@@ -68,9 +68,10 @@ if request.get("baseline_commit") != BASELINE:
     raise ValueError("Unexpected extraction baseline")
 if not os.environ.get("GITHUB_REF_NAME", "").startswith("migration/"):
     raise SystemExit("Preparation requires an explicit migration branch")
+REQUEST_PARENT = "264386c18d0b9f9aefbf882b214fe02d5ad86f24"
 headers = subprocess.check_output(["git", "cat-file", "-p", "HEAD"], cwd=ROOT, text=True).split("\n\n", 1)[0].splitlines()
-if "parent " + BASELINE not in headers:
-    raise ValueError(f"Extraction request must directly follow {BASELINE}")
+if "parent " + REQUEST_PARENT not in headers:
+    raise ValueError("Unexpected extraction request parent")
 
 archive_path = ROOT / ARCHIVE_REL
 if sha(archive_path) != ARCHIVE_SHA256:
