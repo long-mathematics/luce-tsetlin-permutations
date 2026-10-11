@@ -20,7 +20,7 @@ jobs:
       - name: Validate explicit migration request
         run: |
           test -f .migration/request.json
-          python3 -c "import json; r=json.load(open('.migration/request.json')); assert r['stage'] in ('import','integration')"
+          python3 -c "import json; r=json.load(open('.migration/request.json')); assert r['stage'] in ('import','integration','macroscopic-pd-audit-repair')"
       - name: Install TeX and numerical tools
         run: |
           sudo apt-get update
