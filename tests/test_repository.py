@@ -14,7 +14,20 @@ class RepositoryTests(unittest.TestCase):
     def test_links_and_readme(self):
         build.check_markdown()
     def test_bad_math_rejected(self):
-        for text in [r'\[x\]', '$\n', '$$\nx\n=\ny\n$$\n', '$$\n- x\n$$\n', '$$\nx\n', r'$\Ee X$']:
+        bad = [
+            r'\[x\]',
+            '$\n',
+            '$$\nx\n=\ny\n$$\n',
+            '$$\n- x\n$$\n',
+            '$$\nx\n',
+            r'$\Ee X$',
+            r'$\operatorname{ord}(\sigma)$',
+            r'$\newcommand{\foo}{x}\foo$',
+            r'$$\n\begin{aligned}x&=y\end{aligned}\n$$\n',
+            r'$\href{https://example.com}{x}$',
+            r'$\foo{x}$',
+        ]
+        for text in bad:
             with self.subTest(text=text), self.assertRaises(ValueError):
                 build.check_readme_math(text)
     def test_good_math(self):

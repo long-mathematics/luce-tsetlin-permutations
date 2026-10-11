@@ -85,11 +85,36 @@ def check_markdown(allow_pending: bool = False) -> None:
 
 
 def check_readme_math(text: str) -> None:
-    for token in (r'\(', r'\)', r'\[', r'\]', r'\newcommand', r'\renewcommand', r'\def'):
+    # Keep README math to a conservative GitHub Markdown/MathJax subset. Use only
+    # $...$ for inline math and $$...$$ for display math; avoid document-level
+    # definitions/environments, repository-private aliases, and commands
+    # rejected by GitHub's safe renderer (notably \operatorname).
+    forbidden_tokens = (
+        r'\(', r'\)', r'\[', r'\]',
+        r'\newcommand', r'\renewcommand', r'\providecommand',
+        r'\def', r'\gdef', r'\xdef', r'\let',
+        r'\DeclareMathOperator', r'\operatorname',
+        r'\begin{', r'\end{',
+        r'\input', r'\include', r'\require',
+        r'\href', r'\url', r'\htmlClass', r'\htmlId',
+        r'\htmlStyle', r'\class', r'\style', r'\cssId',
+    )
+    for token in forbidden_tokens:
         if token in text:
-            raise ValueError('Unsupported README TeX delimiter/definition: ' + token)
+            raise ValueError('Unsupported README TeX command/delimiter: ' + token)
     if re.search(r'\\(?:Ee|Pp|TV|Kol|one|Pois|dd|cL)\b', text):
         raise ValueError('Private manuscript macro in README')
+    allowed_commands = {
+        'mathbb', 'sim', 'frac', 'to', 'infty', 'log', 'mathrm',
+        'sigma', 'sqrt', 'Rightarrow', 'left', 'right', 'le', 'kappa',
+        'Phi', 'varphi', 'sum', 'qquad', 'mathcal', 'int', 'mu', 'pi',
+        'theta', 'bigl', 'varepsilon', 'bigr', 'max', 'lambda', 'ell',
+        'longrightarrow',
+    }
+    commands = set(re.findall(r'\\([A-Za-z]+)', text))
+    unknown = sorted(commands - allowed_commands)
+    if unknown:
+        raise ValueError('Unreviewed README TeX command(s): ' + ', '.join(unknown))
     display = False
     for line in text.splitlines():
         s = line.strip()
