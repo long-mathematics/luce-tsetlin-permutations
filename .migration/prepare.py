@@ -4,12 +4,13 @@ from pathlib import Path
 import hashlib, json, os, subprocess
 
 ROOT=Path(__file__).resolve().parents[1]
-PARENT="093975f381d56c85cd76a4443061b5b1da0326fd"
+PARENT="0fa1ad71fc3fd906705a8fe13ff3e09e6525f2ca"
+REQUEST_BASE="0e898f0d0203bef77de54e17d95d0763deb31325"
 BASE_BRANCH="migration/regular-profile-extraction"
 BASE_HEAD="1f40456f23e2eba20561539637f286ed490ff688"
 
 request=json.loads((ROOT/".migration/request.json").read_text())
-expected={"stage":"integration","task":"regular-profile-repair-snapshot","baseline_commit":PARENT}
+expected={"stage":"integration","task":"regular-profile-repair-snapshot","baseline_commit":REQUEST_BASE}
 if request != expected:
     raise ValueError("Unexpected repair snapshot request")
 if not os.environ.get("GITHUB_REF_NAME","").startswith("migration/"):
