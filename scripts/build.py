@@ -104,6 +104,17 @@ def check_readme_math(text: str) -> None:
             raise ValueError('Unsupported README TeX command/delimiter: ' + token)
     if re.search(r'\\(?:Ee|Pp|TV|Kol|one|Pois|dd|cL)\b', text):
         raise ValueError('Private manuscript macro in README')
+    allowed_commands = {
+        'mathbb', 'sim', 'frac', 'to', 'infty', 'log', 'mathrm',
+        'sigma', 'sqrt', 'Rightarrow', 'left', 'right', 'le', 'kappa',
+        'Phi', 'varphi', 'sum', 'qquad', 'mathcal', 'int', 'mu', 'pi',
+        'theta', 'bigl', 'varepsilon', 'bigr', 'max', 'lambda', 'ell',
+        'longrightarrow',
+    }
+    commands = set(re.findall(r'\\([A-Za-z]+)', text))
+    unknown = sorted(commands - allowed_commands)
+    if unknown:
+        raise ValueError('Unreviewed README TeX command(s): ' + ', '.join(unknown))
     display = False
     for line in text.splitlines():
         s = line.strip()
