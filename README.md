@@ -26,9 +26,9 @@ The **139-page original research draft** is preserved as [PDF](archive/6178a99/o
 [PDF](output/pdf/mesoscopic-luce-cycles.pdf) · [LaTeX](papers/mesoscopic-switching/mesoscopic-luce-cycles.tex)
 
 For arbitrary triangular arrays of positive rates with a fixed largest-to-smallest ratio, this paper proves the mesoscopic uniform-permutation law
-$
+$$
 \mathbb E C_{n,r}\sim \frac1r
-$
+$$
 uniformly whenever the cycle length tends to infinity but remains $o(n)$. More generally, if $a_n\to\infty$ and $a_n=o(n)$, the point process of cycle lengths divided by $a_n$ converges vaguely to the scale-invariant Poisson process with intensity $dx/x$.
 
 The proof develops the switching calculus used throughout the later series: a marked involutive clock-swap identity, selected-factor moment bounds, and a finite-endpoint mixing theorem in mean conditional total variation. It proves the short-root estimate internally and therefore does not depend on the macroscopic Poisson--Dirichlet theorem.
@@ -40,11 +40,11 @@ The proof develops the switching calculus used throughout the later series: a ma
 [PDF](output/pdf/luce-erdos-turan.pdf) · [LaTeX](papers/erdos-turan-order/luce-erdos-turan.tex)
 
 This paper proves that the classical Erdős--Turán central limit theorem for permutation order survives throughout the comparable-rate Luce class, with no limiting rate profile:
-$
+$$
 \frac{\log\operatorname{ord}(\sigma_n)-\frac12(\log n)^2}
 {\sqrt{\frac13(\log n)^3}}
 \Rightarrow N(0,1).
-$
+$$
 The additive cycle-product statistic is handled by the marked switching theory, while an exact rate-oriented three-clock identity controls the arithmetic difference between the product and least common multiple of the cycle lengths through a uniform two-cycle factorial-moment estimate.
 
 **Status:** imported manuscript. Its switching dependencies are explicit; the source is unchanged by the later total-cycle integration.
@@ -54,21 +54,21 @@ The additive cycle-product statistic is handled by the marked switching theory, 
 [PDF](output/pdf/luce-edgeworth.pdf) · [LaTeX](papers/sharp-order-edgeworth/luce-edgeworth.tex)
 
 This quantitative supplement strengthens the scalar Erdős--Turán law. Writing $O_n=\operatorname{ord}(\sigma_n)$, $m_n=\mathbb E\log O_n$, and $L=\log n$, it states
-$
+$$
 d_{\mathrm K}\!\left(
 \frac{\log O_n-m_n}{\sqrt{L^3/3}},N(0,1)
 \right)
 \le \frac{C_\kappa}{\sqrt L},
-$
+$$
 together with the first Edgeworth correction
-$
+$$
 \mathbb P\!\left\{
 \frac{\log O_n-m_n}{\sqrt{L^3/3}}\le x
 \right\}
 =
 \Phi(x)-\frac{\sqrt3}{8}(x^2-1)\varphi(x)L^{-1/2}
 +o_\kappa(L^{-1/2}).
-$
+$$
 The proof combines polynomial endpoint control, prime-power linearization, compound-Poisson approximation, an extended Fourier window, and bounds for the nonlinear arithmetic remainder.
 
 **Status:** imported quantitative manuscript. The later repository integration reviewed the switching interfaces used elsewhere, but did not constitute a fresh audit of this paper's full nonlinear arithmetic argument.
@@ -78,13 +78,13 @@ The proof combines polynomial endpoint control, prime-power linearization, compo
 [PDF](output/pdf/functional-luce-erdos-turan.pdf) · [LaTeX](papers/functional-erdos-turan/functional-luce-erdos-turan.tex)
 
 For arbitrary comparable-rate triangular arrays, define the cycle-count and truncated-order processes by
-$
+$$
 K_n(t)=\sum_{r\le n^t}C_{n,r},
 \qquad
 \mathcal O_n(t)=\log\operatorname{lcm}\{r\le n^t:C_{n,r}>0\}.
-$
+$$
 This paper proves their joint functional convergence to the common Brownian field
-$
+$$
 \left(
 \frac{K_n(t)-t\log n}{\sqrt{\log n}},
 \frac{\mathcal O_n(t)-\frac12t^2(\log n)^2}
@@ -92,7 +92,7 @@ $
 \right)
 \Rightarrow
 \left(W(t),\sqrt3\int_0^t u\,dW(u)\right).
-$
+$$
 In particular it gives the total-cycle CLT and the joint endpoint Gaussian law, whose cycle-count/order correlation is $\sqrt3/2$.
 
 The main intermediate theorem is a growing-dimensional product-Poisson approximation for all cycle counts in a logarithmically truncated window. It is obtained from the marked switching identity by an approximate Campbell formula and configuration-space Poisson Stein method, after which short and long cycles are restored.
@@ -104,11 +104,11 @@ The main intermediate theorem is a growing-dimensional product-Poisson approxima
 [PDF](output/pdf/total-cycle-edgeworth.pdf) · [LaTeX](papers/total-cycle-edgeworth/total-cycle-edgeworth.tex)
 
 Let $K_n$ be the total number of cycles and $\mu_n=\mathbb E K_n$. For comparable-rate Luce permutations this paper proves the stronger exact-mean Poisson approximation
-$
+$$
 d_{\mathrm{TV}}\!\left(\mathcal L(K_n),\operatorname{Pois}(\mu_n)\right)
 =
 O_\kappa\!\left(\frac{(\log\log n)^2}{\log n}\right),
-$
+$$
 which yields the sharp Berry--Esseen order $(\log n)^{-1/2}$. Its first lattice Edgeworth expansion determines the exact leading Kolmogorov constant $2/(3\sqrt{2\pi})$.
 
 The paper also gives the variance asymptotic, a continuity-corrected second-order lattice expansion retaining the exact coefficient $\operatorname{Var}K_n-\mu_n$, and signed Poisson--Charlier approximations at every fixed order. The proof uses a passive-mark Poisson core from the switching theory and discrete Poisson smoothing; it does not use the nonlinear arithmetic analysis required for logarithmic permutation order.
@@ -120,15 +120,15 @@ The paper also gives the variance asymptotic, a continuity-corrected second-orde
 [PDF](output/pdf/regular-profile-cycles.pdf) · [LaTeX](papers/regular-profile-cycles/regular-profile-cycles.tex)
 
 For sampled positive continuous profiles
-$
+$$
 \theta_{n,i}=a_n\bigl(f(i/n)+\varepsilon_{n,i}\bigr),
 \qquad
 \max_i|\varepsilon_{n,i}|\to0,
-$
+$$
 this paper proves joint independent Poisson limits for every fixed vector of cycle counts. Their means are cyclic traces of the microscopic Luce kernel, and those limiting means satisfy
-$
+$$
 \lambda_r=\frac1r+O\!\left(\frac{q^r}{r}\right)
-$
+$$
 for some $q<1$ depending on the limiting profile.
 
 The same local-entry theory yields fixed-width diagonal-band Poisson laws, sparse-entry and thin-graph laws, deterministic-permutation overlap laws, and a transverse thin-curve theorem. The proof develops the separated bulk local estimate together with endpoint, collision, gap, and target-crowding envelopes sufficient to sum fixed factorial moments globally.
