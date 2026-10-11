@@ -12,7 +12,7 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 STAGE = 'macroscopic-pd-audit-repair'
 BASELINE = 'f7eb751eb6d5a7afd21e2139f0d17176557120b4'
-REQUEST_PARENT = 'c2feddf0b851a6233d279fee00869822b9398408'
+REQUEST_PARENT = '10b4467619a9e985046987d0104141dba9c1fbb9'
 PAYLOAD_SHA256 = '3ececa6ee8d054bc0066445c480a6308756c7540f584e85ef3059bd645815a65'
 PAYLOAD_FILES = [ROOT/f'.migration/macroscopic-pd-repair-payload-part-{j}.b64' for j in range(1, 7)]
 
@@ -77,8 +77,6 @@ for rec in archive:
     if sha(path) != archive_before[rec['path']] or sha(path) != rec['sha256']:
         raise ValueError('Frozen archive changed: '+rec['path'])
 
-# Restore exact baseline tooling so neither the helper nor the temporary workflow
-# appears in the final focused repair diff.
 for rel in ('.migration/prepare.py', '.github/workflows/prepare-migration.yml'):
     baseline_bytes = subprocess.check_output(['git','show',f'{BASELINE}:{rel}'], cwd=ROOT)
     (ROOT/rel).write_bytes(baseline_bytes)

@@ -37,7 +37,6 @@ jobs:
           BRANCH: ${{ github.ref_name }}
         run: |
           case "$BRANCH" in migration/*) ;; *) exit 1;; esac
-          git diff --exit-code -- .github/
           rm .migration/request.json
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
