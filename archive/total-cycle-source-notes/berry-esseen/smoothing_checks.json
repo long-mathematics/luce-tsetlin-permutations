@@ -1,0 +1,525 @@
+{
+  "status": "all checks passed",
+  "exact_discrete_taylor_cases": 104,
+  "exact_charlier_moment_cases": 8,
+  "exact_passivity": {
+    "permutations": 5910,
+    "good_splits": 84438,
+    "max_n": 7
+  },
+  "numerical_cases": [
+    {
+      "lambda": 0.25,
+      "residual": "zero",
+      "total_variation": 0.0,
+      "bound": 0.0,
+      "second_difference_norm": 2.725802740749917,
+      "norm_bound": 5.656854249492381
+    },
+    {
+      "lambda": 0.25,
+      "residual": "deterministic_one",
+      "total_variation": 0.42066978699616725,
+      "bound": 1.414213562373095,
+      "second_difference_norm": 2.725802740749917,
+      "norm_bound": 5.656854249492381
+    },
+    {
+      "lambda": 0.25,
+      "residual": "deterministic_eight",
+      "total_variation": 0.7069819763001051,
+      "bound": 169.70562748477138,
+      "second_difference_norm": 2.725802740749917,
+      "norm_bound": 5.656854249492381
+    },
+    {
+      "lambda": 0.25,
+      "residual": "bernoulli",
+      "total_variation": 0.07729186176146786,
+      "bound": 0.19360583668887668,
+      "second_difference_norm": 2.725802740749917,
+      "norm_bound": 5.656854249492381
+    },
+    {
+      "lambda": 0.25,
+      "residual": "uniform_0_12",
+      "total_variation": 0.3105581484234177,
+      "bound": 113.1370849898476,
+      "second_difference_norm": 2.725802740749917,
+      "norm_bound": 5.656854249492381
+    },
+    {
+      "lambda": 0.25,
+      "residual": "rare_forty",
+      "total_variation": 0.4332870182988215,
+      "bound": 45.02855982595934,
+      "second_difference_norm": 2.725802740749917,
+      "norm_bound": 5.656854249492381
+    },
+    {
+      "lambda": 0.25,
+      "residual": "rare_two_hundred",
+      "total_variation": 0.1413938306665602,
+      "bound": 56.34226832494411,
+      "second_difference_norm": 2.725802740749917,
+      "norm_bound": 5.656854249492381
+    },
+    {
+      "lambda": 0.25,
+      "residual": "binomial",
+      "total_variation": 0.02989928846190855,
+      "bound": 64.35237394222534,
+      "second_difference_norm": 2.725802740749917,
+      "norm_bound": 5.656854249492381
+    },
+    {
+      "lambda": 1.0,
+      "residual": "zero",
+      "total_variation": 0.0,
+      "bound": 0.0,
+      "second_difference_norm": 1.103638323514327,
+      "norm_bound": 1.4142135623730951
+    },
+    {
+      "lambda": 1.0,
+      "residual": "deterministic_one",
+      "total_variation": 0.19791042566667144,
+      "bound": 0.35355339059327373,
+      "second_difference_norm": 1.103638323514327,
+      "norm_bound": 1.4142135623730951
+    },
+    {
+      "lambda": 1.0,
+      "residual": "deterministic_eight",
+      "total_variation": 0.5376072469009902,
+      "bound": 42.426406871192846,
+      "second_difference_norm": 1.103638323514327,
+      "norm_bound": 1.4142135623730951
+    },
+    {
+      "lambda": 1.0,
+      "residual": "bernoulli",
+      "total_variation": 0.0332836475942184,
+      "bound": 0.04840145917221917,
+      "second_difference_norm": 1.103638323514327,
+      "norm_bound": 1.4142135623730951
+    },
+    {
+      "lambda": 1.0,
+      "residual": "uniform_0_12",
+      "total_variation": 0.2881502417722682,
+      "bound": 28.2842712474619,
+      "second_difference_norm": 1.103638323514327,
+      "norm_bound": 1.4142135623730951
+    },
+    {
+      "lambda": 1.0,
+      "residual": "rare_forty",
+      "total_variation": 0.2782068176755847,
+      "bound": 11.257139956489835,
+      "second_difference_norm": 1.103638323514327,
+      "norm_bound": 1.4142135623730951
+    },
+    {
+      "lambda": 1.0,
+      "residual": "rare_two_hundred",
+      "total_variation": 0.07339585725369713,
+      "bound": 14.085567081236027,
+      "second_difference_norm": 1.103638323514327,
+      "norm_bound": 1.4142135623730951
+    },
+    {
+      "lambda": 1.0,
+      "residual": "binomial",
+      "total_variation": 0.025528813971526204,
+      "bound": 16.088093485556335,
+      "second_difference_norm": 1.103638323514327,
+      "norm_bound": 1.4142135623730951
+    },
+    {
+      "lambda": 3.0,
+      "residual": "zero",
+      "total_variation": 0.0,
+      "bound": 0.0,
+      "second_difference_norm": 0.33357335806468835,
+      "norm_bound": 0.47140452079103173
+    },
+    {
+      "lambda": 3.0,
+      "residual": "deterministic_one",
+      "total_variation": 0.07192398356917379,
+      "bound": 0.1178511301977579,
+      "second_difference_norm": 0.33357335806468835,
+      "norm_bound": 0.47140452079103173
+    },
+    {
+      "lambda": 3.0,
+      "residual": "deterministic_eight",
+      "total_variation": 0.31698895022991747,
+      "bound": 14.14213562373095,
+      "second_difference_norm": 0.33357335806468835,
+      "norm_bound": 0.47140452079103173
+    },
+    {
+      "lambda": 3.0,
+      "residual": "bernoulli",
+      "total_variation": 0.010870870721862755,
+      "bound": 0.016133819724073056,
+      "second_difference_norm": 0.33357335806468835,
+      "norm_bound": 0.47140452079103173
+    },
+    {
+      "lambda": 3.0,
+      "residual": "uniform_0_12",
+      "total_variation": 0.22973863275723855,
+      "bound": 9.428090415820632,
+      "second_difference_norm": 0.33357335806468835,
+      "norm_bound": 0.47140452079103173
+    },
+    {
+      "lambda": 3.0,
+      "residual": "rare_forty",
+      "total_variation": 0.18080240774688955,
+      "bound": 3.752379985496612,
+      "second_difference_norm": 0.33357335806468835,
+      "norm_bound": 0.47140452079103173
+    },
+    {
+      "lambda": 3.0,
+      "residual": "rare_two_hundred",
+      "total_variation": 0.04506493248789186,
+      "bound": 4.695189027078675,
+      "second_difference_norm": 0.33357335806468835,
+      "norm_bound": 0.47140452079103173
+    },
+    {
+      "lambda": 3.0,
+      "residual": "binomial",
+      "total_variation": 0.01877835335975137,
+      "bound": 5.362697828518778,
+      "second_difference_norm": 0.33357335806468835,
+      "norm_bound": 0.47140452079103173
+    },
+    {
+      "lambda": 10.0,
+      "residual": "zero",
+      "total_variation": 0.0,
+      "bound": 0.0,
+      "second_difference_norm": 0.09779230316619146,
+      "norm_bound": 0.1414213562373095
+    },
+    {
+      "lambda": 10.0,
+      "residual": "deterministic_one",
+      "total_variation": 0.02347052586224923,
+      "bound": 0.035355339059327376,
+      "second_difference_norm": 0.09779230316619146,
+      "norm_bound": 0.1414213562373095
+    },
+    {
+      "lambda": 10.0,
+      "residual": "deterministic_eight",
+      "total_variation": 0.1432767562024821,
+      "bound": 4.242640687119285,
+      "second_difference_norm": 0.09779230316619146,
+      "norm_bound": 0.1414213562373095
+    },
+    {
+      "lambda": 10.0,
+      "residual": "bernoulli",
+      "total_variation": 0.00330019358819933,
+      "bound": 0.004840145917221917,
+      "second_difference_norm": 0.09779230316619146,
+      "norm_bound": 0.1414213562373095
+    },
+    {
+      "lambda": 10.0,
+      "residual": "uniform_0_12",
+      "total_variation": 0.12896888658497713,
+      "bound": 2.82842712474619,
+      "second_difference_norm": 0.09779230316619146,
+      "norm_bound": 0.1414213562373095
+    },
+    {
+      "lambda": 10.0,
+      "residual": "rare_forty",
+      "total_variation": 0.10740971918692453,
+      "bound": 1.1257139956489837,
+      "second_difference_norm": 0.09779230316619146,
+      "norm_bound": 0.1414213562373095
+    },
+    {
+      "lambda": 10.0,
+      "residual": "rare_two_hundred",
+      "total_variation": 0.02542246067971425,
+      "bound": 1.4085567081236028,
+      "second_difference_norm": 0.09779230316619146,
+      "norm_bound": 0.1414213562373095
+    },
+    {
+      "lambda": 10.0,
+      "residual": "binomial",
+      "total_variation": 0.009678844313141487,
+      "bound": 1.6088093485556336,
+      "second_difference_norm": 0.09779230316619146,
+      "norm_bound": 0.1414213562373095
+    },
+    {
+      "lambda": 30.0,
+      "residual": "zero",
+      "total_variation": 0.0,
+      "bound": 0.0,
+      "second_difference_norm": 0.032141179171833484,
+      "norm_bound": 0.047140452079103175
+    },
+    {
+      "lambda": 30.0,
+      "residual": "deterministic_one",
+      "total_variation": 0.007991622427670732,
+      "bound": 0.011785113019775792,
+      "second_difference_norm": 0.032141179171833484,
+      "norm_bound": 0.047140452079103175
+    },
+    {
+      "lambda": 30.0,
+      "residual": "deterministic_eight",
+      "total_variation": 0.05731710095595037,
+      "bound": 1.414213562373095,
+      "second_difference_norm": 0.032141179171833484,
+      "norm_bound": 0.047140452079103175
+    },
+    {
+      "lambda": 30.0,
+      "residual": "bernoulli",
+      "total_variation": 0.0010992013950965505,
+      "bound": 0.0016133819724073058,
+      "second_difference_norm": 0.032141179171833484,
+      "norm_bound": 0.047140452079103175
+    },
+    {
+      "lambda": 30.0,
+      "residual": "uniform_0_12",
+      "total_variation": 0.05567644425653266,
+      "bound": 0.9428090415820634,
+      "second_difference_norm": 0.032141179171833484,
+      "norm_bound": 0.047140452079103175
+    },
+    {
+      "lambda": 30.0,
+      "residual": "rare_forty",
+      "total_variation": 0.0675875613010461,
+      "bound": 0.3752379985496612,
+      "second_difference_norm": 0.03214117917183349,
+      "norm_bound": 0.047140452079103175
+    },
+    {
+      "lambda": 30.0,
+      "residual": "rare_two_hundred",
+      "total_variation": 0.01499977858606424,
+      "bound": 0.46951890270786756,
+      "second_difference_norm": 0.03214117917183349,
+      "norm_bound": 0.047140452079103175
+    },
+    {
+      "lambda": 30.0,
+      "residual": "binomial",
+      "total_variation": 0.004053054676990273,
+      "bound": 0.5362697828518779,
+      "second_difference_norm": 0.03214117917183349,
+      "norm_bound": 0.047140452079103175
+    },
+    {
+      "lambda": 100.0,
+      "residual": "zero",
+      "total_variation": 0.0,
+      "bound": 0.0,
+      "second_difference_norm": 0.009692298817766532,
+      "norm_bound": 0.01414213562373095
+    },
+    {
+      "lambda": 100.0,
+      "residual": "deterministic_one",
+      "total_variation": 0.002411044849804848,
+      "bound": 0.0035355339059327377,
+      "second_difference_norm": 0.009692298817766532,
+      "norm_bound": 0.01414213562373095
+    },
+    {
+      "lambda": 100.0,
+      "residual": "deterministic_eight",
+      "total_variation": 0.018645071426988253,
+      "bound": 0.4242640687119285,
+      "second_difference_norm": 0.00969229881776653,
+      "norm_bound": 0.01414213562373095
+    },
+    {
+      "lambda": 100.0,
+      "residual": "bernoulli",
+      "total_variation": 0.00033123525309441086,
+      "bound": 0.00048401459172219176,
+      "second_difference_norm": 0.009692298817766532,
+      "norm_bound": 0.01414213562373095
+    },
+    {
+      "lambda": 100.0,
+      "residual": "uniform_0_12",
+      "total_variation": 0.018483469916469264,
+      "bound": 0.282842712474619,
+      "second_difference_norm": 0.00969229881776653,
+      "norm_bound": 0.01414213562373095
+    },
+    {
+      "lambda": 100.0,
+      "residual": "rare_forty",
+      "total_variation": 0.03917208024272374,
+      "bound": 0.11257139956489837,
+      "second_difference_norm": 0.00969229881776653,
+      "norm_bound": 0.01414213562373095
+    },
+    {
+      "lambda": 100.0,
+      "residual": "rare_two_hundred",
+      "total_variation": 0.008477006452171428,
+      "bound": 0.14085567081236028,
+      "second_difference_norm": 0.00969229881776653,
+      "norm_bound": 0.01414213562373095
+    },
+    {
+      "lambda": 100.0,
+      "residual": "binomial",
+      "total_variation": 0.0013345610274792274,
+      "bound": 0.16088093485556335,
+      "second_difference_norm": 0.00969229881776653,
+      "norm_bound": 0.01414213562373095
+    },
+    {
+      "lambda": 1000.0,
+      "residual": "zero",
+      "total_variation": 0.0,
+      "bound": 0.0,
+      "second_difference_norm": 0.0009678820279994001,
+      "norm_bound": 0.0014142135623730952
+    },
+    {
+      "lambda": 1000.0,
+      "residual": "deterministic_one",
+      "total_variation": 0.00024189904474555224,
+      "bound": 0.00035355339059327376,
+      "second_difference_norm": 0.0009678820279994001,
+      "norm_bound": 0.0014142135623730952
+    },
+    {
+      "lambda": 1000.0,
+      "residual": "deterministic_eight",
+      "total_variation": 0.0019284175346107246,
+      "bound": 0.04242640687119285,
+      "second_difference_norm": 0.0009678820279994001,
+      "norm_bound": 0.0014142135623730952
+    },
+    {
+      "lambda": 1000.0,
+      "residual": "bernoulli",
+      "total_variation": 3.312089898769583e-05,
+      "bound": 4.8401459172219174e-05,
+      "second_difference_norm": 0.0009678820279994001,
+      "norm_bound": 0.0014142135623730952
+    },
+    {
+      "lambda": 1000.0,
+      "residual": "uniform_0_12",
+      "total_variation": 0.0019267937043300311,
+      "bound": 0.0282842712474619,
+      "second_difference_norm": 0.0009678820279994001,
+      "norm_bound": 0.0014142135623730952
+    },
+    {
+      "lambda": 1000.0,
+      "residual": "rare_forty",
+      "total_variation": 0.006808875584544484,
+      "bound": 0.011257139956489836,
+      "second_difference_norm": 0.0009678820279994001,
+      "norm_bound": 0.0014142135623730952
+    },
+    {
+      "lambda": 1000.0,
+      "residual": "rare_two_hundred",
+      "total_variation": 0.0030434751977471133,
+      "bound": 0.014085567081236027,
+      "second_difference_norm": 0.0009678820279994,
+      "norm_bound": 0.0014142135623730952
+    },
+    {
+      "lambda": 1000.0,
+      "residual": "binomial",
+      "total_variation": 0.00013876647550255608,
+      "bound": 0.016088093485556336,
+      "second_difference_norm": 0.0009678820279994001,
+      "norm_bound": 0.0014142135623730952
+    },
+    {
+      "lambda": 10000.0,
+      "residual": "zero",
+      "total_variation": 0.0,
+      "bound": 0.0,
+      "second_difference_norm": 9.678963415712701e-05,
+      "norm_bound": 0.0001414213562373095
+    },
+    {
+      "lambda": 10000.0,
+      "residual": "deterministic_one",
+      "total_variation": 2.4196198697153315e-05,
+      "bound": 3.535533905932737e-05,
+      "second_difference_norm": 9.678963415712701e-05,
+      "norm_bound": 0.0001414213562373095
+    },
+    {
+      "lambda": 10000.0,
+      "residual": "deterministic_eight",
+      "total_variation": 0.00019350186855581178,
+      "bound": 0.004242640687119285,
+      "second_difference_norm": 9.678963415712701e-05,
+      "norm_bound": 0.0001414213562373095
+    },
+    {
+      "lambda": 10000.0,
+      "residual": "bernoulli",
+      "total_variation": 3.312579682899524e-06,
+      "bound": 4.840145917221917e-06,
+      "second_difference_norm": 9.678963415712701e-05,
+      "norm_bound": 0.0001414213562373095
+    },
+    {
+      "lambda": 10000.0,
+      "residual": "uniform_0_12",
+      "total_variation": 0.0001934873361870627,
+      "bound": 0.0028284271247461896,
+      "second_difference_norm": 9.678963415712701e-05,
+      "norm_bound": 0.0001414213562373095
+    },
+    {
+      "lambda": 10000.0,
+      "residual": "rare_forty",
+      "total_variation": 0.0007332140525196801,
+      "bound": 0.0011257139956489836,
+      "second_difference_norm": 9.678963415712701e-05,
+      "norm_bound": 0.0001414213562373095
+    },
+    {
+      "lambda": 10000.0,
+      "residual": "rare_two_hundred",
+      "total_variation": 0.0007843002244234789,
+      "bound": 0.0014085567081236026,
+      "second_difference_norm": 9.678963415712701e-05,
+      "norm_bound": 0.0001414213562373095
+    },
+    {
+      "lambda": 10000.0,
+      "residual": "binomial",
+      "total_variation": 1.393141370080987e-05,
+      "bound": 0.0016088093485556335,
+      "second_difference_norm": 9.678963415712701e-05,
+      "norm_bound": 0.0001414213562373095
+    }
+  ],
+  "scope": "Finite consistency checks only; not an asymptotic proof or formal verification."
+}

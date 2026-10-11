@@ -1,0 +1,982 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1.05in]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{microtype}
+\allowdisplaybreaks
+\usepackage{needspace}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Lattice Edgeworth Expansions for Total Luce Cycles},
+  pdfauthor={Christopher D. Long},
+  colorlinks=true,
+  linkcolor={black},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Lattice Edgeworth Expansions for Total Luce Cycles}
+\author{Christopher D. Long}
+\date{Research note -- 11 October 2026}
+
+\begin{document}
+\maketitle
+
+\section{Results and scope}\label{results-and-scope}
+
+Let \(\sigma_n\) be the label-to-rank permutation of independent
+exponential clocks with rates \(\theta_{n,i}\). Assume that, after a
+common rescaling in each row,
+
+\[
+1\le\theta_{n,i}\le\kappa
+\]
+
+for a fixed \(\kappa<\infty\). Write
+
+\[
+K_n=\sum_{r=1}^n C_{n,r},\qquad
+\mu_n=\mathbb E K_n,\qquad
+L=\log n,\qquad
+\ell=1+\log L,
+\]
+
+and define the second factorial cumulant
+
+\[
+c_n=\operatorname{Var}K_n-\mu_n.
+\]
+
+All asymptotic estimates below are uniform over rate arrays with a fixed
+comparability bound. The definition of \(\ell\) is used only for
+sufficiently large \(n\).
+
+The earlier total-cycle note proved
+
+\[
+d_{\mathrm{TV}}(\mathcal L(K_n),\operatorname{Pois}(\mu_n))
+=O_\kappa(\ell^2/L),\qquad
+\mu_n=L+O_\kappa(\ell).
+\tag{1}
+\]
+
+This error is already \(o(L^{-1/2})\), so it transfers the first lattice
+Edgeworth expansion of the Poisson law. The fixed-order factorial
+domination in Paper IV allows a stronger signed approximation and a
+second-order expansion. No limiting profile is needed.
+
+\Needspace{10\baselineskip}
+
+\textbf{Theorem 1 (First lattice Edgeworth expansion).} Let
+
+\[
+\psi(u)=\frac12-\{u\},\qquad \{u\}=u-\lfloor u\rfloor.
+\]
+
+In particular \(\psi(k)=1/2\) at integers: this is the convention for a
+right-continuous distribution function. Uniformly in \(x\in\mathbb R\),
+
+\[
+\begin{split}
+\mathbb P\left\{\frac{K_n-\mu_n}{\sqrt L}\le x\right\}
+={}&\Phi(x)+\frac{\varphi(x)}{\sqrt L}
+\left[\frac{1-x^2}{6}+\psi(\mu_n+x\sqrt L)\right]
++O_\kappa(\ell^2/L).
+\end{split}
+\tag{2}
+\]
+
+The identical assertion holds with \(L\) replaced by \(\mu_n\) in the
+denominator, prefactor, and lattice argument. The first smooth
+correction is universal. The oscillating term is essential and has the
+same order as the smooth correction.
+
+\Needspace{10\baselineskip}
+
+\textbf{Corollary 2 (Exact leading Kolmogorov constant).}
+
+\[
+\sqrt L\,d_{\mathrm K}\left(
+\mathcal L\left(\frac{K_n-\mu_n}{\sqrt L}\right),N(0,1)
+\right)
+\longrightarrow\frac{2}{3\sqrt{2\pi}}.
+\tag{3}
+\]
+
+The convergence is uniform in the comparable-rate class. The same limit
+holds with scale \(\sqrt{\mu_n}\) or with the exact standard deviation.
+
+To state the stronger expansion, let
+
+\[
+p_\mu(k)=e^{-\mu}\frac{\mu^k}{k!}\quad(k\ge0),\qquad
+p_\mu(k)=0\quad(k<0),
+\]
+
+and use the right-shift difference \(\Delta p(k)=p(k-1)-p(k)\).
+
+\Needspace{10\baselineskip}
+
+\textbf{Theorem 3 (Second-order signed Poisson approximation).}
+
+\[
+c_n=O_\kappa(\ell^2),\qquad
+\operatorname{Var}K_n=L+O_\kappa(\ell^2),
+\tag{4}
+\]
+
+and
+
+\[
+\frac12\sum_{k\in\mathbb Z}
+\left|\mathbb P(K_n=k)-p_{\mu_n}(k)
+-\frac{c_n}{2}\Delta^2p_{\mu_n}(k)\right|
+\le C_\kappa\frac{\ell^3}{L^{3/2}}.
+\tag{5}
+\]
+
+The approximating sequence is a signed measure of total mass one;
+positivity is not claimed or required.
+
+\Needspace{10\baselineskip}
+
+\textbf{Theorem 4 (Second-order continuity-corrected Edgeworth
+expansion).} For \(k\in\mathbb Z\), set
+
+\[
+y=y_{n,k}=\frac{k+1/2-\mu_n}{\sqrt{\mu_n}},\qquad
+Q(y)=\frac{-y^5+7y^3-3y}{72}.
+\]
+
+Uniformly in integer \(k\),
+
+\[
+\begin{split}
+\mathbb P(K_n\le k)
+={}&\Phi(y)+\frac{\varphi(y)}{6\sqrt{\mu_n}}(1-y^2)\\
+&+\frac{\varphi(y)}{\mu_n}
+\left[Q(y)-\frac{c_n y}{2}\right]
++O_\kappa\left(\frac{\ell^3}{L^{3/2}}\right).
+\end{split}
+\tag{6}
+\]
+
+Since \(\ell^3/L^{3/2}=o(L^{-1})\), this resolves the second-order term.
+Its first non-Poisson coefficient is exactly
+\(c_n=\operatorname{Var}K_n-\mathbb E K_n\). The estimate does not
+assert that this coefficient has a limit.
+
+\Needspace{10\baselineskip}
+
+\textbf{Corollary 5 (Exact-variance standardization).} Put
+\(s_n^2=\operatorname{Var}K_n\) and \(z=(k+1/2-\mu_n)/s_n\). Then,
+uniformly in \(k\),
+
+\[
+\mathbb P(K_n\le k)
+=\Phi(z)+\frac{\varphi(z)}{6s_n}(1-z^2)
++\frac{\varphi(z)}{s_n^2}Q(z)
++O_\kappa(\ell^3/L^{3/2}).
+\tag{7}
+\]
+
+Thus, after using the exact mean and variance, the displayed smooth
+coefficients are universal through second order. The mean and variance,
+and consequently the lattice locations, still depend on the rate array.
+
+These conclusions are deductions from the named switching inputs
+recorded below. This note does not re-prove the whole endpoint
+construction, certify every argument in Paper IV, or establish a
+profile-dependent mod-Poisson limit.
+
+\section{Imported inputs and the additional moment
+information}\label{imported-inputs-and-the-additional-moment-information}
+
+The repository is frozen at commit
+
+\texttt{6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0}.
+
+The quantitative inputs are Paper IV's \texttt{prop:poly-block},
+\texttt{lem:passive-Stein}, and \texttt{thm:poly-pp}. The additional
+input beyond the preceding Berry--Esseen note is
+\texttt{cor:factorial-domination}, proved by the rate-oriented
+fixed-order multi-clock identity \texttt{thm:multiclock}. No arithmetic
+order statistic or prime-power estimate is needed.
+
+For any fixed accuracy exponent \(Q_0\), choose a constant
+\(A=A(\kappa,Q_0)\) sufficiently large and put
+
+\[
+b=\lceil L^3\rceil,\qquad U=\lfloor n/L^A\rfloor,
+\]
+
+\[
+J_n=\sum_{b<r\le U}C_{n,r},\qquad
+D_n=K_n-J_n,\qquad
+\lambda_n=\sum_{b<r\le U}\frac{n}{r(n-r)}.
+\]
+
+A good split producing a core \(r\)-cycle comes from a source cycle of
+length greater than \(r+U\). It changes \(J_n\) by one and leaves
+\(D_n\) unchanged: the source and residual cycles are both above \(U\),
+and the short cycles are unaffected. The marked theorem therefore
+supplies an independent pair
+
+\[
+Z_n\sim\operatorname{Pois}(\lambda_n),\qquad
+\widetilde D_n\overset d=D_n
+\]
+
+such that
+
+\[
+d_{\mathrm{TV}}\bigl(\mathcal L(J_n,D_n),
+\mathcal L(Z_n,\widetilde D_n)\bigr)
+\le C_{\kappa,Q_0}L^{-Q_0}.
+\tag{8}
+\]
+
+Write \(S_n=Z_n+\widetilde D_n\), \(\nu_n=\mathbb ED_n\), and
+\(\mu_n^0=\lambda_n+\nu_n\). Separately, the exact mean-switching
+identity and the polynomial intensity error give
+
+\[
+|\mathbb EJ_n-\lambda_n|\le C_{\kappa,Q_0}L^{-Q_0},
+\qquad |\mu_n-\mu_n^0|\le C_{\kappa,Q_0}L^{-Q_0}.
+\tag{9}
+\]
+
+This is not a deduction of moment convergence from total variation.
+
+The fixed-order domination says that for every fixed integer \(q\ge1\),
+
+\[
+\mathbb E\mathcal C_n(r_1,\ldots,r_q)
+\le\frac{C_{\kappa,q}}{r_1\cdots r_q},
+\qquad r_1+\cdots+r_q\le n/2,
+\tag{10}
+\]
+
+where \(\mathcal C_n\) counts ordered tuples of distinct cycles, also
+when some lengths coincide. The rate-oriented rotation used in its proof
+has only one positive clock coefficient in its logarithmic density
+ratio. Splitting the sum by the position of that clock permits injective
+reindexing by the corresponding label. This gives the selected
+first-moment bound for every fixed \(q\) without requiring a product of
+\(q\) untruncated swap factors to have a high moment.
+
+\subsection{All fixed moments of the boundary
+count}\label{all-fixed-moments-of-the-boundary-count}
+
+\Needspace{10\baselineskip}
+
+\textbf{Lemma 6.} For every fixed integer \(q\ge1\),
+
+\[
+\mathbb ED_n^q=O_{\kappa,q}(\ell^q),\qquad
+\mathbb EK_n^q=O_{\kappa,q}(L^q).
+\tag{11}
+\]
+
+\textbf{Proof.} Let \(W=\lfloor n/(2q)\rfloor\). For large \(n\),
+\(b<U<W\). Let \(V_n\) count the omitted cycles with lengths at most
+\(W\). Their length set has harmonic mass
+
+\[
+\sum_{r\le b}\frac1r+\sum_{U<r\le W}\frac1r=O_{\kappa,q}(\ell).
+\]
+
+For every \(j\le q\), a tuple of \(j\) such cycles has total length at
+most \(n/2\), so (10) gives \(\mathbb E(V_n)_j=O_{\kappa,q}(\ell^j)\).
+Expanding \(V_n^q\) in falling factorials proves
+\(\mathbb EV_n^q=O(\ell^q)\). At most \(2q-1\) cycles are longer than
+\(W\), because each has length at least \(W+1>n/(2q)\). Adding this
+bounded count proves the first assertion. The identical argument with
+all lengths at most \(W\), whose harmonic mass is \(O(L)\), proves the
+second. \(\square\)
+
+The same global moment bound holds for \(S_n\): the Poisson parameter is
+\(O(L)\) and the mark has the moments just proved. Under a maximal
+coupling of \(K_n\) and \(S_n\), (8) and Cauchy--Schwarz imply
+
+\[
+|\mathbb EK_n^j-\mathbb ES_n^j|
+\le C_{\kappa,j}L^j L^{-Q_0/2}
+\tag{12}
+\]
+
+for every fixed \(j\) for which the global \(2j\)th moments are invoked.
+Thus the probability approximation can legitimately be upgraded to the
+specific moment comparison needed here, after increasing \(Q_0\).
+
+In particular, if
+
+\[
+b_n^*=\operatorname{Var}D_n-\nu_n,
+\]
+
+then (9), (11), and (12) show
+
+\[
+c_n=b_n^*+O_\kappa(L^{2-Q_0/2}).
+\tag{13}
+\]
+
+Taking \(Q_0\ge12\) makes this error \(O(L^{-4})\). Since
+\(|b_n^*|=O_\kappa(\ell^2)\), (4) follows. More generally the same
+reasoning gives, for each fixed \(j\ge2\),
+
+\[
+\kappa_j^F(K_n)=O_{\kappa,j}(\ell^j),\qquad
+\kappa_j(K_n)=\mu_n+O_{\kappa,j}(\ell^j),
+\tag{14}
+\]
+
+where \(\kappa_j^F\) denotes a factorial cumulant. These are
+polylogarithmic bounds, not \(O(1)\) cumulant corrections.
+
+\section{Discrete Taylor expansion and Poisson
+smoothing}\label{discrete-taylor-expansion-and-poisson-smoothing}
+
+Let \(T\) be right shift and \(\Delta=T-I\). For every integer \(m\ge0\)
+and fixed integer \(s\ge0\),
+
+\[
+T^mp=\sum_{j=0}^s\binom mj\Delta^jp
++\sum_{u=0}^{m-s-1}\binom{m-1-u}{s}T^u\Delta^{s+1}p,
+\tag{15}
+\]
+
+with an empty remainder when \(m\le s\) and with \(\binom mj=0\) for
+\(j>m\). The identity follows by repeated telescoping, or induction on
+\(m\). Translation preserves the \(\ell^1\) norm, and the sum of the
+remainder coefficients is \(\binom m{s+1}\). Hence
+
+\[
+\left\|T^mp-\sum_{j=0}^s\binom mj\Delta^jp\right\|_1
+\le\binom m{s+1}\|\Delta^{s+1}p\|_1.
+\tag{16}
+\]
+
+\subsection{Norms of Poisson
+differences}\label{norms-of-poisson-differences}
+
+For \(Z\sim\operatorname{Pois}(\lambda)\), define the Charlier
+polynomial by
+
+\[
+C_j(k;\lambda)=\sum_{r=0}^j(-1)^{j-r}\binom jr(k)_r\lambda^{j-r}.
+\]
+
+Then
+
+\[
+\Delta^jp_\lambda(k)=\lambda^{-j}C_j(k;\lambda)p_\lambda(k).
+\]
+
+The generating identity
+
+\[
+\sum_{j\ge0}\frac{C_j(k;\lambda)}{j!}t^j=e^{-\lambda t}(1+t)^k
+\]
+
+and the Poisson generating function give
+
+\[
+\mathbb E\left[e^{-\lambda(s+t)}(1+s)^Z(1+t)^Z\right]
+=e^{\lambda st}.
+\]
+
+Comparing coefficients proves \(\mathbb EC_j(Z;\lambda)^2=j!\lambda^j\).
+Therefore
+
+\[
+\boxed{\|\Delta^jp_\lambda\|_1\le\sqrt{j!}\,\lambda^{-j/2}.}
+\tag{17}
+\]
+
+This is an exact orthogonality calculation, not a central-limit
+approximation.
+
+\subsection{Retaining the second factorial
+cumulant}\label{retaining-the-second-factorial-cumulant}
+
+Let \(M\) be an independent nonnegative integer mark, put
+\(\nu=\mathbb EM\), and let \(N\sim\operatorname{Pois}(\nu)\). Apply
+(15) with \(s=2\), once with \(m=M\) and once with \(m=N\). The constant
+and linear terms cancel. If
+\(b=\mathbb E(M)_2-\nu^2=\operatorname{Var}M-\nu\), then
+
+\[
+p_\lambda*\mathcal L(M)
+=p_{\lambda+\nu}+\frac b2\Delta^2p_\lambda+R,
+\]
+
+\[
+\|R\|_1\le\frac{\mathbb E(M)_3+\nu^3}{6}\|\Delta^3p_\lambda\|_1.
+\]
+
+Moreover, telescoping the shift and averaging over \(N\) gives
+
+\[
+\|\Delta^2p_{\lambda+\nu}-\Delta^2p_\lambda\|_1
+\le\nu\|\Delta^3p_\lambda\|_1.
+\]
+
+Thus
+
+\[
+\begin{split}
+\frac12\left\|p_\lambda*\mathcal L(M)-p_{\lambda+\nu}
+-\frac b2\Delta^2p_{\lambda+\nu}\right\|_1
+\le\frac{\sqrt6}{2\lambda^{3/2}}
+\left[\frac{\mathbb E(M)_3+\nu^3}{6}+\frac{|b|\nu}{2}\right].
+\end{split}
+\tag{18}
+\]
+
+Apply (18) with \(M=\widetilde D_n\). Equation (11) makes its right side
+\(O_\kappa(\ell^3/L^{3/2})\). The coupling error (8) is smaller.
+Replacing \(\mu_n^0\) by \(\mu_n\) uses (9) and the elementary Poisson
+parameter coupling. Replacing \(b_n^*\) by \(c_n\) uses (13) and (17).
+All these replacements are smaller than the displayed remainder when
+\(Q_0\ge12\). This proves Theorem 3.
+
+\section{The elementary Poisson lattice
+expansion}\label{the-elementary-poisson-lattice-expansion}
+
+The analytic step can be derived directly for a Poisson variable, so no
+nonlattice Edgeworth theorem is being applied to an integer-valued law.
+
+Let \(h=\mu^{-1/2}\) and \(x_j=(j-\mu)h\). With the probabilists'
+Hermite polynomials \(H_j\), Fourier inversion of the centered Poisson
+characteristic function gives
+
+\[
+\begin{split}
+p_\mu(j)=h\varphi(x_j)\left[
+1+\frac h6H_3(x_j)
++h^2\left\{\frac{H_4(x_j)}{24}+\frac{H_6(x_j)}{72}\right\}
+\right]+r_\mu(j),
+\end{split}
+\tag{19}
+\]
+
+where
+
+\[
+\sum_{j\in\mathbb Z}|r_\mu(j)|\le C h^3.
+\tag{20}
+\]
+
+Here is a remainder justification. On the inversion interval
+\([-\pi/h,\pi/h]\), the characteristic function is
+
+\[
+\chi_\mu(t)=\exp\{\mu(e^{iht}-1-iht)\},\qquad
+|\chi_\mu(t)|\le e^{-2t^2/\pi^2}.
+\]
+
+On \(|t|\le h^{-1/8}\), expansion of its logarithm and then its
+exponential, with two derivatives, compares it with
+
+\[
+e^{-t^2/2}\left[1+\frac h6(it)^3
++h^2\left\{\frac{(it)^4}{24}+\frac{(it)^6}{72}\right\}\right]
+\]
+
+with an integrable error and integrable second derivative both
+\(O(h^3)\). Indeed the discarded terms are bounded by \(Ch^3\) times a
+fixed polynomial in \(|t|\) times \(e^{-ct^2}\). Outside the cutoff, the
+same Gaussian bound makes the integrals of the characteristic function
+and its first two derivatives smaller than every power of \(h\); the
+cutoff can be made smooth. Fourier inversion and two integrations by
+parts give \(|r_\mu(j)|\le Ch^4/(1+x_j^2)\), with exponentially small
+endpoint contributions handled by the periodic uncentered integrand.
+Summing the grid, whose spacing is \(h\), proves (20).
+
+For a Schwartz function \(f\) and \(y=(k+1/2-\mu)h\), midpoint
+Euler--Maclaurin summation gives, uniformly in \(k\),
+
+\[
+h\sum_{j\le k}f(x_j)
+=\int_{-\infty}^{y}f(t)\,dt-\frac{h^2}{24}f'(y)+O_f(h^3).
+\tag{21}
+\]
+
+Apply this to the terms in (19). The identity
+
+\[
+\int_{-\infty}^{y}H_j(t)\varphi(t)\,dt
+=-H_{j-1}(y)\varphi(y)
+\]
+
+and \(\varphi'(y)=-y\varphi(y)\) yield
+
+\[
+\begin{split}
+\mathbb P\{\operatorname{Pois}(\mu)\le k\}
+={}&\Phi(y)+\frac{\varphi(y)}{6\sqrt\mu}(1-y^2)\\
+&+\frac{\varphi(y)}\mu
+\left[-\frac{H_3(y)}{24}-\frac{H_5(y)}{72}+\frac y{24}\right]
++O(\mu^{-3/2}).
+\end{split}
+\tag{22}
+\]
+
+The bracket is exactly \(Q(y)=(-y^5+7y^3-3y)/72\). The positive \(y/24\)
+term is the second-order continuity correction. Omitting it is not valid
+at order \(\mu^{-1}\).
+
+The use of a lattice correction is classical; see Kolassa--McCullagh
+{[}KM90{]}. Signed Poisson--Charlier approximation schemes are developed
+more generally in {[}BKN14, CDMN20, MNV22{]}. The proof here uses the
+explicit Poisson core and moment bounds rather than assuming convergence
+of a mod-Poisson residue.
+
+\section{Proofs of the displayed Edgeworth
+formulas}\label{proofs-of-the-displayed-edgeworth-formulas}
+
+Summing the second difference telescopes exactly:
+
+\[
+\sum_{j\le k}\Delta^2p_\mu(j)
+=p_\mu(k)-p_\mu(k-1)
+=-\frac{k-\mu}{\mu}p_\mu(k).
+\tag{23}
+\]
+
+With \(y=(k+1/2-\mu)/\sqrt\mu\), (19) implies, uniformly in \(k\),
+
+\[
+p_\mu(k)-p_\mu(k-1)
+=-\frac{y\varphi(y)}\mu+O(\mu^{-3/2}).
+\tag{24}
+\]
+
+Combine (5), (22), and (24), using \(c_n=O_\kappa(\ell^2)\). This proves
+(6), including its sign and uniform remainder.
+
+For a real threshold \(a=\mu+x\sqrt\mu\), let \(k=\lfloor a\rfloor\).
+Its midpoint coordinate is
+
+\[
+y=x+\frac{\psi(a)}{\sqrt\mu}.
+\]
+
+Expanding (22) to first order, and using (1), proves
+
+\[
+\mathbb P\left\{\frac{K_n-\mu_n}{\sqrt{\mu_n}}\le x\right\}
+=\Phi(x)+\frac{\varphi(x)}{\sqrt{\mu_n}}
+\left[\psi(\mu_n+x\sqrt{\mu_n})+\frac{1-x^2}{6}\right]
++O_\kappa(\ell^2/L).
+\tag{25}
+\]
+
+For scale \(\sqrt L\), use the same calculation at \(x\sqrt{L/\mu_n}\).
+The lattice argument is then exactly \(\mu_n+x\sqrt L\); it is not
+approximated. Since \(\mu_n-L=O_\kappa(\ell)\), the normal scale change
+costs \(O_\kappa(\ell/L)\), proving (2).
+
+For reference, the full second-order sawtooth form at scale
+\(\sqrt{\mu_n}\) is also available. Set
+
+\[
+a=\mu_n+x\sqrt{\mu_n},\quad f=\{a\},\quad s=1/2-f,
+\quad B_2(f)=f^2-f+1/6.
+\]
+
+Then
+
+\[
+\begin{split}
+\mathbb P\left\{\frac{K_n-\mu_n}{\sqrt{\mu_n}}\le x\right\}
+={}&\Phi(x)+\frac{\varphi(x)}{\sqrt{\mu_n}}
+\left[s-\frac{H_2(x)}6\right]\\
+&+\frac{\varphi(x)}{\mu_n}
+\left[-\frac{H_3(x)}{24}-\frac{H_5(x)}{72}
++\frac{sH_3(x)}6-\frac x2\{B_2(f)+c_n\}\right]\\
+&+O_\kappa(\ell^3/L^{3/2}).
+\end{split}
+\tag{26}
+\]
+
+This formula includes the right side of every jump. Formula (6) is
+usually simpler to use.
+
+\subsection{Exact-variance scaling}\label{exact-variance-scaling}
+
+Let \(s_n^2=\mu_n+c_n\). In (6), replace \(y\) by
+\(z\sqrt{1+c_n/\mu_n}\). The first-order normal-scale correction is
+\(c_n z\varphi(z)/(2\mu_n)\), which cancels the term
+\(-c_n y\varphi(y)/(2\mu_n)\). All remaining errors are
+
+\[
+O_\kappa\left(\frac{1+|c_n|}{\mu_n^{3/2}}
++\frac{c_n^2}{\mu_n^2}\right)
+=O_\kappa(\ell^3/L^{3/2}).
+\]
+
+Replacing the remaining prefactors by \(s_n^{-1}\) and \(s_n^{-2}\) has
+the same smaller cost. This proves (7). The lattice thresholds are
+unchanged throughout.
+
+\subsection{Exact leading Kolmogorov
+constant}\label{exact-leading-kolmogorov-constant}
+
+The first-order correction in (2) satisfies
+
+\[
+\left|\varphi(x)\left[\psi(\mu_n+x\sqrt L)
++\frac{1-x^2}{6}\right]\right|
+\le\varphi(x)\left[\frac12+\frac{|1-x^2|}{6}\right].
+\]
+
+The right side has maximum \(2/(3\sqrt{2\pi})\), attained at \(x=0\). To
+verify this, by symmetry take \(x\ge0\). On \([0,1]\) its polynomial
+factor is \((4-x^2)/6\) and its derivative, after removing the common
+Gaussian factor, is \(x(x^2-6)/6\). On \([1,\infty)\) the corresponding
+factor is \((x^2+2)/6\) and the derivative is \(-x^3/6\). Both ranges
+are decreasing away from zero.
+
+For the matching lower bound, choose an integer \(k_n\) nearest
+\(\mu_n\) and put \(x_n=(k_n-\mu_n)/\sqrt L\). Then \(x_n\to0\) and the
+lattice term at this exact threshold equals \(1/2\). The correction
+tends to \((1/2+1/6)\varphi(0)=2/(3\sqrt{2\pi})\). The error in (2) is
+\(o(L^{-1/2})\). This proves (3). The changes to the other stated scales
+are smaller than first order by (1) and (4).
+
+\section{An expansion at every fixed Poisson--Charlier
+order}\label{an-expansion-at-every-fixed-poissoncharlier-order}
+
+The preceding argument is not limited to the second difference. The
+following formulation uses exact finite-\(n\) coefficients and does not
+assume a limiting profile.
+
+For a fixed integer \(m\ge1\), define
+
+\[
+a_{n,j}=[w^j]\left\{e^{-\mu_n w}\mathbb E(1+w)^{K_n}\right\},
+\qquad 0\le j\le m.
+\]
+
+The coefficients are well-defined derivatives at zero of an entire
+function. There is no assertion of uniform analytic convergence in a
+fixed complex neighborhood. In particular,
+
+\[
+a_{n,0}=1,\quad a_{n,1}=0,\quad
+a_{n,2}=\frac{\kappa_2^F(K_n)}2=\frac{c_n}{2},
+\]
+
+\[
+a_{n,3}=\frac{\kappa_3^F(K_n)}6,
+\qquad
+a_{n,4}=\frac{\kappa_4^F(K_n)+3\kappa_2^F(K_n)^2}{24}.
+\]
+
+\Needspace{10\baselineskip}
+
+\textbf{Theorem 7 (Fixed-order signed expansion).} For every fixed
+\(m\),
+
+\[
+|a_{n,j}|\le C_{\kappa,m}\ell^j\quad(2\le j\le m)
+\]
+
+and
+
+\[
+\frac12\left\|\mathcal L(K_n)-
+\sum_{j=0}^m a_{n,j}\Delta^jp_{\mu_n}\right\|_1
+\le C_{\kappa,m}\frac{\ell^{m+1}}{L^{(m+1)/2}}.
+\tag{27}
+\]
+
+The order \(m\) is fixed before choosing constants and cutoffs. No
+uniformity for an increasing expansion order is asserted.
+
+\textbf{Proof.} First work with \(S=Z_\lambda+M\) from (8), whose mean
+is \(\mu^0=\lambda+\nu\), and put
+
+\[
+\alpha_j=[w^j]\{e^{-\nu w}\mathbb E(1+w)^M\}.
+\]
+
+Equation (11) implies \(|\alpha_j|=O_{\kappa,m}(\ell^j)\). Applying
+(15)--(17) to the mark gives an expansion of \(p_\lambda*\mathcal L(M)\)
+through order \(m\) with coefficients \(\mathbb E(M)_j/j!\) and
+remainder \(O(\ell^{m+1}\lambda^{-(m+1)/2})\) in \(\ell^1\).
+
+For the proposed approximation
+\(\sum_{j\le m}\alpha_j\Delta^jp_{\lambda+\nu}\), use
+\(p_{\lambda+\nu}=p_\lambda*\operatorname{Pois}(\nu)\) and expand each
+shift of \(\Delta^jp_\lambda\) through order \(m-j\). The error is
+bounded by
+
+\[
+\sum_{j=0}^m|\alpha_j|\frac{\nu^{m-j+1}}{(m-j+1)!}
+\|\Delta^{m+1}p_\lambda\|_1
+=O_{\kappa,m}(\ell^{m+1}\lambda^{-(m+1)/2}).
+\]
+
+The coefficients through degree \(m\) agree, because
+
+\[
+\left(\sum_{j\ge0}\alpha_j w^j\right)e^{\nu w}
+=\mathbb E(1+w)^M
+\]
+
+as a formal Taylor identity to the required finite order.
+
+Finally choose the accuracy exponent \(Q_0\) large in terms of \(m\).
+Equations (9), (11), and (12) show that the coefficients of
+\(e^{-\mu_n w}\mathbb E(1+w)^{K_n}\) and those of
+\(e^{-\mu_n^0w}\mathbb E(1+w)^{S_n}\) differ, through degree \(m\), by
+\(O_{\kappa,m}(L^{j-Q_0/2})\) in degree \(j\). Equation (17), the mean
+parameter replacement, and (8) make their contributions smaller than the
+stated remainder. This proves (27). \(\square\)
+
+Combining (27) with higher versions of (19)--(22) yields Gaussian
+lattice expansions at each fixed order, with exact finite-\(n\)
+factorial-cumulant coefficients. This is different from proving that
+those coefficients converge to profile-dependent constants.
+
+\section{Profile-dependent terms: deductions and unresolved
+limits}\label{profile-dependent-terms-deductions-and-unresolved-limits}
+
+There are three distinct questions: the location parameter, the first
+non-Poisson shape coefficient, and a full limiting analytic residue. The
+transfer argument identifies where each would enter, but does not by
+itself identify its limit.
+
+\subsection{A profile mean correction}\label{a-profile-mean-correction}
+
+Let \(\delta_n=\mu_n-L=O_\kappa(\ell)\). Applying (2) at a shifted real
+threshold gives the unconditional identity
+
+\[
+\begin{split}
+\mathbb P\left\{\frac{K_n-L}{\sqrt L}\le x\right\}
+={}&\Phi(x)+\frac{\varphi(x)}{\sqrt L}
+\left[\psi(L+x\sqrt L)+\frac{1-x^2}{6}-\delta_n\right]
++O_\kappa(\ell^2/L).
+\end{split}
+\tag{28}
+\]
+
+For a sampled profile \(\theta_{n,i}=f(i/n)\) with \(f\in C([0,1])\)
+strictly positive, an additional theorem \(\delta_n\to\kappa_f\) would
+therefore yield
+
+\[
+\begin{split}
+\mathbb P\left\{\frac{K_n-L}{\sqrt L}\le x\right\}
+={}&\Phi(x)+\frac{\varphi(x)}{\sqrt L}
+\left[\psi(L+x\sqrt L)+\frac{1-x^2}{6}-\kappa_f\right]
++o(L^{-1/2}).
+\end{split}
+\tag{29}
+\]
+
+The historical candidate proposed
+
+\[
+\kappa_f=\gamma_E+\sum_{r\ge1}\left(\lambda_r(f)-\frac1r\right),
+\qquad \lambda_r(f)=\frac{\operatorname{Tr}(\mathcal K_f^r)}r.
+\tag{30}
+\]
+
+This note does not reinstate the invalidated proof of that expectation
+expansion. Formula (29) is conditional on the mean limit, and (30) is a
+proposed identification, not a consequence of (27).
+
+\subsection{A profile variance-minus-mean
+correction}\label{a-profile-variance-minus-mean-correction}
+
+If \(c_n\to c_f\), then (6) holds with \(c_f\) in place of \(c_n\) and
+an \(o(L^{-1})\) remainder. This gives the profile shape contribution
+
+\[
+-\frac{c_f}{2\mu_n}y\varphi(y).
+\tag{31}
+\]
+
+The proven general bound is only \(c_n=O_\kappa(\ell^2)\). It neither
+proves convergence nor shows whether \(c_f\) is genuinely profile
+dependent. The exact variance standardization in (7) absorbs this term.
+
+Small changes inside the fractional-part function cannot be ignored
+uniformly at its discontinuities. Approximate deterministic centers must
+therefore be handled by their actual threshold, as in (28)--(29), not by
+silently substituting an approximate mean into the lattice phase.
+
+\subsection{A stronger, explicitly conjectural mod-Poisson
+candidate}\label{a-stronger-explicitly-conjectural-mod-poisson-candidate}
+
+For uniform permutations,
+
+\[
+\mathbb E z^{K_n}=\frac{\Gamma(n+z)}{\Gamma(z)\Gamma(n+1)},
+\]
+
+so the normalized generating function tends to \(1/\Gamma(z)\). This
+classical example is discussed by Kowalski--Nikeghbali {[}KN10{]}. It
+yields \(\mu_n=H_n\) and \(c_n=-H_n^{(2)}\to-\zeta(2)\).
+
+Let \(A_f=\sum_r(\lambda_r(f)-1/r)\). A possible extension, suggested by
+the short-cycle mean corrections and the uniform residue, is
+
+\[
+e^{-(z-1)L}\mathbb E z^{K_n}
+\longrightarrow \frac{e^{A_f(z-1)}}{\Gamma(z)}
+\tag{32}
+\]
+
+locally uniformly in a complex neighborhood of \(z=1\). This is a
+\textbf{conjectural strengthening}, not an established Luce theorem. It
+is not justified simply by fixed-dimensional Poisson convergence and
+macroscopic Poisson--Dirichlet convergence.
+
+If (32) were proved with the stated analytic convergence,
+differentiating its logarithm would give
+
+\[
+\kappa_f=\gamma_E+A_f,
+\qquad
+\kappa_j^F(K_n)\longrightarrow
+(-1)^{j+1}(j-1)!\zeta(j),\quad j\ge2.
+\tag{33}
+\]
+
+Thus under this particular candidate, higher factorial-cumulant limits
+would be universal rather than profile dependent. It predicts
+\(c_f=-\zeta(2)\) for every regular profile. The finite-order expansion
+theorem (27) does not prove (32); its constants depend on the order and
+its coefficients need not converge.
+
+\section{Source records, references, and finite
+checks}\label{source-records-references-and-finite-checks}
+
+\subsection{Internal dependencies}\label{internal-dependencies}
+
+All repository line numbers refer to the frozen commit stated above.
+
+\begin{itemize}
+\tightlist
+\item
+  Paper IV, \texttt{luce-edgeworth.tex}: rate-oriented fixed-order
+  switching and factorial domination, source lines 929--1112; polynomial
+  one-block switching and passive-mark theorem, source lines 1840--2010.
+  These modules were read directly for this note.
+\item
+  The preceding conversation artifact,
+  \texttt{luce-total-cycle-berry-esseen.md}: the polynomial passive-mark
+  coupling, exact-mean bookkeeping, and the second-moment Poisson
+  smoothing theorem. The new note adds fixed-order moment transfer and
+  retains the second and higher Poisson differences.
+\item
+  Historical provenance candidate
+  \texttt{mesoscopic-total-cycle-resolution-candidate.tex}, source lines
+  125--215: the proposed expectation constant in (30). This source is
+  used only to identify the conjectural target and is not a proof
+  dependency.
+\end{itemize}
+
+The prior functional audit and the preceding Berry--Esseen note pin the
+same repository commit. No repository file is modified by this note.
+
+\subsection{Primary literature}\label{primary-literature}
+
+{[}KM90{]} J. E. Kolassa and P. McCullagh, \emph{Edgeworth Series for
+Lattice Distributions}, Annals of Statistics \textbf{18} (1990),
+981--985. DOI:
+\href{https://doi.org/10.1214/aos/1176347637}{10.1214/aos/1176347637}.
+
+{[}BKN14{]} A. D. Barbour, E. Kowalski, and A. Nikeghbali,
+\emph{Mod-discrete expansions}, Probability Theory and Related Fields
+\textbf{158} (2014), 859--893. DOI:
+\href{https://doi.org/10.1007/s00440-013-0498-8}{10.1007/s00440-013-0498-8}.
+
+{[}KN10{]} E. Kowalski and A. Nikeghbali, \emph{Mod-Poisson convergence
+in probability and number theory}, International Mathematics Research
+Notices \textbf{2010}, 3549--3587. DOI:
+\href{https://doi.org/10.1093/imrn/rnq019}{10.1093/imrn/rnq019}. See in
+particular the uniform-permutation formula (4.9).
+
+{[}CDMN20{]} R. Chhaibi, F. Delbaen, P.-L. Méliot, and A. Nikeghbali,
+\emph{Mod-\(\phi\) convergence: approximation of discrete measures and
+harmonic analysis on the torus}, Annales de l'Institut Fourier
+\textbf{70} (2020), 1115--1197. DOI:
+\href{https://doi.org/10.5802/aif.3332}{10.5802/aif.3332}.
+
+{[}MNV22{]} P.-L. Méliot, A. Nikeghbali, and G. Visentin,
+\emph{Mod-Poisson approximation schemes and higher-order Chen--Stein
+inequalities}, preprint
+\href{https://arxiv.org/abs/2210.13818}{arXiv:2210.13818}.
+
+\subsection{Verification performed}\label{verification-performed}
+
+The accompanying \texttt{check\_edgeworth.py} checks 125 exact discrete
+Taylor identities, six symbolic Charlier norm identities, the midpoint
+polynomial and Kolmogorov envelope algebra, the Poisson CDF formulas for
+eight parameters and five lattice phases, 30 independent
+Poisson-plus-mark examples against the proved signed smoothing bound,
+and exact uniform-permutation cycle distributions for
+\(n=100,1000,10000,100000\).
+
+All checks passed. Numerical computations test signs, phases,
+coefficients, and finite consistency; they do not prove asymptotics or
+independently verify the upstream Luce endpoint theorem. The JSON file
+records the actual errors and test parameters.
+
+\end{document}

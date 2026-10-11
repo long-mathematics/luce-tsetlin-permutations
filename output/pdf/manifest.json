@@ -4,10 +4,10 @@
     {
       "id": "mesoscopic-switching",
       "source": "papers/mesoscopic-switching/mesoscopic-luce-cycles.tex",
-      "source_sha256": "30bb9a373aa8d83e37dc96f425417fa35d343aba44504d5f2a5e9314ac6ccaed",
+      "source_sha256": "3054c73c11ae8c416201b752c9ba432e8adec6905122746a63d080adcfd3945f",
       "pdf": "output/pdf/mesoscopic-luce-cycles.pdf",
-      "pdf_sha256": "0733c2d354b70434e19bf446d386566a6d681ed43d6e77b095b38eb93586c041",
-      "pages": 27
+      "pdf_sha256": "502f81f91bbd63e5534fdbf10ba219bea60b6f9a40473f9e844d811009f75421",
+      "pages": 28
     },
     {
       "id": "erdos-turan-order",
@@ -20,18 +20,26 @@
     {
       "id": "sharp-order-edgeworth",
       "source": "papers/sharp-order-edgeworth/luce-edgeworth.tex",
-      "source_sha256": "dfe6a24f7002eaa2c732e2448c290f416cc72a62bdf8dbda47228fe07daeba80",
+      "source_sha256": "5a059e492f85c62ac00b3040404c63ed305e2a3eba7930aa4fc57d3ee8e64046",
       "pdf": "output/pdf/luce-edgeworth.pdf",
-      "pdf_sha256": "160cc95c3b7f7889800ad258b5c84c5ca52599bf40d4a44f78e962aaeecfb8fd",
+      "pdf_sha256": "6c25c052a0d26df1ed82c240991f7033ceafc8aaa46b3c7be8f15a93e9e91eb8",
       "pages": 39
     },
     {
       "id": "functional-erdos-turan",
-      "source": "notes/working/functional-luce-erdos-turan.tex",
-      "source_sha256": "bae8958e825dc3f3d8bd4290ae4715f9d6fbce1d1eb17ca101699c9ba8e5bffa",
+      "source": "papers/functional-erdos-turan/functional-luce-erdos-turan.tex",
+      "source_sha256": "b7715a0808e7e199e6fd032309cecc2b1f52c3cb502c7edc44812c77717e6a0d",
       "pdf": "output/pdf/functional-luce-erdos-turan.pdf",
-      "pdf_sha256": "a0513d8b4eb9298f7b7cba8f8ba25e008c4b7716b5f82df1cbf8e70befaf36a8",
-      "pages": 21
+      "pdf_sha256": "fcafcd133328839715bb1eef820a47434a6cc5ca34a3222fcc5951500c6ea0b3",
+      "pages": 20
+    },
+    {
+      "id": "total-cycle-edgeworth",
+      "source": "papers/total-cycle-edgeworth/total-cycle-edgeworth.tex",
+      "source_sha256": "374a65e72f182d09b90bb4993d01aa3204d257a71d7f269c3e81b12fd99493aa",
+      "pdf": "output/pdf/total-cycle-edgeworth.pdf",
+      "pdf_sha256": "a7da9bd3aa7b1ab7fc12a33161d6020359a05f23ad73b479614965dc255c9f81",
+      "pages": 13
     }
   ]
 }

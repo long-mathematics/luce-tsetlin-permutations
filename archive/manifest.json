@@ -134,6 +134,114 @@
       "upstream_path": ".github/workflows/latex.yml",
       "sha256": "89d57e719e62ff9a25c7d57cb0c829112220873ea1e51461287fcd3d8ad2cc9c",
       "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/.github/workflows/latex.yml"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/audit/audit-manifest.json",
+      "sha256": "239ba8f604b853a58865a3e3f7b17f1b6809cb07d952ee90f05d6be999ca0b71",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "audit/audit-manifest.json"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/audit/check_switching_identities.py",
+      "sha256": "9d80ba0ef11beb401effa6c07a2834bfecabdd211b2e2c7a838218fe80795eb5",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "audit/check_switching_identities.py"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/audit/finite_checks.json",
+      "sha256": "724b2d3a96637c35aa1a68f51b2faae687d8c52708255fb79db65c5e627416fa",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "audit/finite_checks.json"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/audit/functional-luce-total-cycle-audit.md",
+      "sha256": "9baef2fcf505a9222cc03f30e8a7bf3717cf0eb35787cb0929d4a11bf08341ab",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "audit/functional-luce-total-cycle-audit.md"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/berry-esseen/README.md",
+      "sha256": "0352faa138adc2684971dfa66d9eaffe9f8bd59d7b7bb1035586bcf56a6ccd23",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "berry-esseen/README.md"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/berry-esseen/SHA256SUMS",
+      "sha256": "f8ba4853b0abbd4607ba939de04a45b29c25f5d7d15c172ccbb56ed2993b95c5",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "berry-esseen/SHA256SUMS"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/berry-esseen/check_poisson_smoothing.py",
+      "sha256": "9b4de32adbdeea68b03bfc410852560b3ae1d865cc281c4c2d7ed15ac5474455",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "berry-esseen/check_poisson_smoothing.py"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/berry-esseen/luce-total-cycle-berry-esseen.md",
+      "sha256": "0e844da1fef59669d15d83576f9644a8b9c58051dcf7e8022e1e94a25ccd698d",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "berry-esseen/luce-total-cycle-berry-esseen.md"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/berry-esseen/luce-total-cycle-berry-esseen.tex",
+      "sha256": "2c29bcc696b6859b6854fb4704060862e92f461548bdd2a6035fc497224f5816",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "berry-esseen/luce-total-cycle-berry-esseen.tex"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/berry-esseen/smoothing_checks.json",
+      "sha256": "a82e973dddcc2073bb033ea5ae8b66b4f647c12ffedd435e7260cd13d14f103d",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "berry-esseen/smoothing_checks.json"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/berry-esseen/source-manifest.json",
+      "sha256": "0b66287d111dc38e874c5ebad1f163f2709186c08679cc5a7516806d7dc7ec6c",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "berry-esseen/source-manifest.json"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/edgeworth/README.md",
+      "sha256": "2672581c55900932badc555614ad3fa1ccdec8dfa80b9960ea0ed841a97c0cf6",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "edgeworth/README.md"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/edgeworth/SHA256SUMS",
+      "sha256": "8a385c36091ef9878bf8ff7eaa6d2cee1f78f5d5c2f8fc1e7f43b5665436549b",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "edgeworth/SHA256SUMS"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/edgeworth/check_edgeworth.py",
+      "sha256": "f685b3cf93ec4d96ca86b36cddc3ea0855eab45efa99fcc5d991d3e596178888",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "edgeworth/check_edgeworth.py"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/edgeworth/edgeworth_checks.json",
+      "sha256": "30752f62b83f0e6dc4913ee5264f0d5354796de00a6a5bc9e7824ffb796d1f81",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "edgeworth/edgeworth_checks.json"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/edgeworth/luce-total-cycle-edgeworth.md",
+      "sha256": "3e1e51bf2180e53fbeba47f25f37f205af5d0bdaf48471f4f67c7d17be30db36",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "edgeworth/luce-total-cycle-edgeworth.md"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/edgeworth/luce-total-cycle-edgeworth.tex",
+      "sha256": "33b50b3bd8151a43c71f25c3bf1b0a04cd62e098582899ce36d6579f7f733b75",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "edgeworth/luce-total-cycle-edgeworth.tex"
+    },
+    {
+      "path": "archive/total-cycle-source-notes/edgeworth/source-manifest.json",
+      "sha256": "283cf5cb627a05e3c3f5e37293ea764580d9c5ca65d0cd36a88bf858015016ee",
+      "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
+      "original_filename": "edgeworth/source-manifest.json"
     }
   ]
 }

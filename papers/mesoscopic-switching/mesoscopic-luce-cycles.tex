@@ -1609,6 +1609,55 @@ $\psi_{n,\ell}(i,j,z)=e^z\wedge A_\ell$, which is bounded by $A_\ell$
 and $A_\ell$-Lipschitz.
 \end{proof}
 
+
+\begin{corollary}[Quantitative truncation-uniform observable interface]
+\label{cor:quantitative-truncation-interface}
+In the setting of Proposition~\ref{prop:endpoint-mixing}, fix $q\in\{1,2\}$
+and use an admissible free terminal depth. Let $\mathcal G_{n,q}$ denote
+the bracket on the right side of~\eqref{eq:free-depth-global-bound}.
+For every truncation level $A\ge1$, which may depend on $n$, and every
+$r\in[r_-,r_+]$, put
+\[
+ S_{n,r}^{(A)}=\sum_{i:L_n(i)>r}(R_{i,\sigma_n^r(i)}\wedge A),
+ \qquad D_{n,A}=\frac1{n^2}\sum_{i,j}(R_{ij}\wedge A).
+\]
+The one-root construction gives
+\begin{equation}\label{eq:truncation-uniform-first}
+ \left|\E[S_{n,r}^{(A)}/n]-\E D_{n,A}\right|
+ \le C_\kappa A\mathcal G_{n,1},
+\end{equation}
+and the two-root construction gives
+\begin{equation}\label{eq:truncation-uniform-second}
+ \left|\E[(S_{n,r}^{(A)}/n)^2]-\E D_{n,A}^2\right|
+ \le C_\kappa A^2\mathcal G_{n,2}.
+\end{equation}
+The constants are independent of $A$. These are annealed observable
+estimates, not an arbitrary-deletion quenched comparison.
+\end{corollary}
+\begin{proof}
+The function $z\mapsto e^z\wedge A$ is bounded by $A$ and is
+$A$-Lipschitz. On finite blocks,~\eqref{eq:coarse-log-R-error}
+therefore bounds a one-factor coarsening error by $2\kappa Ah$.
+A telescoping product bounds the two-factor error by $C_\kappa A^2h$.
+Apply the quantitative comparison of
+Proposition~\ref{prop:endpoint-mixing} to the bounded coarse test,
+and then undo this coarsening. The tail-label exceptions have probability
+$O_q(\rho)$. The internal root bound
+in Corollary~\ref{cor:root-crude} gives
+$\Pp\{L_n(I_\ell)\le r_+\}=O_\kappa(r_+/n)$.
+Multiplying these probabilities by $A^q$ charges both kinds of exception
+to the displayed bracket, since $h,\rho,r_+/n$ are already absorbed there.
+All estimates remain linear in the one-factor bound and quadratic in the
+two-factor bound, so no fixed-$A$ limiting argument is used.
+
+Conditional on the clocks, independent uniform roots turn the selected
+one-factor expectation into $S_{n,r}^{(A)}/n$ and the two-factor
+expectation into $(S_{n,r}^{(A)}/n)^2$. Independent fresh uniform pairs
+similarly give $D_{n,A}$ and $D_{n,A}^2$.
+The fresh pairs share the clock environment: the latter quantity is
+$\E D_{n,A}^2$, not $(\E D_{n,A})^2$. This proves both claims.
+\end{proof}
+
 \begin{corollary}[Untruncated swap-factor decorrelation below the moment threshold]
 \label{cor:untruncated-swap-decorrelation}
 If the fixed integer $q$ satisfies $q<\lambda_\kappa$, then uniformly in

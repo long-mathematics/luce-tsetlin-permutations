@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-11",
+  "title": "Lattice Edgeworth Expansions for Total Luce Cycles",
+  "author": "Christopher D. Long",
+  "repository": "long-mathematics/nonuniform-random-permutations",
+  "frozen_commit": "6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0",
+  "sources": [
+    {
+      "path": "papers/04-luce-edgeworth/luce-edgeworth.tex",
+      "blob_sha": "28ba5778ecb8bb83da97872e5f68a99401e6b5ce",
+      "ranges_read": [
+        [
+          929,
+          990
+        ],
+        [
+          985,
+          1215
+        ],
+        [
+          1840,
+          2040
+        ],
+        [
+          2530,
+          2860
+        ],
+        [
+          620,
+          1020
+        ]
+      ],
+      "used_inputs": [
+        "thm:multiclock",
+        "cor:factorial-domination",
+        "prop:poly-block",
+        "lem:passive-Stein",
+        "thm:poly-pp"
+      ]
+    },
+    {
+      "path": "notes/provenance/mesoscopic-total-cycle-resolution-candidate.tex",
+      "blob_sha": "24f58ea49f948db80bb6ae9e4ee1c91333fc3180",
+      "ranges_read": [
+        [
+          125,
+          215
+        ]
+      ],
+      "role": "Conjectural expectation target only; not a proof input"
+    }
+  ],
+  "conversation_inputs": [
+    {
+      "file": "luce-total-cycle-berry-esseen.md",
+      "sha256": "0e844da1fef59669d15d83576f9644a8b9c58051dcf7e8022e1e94a25ccd698d"
+    },
+    {
+      "file": "functional-luce-total-cycle-audit.md",
+      "sha256": "9baef2fcf505a9222cc03f30e8a7bf3717cf0eb35787cb0929d4a11bf08341ab"
+    }
+  ],
+  "new_results": [
+    "First lattice Edgeworth term",
+    "Exact leading Kolmogorov constant",
+    "Fixed-order boundary moments and legitimate moment transfer",
+    "Second-order signed Poisson-Charlier approximation",
+    "Second-order continuity-corrected Edgeworth formula",
+    "Every fixed Poisson-Charlier order with exact finite-n coefficients"
+  ],
+  "not_established": [
+    "Profile mean constant",
+    "Profile factorial-cumulant limits",
+    "Analytic mod-Poisson convergence",
+    "Uniform expansion with growing order"
+  ],
+  "repository_modified": false,
+  "pdf_checks": {
+    "pages": 13,
+    "final_build": "No overfull, underfull, undefined-reference, or citation warnings on final pass",
+    "visual": "All pages inspected in rendered contact sheet"
+  }
+}

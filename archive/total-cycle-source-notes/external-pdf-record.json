@@ -1,0 +1,17 @@
+{
+  "note": "Original proof-note PDFs remain available in the conversation; their source bytes are archived here. The integrated current PDF is separately built from its canonical source.",
+  "files": [
+    {
+      "conversation_filename": "luce-total-cycle-berry-esseen.pdf",
+      "bytes": 332474,
+      "sha256": "5c3880dc518b03e517b33588755cc74457f292a828291df8f0e38f61d7321151",
+      "storage": "original conversation artifact; not copied into this archive"
+    },
+    {
+      "conversation_filename": "luce-total-cycle-edgeworth.pdf",
+      "bytes": 349154,
+      "sha256": "fcaf253bbc17535f98f523e1f328174a7f69bc489cd1161e64b2a5ba35be6848",
+      "storage": "original conversation artifact; not copied into this archive"
+    }
+  ]
+}

@@ -1,3 +1,21 @@
 {
-  "checks": []
+  "checks": [
+    {
+      "script": "scripts/total-cycles/check_switching_identities.py"
+    },
+    {
+      "script": "scripts/total-cycles/check_poisson_smoothing.py",
+      "args": [
+        "--output",
+        ".build/verification/smoothing_checks.json"
+      ]
+    },
+    {
+      "script": "scripts/total-cycles/check_edgeworth.py",
+      "args": [
+        "--output",
+        ".build/verification/edgeworth_checks.json"
+      ]
+    }
+  ]
 }

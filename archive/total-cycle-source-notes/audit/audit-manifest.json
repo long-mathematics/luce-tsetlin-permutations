@@ -1,0 +1,16 @@
+{
+  "audit_date": "2026-10-11",
+  "repository": "long-mathematics/nonuniform-random-permutations",
+  "commit": "6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0",
+  "sources": {
+    "notes/working/functional-luce-erdos-turan.tex": "bc3769c671dcb77657871b6d3fafc8879075d079",
+    "papers/02-mesoscopic-luce-cycles/mesoscopic-luce-cycles.tex": "cb8e806ee252e329a221ba126b998a69bef263c4",
+    "papers/03-luce-erdos-turan/luce-erdos-turan.tex": "b5ca7fd1ccfd4a8102c756056446a76553abd9de"
+  },
+  "repository_mutated": false,
+  "local_files_sha256": {
+    "check_switching_identities.py": "9d80ba0ef11beb401effa6c07a2834bfecabdd211b2e2c7a838218fe80795eb5",
+    "finite_checks.json": "724b2d3a96637c35aa1a68f51b2faae687d8c52708255fb79db65c5e627416fa",
+    "functional-luce-total-cycle-audit.md": "9baef2fcf505a9222cc03f30e8a7bf3717cf0eb35787cb0929d4a11bf08341ab"
+  }
+}
