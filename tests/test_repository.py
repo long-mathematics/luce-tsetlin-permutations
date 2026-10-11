@@ -24,48 +24,8 @@ class RepositoryTests(unittest.TestCase):
             r'$\operatorname{ord}(\sigma)$',
             r'$\newcommand{\foo}{x}\foo$',
             r'$$\n\begin{aligned}x&=y\end{aligned}\n$$\n',
-            r'$\href{https://example.com}{x}        ]
-        for text in bad:
-            with self.subTest(text=text), self.assertRaises(ValueError):
-                build.check_readme_math(text)
-    def test_good_math(self):
-        build.check_readme_math('$$\nx\n= y\n$$\n')
-    def test_historical_candidate_is_not_dependency(self):
-        for d in build.catalog():
-            self.assertNotIn('resolution-candidate', d['source'])
-            self.assertNotIn('historical-total-cycle', d.get('dependencies', []))
-    def test_status_distinctions(self):
-        text = (ROOT/'THEOREM_STATUS.md').read_text()
-        self.assertIn('Historical rejected candidate', text)
-        self.assertIn('Formalization status', text)
-        self.assertIn('not started', text)
-    def test_no_imported_thorp_material(self):
-        self.assertFalse((ROOT/'third_party/openai-thorp').exists())
-
-if __name__ == '__main__':
-    unittest.main()
-,
-            r'$\foo{x}        ]
-        for text in bad:
-            with self.subTest(text=text), self.assertRaises(ValueError):
-                build.check_readme_math(text)
-    def test_good_math(self):
-        build.check_readme_math('$$\nx\n= y\n$$\n')
-    def test_historical_candidate_is_not_dependency(self):
-        for d in build.catalog():
-            self.assertNotIn('resolution-candidate', d['source'])
-            self.assertNotIn('historical-total-cycle', d.get('dependencies', []))
-    def test_status_distinctions(self):
-        text = (ROOT/'THEOREM_STATUS.md').read_text()
-        self.assertIn('Historical rejected candidate', text)
-        self.assertIn('Formalization status', text)
-        self.assertIn('not started', text)
-    def test_no_imported_thorp_material(self):
-        self.assertFalse((ROOT/'third_party/openai-thorp').exists())
-
-if __name__ == '__main__':
-    unittest.main()
-,
+            r'$\href{https://example.com}{x}$',
+            r'$\foo{x}$',
         ]
         for text in bad:
             with self.subTest(text=text), self.assertRaises(ValueError):
