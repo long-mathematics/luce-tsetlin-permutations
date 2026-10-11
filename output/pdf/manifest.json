@@ -44,10 +44,10 @@
     {
       "id": "regular-profile-cycles",
       "source": "papers/regular-profile-cycles/regular-profile-cycles.tex",
-      "source_sha256": "7c4bbf5a78a7e78bb13a9b0ce63061dc8301d8fd61ff89880415277f66c79f7a",
+      "source_sha256": "df0c78bc08ae7a5e0e55d4f51ff7bb57cbca5bb2c95fb1c2cf95e58d613e0511",
       "pdf": "output/pdf/regular-profile-cycles.pdf",
-      "pdf_sha256": "55c1a9cb015d9808e70667b18c1432192fefb496b67aec27cce20685430429c1",
-      "pages": 27
+      "pdf_sha256": "aebd3e848c4e1922562f1c0a91007b341206cef4e39d257ca9a4ab682ea99ce6",
+      "pages": 28
     },
     {
       "id": "macroscopic-pd",

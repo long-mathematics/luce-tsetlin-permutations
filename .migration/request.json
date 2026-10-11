@@ -1,5 +1,0 @@
-{
-  "stage": "integration",
-  "task": "regular-profile-repair-snapshot",
-  "baseline_commit": "0e898f0d0203bef77de54e17d95d0763deb31325"
-}
