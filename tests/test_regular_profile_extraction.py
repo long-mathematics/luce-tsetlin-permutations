@@ -20,16 +20,19 @@ MARKERS = [
     ("% BEGIN ARCHIVED BLOCK: regular-positive-profile-theory", "% END ARCHIVED BLOCK: regular-positive-profile-theory", START_REGULAR, END_REGULAR),
 ]
 
+def source_block(text, start, end):
+    return text[text.index(start):text.index(end, text.index(start))]
 
-def source_block(text: str, start: str, end: str) -> str:
-    i = text.index(start)
-    j = text.index(end, i)
-    return text[i:j]
-
-
-def active_block(text: str, start_marker: str, end_marker: str) -> str:
+def active_block(text, start_marker, end_marker):
     return text.split(start_marker + "\n", 1)[1].split(end_marker, 1)[0]
 
+def strip_repairs(text):
+    return re.sub(
+        r"\n% BEGIN AUDIT REPAIR [^\n]+\n.*?% END AUDIT REPAIR [^\n]+\n",
+        "",
+        text,
+        flags=re.S,
+    )
 
 class RegularProfileExtractionTests(unittest.TestCase):
     @classmethod
@@ -37,12 +40,12 @@ class RegularProfileExtractionTests(unittest.TestCase):
         cls.archive = ARCHIVE.read_text(encoding="utf-8")
         cls.active = ACTIVE.read_text(encoding="utf-8")
 
-    def test_mathematical_blocks_are_byte_preserved(self):
-        for start_marker, end_marker, source_start, source_end in MARKERS:
-            with self.subTest(start_marker=start_marker):
+    def test_archived_blocks_recovered_after_stripping_repairs(self):
+        for sm, em, ss, se in MARKERS:
+            with self.subTest(marker=sm):
                 self.assertEqual(
-                    active_block(self.active, start_marker, end_marker),
-                    source_block(self.archive, source_start, source_end),
+                    strip_repairs(active_block(self.active, sm, em)),
+                    source_block(self.archive, ss, se),
                 )
 
     def test_label_reference_and_citation_closure(self):
@@ -70,29 +73,25 @@ class RegularProfileExtractionTests(unittest.TestCase):
         for token in required:
             self.assertIn(token, self.active)
 
-    def test_catalog_and_status_keep_extraction_working(self):
+    def test_audit_repairs_are_all_present(self):
+        for marker in ["1:", "2:", "3A:", "3B:", "4:", "5A:", "5B:", "5C:", "6A:", "6B:", "6C:"]:
+            self.assertIn("% BEGIN AUDIT REPAIR " + marker, self.active)
+        self.assertIn("Audited current manuscript", self.active)
+
+    def test_catalog_and_status_promoted_without_dependencies(self):
         catalog = json.loads((ROOT / "papers.json").read_text())["documents"]
         doc = next(d for d in catalog if d["id"] == "regular-profile-cycles")
-        self.assertEqual(doc["status"], "working")
+        self.assertEqual(doc["status"], "current-research")
         self.assertEqual(doc.get("dependencies", []), [])
         status = (ROOT / "THEOREM_STATUS.md").read_text()
-        self.assertIn("Working mechanical extraction", status)
-        self.assertIn("regular-profile-cycles", status)
-        self.assertIn("proof audit is pending", status)
+        self.assertIn("Regular positive-profile microscopic cycles and sparse entries", status)
+        self.assertIn("**Audited current manuscript**", status)
+        self.assertIn("regular-profile-repair-record.md", status)
 
-    def test_no_unreviewed_strengthening_markers(self):
-        provenance = self.active.split("% BEGIN ARCHIVED BLOCK: exponential-race-and-gumbel-input", 1)[0]
-        self.assertIn("does not audit", provenance)
-        self.assertNotIn("audited current manuscript", provenance.lower())
-        prohibited = [
-            "uniformly comparable triangular arrays",
-            "growing cycle lengths",
-            "quantitative total variation rate",
-            "quenched arbitrary-deletion",
-        ]
-        for phrase in prohibited:
-            self.assertNotIn(phrase, provenance.lower())
-
+    def test_scope_denials_are_recorded(self):
+        status = (ROOT / "THEOREM_STATUS.md").read_text()
+        for token in ("arbitrary-comparable-array", "growing-cycle", "endpoint-singular", "quantitative-TV"):
+            self.assertIn(token, status)
 
 if __name__ == "__main__":
     unittest.main()

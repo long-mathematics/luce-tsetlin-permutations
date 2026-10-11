@@ -50,7 +50,7 @@
 
 \title{Microscopic Cycles and Sparse Entries for Regular Luce Profiles}
 \author{Christopher D. Long}
-\date{Mechanical extraction --- proof audit pending}
+\date{Audited current manuscript --- localized clarifications only}
 
 \begin{document}
 \maketitle
@@ -84,11 +84,14 @@ between the archival sentinels below is copied byte-for-byte from the frozen
 source.  Only the standalone preamble, abstract, this provenance notice,
 section wrapper, and selected bibliography have been added.
 
-The extraction preserves the profile hypothesis, all equality and limit
-statements, every endpoint and collision envelope used by the factorial-moment
-arguments, and all internal labels and references.  It does not audit,
-strengthen, or otherwise change the proof.  Its mathematical status remains
-that of the archived draft until a separate adversarial audit is completed.
+The initial extraction preserved the profile hypothesis, all equality and
+limit statements, every endpoint and collision envelope used by the
+factorial-moment arguments, and all internal labels and references.  A later
+adversarial audit found no fatal gap and recommended six localized
+clarifications.  The present source differs from the frozen mathematical
+blocks only by the marked clarification passages below; no hypothesis,
+conclusion, limiting constant, or mode of convergence has been strengthened.
+The audit and exact repair record are kept under \texttt{audits/}.
 
 \section{Preliminaries}
 
@@ -477,6 +480,32 @@ For a finite set of specified labels \(P\subset[n]\), define empirical functions
         B_{n,P}(t)=A_{n,P}'(t)=\frac1n\sum_{j\notin P}\theta_{n,j}e^{-\theta_{n,j}t}.
 \]
 If \(|P|\) is fixed, then \(A_{n,P}\to A\) and \(B_{n,P}\to B\) uniformly on compact subsets of \([0,\infty)\).
+% BEGIN AUDIT REPAIR 1: uniform profile approximation
+\medskip
+\noindent\textit{Uniform profile approximation.}
+Fix \(T<\infty\) and \(K<\infty\).  For the given triangular array satisfying
+\(\max_i|\eps_{n,i}|\to0\), uniformly over all \(P\subset[n]\) with
+\(|P|\le K\),
+\[
+ \max_{0\le m\le2}\ \sup_{0\le t\le T}
+ \left|A_{n,P}^{(m)}(t)-A^{(m)}(t)\right|\longrightarrow0.
+\]
+Indeed, after the harmless common rescaling, the rates are uniformly bounded
+above and below and converge uniformly to \(f(i/n)\); for \(m=0,1,2\) the
+summands defining \(A_{n,P}^{(m)}\) are uniformly Lipschitz in the rate on
+compact time intervals, removal of \(O(1)\) labels costs \(O(1/n)\), and the
+remaining sums are ordinary Riemann sums.  The same argument applied to
+\[
+ (1-e^{-\theta t_{a\wedge b}})e^{-\theta t_{a\vee b}}
+\]
+and its first time derivatives shows uniform compact convergence, and hence
+uniform continuity, of the normalized covariance kernels used below.  All
+uniformity statements here and in the sequel are for this fixed triangular
+array, uniformly over the displayed labels, bounded-size removed sets, and
+admissible target positions; no quantitative rate uniform over all
+perturbation arrays without a common modulus of convergence is asserted.
+% END AUDIT REPAIR 1: uniform profile approximation
+
 
 \begin{lemma}[Uniform saddle geometry]\label{lem:regular-saddle-geometry}
 Fix \(\ell\ge1\), \(\delta>0\), and \(\eta>0\).  Uniformly over sets \(P\subset[n]\) of cardinality at most \(\ell\) and over integers
@@ -833,7 +862,23 @@ and
 \[
         g_n(t)=\prod_{a=1}^\ell\theta_{n,p_a}e^{-\theta_{n,p_a}t_a}.
 \]
-The functions \(g_n\) are uniformly bounded and equicontinuous in the saddle neighborhood, since the specified rates are uniformly bounded and the neighborhood is compact.  Thus the hypotheses of Lemma \ref{lem:integrated-lattice-saddle} are satisfied uniformly over the separated bulk configurations.  Here
+The functions \(g_n\) are uniformly bounded and equicontinuous in the saddle neighborhood, since the specified rates are uniformly bounded and the neighborhood is compact.  
+% BEGIN AUDIT REPAIR 2: integrated-saddle checklist
+For clarity, the hypotheses of Lemma \ref{lem:integrated-lattice-saddle}
+are verified as follows.  The preceding uniform profile approximation gives
+uniform \(C^2\) bounds for \(A_{n,P}\) and uniform continuity of the covariance
+kernels.  Lemma \ref{lem:regular-saddle-geometry} places the saddles in a fixed
+compact set and bounds the diagonal entries of \(DA_n(t_n^*)\) away from zero.
+Lemma \ref{lem:luce-cumulative-llt} gives uniform covariance
+nondegeneracy and the required local CLT.  Lemmas
+\ref{lem:regular-off-saddle} and \ref{lem:regular-gaussian-tail} give,
+respectively, the off-saddle \(o(n^{-\ell})\) contribution and the Gaussian
+majorant on the saddle window.  Finally the displayed product defining
+\(g_n\) is uniformly bounded and equicontinuous there.  Thus every hypothesis
+of the integrated-saddle lemma is satisfied uniformly over the separated bulk
+configurations.
+% END AUDIT REPAIR 2: integrated-saddle checklist
+Thus the hypotheses of Lemma \ref{lem:integrated-lattice-saddle} are satisfied uniformly over the separated bulk configurations.  Here
 \[
         DA_n(t_n^*)=
         \diag(B_{n,P}(t_{n,1}^*),\ldots,B_{n,P}(t_{n,\ell}^*)).
@@ -990,6 +1035,18 @@ suffices to assume $h<N/2$.
 For $\ell=1$, the defining condition implies $r>N-h-1$, so the terminal-tail
 bound, with a harmless endpoint term, gives
 $H_1(N,h)\le C(h/N)^\alpha\le C(h/N)^\beta$.
+% BEGIN AUDIT REPAIR 3A: gap endpoint term
+More explicitly, the terminal-tail estimate covers \(r>N-h\).  The only
+remaining possible value is \(r=N-h\); since \(h<N/2\) and
+\(0<\alpha\le1\),
+\[
+ w_N(N-h)=N^{-\alpha}(h+1)^{\alpha-1}
+ \le C N^{-\alpha}h^\alpha
+ =C(h/N)^\alpha.
+\]
+Thus the endpoint convention does not alter the asserted power bound.
+% END AUDIT REPAIR 3A: gap endpoint term
+
 Assume the result for $\ell-1$.  After the first gap $r$, put $s=N-r$.
 The induction hypothesis gives
 \[
@@ -1122,6 +1179,13 @@ and to every cyclic trace integral
  \dd x_1\cdots\dd x_r,
 \]
 as well as to their finite products in mixed factorial moments.
+
+% BEGIN AUDIT REPAIR 3B: order of limits
+The limiting procedure used here and in the factorial-moment arguments is
+therefore explicit: first \(n\to\infty\) with \(\delta,\eta>0\) fixed, then
+\(\eta\downarrow0\) to remove collision neighborhoods, and finally
+\(\delta\downarrow0\) to remove the endpoint truncation.
+% END AUDIT REPAIR 3B: order of limits
 \end{proof}
 
 \subsection{Factorial moments}
@@ -1176,6 +1240,20 @@ Let \(\calC_{n,r}\) be the set of directed \(r\)-cycles on \([n]\), counted up t
         \sigma_n(i_r)=i_1\}.
 \]
 Then \(C_r(\sigma_n)=\sum_{\gamma\in\calC_{n,r}}\one_{E_\gamma}\).  Put \(L=\sum_{r=1}^R r k_r\).  Expanding the mixed factorial moment gives a sum over ordered collections of distinct cycles.  For \(k_r\) cycles of the same length \(r\), the factorial moment \((C_r(\sigma_n))_{k_r}\) keeps those cycles ordered, so no additional \(k_r!\) denominator appears; the only normalization inside a single directed \(r\)-cycle is the factor \(1/r\) for cyclic rotations.  If two distinct cycles share a label, their events are incompatible; hence only disjoint collections contribute.
+% BEGIN AUDIT REPAIR 4: cycle combinatorial normalization
+Equivalently, if each selected cycle is first represented by an ordered list
+of its vertices, then the conversion from ordered lists to the ordered cycle
+collection contributes exactly
+\[
+        \prod_{r=1}^R r^{-k_r}.
+\]
+There is no factor \(k_r!^{-1}\), because the falling factorial already orders
+the \(k_r\) selected \(r\)-cycles.  Once the ordered cycle encoding is fixed,
+the target tuple is determined from the source tuple by the prescribed cyclic
+shifts, so only a fixed combinatorial factor depending on
+\(R,k_1,\ldots,k_R\) enters the envelope estimates.
+% END AUDIT REPAIR 4: cycle combinatorial normalization
+
 
 For a disjoint collection, the event imposes \(L\) distinct point constraints \(\sigma_n(p_a)=q_a\).  The labels \(p_a\) are distinct, and the target positions \(q_a\) are the same labels cyclically shifted within each cycle, hence are also distinct.  The separated local estimate requires separation of the target positions; no separate metric separation of the labels is needed.
 
@@ -1213,7 +1291,13 @@ factorial moments:
 These are exactly the mixed factorial moments of independent Poisson variables
 \(Z_r\sim\Pois(\lambda_r)\).  Since ordinary mixed moments are finite linear
 combinations of mixed factorial moments, all fixed mixed ordinary moments also
-converge to those of \((Z_1,\ldots,Z_R)\).  The limiting vector has finite
+converge to those of \((Z_1,\ldots,Z_R)\).  
+% BEGIN AUDIT REPAIR 5A: moment-method reference
+For a standard statement of the multivariate method of moments, see
+\cite{Billingsley1995}.  This citation is only to the convergence criterion:
+the model-specific factorial-moment estimates are proved above.
+% END AUDIT REPAIR 5A: moment-method reference
+The limiting vector has finite
 exponential moments and is therefore moment-determinate, so the multivariate
 method of moments gives
 \[
@@ -1236,6 +1320,12 @@ For every fixed $R$,
 \begin{proof}
 Let $p_n$ and $p$ be the probability mass functions of the two laws on the
 countable discrete space $\Zz_{\ge0}^R$.  Theorem \ref{thm:regular-cycles} implies
+
+% BEGIN AUDIT REPAIR 5B: discrete Scheffe reference
+The finite-set argument below is the counting-measure form of Scheff\'e's
+lemma; see \cite{Billingsley1995}.  No unbounded-moment passage is used in
+this total-variation step.
+% END AUDIT REPAIR 5B: discrete Scheffe reference
 $p_n(z)\to p(z)$ for every $z\in\Zz_{\ge0}^R$.  Given $\varepsilon>0$, choose a
 finite set $A\subset\Zz_{\ge0}^R$ with $p(A)>1-\varepsilon$.  Then
 $\sum_{z\in A}|p_n(z)-p(z)|\to0$ and $p_n(A^c)\to p(A^c)$.  Hence
@@ -1373,7 +1463,19 @@ Equality must therefore hold in the pointwise Jensen inequality used in the
 proof of Lemma \ref{lem:bistochastic-hs} for almost every $x$.  Because
 $\rho(x,y)>0$ for every $x\in[0,1]$ and every $y\in(0,1)$, equality in Jensen's
 inequality forces $h(y)$ to be almost everywhere constant.  It follows that
-$\zeta=1$.  Thus the only eigenvectors with eigenvalue of modulus one are the
+$\zeta=1$.
+% BEGIN AUDIT REPAIR 6A: complex Jensen equality
+For complex-valued \(h\), this is the equality case of Cauchy--Schwarz for
+the probability measure \(\rho(x,y)\dd y\):
+\[
+ \left|\int h\,\rho(x,\cdot)\right|^2
+ \le \int |h|^2\,\rho(x,\cdot),
+\]
+with equality only when \(h\) is a scalar multiple of the constant function
+almost everywhere for that measure.  Strict positivity of \(\rho\) makes
+this equivalent to Lebesgue almost-everywhere constancy.
+% END AUDIT REPAIR 6A: complex Jensen equality
+  Thus the only eigenvectors with eigenvalue of modulus one are the
 constants.  The eigenvalue $1$ is algebraically simple as well.  Indeed, if
 $(K-I)g=c\one$ with $c\ne0$, then $K^ng=g+nc\one$, contradicting
 $\|K^n\|\le1$.
@@ -1417,6 +1519,14 @@ Therefore
         \le q^{r-2}\sum_{j\ge2}|\zeta_j|^2
         \le q^{r-2}\|T\|_{\mathrm{HS}}^2.
 \]
+
+% BEGIN AUDIT REPAIR 6B: first-moment link
+For each fixed \(r\), Proposition \ref{prop:regular-cycle-factorial} with
+\(k_r=1\) and all other \(k_s=0\) gives
+\(\Ee C_r(\sigma_n)\to\lambda_r\).  This is the fixed-\(r\) input used in
+the iterated limit below; absolute summability comes from the same geometric
+trace bound.
+% END AUDIT REPAIR 6B: first-moment link
 After changing the constant, this is $O(q^r)$.  The two consequences follow
 immediately.
 \end{proof}
@@ -1561,6 +1671,15 @@ is at most
 \[
         C_k D_n|E_n|^{k-1}=o(n^k).
 \]
+% BEGIN AUDIT REPAIR 6C: repeated-edge bookkeeping
+The unrestricted deterministic product sum used below also contains tuples
+with a repeated edge.  Their number is at most
+\(C_k|E_n|^{k-1}=O(n^{k-1})\), so after multiplication by the bulk
+\(O(n^{-k})\) scale their contribution is \(o(1)\).  Thus excluding repeated
+edges in the factorial moment and excluding repeated rows in the compatible
+tuple sum are both negligible in the deterministic comparison.
+% END AUDIT REPAIR 6C: repeated-edge bookkeeping
+
 The number containing a pair of target columns at distance at most $\eta n$ is
 at most
 \[
@@ -1688,7 +1807,14 @@ Theorem \ref{thm:sparse-entry} to the graph edges with target in
 $[\delta',\delta]\cup[1-\delta,1-\delta']$ identifies the corresponding
 limiting integral with the limit of their expected overlap count.  The latter
 is bounded by the endpoint estimate above and is therefore
-$O(\delta+\delta^\beta)$.  Thus $\Lambda_\mu(\delta)$ is Cauchy as
+$O(\delta+\delta^\beta)$.  
+% BEGIN AUDIT REPAIR 5C: converging-together reference
+The limit order is: for each fixed \(\delta\), first let \(n\to\infty\);
+then let \(\delta\downarrow0\), under which the omitted count vanishes in
+probability and the truncated Poisson means converge.  See
+\cite{Billingsley1999} for the standard converging-together lemma.
+% END AUDIT REPAIR 5C: converging-together reference
+Thus $\Lambda_\mu(\delta)$ is Cauchy as
 $\delta\downarrow0$ and has a finite monotone limit.  The
 converging-together lemma now yields the stated Poisson limit.
 \end{proof}
@@ -1734,6 +1860,18 @@ J. Borga, S. Chatterjee, and P. Diaconis.
 \newblock Permuton and local limits for the Luce model.
 \newblock Preprint, arXiv:2509.07729v2 [math.PR], 2025.
 \newblock \url{https://arxiv.org/abs/2509.07729}.
+\bibitem{Billingsley1995}
+P. Billingsley.
+\newblock \emph{Probability and Measure}, third edition.
+\newblock Wiley Series in Probability and Mathematical Statistics.
+\newblock John Wiley \& Sons, New York, 1995.
+
+\bibitem{Billingsley1999}
+P. Billingsley.
+\newblock \emph{Convergence of Probability Measures}, second edition.
+\newblock Wiley Series in Probability and Statistics.
+\newblock John Wiley \& Sons, New York, 1999.
+
 \bibitem{Petrov1975}
 V. V. Petrov.
 \newblock \emph{Sums of Independent Random Variables}.

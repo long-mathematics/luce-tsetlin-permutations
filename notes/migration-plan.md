@@ -6,7 +6,7 @@
 2. Preservation import: pin upstream commit `6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0`; preserve the original five Luce source/PDF pairs and historical audits byte-for-byte. Create active copies of the switching, scalar order, quantitative order, and functional manuscripts without changing their source bytes. The monolith stays archived.
 3. Total-cycle integration: make the quantitative truncation interface explicit, incorporate the functional audit clarifications, and integrate the new total-cycle Poisson/Berry–Esseen/lattice Edgeworth argument. Preserve the uploaded proof notes and test programs with hashes. Any new mathematical limitation discovered during integration must be reported rather than hidden.
 4. Macroscopic PD/GEM extraction and audit: mechanically extract the archived macroscopic-cycle section and every model-specific lemma used by it; preserve the exact hypothesis, PD(1)/GEM(1) conclusions, uniform-root conclusion, `ell^1` topologies, labels, and proof content; then audit the extracted argument in a separate stage. The audit found no fatal gap, and the six localized clarification repairs have been applied without changing the principal theorem.
-5. Regular positive-profile extraction: mechanically extract the complete microscopic-cycle, long-trace, diagonal-band, sparse-entry, thin-graph, and overlap theory together with its indispensable preliminary and endpoint/collision bounds. Preserve proof status pending a separate audit.
+5. Regular positive-profile extraction and audit: mechanically extract the complete microscopic-cycle, long-trace, diagonal-band, sparse-entry, thin-graph, and overlap theory together with its indispensable preliminary and endpoint/collision bounds; audit the extracted proof separately; then apply only the six localized clarification sets approved by that audit. The audit found no fatal gap and the repairs preserve theorem scope.
 
 The original repository has now been reconciled by a separate documentation-only PR and points here as the canonical editing location for the migrated Luce series.
 
@@ -18,7 +18,7 @@ The audit examined the clock-slab conditioning, relative-prefix estimate, rooted
 
 ## Subsequent decomposition of the 139-page draft
 
-The regular-profile microscopic-cycle/sparse-entry paper is now present as a working mechanical extraction with byte-preserving coverage and provenance checks. Its separate adversarial proof audit is the next stage; no theorem has been promoted by the extraction.
+The regular-profile microscopic-cycle/sparse-entry paper has now completed mechanical extraction, adversarial proof audit, and localized clarification repair. Its active source is an audited current manuscript; the frozen monolith remains unchanged.
 
 The remaining planned thematic destinations are boundary laws; Sukhatme fixed points; endpoint universality; global endpoint fixed-point Poisson approximation; and singular-profile short cycles. These are proposed boundaries, not a promise that every extraction already fits a particular page count. Do not change hypotheses or upgrade proof status during mechanical extraction.
 
