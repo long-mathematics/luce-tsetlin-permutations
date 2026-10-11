@@ -28,7 +28,7 @@ def active_block(text, start_marker, end_marker):
 
 def strip_repairs(text):
     return re.sub(
-        r"% BEGIN AUDIT REPAIR [^\n]+\n.*?% END AUDIT REPAIR [^\n]+\n?",
+        r"\n% BEGIN AUDIT REPAIR [^\n]+\n.*?% END AUDIT REPAIR [^\n]+\n",
         "",
         text,
         flags=re.S,
