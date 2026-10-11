@@ -85,10 +85,10 @@ def check_markdown(allow_pending: bool = False) -> None:
 
 
 def check_readme_math(text: str) -> None:
-    # GitHub Markdown math is intentionally kept to a conservative, portable
-    # MathJax subset.  Use only $...$ and $...$ delimiters, no document-level
-    # macro definitions/environments, no repository-private aliases, and no
-    # commands rejected by GitHub's safe renderer (notably \\operatorname).
+    # Keep README math to a conservative GitHub/MathJax subset. Use only
+    # $...$ for inline math and $$...$$ for display math; avoid document-level
+    # definitions/environments, repository-private aliases, and commands
+    # rejected by GitHub's safe renderer (notably \\operatorname).
     forbidden_tokens = (
         r'\\(', r'\\)', r'\\[', r'\\]',
         r'\\newcommand', r'\\renewcommand', r'\\providecommand',
@@ -102,7 +102,7 @@ def check_readme_math(text: str) -> None:
     for token in forbidden_tokens:
         if token in text:
             raise ValueError('Unsupported README TeX command/delimiter: ' + token)
-    if re.search(r'\\(?:Ee|Pp|TV|Kol|one|Pois|dd|cL)\b', text):
+    if re.search(r'\\(?:Ee|Pp|TV|Kol|one|Pois|dd|cL)\\b', text):
         raise ValueError('Private manuscript macro in README')
     display = False
     for line in text.splitlines():
@@ -114,11 +114,10 @@ def check_readme_math(text: str) -> None:
                 raise ValueError('Display delimiter must occupy its own line')
             display = not display
             continue
-        if display and (re.fullmatch(r'=+|-+', s) or re.match(r'^[+*-]\s+', s)):
+        if display and (re.fullmatch(r'=+|-+', s) or re.match(r'^[+*-]\\s+', s)):
             raise ValueError('Markdown structure inside mathematical display')
     if display:
         raise ValueError('Unclosed README display')
-
 
 def check_archive() -> None:
     path = ROOT/'archive/manifest.json'
