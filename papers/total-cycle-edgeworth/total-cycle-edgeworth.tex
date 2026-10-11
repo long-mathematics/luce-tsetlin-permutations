@@ -1,0 +1,557 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,mathtools,microtype}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{enumitem,booktabs}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={Poisson Approximation and Lattice Edgeworth Expansions for Total Luce Cycles},pdfauthor={Christopher D. Long}}
+\allowdisplaybreaks
+\setlength{\emergencystretch}{2em}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Pois}{\operatorname{Pois}}
+\newcommand{\TV}{d_{\mathrm{TV}}}
+\newcommand{\Kol}{d_{\mathrm K}}
+\newcommand{\Law}{\mathcal L}
+\newcommand{\one}{\mathbf1}
+\newcommand{\dd}{\,\mathrm d}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{inputtheorem}[theorem]{Input theorem}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\title{Poisson Approximation and Lattice Edgeworth Expansions\\for Total Luce Cycles}
+\author{Christopher D. Long}
+\date{11 October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let $K_n$ be the total number of cycles of a Luce permutation whose exponential-clock rates have uniformly bounded ratio, and let $\mu_n=\E K_n$. We prove an exact-mean Poisson approximation with total-variation error $O_\kappa((\log\log n)^2/\log n)$ and a sharp Berry--Esseen bound of order $(\log n)^{-1/2}$. The first lattice Edgeworth expansion gives the exact leading Kolmogorov constant $2/(3\sqrt{2\pi})$. Retaining the second Poisson difference gives a continuity-corrected second-order expansion with the exact coefficient $\Var K_n-\mu_n$; exact-variance standardization absorbs that coefficient. More generally, we obtain a signed Poisson--Charlier expansion at every fixed order. The proof combines a polynomially accurate passive-mark Poisson core from the comparable-rate switching theory with an elementary discrete smoothing argument. We state the precise imported modules; the nonlinear arithmetic analysis of logarithmic permutation order is not used. Profile-dependent limiting mean constants and analytic mod-Poisson convergence remain separate questions.
+\end{abstract}
+\tableofcontents
+
+\section{Model, results, and scope}
+Let $X_{n,i}\sim\operatorname{Exp}(\theta_{n,i})$, $1\le i\le n$, be independent, and define the label-to-rank permutation
+\[
+ \sigma_n(i)=1+\#\{j:X_{n,j}<X_{n,i}\}.
+\]
+Write $C_{n,r}$ for its number of $r$-cycles. A common rescaling of the rates leaves the permutation unchanged. Throughout assume
+\begin{equation}\label{eq:rates}
+ 1\le\theta_{n,i}\le\kappa
+\end{equation}
+for a fixed $\kappa<\infty$, and put
+\[
+ K_n=\sum_{r=1}^n C_{n,r},\quad \mu_n=\E K_n,\quad L=\log n,
+ \quad \ell=1+\log L,\quad c_n=\Var K_n-\mu_n.
+\]
+We use $\ell$ only for sufficiently large $n$. All asymptotic constants are uniform over the arrays in \eqref{eq:rates}. No limiting profile, continuity, monotonicity, or macroscopic Poisson--Dirichlet assumption is imposed. The standard normal density and distribution function are $\varphi$ and $\Phi$. For probability measures, $\TV$ is the supremum over events, or half the $\ell^1$ distance in the discrete case; $\Kol$ is the supremum of distribution-function differences.
+
+\begin{theorem}[Poisson approximation and sharp normal approximation]\label{thm:poisson-be}
+One has
+\begin{equation}\label{eq:main-poisson}
+ \mu_n=L+O_\kappa(\ell),\qquad
+ \TV\bigl(\Law(K_n),\Pois(\mu_n)\bigr)=O_\kappa(\ell^2/L),
+\end{equation}
+and
+\begin{equation}\label{eq:main-be}
+ \Kol\left(\Law\left(\frac{K_n-\mu_n}{\sqrt L}\right),N(0,1)\right)
+ =O_\kappa(L^{-1/2}).
+\end{equation}
+The same upper bound holds with denominator $\sqrt{\mu_n}$.
+\end{theorem}
+
+Define the right-continuous lattice convention
+\[
+ \psi(u)=\tfrac12-\{u\},\qquad \{u\}=u-\lfloor u\rfloor.
+\]
+In particular $\psi(k)=1/2$ at an integer $k$.
+\begin{theorem}[First lattice expansion and exact leading constant]\label{thm:first}
+Uniformly for $x\in\mathbb R$,
+\begin{equation}\label{eq:first}
+\begin{split}
+ \Pp\left\{\frac{K_n-\mu_n}{\sqrt L}\le x\right\}
+ ={}&\Phi(x)+\frac{\varphi(x)}{\sqrt L}
+ \left[\frac{1-x^2}{6}+\psi(\mu_n+x\sqrt L)\right]
+ +O_\kappa(\ell^2/L).
+\end{split}
+\end{equation}
+Consequently, uniformly in the comparability class,
+\begin{equation}\label{eq:constant}
+ \sqrt L\,\Kol\left(\Law\left(\frac{K_n-\mu_n}{\sqrt L}\right),N(0,1)\right)
+ \longrightarrow\frac{2}{3\sqrt{2\pi}}.
+\end{equation}
+The first expansion also holds with $L$ replaced by $\mu_n$ in the scale, prefactor, and lattice argument.
+\end{theorem}
+
+Extend the Poisson mass $p_\mu(k)=e^{-\mu}\mu^k/k!$ by zero for negative integers. For a sequence on $\mathbb Z$, let $(Tp)(k)=p(k-1)$ and $\Delta=T-I$.
+\begin{theorem}[Second signed approximation and variance]\label{thm:signed}
+One has
+\begin{equation}\label{eq:variance}
+ c_n=O_\kappa(\ell^2),\qquad \Var K_n=L+O_\kappa(\ell^2),
+\end{equation}
+and
+\begin{equation}\label{eq:signed}
+ \frac12\left\|\Law(K_n)-p_{\mu_n}-\frac{c_n}{2}\Delta^2p_{\mu_n}\right\|_1
+ =O_\kappa(\ell^3/L^{3/2}).
+\end{equation}
+The approximant is a signed measure of total mass one; positivity is not asserted.
+\end{theorem}
+
+\begin{theorem}[Second continuity-corrected lattice expansion]\label{thm:second}
+For $k\in\mathbb Z$, set
+\[
+ y=\frac{k+1/2-\mu_n}{\sqrt{\mu_n}},\qquad Q(y)=\frac{-y^5+7y^3-3y}{72}.
+\]
+Uniformly in $k$,
+\begin{equation}\label{eq:second}
+\begin{split}
+ \Pp(K_n\le k)={}&\Phi(y)+\frac{\varphi(y)}{6\sqrt{\mu_n}}(1-y^2)\\
+ &+\frac{\varphi(y)}{\mu_n}\left[Q(y)-\frac{c_ny}{2}\right]
+ +O_\kappa(\ell^3/L^{3/2}).
+\end{split}
+\end{equation}
+If $s_n^2=\Var K_n$ and $z=(k+1/2-\mu_n)/s_n$, then
+\begin{equation}\label{eq:variance-scaled}
+ \Pp(K_n\le k)=\Phi(z)+\frac{\varphi(z)}{6s_n}(1-z^2)
+ +\frac{\varphi(z)}{s_n^2}Q(z)+O_\kappa(\ell^3/L^{3/2}).
+\end{equation}
+\end{theorem}
+Since $\ell^3/L^{3/2}=o(L^{-1})$, the second-order term is resolved, even though $c_n$ is not assumed bounded or convergent. The exact leading constant in \eqref{eq:constant} also holds with scale $\sqrt{\mu_n}$ or $s_n$.
+
+\subsection*{Dependency and review boundary}
+The model and local-limit background are developed in the Luce literature \cite{CDK,BCD}. Our probabilistic inputs are precisely the marked swap and free-depth endpoint modules of \cite{Switch}, the two-cycle bound of \cite{Order}, and the polynomial intensity/passive-mark and fixed-order domination modules of \cite{OrderQuant}. These modules are stated below with their source labels. We do not import the logarithmic-order Berry--Esseen or Edgeworth conclusions, prime-power linearization, or the nonlinear arithmetic remainder analysis. The new analytic transfer is proved here. Its elementary Poisson/Charlier ingredients are related to the general signed-approximation framework of \cite{BKN}; no novelty claim is made for those standard tools. The lattice convention is consistent with the classical lattice Edgeworth framework \cite{KM}.
+
+This is a research manuscript with explicit upstream dependencies, not a formal verification certificate. The repository preserves the scoped functional audit and the two source proof notes separately. Historical rejected total-cycle candidates are not dependencies. The profile mean limit is not inferred from this paper's normal approximation.
+
+\section{Quantitative switching inputs}\label{sec:inputs}
+Let $L_n(i)$ be the cycle length containing $i$. For $i\ne j$, define
+\[
+ R_{ij}=\exp\{-(\theta_{n,i}-\theta_{n,j})(X_{n,j}-X_{n,i})\},\qquad R_{ii}=1,
+\]
+and
+\[
+ S_{n,r}=\sum_{i:L_n(i)>r}R_{i,\sigma_n^r(i)},\qquad
+ \delta_{n,r}=\E|S_{n,r}/n-1|.
+\]
+Choose $p=2$ if $\kappa=1$, and $p=1+1/(2(\kappa-1))$ otherwise. Then $1<p<\kappa/(\kappa-1)$ when $\kappa>1$. Write $\beta=1-1/p>0$; it depends only on $\kappa$.
+
+\begin{inputtheorem}[Marked switching and polynomial intensity]\label{input:switch}
+For bounded permutation-measurable $F$ and $1\le r<n$,
+\begin{equation}\label{eq:marked}
+ r(n-r)\E[C_{n,r}F(\sigma_n)]
+ =\E\sum_{i:L_n(i)>r}R_{i,\sigma_n^r(i)}
+ F\bigl(\sigma_n\circ(i\ \sigma_n^r(i))\bigr).
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:pmoment}
+ \sup_{n,r}\frac1n\E\sum_{i:L_n(i)>r}R_{i,\sigma_n^r(i)}^p\le C_\kappa.
+\end{equation}
+For any fixed $Q_0>0$, choose $A=A(\kappa,Q_0)$ sufficiently large and put
+\begin{equation}\label{eq:window}
+ b=\lceil L^3\rceil,\quad U=\lfloor n/L^A\rfloor,\quad
+ \mathcal I_n=\{r:b<r\le U\},\quad a_{n,r}=\frac{n}{r(n-r)}.
+\end{equation}
+Then
+\begin{equation}\label{eq:poly}
+ \sum_{j:2^jb\le U}\ \sup_{2^jb\le r<2^{j+1}b}\delta_{n,r}
+ \le C_{\kappa,Q_0}L^{-Q_0}.
+\end{equation}
+The bound is available with $A\beta\ge Q_0+1$.
+\end{inputtheorem}
+The marked identity and selected-factor estimate are proved in the
+switching manuscript \cite{Switch}, under the respective source labels
+\texttt{prop:master-switch} and \texttt{cor:selected-moments}.
+The polynomial estimate is Proposition~\texttt{prop:poly-block} of
+\cite{OrderQuant}, using the free-depth theorem of \cite{Switch}. In that specialization the terminal depth is proportional to $\log(n/r)$, rather than its square root. The one- and two-root estimates are uniform for truncations $R\wedge T$, with respective costs $C_\kappa T\mathcal E$ and $C_\kappa T^2\mathcal E$. Truncated second moments and selected first-moment tails then control $\delta_{n,r}$. This does not assume an untruncated selected second moment, a growing number of roots, or a quenched arbitrary-deletion theorem.
+
+Taking $F=1$ and applying \eqref{eq:pmoment} gives
+\begin{equation}\label{eq:crude}
+ \E C_{n,r}\le\frac{C_\kappa n}{r(n-r)},\qquad
+ \Pp\{L_n(I_n)\le a\}\le C_\kappa a/n\quad(a\le n/2),
+\end{equation}
+where $I_n$ is an independent uniform label. The second inequality follows by summing $r\E C_{n,r}/n$. Cycles longer than $n/2$ are treated by their deterministic count bound of one, not by a singular endpoint denominator.
+
+For positive $r_1,\ldots,r_q$, let $\mathcal C_n(r_1,\ldots,r_q)$ count ordered $q$-tuples of distinct cycles having those lengths, including the falling-factorial convention when lengths coincide.
+\begin{inputtheorem}[Fixed-order cycle domination]\label{input:factorial}
+For each fixed $q\ge1$,
+\begin{equation}\label{eq:factorial}
+ \E\mathcal C_n(r_1,\ldots,r_q)\le\frac{C_{\kappa,q}}{r_1\cdots r_q}
+ \quad\text{if }r_1+\cdots+r_q\le n/2.
+\end{equation}
+\end{inputtheorem}
+This is \cite[\texttt{cor:factorial-domination}]{OrderQuant}, proved from its rate-oriented multi-clock identity \texttt{thm:multiclock}. In the logarithmic density ratio of the chosen rotation, only the maximum-rate clock has a positive coefficient. Partitioning by its position permits injective reindexing and a selected first-moment bound for every fixed $q$. Thus the input is not a high-moment assumption on a product of swap factors. The case $q=2$, sufficient for Theorem~\ref{thm:poisson-be}, is also \cite[\texttt{cor:pair}]{Order}.
+
+\section{A passive Poisson core and exact centering}\label{sec:core}
+Define
+\[
+ J_n=\sum_{b<r\le U}C_{n,r},\qquad
+ D_n=\sum_{r\le b}C_{n,r}+\sum_{r>U}C_{n,r},\qquad K_n=J_n+D_n,
+\]
+and put $\lambda_n=\sum_{r\in\mathcal I_n}a_{n,r}$. Here $D_n$ is an omitted \emph{cycle count}, not an arithmetic remainder for permutation order.
+
+\begin{lemma}[Passive-mark approximation]\label{lem:passive}
+There exist independent variables $Z_n\sim\Pois(\lambda_n)$ and $\widetilde D_n\overset d=D_n$ such that
+\begin{equation}\label{eq:joint-tv}
+ \TV\bigl(\Law(J_n,D_n),\Law(Z_n,\widetilde D_n)\bigr)
+ \le C_{\kappa,Q_0}L^{-Q_0}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Write $\xi_n=(C_{n,r})_{r\in\mathcal I_n}$. A good split with prescribed $r\in\mathcal I_n$ uses a source cycle of length $d>r+U$. It produces an $r$-cycle and a residual cycle of length $d-r>U$. Therefore the exact effect is
+\[
+ (\xi_n,D_n)\longmapsto(\xi_n+e_r,D_n).
+\]
+The source and residual cycles are both above $U$; no short cycle changes. This proves passivity of the full omitted count, without assuming independence between its short and long parts.
+
+For arbitrary measurable $g_r:\mathbb Z_+^{\mathcal I_n}\times\mathbb Z_+\to[-1,1]$, apply \eqref{eq:marked} with the test $g_r(\xi(\pi)-e_r,D(\pi))$ when $C_r(\pi)>0$, and zero otherwise. Good splits produce $g_r(\xi_n,D_n)$. The two tests differ by at most two on exceptional splits. Consequently
+\begin{align}
+ &\left|\E[C_{n,r}g_r(\xi_n-e_r,D_n)]-a_{n,r}\E g_r(\xi_n,D_n)\right|\notag\\
+ &\qquad\le a_{n,r}\delta_{n,r}
+ +\frac{2a_{n,r}}n\E\sum_{i:r<L_n(i)\le r+U}R_{i,\sigma_n^r(i)}.
+ \label{eq:campbell-one}
+\end{align}
+H\"older's inequality, \eqref{eq:pmoment}, and \eqref{eq:crude} bound the normalized exceptional sum by $C_\kappa(U/n)^\beta$. Since $a_{n,r}\le2/r$ and each dyadic block has bounded harmonic mass, summing \eqref{eq:campbell-one} gives a Campbell discrepancy at most
+\[
+ C_{\kappa,Q_0}L^{-Q_0}+C_\kappa L(U/n)^\beta
+ \le C_{\kappa,Q_0}L^{-Q_0}.
+\]
+The bound holds for tests of the entire growing vector and mark.
+
+For completeness, the dimension-free Stein transfer uses the immigration--death generator on the core, with the mark held fixed. For an event $B$, its semigroup solution $h_B(x,d)$ has
+\[
+ |h_B(x+e_r,d)-h_B(x,d)|\le\int_0^\infty e^{-t}\dd t=1.
+\]
+Indeed, couple two chains with the same births and deaths, differing by one initial particle. The discrepancy survives until time $t$ with probability $e^{-t}$. The defining integral is finite by coupling to stationarity; measurability is immediate here since both state coordinates are countable. Testing the Campbell discrepancy against these first differences gives total variation from the independent product of the Poisson core and a copied mark. Summing the core coordinates proves \eqref{eq:joint-tv}. This is the marked form of the point-process Stein argument in \cite{BB}; see also \cite[\texttt{lem:passive-Stein}]{OrderQuant}.
+\end{proof}
+
+\begin{lemma}[Omitted moments and core mean]\label{lem:moments}
+For each fixed integer $q\ge1$,
+\begin{equation}\label{eq:moment-bounds}
+ \E D_n^q=O_{\kappa,q}(\ell^q),\qquad \E K_n^q=O_{\kappa,q}(L^q).
+\end{equation}
+Separately, with $\nu_n=\E D_n$,
+\begin{equation}\label{eq:mean-error}
+ |\E J_n-\lambda_n|=O_{\kappa,Q_0}(L^{-Q_0}),\qquad
+ \mu_n=\lambda_n+\nu_n+O_{\kappa,Q_0}(L^{-Q_0}),
+\end{equation}
+and
+\begin{equation}\label{eq:lambda}
+ \lambda_n=L-(A+3)\log L+O_\kappa(1),\qquad
+ \mu_n=L+O_\kappa(\ell).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Let $W=\lfloor n/(2q)\rfloor$; eventually $b<U<W$. Omitted lengths at most $W$ have harmonic mass
+\[
+ H=\sum_{r\le b}\frac1r+\sum_{U<r\le W}\frac1r=O_{\kappa,q}(\ell).
+\]
+If $V$ counts those cycles, \eqref{eq:factorial} gives $\E(V)_j\le C_{\kappa,q}H^j$ for $1\le j\le q$, since every tuple considered has total length at most $n/2$. Expanding $V^q$ in falling factorials yields $\E V^q=O(\ell^q)$. At most $2q-1$ cycles are longer than $W$, because each has length at least $W+1>n/(2q)$. Adding this bounded count proves the first estimate. The same proof for all lengths at most $W$, with harmonic mass $O(L)$, proves the second.
+
+The mean is not transferred through total variation. Instead, \eqref{eq:marked} with $F=1$ gives
+\[
+ |\E J_n-\lambda_n|\le\sum_{r\in\mathcal I_n}a_{n,r}\delta_{n,r}
+ =O_{\kappa,Q_0}(L^{-Q_0})
+\]
+by \eqref{eq:poly}. Finally $a_{n,r}=1/r+1/(n-r)$, so harmonic summation proves the expansion for $\lambda_n$. The bound $\nu_n=O_\kappa(\ell)$ then proves the assertion for $\mu_n$. In particular $\lambda_n,\mu_n\ge L/2$ for all sufficiently large $n$.
+\end{proof}
+
+\section{Discrete smoothing by a large Poisson law}\label{sec:smoothing}
+We give the analytic identities in a form reusable independently of the Luce model.
+\begin{lemma}[Discrete Taylor identity]\label{lem:taylor}
+For integers $a,m\ge0$ and any sequence $p$,
+\begin{equation}\label{eq:taylor}
+ T^ap=\sum_{j=0}^m\binom aj\Delta^jp
+ +\sum_{u=0}^{a-m-1}\binom{a-1-u}{m}T^u\Delta^{m+1}p.
+\end{equation}
+The second sum is empty when $a\le m$, and $\binom aj=0$ for $j>a$. For summable $p$,
+\begin{equation}\label{eq:taylor-bound}
+ \left\|T^ap-\sum_{j=0}^m\binom aj\Delta^jp\right\|_1
+ \le\binom a{m+1}\|\Delta^{m+1}p\|_1.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Repeated telescoping, or induction on $a$, gives \eqref{eq:taylor}. Translation preserves $\ell^1$ norm, and the sum of the nonnegative remainder coefficients is $\binom a{m+1}$.
+\end{proof}
+
+\begin{lemma}[Poisson difference norms]\label{lem:charlier}
+For every fixed $j\ge0$ and $\lambda>0$,
+\begin{equation}\label{eq:charlier}
+ \|\Delta^jp_\lambda\|_1\le\sqrt{j!}\lambda^{-j/2}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Define
+\[
+ C_j(k;\lambda)=\sum_{r=0}^j(-1)^{j-r}\binom jr(k)_r\lambda^{j-r}.
+\]
+Then $\Delta^jp_\lambda(k)=\lambda^{-j}C_j(k;\lambda)p_\lambda(k)$. The generating identity
+\[
+ \sum_{j\ge0}\frac{C_j(k;\lambda)}{j!}t^j=e^{-\lambda t}(1+t)^k
+\]
+and the Poisson generating function imply, for $Z\sim\Pois(\lambda)$,
+\[
+ \E\{e^{-\lambda(s+t)}(1+s)^Z(1+t)^Z\}=e^{\lambda st}.
+\]
+Coefficient comparison gives $\E C_j(Z;\lambda)^2=j!\lambda^j$. Cauchy--Schwarz proves \eqref{eq:charlier}.
+\end{proof}
+
+\begin{lemma}[Mean-matched mark smoothing]\label{lem:smooth2}
+Let $Z\sim\Pois(\lambda)$ and let $M$ be an independent nonnegative integer variable with finite second moment. Put $\nu=\E M$. Then
+\begin{equation}\label{eq:smooth2}
+ \TV\bigl(\Law(Z+M),\Pois(\lambda+\nu)\bigr)
+ \le\frac{\E(M)_2+\nu^2}{2\sqrt2\lambda}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Let $N\sim\Pois(\nu)$ be independent. Average \eqref{eq:taylor} with $m=1$ once at $a=M$ and once at $a=N$. The constant and linear terms cancel since $\E M=\E N=\nu$. Using $\E(N)_2=\nu^2$ gives
+\[
+ \|p_\lambda*\Law(M)-p_{\lambda+\nu}\|_1
+ \le\tfrac12\{\E(M)_2+\nu^2\}\|\Delta^2p_\lambda\|_1.
+\]
+Divide by two and use \eqref{eq:charlier}. The bound can be replaced by its minimum with one.
+\end{proof}
+The cancellation explains why keeping the boundary count is useful. Discarding it leaves a first-order shift; matching its mean leaves a second-difference error of order $1/\lambda$.
+
+\section{Proof of Poisson and normal approximation}\label{sec:be}
+Let $S_n=Z_n+\widetilde D_n$ as in Lemma~\ref{lem:passive}, and set $\mu_n^0=\lambda_n+\nu_n$. Contraction under summation gives
+\[
+ \TV(\Law(K_n),\Law(S_n))\le C_{\kappa,Q_0}L^{-Q_0}.
+\]
+By Lemmas~\ref{lem:moments} and \ref{lem:smooth2},
+\[
+ \TV(\Law(S_n),\Pois(\mu_n^0))=O_\kappa(\ell^2/L).
+\]
+The elementary parameter coupling $\TV(\Pois(u),\Pois(v))\le|u-v|$ and \eqref{eq:mean-error} replace $\mu_n^0$ by $\mu_n$. Taking a fixed $Q_0\ge4$ proves \eqref{eq:main-poisson}.
+
+For $P\sim\Pois(\mu)$, the classical Berry--Esseen inequality gives
+\begin{equation}\label{eq:poisson-be}
+ \Kol\left(\Law\left(\frac{P-\mu}{\sqrt\mu}\right),N(0,1)\right)
+ \le C\mu^{-1/2}.
+\end{equation}
+For instance, write $P$ as a sum of $\lceil\mu\rceil$ independent Poisson variables of mean at most one; their total third absolute centered moment is $O(\mu)$ and their total variance is $\mu$. Transfer by \eqref{eq:main-poisson} proves the normal estimate at scale $\sqrt{\mu_n}$. Since $\mu_n/L=1+O_\kappa(\ell/L)$, replacing this scale by $\sqrt L$ changes the normal comparison by $O_\kappa(\ell/L)$. This proves Theorem~\ref{thm:poisson-be}.
+
+\begin{corollary}[A local limit]\label{cor:local}
+Uniformly in the comparability class,
+\[
+ \sup_{k\in\mathbb Z}\left|\sqrt L\,\Pp(K_n=k)
+ -\varphi\left(\frac{k-\mu_n}{\sqrt L}\right)\right|\longrightarrow0,
+ \qquad
+ \max_k\Pp(K_n=k)\sim(2\pi L)^{-1/2}.
+\]
+\end{corollary}
+\begin{proof}
+Every point-mass error is bounded by \eqref{eq:main-poisson}, whose product with $\sqrt L$ tends to zero. Apply the uniform local Poisson limit, obtainable from Stirling's formula, and \eqref{eq:lambda}.
+\end{proof}
+
+\section{Moment transfer and signed expansions}\label{sec:signed}
+Total variation by itself does not transfer unbounded moments. Here the needed control follows from \eqref{eq:moment-bounds}. The same global moment bound holds for $S_n$: $\lambda_n=O(L)$ and $\E\widetilde D_n^q=O(\ell^q)$. Under a maximal coupling, Cauchy--Schwarz therefore gives, for every fixed $j$,
+\begin{equation}\label{eq:moment-transfer}
+ |\E K_n^j-\E S_n^j|
+ \le C_{\kappa,j}L^jL^{-Q_0/2}.
+\end{equation}
+Here global $2j$th moments are used and $Q_0$ is chosen in advance.
+If $b_n^*=\Var D_n-\nu_n$, independence in $S_n$ and \eqref{eq:mean-error} imply
+\begin{equation}\label{eq:variance-transfer}
+ c_n=b_n^*+O_\kappa(L^{2-Q_0/2}).
+\end{equation}
+Taking $Q_0\ge12$, and using $|b_n^*|=O_\kappa(\ell^2)$, proves \eqref{eq:variance}.
+
+\subsection{Retaining the second difference}
+In Lemma~\ref{lem:smooth2}, suppose in addition $\E M^3<\infty$. Apply the Taylor identity with $m=2$ to $M$ and $N\sim\Pois(\nu)$. Set $b^*=\Var M-\nu$. The quadratic coefficient is $b^*/2$, so
+\[
+ p_\lambda*\Law(M)=p_{\lambda+\nu}+\frac{b^*}{2}\Delta^2p_\lambda+R,
+ \qquad
+ \|R\|_1\le\frac{\E(M)_3+\nu^3}{6}\|\Delta^3p_\lambda\|_1.
+\]
+Telescoping the shift and averaging over $N$ gives
+\[
+ \|\Delta^2p_{\lambda+\nu}-\Delta^2p_\lambda\|_1
+ \le\nu\|\Delta^3p_\lambda\|_1.
+\]
+Consequently
+\begin{equation}\label{eq:smooth3}
+\begin{split}
+ &\frac12\left\|p_\lambda*\Law(M)-p_{\lambda+\nu}
+ -\frac{b^*}{2}\Delta^2p_{\lambda+\nu}\right\|_1\\
+ &\qquad\le\frac{\sqrt6}{2\lambda^{3/2}}
+ \left[\frac{\E(M)_3+\nu^3}{6}+\frac{|b^*|\nu}{2}\right].
+\end{split}
+\end{equation}
+Apply this with $M=\widetilde D_n$. Its third moment is $O_\kappa(\ell^3)$, so the bound is $O_\kappa(\ell^3/L^{3/2})$. The coupling error is smaller. Replace $\mu_n^0$ by $\mu_n$ using \eqref{eq:mean-error}, and $b_n^*$ by $c_n$ using \eqref{eq:variance-transfer}. For the signed correction, parameter replacement is also harmless: $\|\Delta^2(p_u-p_v)\|_1\le4\|p_u-p_v\|_1$. These costs are smaller at $Q_0\ge12$. This proves Theorem~\ref{thm:signed}.
+
+\subsection{Every fixed Poisson--Charlier order}
+For fixed $m\ge1$, define exact coefficients
+\begin{equation}\label{eq:coefficients}
+ \alpha_{n,j}=[w^j]\{e^{-\mu_n w}\E(1+w)^{K_n}\},\qquad 0\le j\le m.
+\end{equation}
+Thus $\alpha_{n,0}=1$, $\alpha_{n,1}=0$, $\alpha_{n,2}=c_n/2$, and $\alpha_{n,3}=\kappa_3^F(K_n)/6$, where $\kappa_j^F$ is the $j$th derivative at zero of $\log\E(1+w)^{K_n}$.
+\begin{theorem}[Fixed-order signed approximation]\label{thm:fixed-order}
+For each fixed $m$,
+\[
+ |\alpha_{n,j}|\le C_{\kappa,m}\ell^j\quad(2\le j\le m),
+\]
+and
+\begin{equation}\label{eq:fixed-order}
+ \frac12\left\|\Law(K_n)-\sum_{j=0}^m\alpha_{n,j}\Delta^jp_{\mu_n}\right\|_1
+ \le C_{\kappa,m}\frac{\ell^{m+1}}{L^{(m+1)/2}}.
+\end{equation}
+The order is fixed before choosing the constants and cutoffs; no growing-order uniformity is asserted.
+\end{theorem}
+\begin{proof}
+First use $S=Z_\lambda+M$ with mean $\mu^0=\lambda+\nu$, and put
+\[
+ \alpha_j^0=[w^j]\{e^{-\nu w}\E(1+w)^M\}.
+\]
+The mark moments give $|\alpha_j^0|=O_{\kappa,m}(\ell^j)$. Averaging \eqref{eq:taylor} at $a=M$ gives an expansion through degree $m$ with coefficients $\E(M)_j/j!$ and error $O_{\kappa,m}(\ell^{m+1}\lambda^{-(m+1)/2})$.
+
+Expand each shifted term of $\Delta^jp_\lambda$ against $N\sim\Pois(\nu)$ through order $m-j$. The total remainder in $\sum_{j\le m}\alpha_j^0\Delta^jp_{\lambda+\nu}$ is at most
+\[
+ \sum_{j=0}^m|\alpha_j^0|\frac{\nu^{m-j+1}}{(m-j+1)!}
+ \|\Delta^{m+1}p_\lambda\|_1
+ =O_{\kappa,m}(\ell^{m+1}\lambda^{-(m+1)/2}).
+\]
+Its coefficients match those of the first expansion, since
+\[
+ \left(\sum_{j\ge0}\alpha_j^0w^j\right)e^{\nu w}=\E(1+w)^M
+\]
+as a formal Taylor identity to the required finite order.
+
+Choose, for example, $Q_0\ge4m+12$. Equation~\eqref{eq:moment-transfer}, the polynomial expression of falling-factorial moments in ordinary moments, and \eqref{eq:mean-error} show that the degree-$j$ coefficients for $K_n$ and $S_n$ differ by $O_{\kappa,m}(L^{j-Q_0/2})$. Multiplication by the norm in \eqref{eq:charlier}, parameter replacement, and the coupling error are all smaller than the stated remainder. This proves \eqref{eq:fixed-order} and the coefficient bounds.
+\end{proof}
+Taking formal logarithms also gives, for each fixed $j\ge2$,
+\[
+ \kappa_j^F(K_n)=O_{\kappa,j}(\ell^j),\qquad
+ \kappa_j(K_n)=\mu_n+O_{\kappa,j}(\ell^j).
+\]
+These are not bounded limiting cumulant corrections and do not imply analytic mod-Poisson convergence.
+
+\section{The elementary Poisson lattice expansion}\label{sec:lattice}
+We record the uniform remainder, rather than applying a nonlattice theorem to an integer-valued law. Let $H_j$ be the probabilists' Hermite polynomials.
+\begin{lemma}[Poisson mass and midpoint distribution expansions]\label{lem:poisson-lattice}
+Let $h=\mu^{-1/2}$ and $x_j=(j-\mu)h$. As $\mu\to\infty$,
+\begin{equation}\label{eq:mass-expansion}
+ p_\mu(j)=h\varphi(x_j)\left[1+\frac h6H_3(x_j)
+ +h^2\left\{\frac{H_4(x_j)}{24}+\frac{H_6(x_j)}{72}\right\}\right]+r_\mu(j),
+\end{equation}
+where $\sum_{j\in\mathbb Z}|r_\mu(j)|\le Ch^3$. Uniformly in integer $k$, with $y=(k+1/2-\mu)h$,
+\begin{equation}\label{eq:poisson-midpoint}
+ \Pp\{\Pois(\mu)\le k\}=\Phi(y)
+ +\frac{\varphi(y)}{6\sqrt\mu}(1-y^2)
+ +\frac{\varphi(y)}\mu\frac{-y^5+7y^3-3y}{72}
+ +O(\mu^{-3/2}).
+\end{equation}
+\end{lemma}
+\begin{proof}
+On the inversion interval $[-\pi/h,\pi/h]$, the centered characteristic function is
+\[
+ \chi_\mu(t)=\exp\{h^{-2}(e^{iht}-1-iht)\},\qquad
+ |\chi_\mu(t)|\le e^{-2t^2/\pi^2}.
+\]
+On $|t|\le h^{-1/8}$, expand the exponent through fourth degree and its exponential through order $h^2$. The comparison function is
+\[
+ e^{-t^2/2}\left[1+\frac h6(it)^3
+ +h^2\left\{\frac{(it)^4}{24}+\frac{(it)^6}{72}\right\}\right].
+\]
+The difference and its second derivative have integrals bounded by $Ch^3$: each omitted term is bounded by $Ch^3$ times a fixed polynomial in $|t|$ and $e^{-ct^2}$. This follows from $h|t|^3\le h^{5/8}$ on the chosen interval, Taylor's formula with remainder, and the differentiated formula. A smooth cutoff between $h^{-1/8}$ and $2h^{-1/8}$ makes the same assertion globally; away from the cutoff the Gaussian bound controls the characteristic function and its first two derivatives by a quantity smaller than every fixed power of $h$.
+
+Fourier inversion and two integrations by parts now give
+\[
+ |r_\mu(j)|\le\frac{Ch^4}{1+x_j^2}.
+\]
+At the endpoints of the inversion interval, boundary terms from the exact characteristic function cancel at the lattice frequencies: the product with $e^{-itx_j}$ is the periodic uncentered inversion integrand. The cutoff comparison vanishes at those endpoints, and its full-line Gaussian extension has exponentially small tails. Thus no nonsummable endpoint bound is introduced. Since the grid spacing is $h$, summing the displayed bound proves the asserted $\ell^1$ error. Inverting powers of $it$ gives the Hermite terms in \eqref{eq:mass-expansion}.
+
+For a Schwartz function $f$, midpoint summation over the cells ending at $y$ gives, uniformly in $k$,
+\begin{equation}\label{eq:midpoint-em}
+ h\sum_{j\le k}f(x_j)=\int_{-\infty}^y f(t)\dd t
+ -\frac{h^2}{24}f'(y)+O_f(h^3).
+\end{equation}
+One can derive this by Taylor expansion on each cell: its integral is $hf(x_j)+h^3f''(x_j)/24$ with a summable remainder bounded by $Ch^3\|f'''\|_1$ after summation; the sum of $f''$ differs from its integral by $O(h\|f'''\|_1)$.
+
+Apply \eqref{eq:midpoint-em} to the three Schwartz terms in \eqref{eq:mass-expansion}. Since
+\[
+ \int_{-\infty}^yH_j(t)\varphi(t)\dd t=-H_{j-1}(y)\varphi(y),
+\]
+the second-order polynomial is
+\[
+ -\frac{H_3(y)}{24}-\frac{H_5(y)}{72}+\frac y{24}
+ =\frac{-y^5+7y^3-3y}{72}.
+\]
+The last $y/24$ is the midpoint correction and is required at order $\mu^{-1}$. This proves \eqref{eq:poisson-midpoint}.
+\end{proof}
+
+\section{Proofs of the lattice expansions and the constant}\label{sec:edgeworth}
+Summation of the second difference telescopes exactly:
+\begin{equation}\label{eq:telescope-cdf}
+ \sum_{j\le k}\Delta^2p_\mu(j)=p_\mu(k)-p_\mu(k-1)
+ =-\frac{k-\mu}{\mu}p_\mu(k).
+\end{equation}
+At $y=(k+1/2-\mu)/\sqrt\mu$, Lemma~\ref{lem:poisson-lattice} gives uniformly
+\[
+ p_\mu(k)-p_\mu(k-1)=-\frac{y\varphi(y)}\mu+O(\mu^{-3/2}).
+\]
+Combine this with Theorem~\ref{thm:signed} and \eqref{eq:poisson-midpoint}, using $c_n=O_\kappa(\ell^2)$. This proves \eqref{eq:second}, including the negative sign of its variance-minus-mean correction.
+
+For a real threshold $a=\mu+x\sqrt\mu$, put $k=\lfloor a\rfloor$. Then exactly
+\[
+ \frac{k+1/2-\mu}{\sqrt\mu}=x+\frac{\psi(a)}{\sqrt\mu}.
+\]
+The first-order Taylor expansion in \eqref{eq:poisson-midpoint}, followed by \eqref{eq:main-poisson}, gives
+\[
+ \Pp\left\{\frac{K_n-\mu_n}{\sqrt{\mu_n}}\le x\right\}
+ =\Phi(x)+\frac{\varphi(x)}{\sqrt{\mu_n}}
+ \left[\frac{1-x^2}{6}+\psi(\mu_n+x\sqrt{\mu_n})\right]
+ +O_\kappa(\ell^2/L).
+\]
+For scale $\sqrt L$, use the same equation at $x\sqrt{L/\mu_n}$. Its lattice argument becomes exactly $\mu_n+x\sqrt L$; the phase is not approximated. The normal scale error is $O_\kappa(\ell/L)$, and bounded Gaussian derivatives control the other prefactors uniformly. This proves \eqref{eq:first}.
+
+For exact variance, replace $y$ in \eqref{eq:second} by $z\sqrt{1+c_n/\mu_n}$. The first normal-scale correction $c_nz\varphi(z)/(2\mu_n)$ cancels the displayed term $-c_ny\varphi(y)/(2\mu_n)$. The remaining errors are
+\[
+ O_\kappa\left(\frac{1+|c_n|}{\mu_n^{3/2}}+\frac{c_n^2}{\mu_n^2}\right)
+ =O_\kappa(\ell^3/L^{3/2}).
+\]
+Replacing the remaining prefactors by $s_n^{-1}$ and $s_n^{-2}$ has the same smaller cost. This proves \eqref{eq:variance-scaled} and Theorem~\ref{thm:second}.
+
+Finally the first-order correction in \eqref{eq:first} is bounded by
+\[
+ \varphi(x)\left(\frac12+\frac{|1-x^2|}{6}\right).
+\]
+Its maximum is $2/(3\sqrt{2\pi})$, at zero. Indeed, by symmetry take $x\ge0$. After removing the common Gaussian factor, the derivative equals $x(x^2-6)/6$ on $[0,1]$ and $-x^3/6$ on $[1,\infty)$; both ranges decrease away from zero. For the matching lower bound choose an integer $k_n$ nearest $\mu_n$ and $x_n=(k_n-\mu_n)/\sqrt L$. Then $x_n\to0$ and $\psi(k_n)=1/2$, so the smooth and lattice corrections add to $(1/6+1/2)\varphi(0)$. Since $\ell^2/L=o(L^{-1/2})$, this proves \eqref{eq:constant}. Changes to the other stated scales are smaller than first order by \eqref{eq:variance}. The proof of Theorem~\ref{thm:first} is complete.
+
+\section{Profile limits, exact phases, and open questions}\label{sec:open}
+Let $d_n=\mu_n-L$. Equation~\eqref{eq:first}, evaluated at the actual shifted threshold, gives unconditionally
+\begin{equation}\label{eq:log-center}
+\begin{split}
+ \Pp\left\{\frac{K_n-L}{\sqrt L}\le x\right\}
+ ={}&\Phi(x)+\frac{\varphi(x)}{\sqrt L}
+ \left[\psi(L+x\sqrt L)+\frac{1-x^2}{6}-d_n\right]
+ +O_\kappa(\ell^2/L).
+\end{split}
+\end{equation}
+A separate sampled-profile theorem $d_n\to\kappa_f$ would replace $d_n$ here by $\kappa_f$ with an $o(L^{-1/2})$ error. Likewise, a theorem $c_n\to c_f$ would replace $c_n$ in \eqref{eq:second} with an $o(L^{-1})$ error. Neither limit is proved here. In particular, \eqref{eq:main-be} with center $L$ is not obtained at the same sharp rate merely from $d_n=O_\kappa(\ell)$.
+
+Small changes inside a fractional-part function are not uniformly negligible at its discontinuities. Any approximate center must be used through its actual threshold as in \eqref{eq:log-center}, rather than substituted silently inside $\psi$.
+
+For uniform permutations, the classical identity
+\[
+ \E z^{K_n}=\frac{\Gamma(n+z)}{\Gamma(z)\Gamma(n+1)}
+\]
+gives $\mu_n=H_n$ and $c_n=-H_n^{(2)}\to-\zeta(2)$; the associated mod-Poisson residue is discussed in \cite{KN}. The Luce fixed-order theorem does not prove convergence to an analogous analytic residue: its order-dependent constants and exact finite-$n$ coefficients do not supply locally uniform complex convergence. The speculative profile-residue formulation is recorded separately under \texttt{notes/working/}, not as a theorem or proof input.
+
+\subsection*{Reproducibility}
+The repository contains the source proof notes, their source manifests, the scoped functional audit, and executable checks for discrete Taylor identities, Charlier norm identities, passive splits, midpoint coefficients, lattice phases, and Poisson-plus-mark smoothing. The checks include the exactly known uniform-permutation distribution. These are finite algebraic and numerical consistency checks, not an independent proof of the upstream endpoint theorem, not novelty certification, and not Lean formalization. The original monograph and rejected historical candidate remain in the immutable archive.
+
+\begin{thebibliography}{99}
+\bibitem{BB} A. D. Barbour and T. C. Brown, Stein's method and point process approximation, \emph{Stochastic Processes and their Applications} \textbf{43} (1992), 9--31. \href{https://doi.org/10.1016/0304-4149(92)90073-Y}{doi:10.1016/0304-4149(92)90073-Y}.
+\bibitem{BKN} A. D. Barbour, E. Kowalski and A. Nikeghbali, Mod-discrete expansions, \emph{Probability Theory and Related Fields} \textbf{158} (2014), 859--893. \href{https://doi.org/10.1007/s00440-013-0498-8}{doi:10.1007/s00440-013-0498-8}.
+\bibitem{BCD} J. Borga, S. Chatterjee and P. Diaconis, Permuton and local limits for the Luce model, preprint, arXiv:2509.07729. \url{https://arxiv.org/abs/2509.07729}.
+\bibitem{CDK} S. Chatterjee, P. Diaconis and G. Kim, Enumerative theory for the Tsetlin library, \emph{Journal of Algebra} \textbf{655} (2024), 139--162. \href{https://doi.org/10.1016/j.jalgebra.2023.08.009}{doi:10.1016/j.jalgebra.2023.08.009}.
+\bibitem{KM} J. E. Kolassa and P. McCullagh, Edgeworth series for lattice distributions, \emph{Annals of Statistics} \textbf{18} (1990), 981--985. \href{https://doi.org/10.1214/aos/1176347637}{doi:10.1214/aos/1176347637}.
+\bibitem{KN} E. Kowalski and A. Nikeghbali, Mod-Poisson convergence in probability and number theory, \emph{International Mathematics Research Notices} \textbf{2010}, 3549--3587. \href{https://doi.org/10.1093/imrn/rnq019}{doi:10.1093/imrn/rnq019}.
+\bibitem{Switch} C. D. Long, \emph{Mesoscopic cycles of comparable-rate Luce permutations}, research manuscript, 2026. Canonical source: \texttt{papers/mesoscopic-switching/mesoscopic-luce-cycles.tex} in the repository \url{https://github.com/long-mathematics/luce-tsetlin-permutations}.
+\bibitem{Order} C. D. Long, \emph{An Erd\H{o}s--Tur\'an Law for Comparable-Rate Luce Permutations}, research manuscript, 2026. Canonical source: \texttt{papers/erdos-turan-order/luce-erdos-turan.tex} in the same repository.
+\bibitem{OrderQuant} C. D. Long, \emph{A Sharp Berry--Esseen Theorem and First Edgeworth Expansion for the Erd\H{o}s--Tur\'an Law of Comparable-Rate Luce Permutations}, research manuscript, 2026. Canonical source: \texttt{papers/sharp-order-edgeworth/luce-edgeworth.tex} in the same repository. The imported modules are stated in Section~\ref{sec:inputs}; the archived upstream version is pinned at commit \texttt{6178a99a8f2e} of \texttt{long-mathematics/nonuniform-random-permutations}.
+\end{thebibliography}
+\end{document}

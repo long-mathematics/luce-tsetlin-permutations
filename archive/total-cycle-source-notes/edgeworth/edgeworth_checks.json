@@ -1,0 +1,398 @@
+{
+  "exact_taylor_cases": 125,
+  "exact_charlier_norm_identities": 6,
+  "polynomial_checks": {
+    "midpoint_polynomial": "-y**5/72 + 7*y**3/72 - y/24",
+    "kolmogorov_constant": 0.2659615202676218
+  },
+  "poisson_cdf_tests": [
+    {
+      "mu": 8.25,
+      "thresholds": 46,
+      "phase_values": 5,
+      "first_max_error": 0.009412616964036946,
+      "mu_times_first_error": 0.0776540899533048,
+      "second_max_error": 0.0006497134990678943,
+      "mu_3_over_2_times_second_error": 0.015395819577999903,
+      "scaled_right_jump_error": 0.26532719969010204
+    },
+    {
+      "mu": 20.0,
+      "thresholds": 77,
+      "phase_values": 5,
+      "first_max_error": 0.003714964471519422,
+      "mu_times_first_error": 0.07429928943038844,
+      "second_max_error": 0.00015106437714785398,
+      "mu_3_over_2_times_second_error": 0.013511608651250692,
+      "scaled_right_jump_error": 0.26427007061475033
+    },
+    {
+      "mu": 50.5,
+      "thresholds": 139,
+      "phase_values": 5,
+      "first_max_error": 0.0014696876023714,
+      "mu_times_first_error": 0.0742192239197557,
+      "second_max_error": 3.6023783764507766e-05,
+      "mu_3_over_2_times_second_error": 0.012927852674677763,
+      "scaled_right_jump_error": 0.2659464997390123
+    },
+    {
+      "mu": 100.0,
+      "thresholds": 223,
+      "phase_values": 5,
+      "first_max_error": 0.0007369937992446896,
+      "mu_times_first_error": 0.07369937992446896,
+      "second_max_error": 1.2553561271604063e-05,
+      "mu_3_over_2_times_second_error": 0.012553561271604063,
+      "scaled_right_jump_error": 0.26562198529998526
+    },
+    {
+      "mu": 300.25,
+      "thresholds": 418,
+      "phase_values": 5,
+      "first_max_error": 0.00024387554733584782,
+      "mu_times_first_error": 0.07322363308758831,
+      "second_max_error": 2.343064234258674e-06,
+      "mu_3_over_2_times_second_error": 0.012190140716133797,
+      "scaled_right_jump_error": 0.2659451872655638
+    },
+    {
+      "mu": 1000.0,
+      "thresholds": 761,
+      "phase_values": 5,
+      "first_max_error": 7.285695449205098e-05,
+      "mu_times_first_error": 0.07285695449205098,
+      "second_max_error": 3.791609136799545e-07,
+      "mu_3_over_2_times_second_error": 0.011990120869391514,
+      "scaled_right_jump_error": 0.2659275393312008
+    },
+    {
+      "mu": 3000.5,
+      "thresholds": 1316,
+      "phase_values": 5,
+      "first_max_error": 2.42307898829508e-05,
+      "mu_times_first_error": 0.07270448504379387,
+      "second_max_error": 7.230684657966169e-08,
+      "mu_3_over_2_times_second_error": 0.011884197710703169,
+      "scaled_right_jump_error": 0.2659612739387978
+    },
+    {
+      "mu": 10000.0,
+      "thresholds": 2401,
+      "phase_values": 5,
+      "first_max_error": 7.260093139727086e-06,
+      "mu_times_first_error": 0.07260093139727086,
+      "second_max_error": 1.181875778494268e-08,
+      "mu_3_over_2_times_second_error": 0.01181875778494268,
+      "scaled_right_jump_error": 0.26595812190076673
+    }
+  ],
+  "convolution_tests": [
+    {
+      "lambda_core": 10.0,
+      "mark": "zero",
+      "mu": 10.0,
+      "c2": -0.0,
+      "signed_half_l1": 0.0,
+      "proved_smoothing_bound": 0.0,
+      "second_cdf_error": 0.00044367968966745053
+    },
+    {
+      "lambda_core": 10.0,
+      "mark": "Bernoulli",
+      "mu": 10.35,
+      "c2": -0.12249999999999998,
+      "signed_half_l1": 0.00033163718431121134,
+      "proved_smoothing_bound": 0.0011070277397909531,
+      "second_cdf_error": 0.0003989417891097219
+    },
+    {
+      "lambda_core": 10.0,
+      "mark": "deterministic",
+      "mu": 12.0,
+      "c2": -2.0,
+      "signed_half_l1": 0.013703054145499305,
+      "proved_smoothing_bound": 0.12909944487358055,
+      "second_cdf_error": 0.004748061868551701
+    },
+    {
+      "lambda_core": 10.0,
+      "mark": "two_point",
+      "mu": 11.2,
+      "c2": 2.1599999999999997,
+      "signed_half_l1": 0.007960580229077148,
+      "proved_smoothing_bound": 0.10782385635841447,
+      "second_cdf_error": 0.004755428777867915
+    },
+    {
+      "lambda_core": 10.0,
+      "mark": "binomial",
+      "mu": 10.8,
+      "c2": -0.32000000000000006,
+      "signed_half_l1": 0.0009420179738409117,
+      "proved_smoothing_bound": 0.008262364471909157,
+      "second_cdf_error": 0.0006188436199769112
+    },
+    {
+      "lambda_core": 30.0,
+      "mark": "zero",
+      "mu": 30.0,
+      "c2": -0.0,
+      "signed_half_l1": 0.0,
+      "proved_smoothing_bound": 0.0,
+      "second_cdf_error": 8.130585246374916e-05
+    },
+    {
+      "lambda_core": 30.0,
+      "mark": "Bernoulli",
+      "mu": 30.35,
+      "c2": -0.12249999999999998,
+      "signed_half_l1": 6.50119038457495e-05,
+      "proved_smoothing_bound": 0.0002130475878562299,
+      "second_cdf_error": 7.52351780227839e-05
+    },
+    {
+      "lambda_core": 30.0,
+      "mark": "deterministic",
+      "mu": 33.0,
+      "c2": -3.0,
+      "signed_half_l1": 0.004289245490050924,
+      "proved_smoothing_bound": 0.07453559924999299,
+      "second_cdf_error": 0.0013144051313983829
+    },
+    {
+      "lambda_core": 30.0,
+      "mark": "two_point",
+      "mu": 31.8,
+      "c2": 5.760000000000001,
+      "signed_half_l1": 0.0006106199845215283,
+      "proved_smoothing_bound": 0.09060547444829148,
+      "second_cdf_error": 0.0030939645054799403
+    },
+    {
+      "lambda_core": 30.0,
+      "mark": "binomial",
+      "mu": 31.2,
+      "c2": -0.47999999999999976,
+      "signed_half_l1": 0.0002794316396923828,
+      "proved_smoothing_bound": 0.00477027835199955,
+      "second_cdf_error": 0.0001575917320546555
+    },
+    {
+      "lambda_core": 100.0,
+      "mark": "zero",
+      "mu": 100.0,
+      "c2": -0.0,
+      "signed_half_l1": 0.0,
+      "proved_smoothing_bound": 0.0,
+      "second_cdf_error": 1.2553561269515456e-05
+    },
+    {
+      "lambda_core": 100.0,
+      "mark": "Bernoulli",
+      "mu": 100.35,
+      "c2": -0.12249999999999998,
+      "signed_half_l1": 1.0756097124466347e-05,
+      "proved_smoothing_bound": 3.500729090727624e-05,
+      "second_cdf_error": 1.1891528128110673e-05
+    },
+    {
+      "lambda_core": 100.0,
+      "mark": "deterministic",
+      "mu": 104.0,
+      "c2": -4.0,
+      "signed_half_l1": 0.000988248846566026,
+      "proved_smoothing_bound": 0.02776088375154268,
+      "second_cdf_error": 0.0002641470465298279
+    },
+    {
+      "lambda_core": 100.0,
+      "mark": "two_point",
+      "mu": 102.4,
+      "c2": 11.040000000000001,
+      "signed_half_l1": 0.0009494012131927531,
+      "proved_smoothing_bound": 0.03962294607926069,
+      "second_cdf_error": 0.0015632460947453408
+    },
+    {
+      "lambda_core": 100.0,
+      "mark": "binomial",
+      "mu": 101.6,
+      "c2": -0.6400000000000003,
+      "signed_half_l1": 6.328484548025601e-05,
+      "proved_smoothing_bound": 0.001776696560098733,
+      "second_cdf_error": 3.197508991270928e-05
+    },
+    {
+      "lambda_core": 300.0,
+      "mark": "zero",
+      "mu": 300.0,
+      "c2": -0.0,
+      "signed_half_l1": 0.0,
+      "proved_smoothing_bound": 0.0,
+      "second_cdf_error": 2.349826025649371e-06
+    },
+    {
+      "lambda_core": 300.0,
+      "mark": "Bernoulli",
+      "mu": 300.35,
+      "c2": -0.12249999999999998,
+      "signed_half_l1": 2.075118374235735e-06,
+      "proved_smoothing_bound": 6.737156276305159e-06,
+      "second_cdf_error": 2.252810350239498e-06
+    },
+    {
+      "lambda_core": 300.0,
+      "mark": "deterministic",
+      "mu": 305.0,
+      "c2": -5.0,
+      "signed_half_l1": 0.00024099396582955788,
+      "proved_smoothing_bound": 0.010213764617139017,
+      "second_cdf_error": 5.8044312956556654e-05
+    },
+    {
+      "lambda_core": 300.0,
+      "mark": "two_point",
+      "mu": 303.0,
+      "c2": 18.0,
+      "signed_half_l1": 0.0006511576894432722,
+      "proved_smoothing_bound": 0.01590990257669732,
+      "second_cdf_error": 0.0006840366525320274
+    },
+    {
+      "lambda_core": 300.0,
+      "mark": "binomial",
+      "mu": 302.0,
+      "c2": -0.8000000000000012,
+      "signed_half_l1": 1.537886806776396e-05,
+      "proved_smoothing_bound": 0.0006536809354968978,
+      "second_cdf_error": 7.563125349080435e-06
+    },
+    {
+      "lambda_core": 1000.0,
+      "mark": "zero",
+      "mu": 1000.0,
+      "c2": -0.0,
+      "signed_half_l1": 0.0,
+      "proved_smoothing_bound": 0.0,
+      "second_cdf_error": 3.791609247266736e-07
+    },
+    {
+      "lambda_core": 1000.0,
+      "mark": "Bernoulli",
+      "mu": 1000.35,
+      "c2": -0.12249999999999998,
+      "signed_half_l1": 3.411361836743165e-07,
+      "proved_smoothing_bound": 1.1070277397909529e-06,
+      "second_cdf_error": 3.654289055937676e-07
+    },
+    {
+      "lambda_core": 1000.0,
+      "mark": "deterministic",
+      "mu": 1006.0,
+      "c2": -6.0,
+      "signed_half_l1": 4.772243651069323e-05,
+      "proved_smoothing_bound": 0.002866007676193488,
+      "second_cdf_error": 1.0394125012941346e-05
+    },
+    {
+      "lambda_core": 1000.0,
+      "mark": "two_point",
+      "mu": 1003.6,
+      "c2": 26.640000000000004,
+      "signed_half_l1": 0.00024466485587976486,
+      "proved_smoothing_bound": 0.0047145051676713646,
+      "second_cdf_error": 0.00021285661810910295
+    },
+    {
+      "lambda_core": 1000.0,
+      "mark": "binomial",
+      "mu": 1002.4,
+      "c2": -0.9600000000000009,
+      "signed_half_l1": 3.0479095098986094e-06,
+      "proved_smoothing_bound": 0.00018342449127638335,
+      "second_cdf_error": 1.4673265925635448e-06
+    },
+    {
+      "lambda_core": 3000.0,
+      "mark": "zero",
+      "mu": 3000.0,
+      "c2": -0.0,
+      "signed_half_l1": 0.0,
+      "proved_smoothing_bound": 0.0,
+      "second_cdf_error": 7.232529308093261e-08
+    },
+    {
+      "lambda_core": 3000.0,
+      "mark": "Bernoulli",
+      "mu": 3000.35,
+      "c2": -0.12249999999999998,
+      "signed_half_l1": 6.566282726407641e-08,
+      "proved_smoothing_bound": 2.1304758785622987e-07,
+      "second_cdf_error": 6.982289203760761e-08
+    },
+    {
+      "lambda_core": 3000.0,
+      "mark": "deterministic",
+      "mu": 3008.0,
+      "c2": -8.0,
+      "signed_half_l1": 1.2263010311944721e-05,
+      "proved_smoothing_bound": 0.0012919503869998784,
+      "second_cdf_error": 2.534355829447721e-06
+    },
+    {
+      "lambda_core": 3000.0,
+      "mark": "two_point",
+      "mu": 3004.8,
+      "c2": 48.96,
+      "signed_half_l1": 0.00014712122124500545,
+      "proved_smoothing_bound": 0.002265405189364587,
+      "second_cdf_error": 0.00010736801170341259
+    },
+    {
+      "lambda_core": 3000.0,
+      "mark": "binomial",
+      "mu": 3003.2,
+      "c2": -1.2799999999999976,
+      "signed_half_l1": 7.833605272449828e-07,
+      "proved_smoothing_bound": 8.26848247679922e-05,
+      "second_cdf_error": 3.797899836288643e-07
+    }
+  ],
+  "uniform_permutation_tests": [
+    {
+      "n": 100,
+      "mu": 5.187377517639621,
+      "c2": -1.6349839001848923,
+      "second_error": 0.016046735688172803,
+      "poisson_second_error": 0.05144618065225562,
+      "scaled_second_error": 0.18958696857365478
+    },
+    {
+      "n": 1000,
+      "mu": 7.485470860550343,
+      "c2": -1.6439345666815615,
+      "second_error": 0.007665896683600432,
+      "poisson_second_error": 0.03349657495149777,
+      "scaled_second_error": 0.1569971063543979
+    },
+    {
+      "n": 10000,
+      "mu": 9.787606036044348,
+      "c2": -1.6448340718480652,
+      "second_error": 0.004591142594892558,
+      "poisson_second_error": 0.02487141251085631,
+      "scaled_second_error": 0.14058387237409328
+    },
+    {
+      "n": 100000,
+      "mu": 12.090146129863335,
+      "c2": -1.6449240668982423,
+      "second_error": 0.003183688883598129,
+      "poisson_second_error": 0.019627135253349803,
+      "scaled_second_error": 0.13383754020108166
+    }
+  ],
+  "status": "All checks passed",
+  "limitations": "Finite algebra and numerical consistency checks only; not a proof of upstream switching or asymptotics."
+}

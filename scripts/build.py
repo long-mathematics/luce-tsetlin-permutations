@@ -72,14 +72,14 @@ def check_catalog() -> None:
         visit(node)
 
 
-def check_markdown() -> None:
+def check_markdown(allow_pending: bool = False) -> None:
     for file in [ROOT/'README.md', ROOT/'THEOREM_STATUS.md', ROOT/'DEPENDENCIES.md', ROOT/'CONTRIBUTING.md', ROOT/'notes/migration-plan.md']:
         text = file.read_text()
         for target in re.findall(r'\]\(([^)]+)\)', text):
             if re.match(r'[A-Za-z][A-Za-z0-9+.-]*:', target) or target.startswith('#'):
                 continue
             dest = (file.parent / target.split('#', 1)[0]).resolve()
-            if not dest.exists():
+            if not dest.exists() and not (allow_pending and dest in {safe_path(d['pdf']) for d in catalog()}):
                 raise ValueError(f'Broken link in {file.name}: {target}')
     check_readme_math((ROOT/'README.md').read_text())
 
@@ -142,7 +142,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check', action='store_true')
     args = parser.parse_args()
-    check_catalog(); check_markdown(); check_archive()
+    check_catalog(); check_markdown(allow_pending=not args.check); check_archive()
     docs = catalog()
     old = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else {'documents': []}
     records = {r['id']: r for r in old['documents']}
@@ -167,6 +167,7 @@ def main() -> None:
     if not args.check:
         MANIFEST.parent.mkdir(parents=True, exist_ok=True)
         MANIFEST.write_text(json.dumps({'schema_version': 1, 'documents': new}, indent=2)+'\n')
+    check_markdown()
     print(f'Verified {len(docs)} active documents and frozen archives.')
 
 if __name__ == '__main__':

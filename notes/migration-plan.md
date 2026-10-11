@@ -15,3 +15,7 @@ Priority: extract the macroscopic PD/GEM proof with all actual dependencies and 
 The planned thematic destinations are boundary laws; regular-profile cycles and sparse entries; macroscopic PD/GEM; Sukhatme fixed points; endpoint universality; global endpoint fixed-point Poisson approximation; and singular-profile short cycles. These are proposed boundaries, not a promise that every extraction already fits a particular page count. Do not change hypotheses or upgrade proof status during mechanical extraction.
 
 Cross-reference the old README only after verified canonical versions are in place. Do not maintain two independently editable copies.
+
+## Initial integration record
+
+The foundation and preservation-import stages have passed their separate PR checks. The total-cycle integration consolidates the two quantitative proof notes, updates the functional source and truncation interface, and registers three finite consistency programs. It does not split or certify the monolith. The original repository remains unchanged until a later explicit cross-reference reconciliation.

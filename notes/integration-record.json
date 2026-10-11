@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "1524e027382e2d6f10a392790d00075717d752ef",
+  "reviewed_payload_sha256": "a6a7d71ff87930d084ff0e278fe932962594ed9316c9d3b0e98a39659880ea3c",
+  "operations": [
+    {
+      "operation": "patch",
+      "path": "DEPENDENCIES.md",
+      "before_sha256": "e22a1cb1ab220d9ef35f9d1b34d251ac14ed1f73efead26c8238a6904278cb3e",
+      "after_sha256": "80004e41f3f3ab5206896d8ffc1f1afadc33c3a80d5bc13f11fdaa3ebf2b06c2"
+    },
+    {
+      "operation": "patch",
+      "path": "README.md",
+      "before_sha256": "7f8a116e19a25dfbba81ab9fb0593a6c2daa86e8a8caaaa5c7a3bb008e0e64e2",
+      "after_sha256": "fc0d5929b7b0de9656607821044511699734bdca261f058dce719e955c00e4d9"
+    },
+    {
+      "operation": "patch",
+      "path": "THEOREM_STATUS.md",
+      "before_sha256": "b00b910eb87838beff58d21902094362c8c37051f6d423bdccdcb2bde71d200e",
+      "after_sha256": "993af88813f8700304860fab56a6f574d30a00cbb0193510b84366e35a53ce6e"
+    },
+    {
+      "operation": "patch",
+      "path": "archive/manifest.json",
+      "before_sha256": "7cf28f31f5a45ef46452a6b479532222a90f8a2d8167b96c35a0b23d53c7ccf5",
+      "after_sha256": "97e80693b82f807dd59d671383c69ddd26f4ee05b1cf1aa1c7d367dbedd621a7"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/README.md",
+      "after_sha256": "08673d86063b3d2d21e2710d43a0845993c8ab4149375a8c3b7206c57c720ac2"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/audit/audit-manifest.json",
+      "after_sha256": "239ba8f604b853a58865a3e3f7b17f1b6809cb07d952ee90f05d6be999ca0b71"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/audit/check_switching_identities.py",
+      "after_sha256": "9d80ba0ef11beb401effa6c07a2834bfecabdd211b2e2c7a838218fe80795eb5"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/audit/finite_checks.json",
+      "after_sha256": "724b2d3a96637c35aa1a68f51b2faae687d8c52708255fb79db65c5e627416fa"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/audit/functional-luce-total-cycle-audit.md",
+      "after_sha256": "9baef2fcf505a9222cc03f30e8a7bf3717cf0eb35787cb0929d4a11bf08341ab"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/berry-esseen/README.md",
+      "after_sha256": "0352faa138adc2684971dfa66d9eaffe9f8bd59d7b7bb1035586bcf56a6ccd23"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/berry-esseen/SHA256SUMS",
+      "after_sha256": "f8ba4853b0abbd4607ba939de04a45b29c25f5d7d15c172ccbb56ed2993b95c5"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/berry-esseen/check_poisson_smoothing.py",
+      "after_sha256": "9b4de32adbdeea68b03bfc410852560b3ae1d865cc281c4c2d7ed15ac5474455"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/berry-esseen/luce-total-cycle-berry-esseen.md",
+      "after_sha256": "0e844da1fef59669d15d83576f9644a8b9c58051dcf7e8022e1e94a25ccd698d"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/berry-esseen/luce-total-cycle-berry-esseen.tex",
+      "after_sha256": "2c29bcc696b6859b6854fb4704060862e92f461548bdd2a6035fc497224f5816"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/berry-esseen/smoothing_checks.json",
+      "after_sha256": "a82e973dddcc2073bb033ea5ae8b66b4f647c12ffedd435e7260cd13d14f103d"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/berry-esseen/source-manifest.json",
+      "after_sha256": "0b66287d111dc38e874c5ebad1f163f2709186c08679cc5a7516806d7dc7ec6c"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/edgeworth/README.md",
+      "after_sha256": "2672581c55900932badc555614ad3fa1ccdec8dfa80b9960ea0ed841a97c0cf6"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/edgeworth/SHA256SUMS",
+      "after_sha256": "8a385c36091ef9878bf8ff7eaa6d2cee1f78f5d5c2f8fc1e7f43b5665436549b"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/edgeworth/check_edgeworth.py",
+      "after_sha256": "f685b3cf93ec4d96ca86b36cddc3ea0855eab45efa99fcc5d991d3e596178888"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/edgeworth/edgeworth_checks.json",
+      "after_sha256": "30752f62b83f0e6dc4913ee5264f0d5354796de00a6a5bc9e7824ffb796d1f81"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/edgeworth/luce-total-cycle-edgeworth.md",
+      "after_sha256": "3e1e51bf2180e53fbeba47f25f37f205af5d0bdaf48471f4f67c7d17be30db36"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/edgeworth/luce-total-cycle-edgeworth.tex",
+      "after_sha256": "33b50b3bd8151a43c71f25c3bf1b0a04cd62e098582899ce36d6579f7f733b75"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/edgeworth/source-manifest.json",
+      "after_sha256": "283cf5cb627a05e3c3f5e37293ea764580d9c5ca65d0cd36a88bf858015016ee"
+    },
+    {
+      "operation": "create",
+      "path": "archive/total-cycle-source-notes/external-pdf-record.json",
+      "after_sha256": "8fa33de6e1eab027924769f1f7dc1714c8269ac6c5f5966127e99cb7838aa2d4"
+    },
+    {
+      "operation": "create",
+      "path": "audits/total-cycle-integration.md",
+      "after_sha256": "6b1e834f5f204fad98dbb8275908395d3659d76e3651b15ac0a673f07815d448"
+    },
+    {
+      "operation": "patch",
+      "path": "notes/migration-plan.md",
+      "before_sha256": "ad799006bab0d9596a6e48b7e06b1f0cc7a9bf7a502057a459ac9eb6b7bfd02f",
+      "after_sha256": "0beea65b9a640168b06f44713519ef16926cdd463a76dd7c5d46edb7b75a04e9"
+    },
+    {
+      "operation": "create",
+      "path": "notes/working/profile-mod-poisson.md",
+      "after_sha256": "51c532bcd63fc1fc1cbdee3e00f3f3826c92b410a76b26766946cd6a1e5d0c9c"
+    },
+    {
+      "operation": "copy",
+      "source": "notes/working/functional-luce-erdos-turan.tex",
+      "path": "papers/functional-erdos-turan/functional-luce-erdos-turan.tex",
+      "before_sha256": "bae8958e825dc3f3d8bd4290ae4715f9d6fbce1d1eb17ca101699c9ba8e5bffa"
+    },
+    {
+      "operation": "patch",
+      "path": "papers/functional-erdos-turan/functional-luce-erdos-turan.tex",
+      "before_sha256": "bae8958e825dc3f3d8bd4290ae4715f9d6fbce1d1eb17ca101699c9ba8e5bffa",
+      "after_sha256": "b7715a0808e7e199e6fd032309cecc2b1f52c3cb502c7edc44812c77717e6a0d"
+    },
+    {
+      "operation": "patch",
+      "path": "papers/mesoscopic-switching/mesoscopic-luce-cycles.tex",
+      "before_sha256": "30bb9a373aa8d83e37dc96f425417fa35d343aba44504d5f2a5e9314ac6ccaed",
+      "after_sha256": "3054c73c11ae8c416201b752c9ba432e8adec6905122746a63d080adcfd3945f"
+    },
+    {
+      "operation": "patch",
+      "path": "papers/sharp-order-edgeworth/luce-edgeworth.tex",
+      "before_sha256": "dfe6a24f7002eaa2c732e2448c290f416cc72a62bdf8dbda47228fe07daeba80",
+      "after_sha256": "5a059e492f85c62ac00b3040404c63ed305e2a3eba7930aa4fc57d3ee8e64046"
+    },
+    {
+      "operation": "create",
+      "path": "papers/total-cycle-edgeworth/total-cycle-edgeworth.tex",
+      "after_sha256": "374a65e72f182d09b90bb4993d01aa3204d257a71d7f269c3e81b12fd99493aa"
+    },
+    {
+      "operation": "patch",
+      "path": "papers.json",
+      "before_sha256": "9b07ea58e4764f0d9dd8da25b035c457ec0497d2aaaf639f39e25192c0dd6fb9",
+      "after_sha256": "7ab6debdc256e4323509fd3fb3e4dccb55dbb96558b1a34983f12a20d37481fa"
+    },
+    {
+      "operation": "patch",
+      "path": "scripts/build.py",
+      "before_sha256": "e9e7ca1f38b7cb23bfb2ce4aa5769fdb0c430fa6bd44e34995be90813a323585",
+      "after_sha256": "05cbee6783ef370fe8b3343662fbb8ae438206b34f7a9f41b10ccc4a4c00ba90"
+    },
+    {
+      "operation": "create",
+      "path": "scripts/total-cycles/check_edgeworth.py",
+      "after_sha256": "f685b3cf93ec4d96ca86b36cddc3ea0855eab45efa99fcc5d991d3e596178888"
+    },
+    {
+      "operation": "create",
+      "path": "scripts/total-cycles/check_poisson_smoothing.py",
+      "after_sha256": "9b4de32adbdeea68b03bfc410852560b3ae1d865cc281c4c2d7ed15ac5474455"
+    },
+    {
+      "operation": "create",
+      "path": "scripts/total-cycles/check_switching_identities.py",
+      "after_sha256": "22d50c04acf8b504e2a3c923865faf32e8f5be6027153c4db76fe6c8182a97ce"
+    },
+    {
+      "operation": "patch",
+      "path": "scripts/verify.py",
+      "before_sha256": "15b363d7f5c01eabef476280f3ea43ddb5de117f79dca4586d4d212472bc46c5",
+      "after_sha256": "165c597c7b87579079b6a3fb0094e690efd4d1e5af77588683d6054154c83f37"
+    },
+    {
+      "operation": "create",
+      "path": "tests/test_total_cycle_integration.py",
+      "after_sha256": "5f0b9d30f6ae9294f372cd349719196c6e5943485df8b7faf4e9a4da537b4b5d"
+    },
+    {
+      "operation": "patch",
+      "path": "verification.json",
+      "before_sha256": "caff5752efd7abaac4289dfac6160ab254513e4c8a5476916398d755ab4949dc",
+      "after_sha256": "f879351ad22711f420cda05d5180a418479917d4000fc08b44ab630fca57ceaa"
+    },
+    {
+      "operation": "delete",
+      "path": "notes/working/functional-luce-erdos-turan.tex",
+      "before_sha256": "bae8958e825dc3f3d8bd4290ae4715f9d6fbce1d1eb17ca101699c9ba8e5bffa"
+    }
+  ],
+  "workflow_configuration": "Artifact export paths were committed through the repository connector before preparation; the preparation job never edits workflow files.",
+  "preserved_original_archive_files": 22
+}

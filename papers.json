@@ -32,13 +32,25 @@
     },
     {
       "id": "functional-erdos-turan",
-      "title": "Functional Erdos--Turan Universality for Comparable-Rate Luce Permutations",
-      "source": "notes/working/functional-luce-erdos-turan.tex",
+      "title": "Functional Erdos--Turan and Total-Cycle Laws for Luce Permutations",
+      "source": "papers/functional-erdos-turan/functional-luce-erdos-turan.tex",
       "pdf": "output/pdf/functional-luce-erdos-turan.pdf",
-      "status": "working",
+      "status": "current-research",
       "dependencies": [
         "mesoscopic-switching",
         "erdos-turan-order"
+      ]
+    },
+    {
+      "id": "total-cycle-edgeworth",
+      "title": "Poisson Approximation and Lattice Edgeworth Expansions for Total Luce Cycles",
+      "source": "papers/total-cycle-edgeworth/total-cycle-edgeworth.tex",
+      "pdf": "output/pdf/total-cycle-edgeworth.pdf",
+      "status": "current-research",
+      "dependencies": [
+        "mesoscopic-switching",
+        "erdos-turan-order",
+        "sharp-order-edgeworth"
       ]
     }
   ]

@@ -1,24 +1,36 @@
 # Theorem status
 
-Status date: 11 October 2026. This is a result/dependency register, not a referee report or formal verification certificate.
+Status date: 11 October 2026. This register distinguishes mathematical assertions, scoped proof reviews, and open questions. It is not an independent referee report or a formal proof certificate.
 
 ## Status vocabulary
 
-- **Imported:** a byte-preserved source was copied; no new proof review follows from importing it.
-- **Working:** a proof candidate is retained separately from the current manuscript series.
-- **Reviewed dependency:** the named proof module has an accompanying scoped audit. This does not certify the rest of its manuscript.
-- **Current research manuscript:** the integrated argument and its named dependencies are documented; external refereeing and formalization are not claimed.
-- **Historical rejected candidate:** preserved for provenance and forbidden as a theorem dependency.
-- **Open:** neither an integration nor a successful build changes this status.
+**Imported** means byte-preserved source provenance, not new mathematical review. **Current research manuscript** means the integrated proof and named dependencies are documented. **Working** means an exploratory candidate. **Reviewed dependency** means only the named module was covered by a scoped audit. **Historical rejected candidate** means immutable provenance, excluded from dependencies. **Open** means no proof is promoted here.
 
-## Preservation import state
+## Result-level status
 
-Four editable manuscript copies and the archived original have been imported without source changes. No theorem is promoted by the import. The preserved upstream snapshot pins `long-mathematics/nonuniform-random-permutations` at commit `6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0`.
+| Result | Current location and scope |
+| --- | --- |
+| Comparable-rate mesoscopic cycles | Imported switching manuscript, now with an explicit truncation-uniform one-/two-root interface. The previously scoped endpoint audit applies to the named modules; no new full-series audit is asserted. |
+| Scalar logarithmic-order CLT | Imported scalar paper, source unchanged by integration. |
+| Sharp logarithmic-order Berry–Esseen/Edgeworth | Imported quantitative-order paper retains its result assertions. This integration narrows the wording of its endpoint interface to the source's mean conditional/annealed statement; it does not re-audit the nonlinear arithmetic proof. |
+| Total-cycle CLT and joint functional count/order law | Current functional paper incorporates the scoped audit's explicit total-count, mean-centering, bounded-weight, tightness, and path-domain clarifications. |
+| Exact-mean total-cycle Poisson approximation and sharp Berry–Esseen | Current quantitative total-cycle paper; the independent copied omitted count and mean-matched smoothing proof are explicit. Only the named switching modules, not the log-order Edgeworth theorem, are inputs. |
+| First lattice Edgeworth expansion and exact leading Kolmogorov constant | Current total-cycle paper, with the right-continuous integer phase. |
+| Variance asymptotic, second signed/lattice expansion, fixed-order Poisson–Charlier hierarchy | Current total-cycle paper, using fixed-order factorial domination and explicit moment transfer. Expansion order is fixed; no analytic residue convergence is inferred. |
+| Macroscopic PD/GEM and singular endpoint results in the 139-page draft | Frozen archive. Dedicated thematic extraction and proof audits are still required; this migration is not such an audit. |
 
-The historical total-cycle/Conjecture 13.2 candidate remains a historical rejected candidate. A later functional proof and total-cycle quantitative notes must be distinguished from it at integration. In particular, a new total-cycle CLT must not silently reinstate the historical profile-dependent expectation proof.
+The original total-cycle/Conjecture 13.2 candidate remains a **Historical rejected candidate**. The newer Campbell–Stein proof does not reinstate its proposed profile expectation expansion.
 
-## Questions that remain separate
+## Proven precision boundaries
 
-The sampled-profile mean constant, an O(1) correction uniformly over arbitrary comparable arrays, convergence of higher factorial cumulants, and an analytic Luce mod-Poisson residue are not established by migration. Macroscopic PD/GEM and singular endpoint arguments in the large research draft retain their existing proof-review boundaries until dedicated audits.
+The quantitative count theorems use the exact mean. The available general estimate is mean = log n + O(log log n); this does not give the same sharp bound with center log n. The second-order expansion retains the exact variance-minus-mean coefficient, bounded by O((log log n)^2), not a conjectured limiting constant. Signed approximants are not asserted positive. The first lattice phase at an integer is +1/2.
 
-Formalization status: **not started in this repository**. Executable exact identities are finite consistency checks, not formal asymptotic proofs.
+## Open questions
+
+The sampled-profile mean constant, a uniformly bounded mean shift for arbitrary comparable arrays, convergence of higher factorial cumulants, and a locally uniform complex Luce mod-Poisson residue remain open in this repository. See [profile-limit note](notes/working/profile-mod-poisson.md).
+
+## Review records
+
+[Integration audit](audits/total-cycle-integration.md), [dependency register](DEPENDENCIES.md), and [preserved scoped audit and proof notes](archive/total-cycle-source-notes/README.md). Original finite result records are provenance; current checks are rerun in CI.
+
+Formalization status: **not started in this repository**. Finite exact identities and numerical checks do not constitute Lean verification or proofs of asymptotic estimates. No independent novelty certification or peer review is claimed.

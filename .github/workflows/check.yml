@@ -44,5 +44,12 @@ jobs:
             output/
             .build/**/*.log
             .build/**/build-console.txt
+            .build/verification/*.json
+            verification.json
+            Makefile
+            AGENTS.md
+            CONTRIBUTING.md
+            LICENSE*
+            .github/workflows/*.yml
           include-hidden-files: true
           retention-days: 14

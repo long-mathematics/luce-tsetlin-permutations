@@ -1,0 +1,534 @@
+---
+title: "Poisson Approximation and a Sharp Berry--Esseen Theorem for Total Luce Cycles"
+author: "Christopher D. Long"
+date: "Research note -- 11 October 2026"
+documentclass: article
+fontsize: 11pt
+geometry: margin=1.05in
+colorlinks: true
+linkcolor: black
+urlcolor: blue
+header-includes:
+  - \usepackage{amsmath,amssymb,mathtools}
+  - \usepackage{microtype}
+---
+
+# Main result
+
+Let $X_{n,i}$ be independent exponential clocks with positive rates $\theta_{n,i}$, and let $\sigma_n(i)$ be the rank of $X_{n,i}$. Write $C_{n,r}$ for the number of $r$-cycles of $\sigma_n$ and
+
+$$
+K_n=\sum_{r=1}^n C_{n,r},\qquad \mu_n=\mathbb E K_n,\qquad L=\log n.
+$$
+
+Assume that, after a common rescaling of each row,
+
+$$
+1\le\theta_{n,i}\le\kappa
+$$
+
+for one fixed $\kappa<\infty$. No limiting rate profile, smoothness, or ordering of the rates is assumed.
+
+**Theorem 1 (Total-cycle Poisson approximation and sharp normal approximation).** Uniformly over the above rate arrays, for all sufficiently large $n$,
+
+$$
+\boxed{
+ d_{\mathrm{TV}}\!\left(\mathcal L(K_n),\operatorname{Pois}(\mu_n)\right)
+ \le C_\kappa\frac{(\log\log n)^2}{\log n}.}
+\tag{1}
+$$
+
+Moreover,
+
+$$
+\mu_n=\log n+O_\kappa(\log\log n),
+\tag{2}
+$$
+
+and
+
+$$
+\boxed{
+ d_{\mathrm K}\!\left(
+ \mathcal L\!\left(\frac{K_n-\mu_n}{\sqrt{\log n}}\right),
+ N(0,1)\right)
+ \le\frac{C_\kappa}{\sqrt{\log n}}.}
+\tag{3}
+$$
+
+The same bound holds with denominator $\sqrt{\mu_n}$. Here $d_{\mathrm{TV}}$ is the supremum over events, equivalently one half of the $\ell^1$ distance of probability masses, and $d_{\mathrm K}$ is the supremum of the difference of distribution functions.
+
+**Corollary 2 (Order optimality).** Uniformly over the same arrays,
+
+$$
+\max_{k\in\mathbb Z}\mathbb P(K_n=k)
+=\frac{1+o_\kappa(1)}{\sqrt{2\pi\log n}}.
+\tag{4}
+$$
+
+In particular,
+
+$$
+ d_{\mathrm K}\!\left(
+ \mathcal L\!\left(\frac{K_n-\mu_n}{\sqrt{\log n}}\right),N(0,1)\right)
+ \ge
+ \left(\frac1{2\sqrt{2\pi}}-o_\kappa(1)\right)(\log n)^{-1/2}.
+\tag{5}
+$$
+
+Thus the exponent in (3) is optimal. The constant in (5) is a lattice lower bound, not a claim about the exact leading Kolmogorov constant.
+
+# Source and dependency boundary
+
+This note develops a new consequence of the quantitative switching machinery already present in the repository `long-mathematics/nonuniform-random-permutations`, frozen at commit
+
+`6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0`.
+
+The inputs used are the free-depth endpoint estimate in Paper II, its polynomial switching specialization and passive-mark Campbell--Stein argument in Paper IV, and the one- and two-cycle bounds in Paper III. The precise source labels appear in the final section and the accompanying source manifest.
+
+Only these modules of Paper IV are needed. Its sharp normal approximation for logarithmic permutation order, prime-power linearization, high-frequency arithmetic analysis, and arithmetic remainder estimates are not inputs to this proof. In particular, the count theorem does not depend on accepting Paper IV's entire order-Edgeworth argument.
+
+The new transfer argument is proved below. The upstream endpoint construction is imported from the previously audited switching theory rather than re-proved here. Only its annealed one- and two-root observable estimates are used; no fully quenched arbitrary-deletion theorem or growing-number-of-roots theorem is assumed.
+
+# Quantitative switching inputs
+
+For distinct labels let
+
+$$
+R_{ij}=\exp\{-(\theta_{n,i}-\theta_{n,j})(X_{n,j}-X_{n,i})\},
+$$
+
+and put
+
+$$
+S_{n,r}=\sum_{i:L_n(i)>r}R_{i,\sigma_n^r(i)},
+\qquad
+\Delta_{n,r}=\mathbb E\left|\frac{S_{n,r}}n-1\right|.
+$$
+
+Here $L_n(i)$ is the length of the cycle containing $i$.
+
+The exact marked switching identity is
+
+$$
+ r(n-r)\mathbb E[C_{n,r}\Phi(\sigma_n)]
+ =\mathbb E\sum_{i:L_n(i)>r}R_{i,\sigma_n^r(i)}
+ \Phi\!\left(\sigma_n\circ(i\ \sigma_n^r(i))\right)
+\tag{6}
+$$
+
+for bounded permutation-measurable $\Phi$. The selected-factor bound gives, for some fixed $p>1$ depending only on $\kappa$,
+
+$$
+ \sup_{n,r}\frac1n\mathbb E\sum_{i:L_n(i)>r}
+ R_{i,\sigma_n^r(i)}^p\le C_{\kappa,p}.
+\tag{7}
+$$
+
+For $\kappa>1$, any $1<p<\kappa/(\kappa-1)$ is admissible; for $\kappa=1$, the factors are identically one. Write $\beta=1-1/p>0$.
+
+The one-cycle and root bounds are
+
+$$
+ \mathbb EC_{n,r}\le\frac{C_\kappa n}{r(n-r)},\qquad r<n,
+\tag{8}
+$$
+
+$$
+ \mathbb P\{L_n(I_n)\le a\}\le C_\kappa a/n,
+ \qquad a\le n/2,
+\tag{9}
+$$
+
+where $I_n$ is an independent uniform root. The two-cycle bound is
+
+$$
+ \mathbb E[C_{n,r}(C_{n,s}-\mathbf1_{\{r=s\}})]
+ \le\frac{C_\kappa}{rs},\qquad r+s\le n/2.
+\tag{10}
+$$
+
+Fix a numerical accuracy exponent $Q\ge4$. Choose $A=A(\kappa,Q)$ sufficiently large, and set
+
+$$
+ b=\lceil L^3\rceil,\qquad U=\lfloor n/L^A\rfloor,
+ \qquad \mathcal I_n=\{r:b<r\le U\},
+\tag{11}
+$$
+
+$$
+ a_{n,r}=\frac{n}{r(n-r)},\qquad
+ \lambda_n=\sum_{r\in\mathcal I_n}a_{n,r}.
+\tag{12}
+$$
+
+The polynomial switching estimate of Paper IV gives
+
+$$
+ \sum_j\sup_{2^jb\le r<2^{j+1}b}\Delta_{n,r}
+ \le C_{\kappa,Q}L^{-Q},
+\tag{13}
+$$
+
+where the sum is over blocks with lower endpoint at most $U$. We choose $A$ large enough also that $A\beta\ge Q+1$.
+
+For completeness, the source of the polynomial accuracy is the free terminal depth. On a dyadic block with $\delta\asymp r/n$, take terminal depth $m\asymp\log(1/\delta)$. The reset error becomes a positive power of $\delta$, while the other terms are logarithmic factors times positive powers of $\delta$, or finite-size terms negligible compared with every fixed power of $L^{-1}$. The truncation-uniform one- and two-root observable bounds give
+
+$$
+ \Delta_{n,r}\le C_\kappa(\mathcal E_{n,2}+n^{-1})^{1/(2\kappa)}.
+$$
+
+Increasing $A$ therefore makes the one-block error $O(L^{-Q-2})$; summing $O(L)$ blocks proves (13). The dependence on a truncation level $T$ is linear for one truncated factor and quadratic for two, not an uncontrolled fixed-$T$ constant. No untruncated selected second moment is required.
+
+# Keep the omitted cycles as a passive mark
+
+Define
+
+$$
+ J_n=\sum_{b<r\le U}C_{n,r},\qquad
+ D_n=\sum_{r\le b}C_{n,r}+\sum_{r>U}C_{n,r}.
+\tag{14}
+$$
+
+Thus $K_n=J_n+D_n$. The variable $D_n$ is the omitted **cycle count**, not the arithmetic remainder for logarithmic order used in Paper IV.
+
+A good core split has prescribed length $r\in\mathcal I_n$ and source-cycle length $\ell>r+U$. It replaces that source cycle by cycles of lengths $r$ and $\ell-r$. Both the original source and the residual cycle are longer than $U$. Hence the split adds one core cycle, changes no short cycle, and leaves the number of long cycles unchanged. Therefore
+
+$$
+ \xi_n\longmapsto\xi_n+e_r,\qquad D_n\longmapsto D_n,
+ \qquad \xi_n=(C_{n,r})_{r\in\mathcal I_n}.
+\tag{15}
+$$
+
+This is the point at which carrying the full omitted count is stronger than simply discarding it. There is no assumption that short and long cycles are independent of one another.
+
+## The marked approximation
+
+For arbitrary measurable $g_r:\mathbb Z_+^{\mathcal I_n}\times\mathbb Z_+\to[-1,1]$, apply (6) with
+
+$$
+ \Phi_r(\pi)=
+ \begin{cases}
+ g_r(\xi(\pi)-e_r,D(\pi)),&C_r(\pi)>0,\\
+ 0,&C_r(\pi)=0.
+ \end{cases}
+$$
+
+On a good split the test on the right becomes $g_r(\xi_n,D_n)$. On a bad split its difference from that value is at most two. Thus
+
+$$
+\begin{split}
+ &\left|\mathbb E[C_{n,r}g_r(\xi_n-e_r,D_n)]
+   -a_{n,r}\mathbb Eg_r(\xi_n,D_n)\right|\\
+ &\qquad\le a_{n,r}\Delta_{n,r}
+ +\frac{2a_{n,r}}n\mathbb E\sum_{i:r<L_n(i)\le r+U}
+ R_{i,\sigma_n^r(i)}.
+\end{split}
+\tag{16}
+$$
+
+By Holder's inequality, (7), and (9), the normalized weighted exceptional mass is at most $C_\kappa(U/n)^\beta$. Since $a_{n,r}\le2/r$ and each dyadic block has bounded harmonic mass, summing (16) gives
+
+$$
+\begin{split}
+ &\left|\mathbb E\sum_{r\in\mathcal I_n}C_{n,r}g_r(\xi_n-e_r,D_n)
+   -\sum_{r\in\mathcal I_n}a_{n,r}\mathbb Eg_r(\xi_n,D_n)\right|\\
+ &\qquad\le C_\kappa L^{-Q}+C_\kappa L(U/n)^\beta
+ \le C_\kappa L^{-Q}.
+\end{split}
+\tag{17}
+$$
+
+The passive-mark Campbell--Stein lemma now gives
+
+$$
+ d_{\mathrm{TV}}\!\left(
+ \mathcal L(\xi_n,D_n),
+ \left(\bigotimes_{r\in\mathcal I_n}\operatorname{Pois}(a_{n,r})\right)
+ \otimes\mathcal L(D_n)\right)
+ \le C_\kappa L^{-Q}.
+\tag{18}
+$$
+
+The reference core and the copied mark are independent. To recall why the Stein constant is dimension-free, solve the immigration--death Stein equation for an event test with the mark held fixed. Chains whose initial conditions differ by one core particle can be coupled so that their difference survives until time $t$ with probability $e^{-t}$. The first difference of the Stein solution is consequently bounded by $\int_0^\infty e^{-t}\,dt=1$. Applying (17) proves (18). No new endpoint theorem for an increasing number of marks is involved.
+
+Let $Z_n\sim\operatorname{Pois}(\lambda_n)$ and let $\widetilde D_n$ have the exact law of $D_n$, independently of $Z_n$. Contraction under summation yields
+
+$$
+ d_{\mathrm{TV}}\!\left(
+ \mathcal L(K_n),\mathcal L(Z_n+\widetilde D_n)\right)
+ \le C_\kappa L^{-Q}.
+\tag{19}
+$$
+
+# A second-moment bound for the omitted count
+
+Take $n$ sufficiently large that $b<U<n/4$. Put
+
+$$
+ \mathcal B_n=\{r:r\le b\}\cup\{r:U<r\le n/4\},
+ \qquad V_n=\sum_{r\in\mathcal B_n}C_{n,r},
+$$
+
+$$
+ H_n=\sum_{r\in\mathcal B_n}\frac1r=O_\kappa(\log L).
+$$
+
+Every two lengths in $\mathcal B_n$ sum to at most $n/2$. Equations (8) and (10) give
+
+$$
+ \mathbb EV_n\le C_\kappa H_n,\qquad
+ \mathbb E[V_n(V_n-1)]\le C_\kappa H_n^2.
+\tag{20}
+$$
+
+There can be at most three cycles longer than $n/4$: four such cycles would already contain more than $n$ vertices. Hence $D_n=V_n+W_n$ with $0\le W_n\le3$, and
+
+$$
+ \mathbb ED_n^2\le2\mathbb EV_n^2+18
+ \le C_\kappa(1+H_n+H_n^2)
+ \le C_\kappa(\log L)^2.
+\tag{21}
+$$
+
+This argument does not use the two-cycle estimate outside its permitted range. In particular, it does not attempt to sum a bound with a singular $n-r-s$ denominator near full size. Nor does it need fourth or higher factorial moments.
+
+# Exact-mean bookkeeping
+
+Total-variation approximation alone does not justify convergence of an unbounded first moment. We therefore compute the core mean directly from (6):
+
+$$
+ \delta_n:=\mathbb EJ_n-\lambda_n
+ =\sum_{r\in\mathcal I_n}a_{n,r}
+ \left(\frac{\mathbb ES_{n,r}}n-1\right).
+$$
+
+Using (13),
+
+$$
+ |\delta_n|\le\sum_{r\in\mathcal I_n}a_{n,r}\Delta_{n,r}
+ \le C_\kappa L^{-Q}.
+\tag{22}
+$$
+
+Write $\nu_n=\mathbb ED_n$. Since
+
+$$
+ a_{n,r}=\frac1r+\frac1{n-r},
+$$
+
+harmonic summation gives
+
+$$
+ \lambda_n=L-(A+3)\log L+O_\kappa(1),\qquad
+ \lambda_n\ge L/2
+\tag{23}
+$$
+
+for all sufficiently large $n$. Equation (21) implies $\nu_n=O_\kappa(\log L)$. Consequently
+
+$$
+ \mu_n=\lambda_n+\nu_n+\delta_n
+ =L+O_\kappa(\log L).
+\tag{24}
+$$
+
+This proves (2), with the expectation calculation independent of any attempted moment transfer through total variation.
+
+# An elementary second-order Poisson smoothing lemma
+
+**Lemma 3 (Poisson core plus an independent nonnegative integer mark).** Let $Z\sim\operatorname{Pois}(\lambda)$ with $\lambda>0$, and let $M$ be an independent nonnegative integer-valued random variable with finite second moment. Put $\nu=\mathbb EM$. Then
+
+$$
+\boxed{
+ d_{\mathrm{TV}}\!\left(
+ \mathcal L(Z+M),\operatorname{Pois}(\lambda+\nu)\right)
+ \le
+ \frac{\mathbb E[M(M-1)]+\nu^2}{2\sqrt2\,\lambda}.}
+\tag{25}
+$$
+
+The bound may of course be replaced by its minimum with one.
+
+**Proof.** Regard the Poisson mass $p_\lambda$ as a sequence on all of $\mathbb Z$, zero on negative integers. Let $T$ be right shift, $(Tp)(k)=p(k-1)$, and put $\Delta=T-I$.
+
+For every integer $m\ge0$, the exact discrete Taylor identity is
+
+$$
+ T^mp=p+m\Delta p+
+ \sum_{j=0}^{m-2}(m-1-j)T^j\Delta^2p,
+\tag{26}
+$$
+
+where the sum is empty for $m=0,1$. Translation preserves $\ell^1$ norm, so
+
+$$
+ \|T^mp-p-m\Delta p\|_1
+ \le\frac{m(m-1)}2\|\Delta^2p\|_1.
+\tag{27}
+$$
+
+For a Poisson mass,
+
+$$
+ \Delta^2p_\lambda(k)
+ =p_\lambda(k)\,
+ \frac{(k-\lambda)^2-k}{\lambda^2}.
+\tag{28}
+$$
+
+The elementary Poisson moment identity
+
+$$
+ \mathbb E\left[((Z-\lambda)^2-Z)^2\right]=2\lambda^2
+\tag{29}
+$$
+
+therefore gives, by Cauchy--Schwarz,
+
+$$
+ \|\Delta^2p_\lambda\|_1\le\frac{\sqrt2}{\lambda}.
+\tag{30}
+$$
+
+Let $N\sim\operatorname{Pois}(\nu)$, independently of $Z$. Average (26) once with $m=M$ and once with $m=N$. Both first-order terms are exactly $\nu\Delta p_\lambda$, so they cancel. Since $\mathbb E[N(N-1)]=\nu^2$,
+
+$$
+ \|\mathcal L(Z+M)-\mathcal L(Z+N)\|_1
+ \le\frac{\mathbb E[M(M-1)]+\nu^2}{2}
+ \|\Delta^2p_\lambda\|_1.
+$$
+
+Finally, $Z+N\sim\operatorname{Pois}(\lambda+\nu)$. Divide by two to convert the $\ell^1$ norm into total variation, and use (30). This proves (25). $\square$
+
+The first-moment matching is essential. Directly discarding $M$ costs a first-order shift. Replacing it by an independent Poisson variable with the same mean leaves only a second-order smoothing error. No normal approximation is needed in this step.
+
+A convenient abstract consequence is the following. If $K=X+M$ and
+
+$$
+ d_{\mathrm{TV}}\bigl(\mathcal L(X,M),
+ \operatorname{Pois}(\lambda)\otimes\mathcal L(M)\bigr)\le\varepsilon,
+$$
+
+then, with $\mu=\mathbb EK$ and $d=\mathbb EX-\lambda$,
+
+$$
+ d_{\mathrm{TV}}(\mathcal L(K),\operatorname{Pois}(\mu))
+ \le\varepsilon+
+ \frac{\mathbb E[M(M-1)]+(\mathbb EM)^2}{2\sqrt2\,\lambda}
+ +|d|.
+\tag{31}
+$$
+
+The last term follows from the elementary Poisson parameter coupling
+$d_{\mathrm{TV}}(\operatorname{Pois}(u),\operatorname{Pois}(v))\le |u-v|$.
+
+# Proof of the total-cycle Poisson approximation
+
+Apply Lemma 3 with $Z=Z_n$ and $M=\widetilde D_n$. By (21) and (23),
+
+$$
+ d_{\mathrm{TV}}\!\left(
+ \mathcal L(Z_n+\widetilde D_n),
+ \operatorname{Pois}(\lambda_n+\nu_n)\right)
+ \le C_\kappa\frac{(\log L)^2}{L}.
+\tag{32}
+$$
+
+The difference between $\lambda_n+\nu_n$ and the exact mean $\mu_n$ is $\delta_n$, bounded separately in (22). Combining (19), (22), and (32) proves
+
+$$
+ d_{\mathrm{TV}}\!\left(\mathcal L(K_n),\operatorname{Pois}(\mu_n)\right)
+ \le C_\kappa\left[L^{-Q}+\frac{(\log L)^2}{L}\right].
+\tag{33}
+$$
+
+Since $Q\ge4$ is fixed and $A$ has already been chosen in terms of $\kappa$, this is (1). In particular, the Poisson approximation error is
+
+$$
+ O_\kappa((\log L)^2/L)=o_\kappa(L^{-1/2}).
+\tag{34}
+$$
+
+# Proof of the sharp Berry--Esseen bound
+
+Let $P_n\sim\operatorname{Pois}(\mu_n)$. The ordinary Poisson normal approximation gives
+
+$$
+ d_{\mathrm K}\!\left(
+ \mathcal L\!\left(\frac{P_n-\mu_n}{\sqrt{\mu_n}}\right),N(0,1)\right)
+ \le C\mu_n^{-1/2}.
+\tag{35}
+$$
+
+For example, (35) follows directly from the classical Berry--Esseen theorem by expressing $P_n$ as the sum of $N=\lceil\mu_n\rceil$ independent Poisson variables of mean $\mu_n/N\le1$. Their total third absolute centered moment is $O(\mu_n)$ and their total variance is $\mu_n$. No regularity or nonlattice assumption is involved.
+
+Contraction of total variation under affine maps and (33) prove (3) with scale $\sqrt{\mu_n}$. To replace it by $\sqrt L$, use (24):
+
+$$
+ \frac{\mu_n}{L}=1+O_\kappa(\log L/L).
+$$
+
+The Kolmogorov distance between centered normals with this variance ratio is $O_\kappa(\log L/L)$. Hence
+
+$$
+\begin{split}
+ d_{\mathrm K}\!\left(
+ \mathcal L\!\left(\frac{K_n-\mu_n}{\sqrt L}\right),N(0,1)\right)
+ &\le C_\kappa\left[
+ L^{-1/2}+\frac{(\log L)^2}{L}+\frac{\log L}{L}\right]\\
+ &\le C_\kappa L^{-1/2}.
+\end{split}
+\tag{36}
+$$
+
+This proves Theorem 1. The main normal approximation error comes from the Poisson law itself, not from restoring the omitted cycles.
+
+# Lattice optimality and a local consequence
+
+A Poisson distribution of mean $\mu\to\infty$ has maximal atom
+
+$$
+ \max_k\mathbb P\{\operatorname{Pois}(\mu)=k\}
+ =\frac{1+o(1)}{\sqrt{2\pi\mu}},
+$$
+
+by Stirling's formula. Its mass at $k=\lfloor\mu\rfloor$ has this same asymptotic. Equation (33) bounds every individual mass error by $o_\kappa(L^{-1/2})$, while $\mu_n/L\to1$ uniformly. The upper bound on all atoms and the lower bound at $\lfloor\mu_n\rfloor$ prove (4).
+
+If a distribution function has a jump of size $p$ and the comparison distribution function is continuous, their Kolmogorov distance is at least $p/2$. Indeed, at the jump point and its left limit, continuity of the comparison function prevents both errors from being smaller than $p/2$. Applying this observation with (4) proves (5).
+
+The same argument, together with the uniform local Poisson limit, also yields
+
+$$
+ \sup_{k\in\mathbb Z}
+ \left|\sqrt L\,\mathbb P(K_n=k)
+ -\varphi\!\left(\frac{k-\mu_n}{\sqrt L}\right)\right|
+ \longrightarrow0
+\tag{37}
+$$
+
+uniformly over each fixed comparability class. This local consequence is not needed for the Berry--Esseen theorem.
+
+# What this does not assert
+
+The mean estimate (2) is not the sharper profile-dependent expansion $\mathbb EK_n=\log n+\kappa_f+o(1)$. It also does not establish $\mu_n-\log n=O_\kappa(1)$ for arbitrary comparable arrays. Consequently, replacing the exact mean in (3) by $\log n$ is not justified at the sharp rate by this proof. The direct bound obtained with that center is only $O_\kappa(\log\log n/\sqrt{\log n})$. Any deterministic center known to be within $O_\kappa(1)$ of $\mu_n$ would preserve the sharp rate.
+
+Neither variance convergence nor higher-cumulant asymptotics are inferred from total variation. The denominators in the theorem are $\sqrt{\log n}$ and $\sqrt{\mu_n}$, not an unproved identification with $\sqrt{\operatorname{Var}K_n}$. An exact-variance formulation can be treated separately using additional moment control.
+
+A first Edgeworth expansion for $K_n$ must account for its integer lattice. A smooth correction copied from the log-order problem cannot have a uniform $o(L^{-1/2})$ remainder without an appropriate lattice correction. No such expansion or exact leading Kolmogorov constant is claimed in this note.
+
+No repository source has been changed or promoted by this note. The new proof is available for a separate audit and integration. The general smoothing lemma is elementary Poisson/Charlier analysis; no claim of novelty is made for that lemma itself.
+
+# Reproducibility and source map
+
+The accompanying script `check_poisson_smoothing.py` performs exact rational checks of the discrete Taylor and Charlier moment identities, exact finite-permutation checks of the passive-mark split, and numerical checks of the Poisson convolution bound.
+
+The executed checks passed: 104 discrete Taylor cases; eight rational Charlier moment cases; 84,438 eligible splits across 5,910 permutations of sizes three through seven; and 64 numerical convolution cases. Numerical cases include deterministic, Bernoulli, uniform, binomial, and rare-large-mark examples. They are consistency checks, not a substitute for the analytic proof.
+
+**Repository sources.** The source manifest pins the following documents at the commit stated above.
+
+- **[II]** Christopher D. Long, *Mesoscopic cycles of comparable-rate Luce permutations: a switching proof of Conjecture 13.1*. The exact marked switching identity, selected-factor moments, crude root bound, and free-depth one-/two-root endpoint theorem.
+- **[III]** Christopher D. Long, *An Erdos--Turan Law for Comparable-Rate Luce Permutations*. Labels `input:one-switch`, `lem:crude`, and `cor:pair`. The pair estimate used here is explicitly restricted to $r+s\le n/2$.
+- **[IV]** Christopher D. Long, *A Sharp Berry--Esseen Theorem and First Edgeworth Expansion for the Erdos--Turan Law of Comparable-Rate Luce Permutations*. Labels `input:free-depth`, `prop:poly-block`, `lem:passive-Stein`, and `thm:poly-pp`; in particular source lines 1750--2007. Blob SHA: `28ba5778ecb8bb83da97872e5f68a99401e6b5ce`.
+
+**External background.** V. Yu. Korolev and I. G. Shevtsova, *An improvement of the Berry--Esseen inequality with applications to Poisson and mixed Poisson random sums*, arXiv:0912.2795. A. D. Barbour, E. Kowalski and A. Nikeghbali, *Mod-discrete expansions*, arXiv:0912.1886. These situate the standard normal-approximation and Poisson/Charlier tools; the total-cycle transfer above is derived from the stated repository inputs, not from an assumption of mod-Poisson convergence.

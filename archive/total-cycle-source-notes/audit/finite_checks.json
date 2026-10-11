@@ -1,0 +1,22 @@
+{
+  "scope": "Exact finite identities only; not a proof of probabilistic asymptotics.",
+  "two_clock_n_max": 8,
+  "two_clock": {
+    "permutations": 46232,
+    "switches": 1246964,
+    "marked_coefficients": 316646,
+    "good_split_cutoffs": 1492038
+  },
+  "three_clock_n_max": 7,
+  "three_clock": {
+    "profile_permutations": 11820,
+    "selected_summands": 384204,
+    "marked_coefficients": 167196
+  },
+  "residual_n_max": 6,
+  "residual": {
+    "prefix_histories": 12164,
+    "invariance_coordinates": 36492
+  },
+  "status": "All assertions passed"
+}

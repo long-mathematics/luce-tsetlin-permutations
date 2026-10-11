@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-11",
+  "repository": "long-mathematics/nonuniform-random-permutations",
+  "commit": "6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0",
+  "scope": "New total-cycle Poisson approximation and Berry–Esseen transfer; no repository modifications. This metadata manifest identifies upstream sources; their full text is not bundled.",
+  "sources": [
+    {
+      "paper": "II",
+      "path": "papers/02-mesoscopic-luce-cycles/mesoscopic-luce-cycles.tex",
+      "git_blob_sha": "cb8e806ee252e329a221ba126b998a69bef263c4",
+      "url": "https://github.com/long-mathematics/nonuniform-random-permutations/blob/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/papers/02-mesoscopic-luce-cycles/mesoscopic-luce-cycles.tex",
+      "used_inputs": [
+        "marked switching",
+        "selected moments",
+        "free-depth finite-endpoint theorem"
+      ]
+    },
+    {
+      "paper": "III",
+      "path": "papers/03-luce-erdos-turan/luce-erdos-turan.tex",
+      "git_blob_sha": "b5ca7fd1ccfd4a8102c756056446a76553abd9de",
+      "url": "https://github.com/long-mathematics/nonuniform-random-permutations/blob/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/papers/03-luce-erdos-turan/luce-erdos-turan.tex",
+      "used_inputs": [
+        "input:one-switch",
+        "lem:crude",
+        "cor:pair"
+      ]
+    },
+    {
+      "paper": "IV",
+      "path": "papers/04-luce-edgeworth/luce-edgeworth.tex",
+      "git_blob_sha": "28ba5778ecb8bb83da97872e5f68a99401e6b5ce",
+      "url": "https://github.com/long-mathematics/nonuniform-random-permutations/blob/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/papers/04-luce-edgeworth/luce-edgeworth.tex",
+      "used_inputs": [
+        "input:free-depth",
+        "prop:poly-block",
+        "lem:passive-Stein",
+        "thm:poly-pp"
+      ]
+    }
+  ],
+  "pdf_pages": 10,
+  "checks": {
+    "exact_discrete_taylor_cases": 104,
+    "exact_charlier_moment_cases": 8,
+    "finite_permutations": 5910,
+    "eligible_splits": 84438,
+    "numerical_convolution_cases": 64
+  },
+  "verification_scope": "Exact finite identities and numerical consistency checks; not formal verification. PDF compiled without overfull/underfull boxes or undefined-reference diagnostics and rendered for visual inspection."
+}

@@ -42,10 +42,10 @@
 \newcommand{\R}{\mathbb R}
 \newcommand{\Z}{\mathbb Z}
 
-\title{Functional Erd\H{o}s--Tur\'an Universality for\\
+\title{Functional Erd\H{o}s--Tur\'an and Total-Cycle Laws for\\
 Comparable-Rate Luce Permutations}
 \author{Christopher D. Long}
-\date{Working branch --- functional and multivariate strengthening}
+\date{Research manuscript --- 11 October 2026}
 
 \begin{document}
 \maketitle
@@ -53,7 +53,7 @@ Comparable-Rate Luce Permutations}
 \begin{abstract}
 Let $\sigma_n$ be the Luce permutation induced by independent exponential
 clocks whose rates, after a common rescaling, lie in $[1,\kappa]$ for one
-fixed $\kappa<\infty$.  This working branch strengthens the scalar
+fixed $\kappa<\infty$.  This manuscript strengthens the scalar
 Erd\H{o}s--Tur\'an theorem to a process-level universality statement.  If
 $C_{n,r}$ is the number of $r$-cycles, set
 \[
@@ -62,8 +62,8 @@ $C_{n,r}$ is the number of $r$-cycles, set
  \cO_n(t)=\log\lcm\{r\le n^t:C_{n,r}>0\},
  \qquad 0\le t\le1.
 \]
-We prove, conditional only on the switching inputs already isolated in the
-scalar paper, that
+We prove, using the switching inputs explicitly stated below and proved in
+the companion switching paper, that
 \[
  \left(
  \frac{K_n(t)-t\log n}{\sqrt{\log n}},
@@ -116,7 +116,7 @@ $\log\ord(\pi)$ is asymptotically Gaussian after centering by
 $\frac12(\log n)^2$ and scaling by $\sqrt{\frac13(\log n)^3}$
 \cite{ErdosTuran1967}.  The scalar comparable-rate Luce theorem proves that
 this normalization survives arbitrary bounded triangular arrays of clock
-rates; see \cite{LongOrder2026}.  The purpose of the present branch is to
+rates; see \cite{LongOrder2026}.  The purpose of this manuscript is to
 identify the full logarithmic-scale Gaussian field behind that endpoint
 law.
 
@@ -184,6 +184,22 @@ Writing $K_n=K_n(1)$,
  \sqrt3/2&1
  \end{pmatrix}\right).}
 \end{equation}
+\end{corollary}
+
+\begin{corollary}[Total-cycle CLT and expectation centering]
+\label{cor:total-cycle-clt}
+Under the hypothesis of Theorem~\ref{thm:main-functional},
+\[
+ \Ee K_n=\log n+O_\kappa(\log\log n),
+\]
+and both
+\[
+ \frac{K_n-\log n}{\sqrt{\log n}}\Rightarrow N(0,1),
+ \qquad
+ \frac{K_n-\Ee K_n}{\sqrt{\log n}}\Rightarrow N(0,1).
+\]
+The expectation conclusion is established directly from the mean switching
+identity, not inferred from total variation for an unbounded statistic.
 \end{corollary}
 
 The process theorem follows from a stronger intermediate-window statement.
@@ -288,13 +304,21 @@ three-clock/von Mangoldt estimate
 therefore transfers the whole additive process to the LCM process.
 \end{enumerate}
 
-\subsection*{Status of this branch}
+\subsection*{Dependency and review boundary}
 
-The draft is written as a proof conditional on the same theorem-level inputs
-already used by the scalar paper.  The only genuinely new probabilistic step
-is Theorem~\ref{thm:TV-main}.  The branch deliberately keeps the scalar
-characteristic-function proof and the Berry--Esseen supplement separate until
-the product-Poisson argument has been independently audited.
+The scoped functional audit of 11 October 2026 checked the Campbell--Stein
+transfer, the one-/two-root switching interfaces, the omitted ranges, and
+the separate arithmetic step for the joint order law. This version includes
+its explicit total-count and expectation statements and its interface
+clarifications. The scalar characteristic-function proof is retained as a
+separate manuscript, not replaced or erased. The audit is not independent
+refereeing or formal verification of the entire research series.
+
+The total-cycle theorem uses no macroscopic Poisson--Dirichlet input and
+no historical total-cycle candidate. The input statements below specify
+the precise mathematical dependency boundary. The quantitative
+truncation-uniform estimates are recorded explicitly in the revised
+switching paper as Corollary~\texttt{cor:quantitative-truncation-interface}.
 
 \section{Model and imported switching inputs}
 
@@ -395,12 +419,13 @@ fourth estimates below $n/2$.  There is deterministically at most one cycle
 longer than $n/2$.
 \end{proof}
 
-Fix once and for all
+Fix $p=2$ if $\kappa=1$ and $p=1+1/(2(\kappa-1))$ otherwise. Then
 \begin{equation}\label{eq:p-beta}
  1<p<\lambda_\kappa,
  \qquad
- \beta=1-\frac1p>0.
+ \beta=1-\frac1p>0,
 \end{equation}
+and $p,\beta$ depend only on $\kappa$.
 The process argument needs a slightly stronger upper cutoff than the scalar
 CLT.  To align this branch with the Berry--Esseen supplement, choose
 \begin{equation}\label{eq:A0-choice}
@@ -968,9 +993,12 @@ the limit has the representation \eqref{eq:Gaussian-limit-process}.
 \end{proof}
 
 \begin{remark}[Continuous-limit tightness]
-The fourth-moment calculation also implies that the maximal jump tends to
-zero in probability.  Hence the sequence is $C$-tight, although we state the
-result in the standard $J_1$ topology on $D([0,1],\R^2)$.
+The covariance partial-sum convergence and Lindeberg calculation in the
+proof give tightness by the independent-increment functional CLT
+\cite{Billingsley1999,EthierKurtz1986}. The fourth-moment calculation also
+makes the maximal jump vanish in probability. Together these give
+$C$-tightness, not merely a maximum-jump bound. We state the result in the
+standard $J_1$ topology on $D([0,1],\R^2)$.
 \end{remark}
 
 \section{Transfer to the Luce intermediate field}
@@ -1031,8 +1059,17 @@ linear combination $f=\sum_jt_jf_j$, the centered Poisson sum has variance
  \frac1{\ell_n}\sum_{r\in\cI_n}a_{n,r}f(u_{n,r})^2
  \longrightarrow\int_0^1f(u)^2\dd u.
 \]
-The maximal coefficient is $O(\ell_n^{-1/2})$, and the same fourth-moment
-argument as above gives Lindeberg.  Apply Cram\'er--Wold.
+For completeness, the measures
+\[
+ \frac1{\ell_n}\sum_{r\in\cI_n}a_{n,r}\delta_{u_{n,r}}
+\]
+converge weakly to Lebesgue measure on $[0,1]$ by the uniform interval
+sums in Lemma~\ref{lem:Riemann}. A bounded Riemann-integrable $f$ has a
+Lebesgue-null discontinuity set, as does $f^2$, so this weak convergence
+justifies the displayed variance limit. The maximal coefficient is
+$O(\ell_n^{-1/2})$, and the same fourth-moment argument as above gives
+Lindeberg. Degenerate limiting variance gives convergence to zero by
+Chebyshev's inequality. Apply Cram\'er--Wold.
 \end{proof}
 
 \section{Restoring the full cycle processes}
@@ -1140,6 +1177,26 @@ and
 Apply Proposition~\ref{prop:Luce-intermediate-FCLT}, then use
 Lemmas~\ref{lem:restore} and \ref{lem:centering} and Slutsky's theorem in
 $D([0,1],\R^2)$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:total-cycle-clt}]
+Take $t=1$ in Theorem~\ref{thm:additive-functional} for the first CLT.
+For the expectation, the exact mean switching identity gives
+\[
+ \sum_{r\in\cI_n}|\Ee C_{n,r}-a_{n,r}|
+ \le\sum_{r\in\cI_n}a_{n,r}\Delta_{n,r}=o(1)
+\]
+by Proposition~\ref{prop:unweighted} and harmonic summation within blocks.
+The omitted counts have expected total
+\[
+ O_\kappa\{\log b_n+1+\log(n/U_n)\}=O_\kappa(\log\ell_n)
+\]
+by Lemma~\ref{lem:crude}; at most one cycle exceeds $n/2$.
+Lemma~\ref{lem:centering} now gives
+$\Ee K_n=\ell_n+O_\kappa(\log\ell_n)$.
+Since $\log\ell_n=o(\sqrt{\ell_n})$, replacing $\ell_n$ by
+$\Ee K_n$ in the center preserves the CLT.
+This argument also yields the same expectation error uniformly in $t$.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:isonormal}]
@@ -1312,95 +1369,48 @@ where $Z_K,Z_\perp$ are independent standard normals.  Thus the normalized
 cycle count explains three quarters of the limiting order variance.
 \end{corollary}
 
-\section{Relation to the Berry--Esseen branch}
+\section{Relation to quantitative results and remaining questions}
 
-The product-Poisson theorem is a qualitative process tool.  It should not be
-confused with the frequency-sensitive comparison used in the quantitative
-supplement \cite{LongBerry2026}.
+The present proof chooses square-root terminal depth. Its unweighted
+Campbell error tends to zero, but the reset contribution of order
+$\exp\{-c_\kappa\sqrt{\log\log n}\}$ is not a sharp scalar rate.
+The free-depth theorem also admits linear logarithmic depth; the
+quantitative supplement~\cite{LongBerry2026} uses that choice to obtain
+polynomial passive-mark Poisson approximation. These are different
+specializations of the same endpoint construction, not conflicting claims
+about its strength.
 
-The total-variation error in \eqref{eq:epsilon-n} contains the reset term
-\[
- \exp\{-c_\kappa\sqrt{\log\log n}\},
-\]
-up to polylogarithmic factors.  This tends to zero, but it is much larger
-than the natural scalar Berry--Esseen scale $(\log n)^{-1/2}$.  In the scalar
-characteristic-function ODE, the same raw switching error is divided by the
-standard deviation and integrated over a controlled frequency window.  The
-Berry--Esseen supplement exploits that extra structure to obtain the sharp
-$O_\kappa((\log n)^{-1/2})$ rate for the additive proxy.
+The separate total-cycle manuscript~\cite{LongCount2026} keeps both omitted
+cycle ranges as a passive count, uses mean-matched Poisson smoothing, and
+proves the sharp exact-mean Berry--Esseen theorem and lattice Edgeworth
+expansions. Its count-only argument does not import the nonlinear arithmetic
+analysis for logarithmic order. The scalar order manuscript remains a
+separate proof and an explicit source for the arithmetic interface used here.
 
-Accordingly, the recommended division of labor is:
+The count CLT does not supply the profile-dependent constant in
+$\Ee K_n=\log n+\kappa_f+o(1)$, nor bounded higher cumulant corrections.
+Those questions remain separate. A quantitative process theorem additionally
+requires an explicitly selected path metric; an endpoint Kolmogorov rate
+is not a path-space error bound. Covariances displayed in this paper are
+those of the Gaussian limit, not finite-$n$ covariance asymptotics inferred
+without uniform integrability.
 
-\begin{enumerate}[label=\textnormal{\arabic*.},leftmargin=2.2em]
-\item Use Theorem~\ref{thm:TV-main} and the present branch for qualitative
-functional and multivariate universality.
+\section{Integration audit record}
 
-\item Retain the scalar switching ODE for sharp additive Berry--Esseen and
-Edgeworth analysis.
+The companion repository audit records the following checked interfaces:
+right-composition and split orientation in the marked clock identity;
+truncation-uniform one-/two-root errors; direct unweighted dyadic summation;
+the factor two in the exceptional-source bound; the dimension-free Stein
+factor; and uniform cutoff restoration. The explicit total-count corollary
+above records the separate first-moment argument. The general weighted
+field records the harmonic-measure justification for Riemann-integrable
+weights. The abstract appendix below specifies its time domain and path
+regularity. No historical rejected proof is used by this chain.
 
-\item Use the multi-clock moment bounds from the quantitative supplement for
-concentration of the arithmetic remainder and order-level rates.
-
-\item Pursue a quantitative functional theorem only after selecting an
-explicit path metric.  A sharp endpoint Kolmogorov rate and a path-space
-bounded-Lipschitz rate are different problems and need not have the same
-proof.
-\end{enumerate}
-
-\begin{remark}[Why this branch still helps quantitative work]
-The product-Poisson approximation identifies the correct Gaussian covariance
-operator and proves that no hidden profile-dependent covariance survives on
-logarithmic scale.  It therefore supplies the structural target for any
-future multivariate Stein, strong approximation, or functional
-Berry--Esseen theorem, even though its present total-variation error is not
-sharp enough for the scalar rate.
-\end{remark}
-
-\section{Audit checklist and merge plan}
-
-Before this branch replaces the scalar section in the main paper, the
-following points should be checked independently.
-
-\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=2.4em]
-\item Re-run Proposition~\ref{prop:unweighted} directly from the exact
-constants in the finite-endpoint input, with the stronger choice
-$A_0\beta>1$ recorded explicitly.
-
-\item Verify the permutation convention in Lemma~\ref{lem:good-split} against
-the marked switch used in the companion manuscript: right-composition by
-$(i\,\sigma_n^r(i))$ must split the source cycle into lengths $r$ and
-$L-r$ with no orientation reversal.
-
-\item Check the factor two and normalization $a_{n,r}=n/[r(n-r)]$ in
-\eqref{eq:Campbell-one-r}.
-
-\item Keep the Stein lemma in the paper, rather than relying on an unstated
-high-dimensional Poisson approximation theorem.  Its dimension-free first
-difference bound is the central reason the argument closes.
-
-\item Verify the uniform-in-$t$ deterministic center estimates at the two
-cutoff transition times $t=\log b_n/\log n$ and
-$t=\log U_n/\log n$.
-
-\item Preserve the scalar characteristic-function proof in a separate branch
-until the product-Poisson theorem has passed this audit.  Afterward, either
-move the scalar proof to an appendix or retain it only in the Berry--Esseen
-supplement.
-\end{enumerate}
-
-A merged final paper would naturally have the following structure:
-
-\begin{enumerate}[label=\textnormal{\arabic*.},leftmargin=2.2em]
-\item Introduction and the bivariate functional theorem.
-\item Model, marked one-switch input, and quantitative endpoint interface.
-\item Unweighted dyadic summability.
-\item Product-Poisson approximation of the intermediate cycle field.
-\item Gaussian random measure and functional additive laws.
-\item Rate-oriented three-clock switch and factorial moments.
-\item Functional product--LCM transfer.
-\item Scalar, joint, and annular consequences.
-\item Quantitative directions and relation to the Berry--Esseen supplement.
-\end{enumerate}
+The repository preserves the original working source and its scoped audit,
+so the changes and their provenance can be checked independently. Successful
+compilation or finite identity tests are not substitutes for mathematical
+review or formalization.
 
 \appendix
 
@@ -1410,7 +1420,10 @@ The monotonicity argument is independent of permutations and may be useful in
 other component models.
 
 Let $(C_{n,r})_{r\ge1}$ be arbitrary nonnegative integer-valued variables and
-let $x_n(t)$ be a nondecreasing integer-valued cutoff.  Define
+let $x_n(t)$ be a finite, nondecreasing integer-valued cutoff on
+$0\le t\le1$, chosen so that the displayed processes are c\`adl\`ag.
+Assume also that any centered processes in the convergence statement are
+random elements of $D([0,1],\R)$. Define
 \[
  A_n(t)=\sum_{r\le x_n(t)}C_{n,r}\log r,
 \]
@@ -1424,7 +1437,7 @@ and
 The discrepancy $A_n(t)-L_n(t)$ is nonnegative and nondecreasing.  Hence, for
 any deterministic scale $s_n>0$,
 \[
- \sup_t\frac{|A_n(t)-L_n(t)|}{s_n}
+ \sup_{0\le t\le1}\frac{|A_n(t)-L_n(t)|}{s_n}
  =\frac{A_n(1)-L_n(1)}{s_n}.
 \]
 Consequently, if
@@ -1527,8 +1540,8 @@ New York, 1986.
 
 \bibitem{LongBerry2026}
 C. D. Long,
-\newblock Berry--Esseen checkpoints for the Erd\H{o}s--Tur\'an law of
-comparable-rate Luce permutations,
+\newblock A sharp Berry--Esseen theorem and first Edgeworth expansion for the
+Erd\H{o}s--Tur\'an law of comparable-rate Luce permutations,
 \newblock research supplement, 2026.
 
 \bibitem{LongOrder2026}
@@ -1539,8 +1552,14 @@ C. D. Long,
 \bibitem{LongSwitch2026}
 C. D. Long,
 \newblock Mesoscopic cycles of comparable-rate Luce permutations: a
-switching proof under submacroscopic root-cycle escape,
+switching proof of Conjecture~13.1 with an internal root bound,
 \newblock manuscript, 2026.
+
+\bibitem{LongCount2026}
+C. D. Long,
+\newblock Poisson approximation and lattice Edgeworth expansions for total
+Luce cycles,
+\newblock research manuscript, 2026.
 
 \bibitem{Luce1959}
 R. D. Luce,

@@ -1789,9 +1789,12 @@ For every fixed $q$, the conditional endpoint comparison of
  +n^2h^{-1}e^{-chM}+n^{-2}\bigg].
  \label{eq:free-depth-input-error}
 \end{align}
-The bound is uniform in every previously exposed compatible terminal
-history.  It also applies to products of bounded Lipschitz functions of the
-selected swap factors: if $F_A(i,j)=R_{ij}\wedge A$, then the one-root error
+The global bound is the mean conditional total-variation comparison relative
+to the coarse environment in the source theorem; it is not a fully quenched
+arbitrary-deletion statement. The compatible terminal-history comparisons
+are used only within that theorem's stopped exploration and averaging.
+Its annealed observable consequence also applies to products of bounded
+Lipschitz functions of the selected swap factors: if $F_A(i,j)=R_{ij}\wedge A$, then the one-root error
 is at most $C_\kappa A\mathcal E_{n,1}(m)$ and the two-root error is at most
 $C_\kappa A^2\mathcal E_{n,2}(m)$.
 
@@ -1836,7 +1839,8 @@ coarse-to-exact replacement costs $O_\kappa(Ah)$, already present in
 $\mathcal E_{n,1}$.  Conditional total variation contributes
 $O(A\mathcal E_{n,1})$.  A telescoping product gives the corresponding
 $O(A^2\mathcal E_{n,2})$ two-root bound.  This proves the stated observable
-form.
+form, now recorded explicitly in the switching manuscript as
+Corollary~\texttt{cor:quantitative-truncation-interface}.
 \end{proof}
 
 For a dyadic block $a\le r<2a$, define
