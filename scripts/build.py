@@ -85,7 +85,7 @@ def check_markdown(allow_pending: bool = False) -> None:
 
 
 def check_readme_math(text: str) -> None:
-    # Keep README math to a conservative GitHub/MathJax subset. Use only
+    # Keep README math to a conservative GitHub Markdown/MathJax subset. Use only
     # $...$ for inline math and $$...$$ for display math; avoid document-level
     # definitions/environments, repository-private aliases, and commands
     # rejected by GitHub's safe renderer (notably \operatorname).
