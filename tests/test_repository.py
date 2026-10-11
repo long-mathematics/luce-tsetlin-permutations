@@ -15,16 +15,16 @@ class RepositoryTests(unittest.TestCase):
         build.check_markdown()
     def test_bad_math_rejected(self):
         bad = [
-            r'\\[x\\]',
-            '$\\n',
-            '$$\\nx\\n=\\ny\\n$$\\n',
-            '$$\\n- x\\n$$\\n',
-            '$$\\nx\\n',
-            r'$\\Ee X$',
-            r'$\\operatorname{ord}(\\sigma)$',
-            r'$\\newcommand{\\foo}{x}\\foo$',
-            r'$$\\n\\begin{aligned}x&=y\\end{aligned}\\n$$\\n',
-            r'$\\href{https://example.com}{x}$',
+            r'\[x\]',
+            '$\n',
+            '$$\nx\n=\ny\n$$\n',
+            '$$\n- x\n$$\n',
+            '$$\nx\n',
+            r'$\Ee X$',
+            r'$\operatorname{ord}(\sigma)$',
+            r'$\newcommand{\foo}{x}\foo$',
+            r'$$\n\begin{aligned}x&=y\end{aligned}\n$$\n',
+            r'$\href{https://example.com}{x}$',
         ]
         for text in bad:
             with self.subTest(text=text), self.assertRaises(ValueError):
