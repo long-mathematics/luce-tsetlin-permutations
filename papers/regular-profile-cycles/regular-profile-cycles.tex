@@ -1289,14 +1289,14 @@ factorial moments:
 These are exactly the mixed factorial moments of independent Poisson variables
 \(Z_r\sim\Pois(\lambda_r)\).  Since ordinary mixed moments are finite linear
 combinations of mixed factorial moments, all fixed mixed ordinary moments also
-converge to those of \((Z_1,\ldots,Z_R)\).  The limiting vector has finite
-exponential moments and is therefore moment-determinate, so the multivariate
-method of moments applies; see, for example, \cite{Billingsley1995}.
-% BEGIN AUDIT REPAIR 5A: moment-method reference
-This citation is only to the standard convergence criterion: the model-specific
-factorial-moment estimates are proved above.
+converge to those of \((Z_1,\ldots,Z_R)\).  % BEGIN AUDIT REPAIR 5A: moment-method reference
+For a standard statement of the multivariate method of moments, see
+\cite{Billingsley1995}.  This citation is only to the convergence criterion:
+the model-specific factorial-moment estimates are proved above.
 % END AUDIT REPAIR 5A: moment-method reference
-Thus
+The limiting vector has finite
+exponential moments and is therefore moment-determinate, so the multivariate
+method of moments gives
 \[
         (C_1(\sigma_n),\ldots,C_R(\sigma_n))
         \Rightarrow (Z_1,\ldots,Z_R),
@@ -1317,14 +1317,13 @@ For every fixed $R$,
 \begin{proof}
 Let $p_n$ and $p$ be the probability mass functions of the two laws on the
 countable discrete space $\Zz_{\ge0}^R$.  Theorem \ref{thm:regular-cycles} implies
-\(p_n(z)\to p(z)\) for every \(z\in\Zz_{\ge0}^R\).  This is the discrete
-counting-measure form of Scheff\'e's lemma; the short argument is included
-below, and standard formulations may be found in \cite{Billingsley1995}.
 % BEGIN AUDIT REPAIR 5B: discrete Scheffe reference
-No unbounded-moment passage is used in this total-variation step.
+The finite-set argument below is the counting-measure form of Scheff\'e's
+lemma; see \cite{Billingsley1995}.  No unbounded-moment passage is used in
+this total-variation step.
 % END AUDIT REPAIR 5B: discrete Scheffe reference
-Given \(\varepsilon>0\), choose a
-finite set \(A\subset\Zz_{\ge0}^R\) with \(p(A)>1-\varepsilon\).  Then
+$p_n(z)\to p(z)$ for every $z\in\Zz_{\ge0}^R$.  Given $\varepsilon>0$, choose a
+finite set $A\subset\Zz_{\ge0}^R$ with $p(A)>1-\varepsilon$.  Then
 $\sum_{z\in A}|p_n(z)-p(z)|\to0$ and $p_n(A^c)\to p(A^c)$.  Hence
 \[
  \sum_{z\in\Zz_{\ge0}^R}|p_n(z)-p(z)|
@@ -1471,7 +1470,8 @@ the probability measure \(\rho(x,y)\dd y\):
 with equality only when \(h\) is a scalar multiple of the constant function
 almost everywhere for that measure.  Strict positivity of \(\rho\) makes
 this equivalent to Lebesgue almost-everywhere constancy.
-% END AUDIT REPAIR 6A: complex Jensen equality  Thus the only eigenvectors with eigenvalue of modulus one are the
+% END AUDIT REPAIR 6A: complex Jensen equality
+Thus the only eigenvectors with eigenvalue of modulus one are the
 constants.  The eigenvalue $1$ is algebraically simple as well.  Indeed, if
 $(K-I)g=c\one$ with $c\ne0$, then $K^ng=g+nc\one$, contradicting
 $\|K^n\|\le1$.
@@ -1515,15 +1515,15 @@ Therefore
         \le q^{r-2}\sum_{j\ge2}|\zeta_j|^2
         \le q^{r-2}\|T\|_{\mathrm{HS}}^2.
 \]
-After changing the constant, this is \(O(q^r)\).
 % BEGIN AUDIT REPAIR 6B: first-moment link
 For each fixed \(r\), Proposition \ref{prop:regular-cycle-factorial} with
 \(k_r=1\) and all other \(k_s=0\) gives
-\(\Ee C_r(\sigma_n)\to\lambda_r\).  Combining this fixed-\(r\) limit with
-\(r\lambda_r\to1\) just proved gives the stated iterated limit; absolute
-summability follows from the same geometric bound.
+\(\Ee C_r(\sigma_n)\to\lambda_r\).  This is the fixed-\(r\) input used in
+the iterated limit below; absolute summability comes from the same geometric
+trace bound.
 % END AUDIT REPAIR 6B: first-moment link
-Thus the two consequences follow.
+After changing the constant, this is $O(q^r)$.  The two consequences follow
+immediately.
 \end{proof}
 
 
@@ -1801,14 +1801,15 @@ Theorem \ref{thm:sparse-entry} to the graph edges with target in
 $[\delta',\delta]\cup[1-\delta,1-\delta']$ identifies the corresponding
 limiting integral with the limit of their expected overlap count.  The latter
 is bounded by the endpoint estimate above and is therefore
-$O(\delta+\delta^\beta)$.  Thus \(\Lambda_\mu(\delta)\) is Cauchy as
-\(\delta\downarrow0\) and has a finite monotone limit.
-% BEGIN AUDIT REPAIR 5C: converging-together reference
-For each fixed \(\delta\), first let \(n\to\infty\); the omitted count then
-vanishes in probability as \(\delta\downarrow0\), while the truncated Poisson
-means converge to \(\Lambda_\mu\).  The standard converging-together lemma
-(see \cite{Billingsley1999}) therefore yields the stated Poisson limit.
+$O(\delta+\delta^\beta)$.  % BEGIN AUDIT REPAIR 5C: converging-together reference
+The limit order is: for each fixed \(\delta\), first let \(n\to\infty\);
+then let \(\delta\downarrow0\), under which the omitted count vanishes in
+probability and the truncated Poisson means converge.  See
+\cite{Billingsley1999} for the standard converging-together lemma.
 % END AUDIT REPAIR 5C: converging-together reference
+Thus $\Lambda_\mu(\delta)$ is Cauchy as
+$\delta\downarrow0$ and has a finite monotone limit.  The
+converging-together lemma now yields the stated Poisson limit.
 \end{proof}
 
 \begin{theorem}[Transverse thin-curve Poisson law]\label{thm:thin-curve-transverse}
