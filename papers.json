@@ -54,6 +54,14 @@
       ]
     },
     {
+      "id": "regular-profile-cycles",
+      "title": "Microscopic Cycles and Sparse Entries for Regular Luce Profiles",
+      "source": "papers/regular-profile-cycles/regular-profile-cycles.tex",
+      "pdf": "output/pdf/regular-profile-cycles.pdf",
+      "status": "current-research",
+      "dependencies": []
+    },
+    {
       "id": "macroscopic-pd",
       "title": "Poisson--Dirichlet Universality for Luce Permutations",
       "source": "papers/macroscopic-pd/poisson-dirichlet-luce.tex",

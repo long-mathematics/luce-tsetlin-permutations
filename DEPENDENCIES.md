@@ -2,6 +2,42 @@
 
 The catalog records document-level input edges and tests reject cycles. References for historical context or later applications are not proof dependencies. The precise modules below determine the review boundary.
 
+## Regular-profile microscopic-cycle manuscript
+
+The standalone paper `papers/regular-profile-cycles/regular-profile-cycles.tex`
+has no proof dependency on another active manuscript in `papers.json` and does
+not use the macroscopic, mesoscopic, order, or total-cycle theorems.
+
+Its internal model-specific proof chain is:
+
+1. exponential-race and Gumbel threshold identities;
+2. Bernoulli point-probability/Bernstein bounds and the fixed-dimensional
+   tilted lattice local limit theorem;
+3. uniform sampled-profile approximation, regular saddle geometry, cumulative
+   count local limits, and off-saddle exclusion;
+4. the integrated lattice saddle and separated bulk multipoint estimate;
+5. gap, endpoint, collision, and target-crowding envelopes;
+6. fixed-order factorial-moment summation and fixed-vector total variation;
+7. bistochasticity, Hilbert--Schmidt compactness, the cyclic trace formula, and
+   exponential long-trace universality;
+8. diagonal-band, sparse-entry, thin-graph, deterministic-overlap, and
+   transverse-curve consequences.
+
+The external inputs are the identified Luce permuton density of
+Borga--Chatterjee--Diaconis, standard Bernoulli/local-limit background from
+Petrov, trace-ideal results from Simon, and standard method-of-moments,
+Scheffe, and converging-together criteria now cited to Billingsley. Every
+model-specific estimate used in a theorem statement remains in the standalone
+source.
+
+The adversarial audit in `audits/regular-profile-proof-audit.md` found no fatal
+gap. The six localized clarification sets in
+`audits/regular-profile-repair-record.md` do not alter theorem scope. The
+repair regression check removes the marked clarification blocks and recovers
+the original three archived mathematical blocks byte-for-byte, while separately
+checking that all repair markers and principal theorem statements remain
+present.
+
 ## Macroscopic PD/GEM extraction
 
 The standalone paper `papers/macroscopic-pd/poisson-dirichlet-luce.tex` was mechanically extracted from archived lines 2199--3565 and then revised only by the six localized clarifications listed in `audits/macroscopic-pd-repair-record.md`. It has no proof dependency on another active manuscript in `papers.json` and does not use the mesoscopic-cycle theorem, scalar or functional Erdős--Turán laws, total-cycle CLT, or quantitative total-cycle results.
