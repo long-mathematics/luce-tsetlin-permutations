@@ -1,0 +1,811 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage[margin=1.05in]{geometry}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue]{hyperref}
+\usepackage{booktabs,longtable,array}
+
+\newcommand{\E}{\mathbb E}
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\osc}{\operatorname{osc}}
+\newcommand{\1}{\mathbf 1}
+\newcommand{\cF}{\mathcal F}
+\newcommand{\cH}{\mathcal H}
+\newcommand{\cG}{\mathcal G}
+\newcommand{\cB}{\mathcal B}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\PD}{\operatorname{PD}(1)}
+\newcommand{\Pois}{\operatorname{Poisson}}
+\newcommand{\cyc}{\mathrm{cyc}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{Audit and rigorous repair of\\
+``Mesoscopic cycles of Luce permutations''}
+\author{}
+\date{18 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The submitted draft does not prove its advertised theorems.  Several errors are
+local and repairable, but four are structural: the asserted slab good event is
+incompatible with the exponential tail of the clocks; the balance lemma is
+used beyond its stopping range and simultaneously over histories without
+justification; the history-dependent slab process is treated as a product of
+ordinary transition matrices; and the central limit theorem is inferred from
+factorial moments with an error far too weak to survive centering.  This note
+records the defects precisely and gives a rigorous replacement for the core
+orbit argument.  The replacement uses a stopped exploration, adaptive
+Chernoff bounds, and oscillation contraction from a two-sided Doeblin bound; it
+eliminates the trace argument entirely.  It proves the local cycle law under an
+explicit quantitative slab hypothesis.  The expectation and mesoscopic
+Poisson conclusions then follow rigorously.  A corrected CLT is also given,
+but it requires a quantitative joint local law and a uniform second-moment
+bound for short cycles.  What remains unproved is the derivation of the slab
+hypothesis from the comparable-weights Luce model, especially the treatment of
+late clock slabs.
+\end{abstract}
+
+\section{Status of the submitted manuscript}
+
+The principal claims in the abstract and Theorems 1.1--1.5 should not be
+presented as proved.  The expectation calculation can be repaired once a
+quantitative one-point local law is available.  The mesoscopic Poisson process
+can be repaired once a quantitative joint local law is available.  The CLT
+needs substantially more than the factorial-moment statement currently
+proved.  The claimed reductions for the remaining conjectures are not
+well-formed as mathematical statements.
+
+The table below lists the main defects.  Line numbers refer to the submitted
+TeX file.
+
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{p{0.08\textwidth}p{0.25\textwidth}p{0.58\textwidth}}
+\toprule
+Lines & Issue & Consequence and repair \\
+\midrule
+\endfirsthead
+\toprule
+Lines & Issue & Consequence and repair \\
+\midrule
+\endhead
+349--367 & Conditioning contradiction & The sigma-field is said to contain the
+sets $H_{n,a}$ and the ordered clocks inside each slab.  Those data determine
+the complete ranking and hence the permutation, leaving no random
+``within-row matching.''  The environment must contain only the information
+actually conditioned on in the cited permanental decomposition. \\
+407--421 & Impossible lower slab mass & With $T=(B+1)\log n$, a width-$h$ slab
+near $T$ has mass of order $h e^{-\theta T}$, not order $h$.  Therefore
+$m_{n,a}\ge cnh$ for every slab, with $c$ independent of $n$, is false.  The
+same error invalidates the claimed lower bounds on all cells.  A new tail
+construction or a precise external slab lemma is indispensable. \\
+529--538 & Wrong Hilbert--Schmidt norm & The equality
+$\sum_{a,b}p_bP_{ab}=1$ is false.  On $L^2(p)$ the correct squared
+Hilbert--Schmidt norm is
+$\sum_{a,b}p_aP_{ab}^2/p_b$, which is bounded by the ratio estimate. \\
+556--637 & Overstated balance lemma & The Freedman calculation leaves a term
+$(\log m)/\sqrt{m_b}$, and the stopping probability has exponent of order
+$\sqrt{m_b}\log m_b$, not
+$(\log m_b)^2\sqrt{m_b}/\delta$.  Both corrections are harmless when cell
+sizes are polynomial, but the displayed lemma is not proved as stated. \\
+640--678 & Circular use of balance & A row-wise lemma valid for at most
+$\gamma m_a$ selections is asserted for every global prefix $r\le\delta n$.
+A single row may have been selected more than $\gamma m_a$ times.  One must
+stop when a row reaches that level and then prove that the stopping time is
+unlikely. \\
+640--690 & Quantifiers over histories & Freedman's inequality gives a
+high-probability assertion along a realized adaptive exploration.  It does not
+produce one event on which the estimate holds for every possible history.
+The proof must use root-specific stopped events and integrate their failure
+probabilities. \\
+696--773 & Non-Markov covariance argument & The slab coordinate is not Markov:
+the next kernel depends on the residual matching and the whole history.
+Different conditional histories do not evolve under a common product of
+kernels.  The claimed geometric covariance estimate therefore does not
+follow.  It is unnecessary: adaptive Chernoff bounds control row visits using
+only the uniform upper ratio $K_t(a,c)\le A p_c$. \\
+781--858 & Invalid trace representation & The future random kernels depend on
+the path and on the distinguished root.  A product of one realized sequence
+of matrices sums over counterfactual paths that would have generated different
+kernels.  Thus the displayed trace is not the root average.  The subsequent
+run expansion also uses unjustified operator identities.  A uniform
+oscillation contraction gives the return density directly and removes this
+entire section. \\
+839--858 & Incorrect crossover arithmetic & With the stated
+$c_*=1/(8|\log q'|)$, the factor
+$h^{-1/2}(q')^{k/2}$ at $k=c_*\log n$ is of constant order (up to
+$\sqrt{\log n}$), not a negative power of $n$.  Moreover $q'=q_0+\eta_n$ and
+$h_k=(q')^k$ define each other circularly. \\
+891--924 & False hazard upper bound & For $S=m-1$, the bound obtained in the
+proof is $m^{-1}\exp(O(\beta m))$, not $C/m$.  Indeed hazards
+$\lambda_j=e^{-\beta}/(m-j)$ give a product of order $m^{-e^{-\beta}}$.
+Telescoping is valid only while $S\le\gamma m< m$; the complement must be
+controlled probabilistically. \\
+1007--1048 & Residual stability not proved & Balanced cell depletion conditional
+on the number of visits to a row does not imply that every row is depleted in
+the same proportion.  The asserted formulas for $r_a$ and $p^R/p$ require an
+additional row-occupancy estimate. \\
+1068--1087 & Wrong sampling denominator & Since $V_j$ is an independent uniform
+vertex, $\Pp(V_j\in R\mid\mathcal E)=(n-K)/n$, not
+$(n-K)/(n-j+1)$.  With the correct denominator the cancellation with the
+residual local law is exactly $((n-K)/n)(1/(n-K))=1/n$. \\
+460--469 & False macroscopic distribution & The number of $\PD$ parts at least
+$\delta$ is not Poisson.  For $\delta>1/2$ it is at most one, whereas a
+non-degenerate Poisson variable can exceed one.  Only its expectation
+$\log(1/\delta)$ is needed later. \\
+1255--1299 & Invalid CLT moment argument & The sum includes fixed lengths
+$r>K$, although the local law requires lengths tending to infinity; it also
+claims $\ell\delta n=o(n)$ for fixed $\delta$, which is false.  More
+fundamentally, relative $o(1)$ errors in raw factorial moments do not survive
+the cancellations involved in centered moments. \\
+1302--1339 & Tightness does not give variance asymptotics & An $O_p(1)$ remainder
+need not have bounded second moment.  Therefore neither the variance claim nor
+the covariance error follows from the stated tightness. \\
+1347--1388 & Ill-formed mixed estimate & Expressions such as
+``$L_{n,j}/n\to s$'' are not finite-$n$ events.  The formula contains an
+$o(1)$ inside a limit and confuses vertex-rooted lengths with ranked cycle
+lengths.  The process $\sum_v\delta_{L_n(v)/n}$ counts every cycle with
+multiplicity equal to its length. \\
+1415--1453 & Invalid singular-profile reduction & The comparable-weights local
+law cannot be invoked for weights whose ratio grows like $n^\alpha$; the
+failure occurs at all scales, not only at $k=\Theta(n)$. \\
+1458--1467 & Incorrect scale diagnosis & $n/\log n=o(n)$, and
+$c^r=o(1/r)$ there.  Thus the stated reason that the one-point local law is
+ineffective is exactly backwards.  The genuine missing input is a sufficiently
+uniform joint/extreme-value estimate. \\
+\bottomrule
+\end{longtable}
+
+\section{A corrected abstract slab framework}
+
+This section isolates a set of hypotheses under which the intended local law
+is rigorously true.  The hypotheses are deliberately stated at the level
+actually used by the proof.  Establishing them for comparable Luce weights is
+a separate theorem; the submitted draft does not do so.
+
+Fix a root $v$.  Let $b_t$ be the slab of the $t$th point in its orbit, and let
+$c(v)$ be the row containing the target $v$.  Let rows have sizes
+$m_a=np_a$, and let
+\[
+ P_{ab}=\frac{N_{ab}}{m_a},\qquad \sum_bP_{ab}=1,
+ \qquad \sum_a p_aP_{ab}=p_b.
+\]
+
+\begin{assumption}[Quantitative slab input]\label{ass:slab}
+There are constants $\alpha,\gamma>0$ and $\zeta\in(0,1/2)$, independent of $n$ and of the
+scale $k$, such that on an environment event $\cG$:
+\begin{enumerate}[label=(H\arabic*)]
+\item $p_{\min}:=\min_a p_a\ge n^{-1/2+\zeta}$ and the number of rows is at
+most $n^{O(1)}$.
+\item The baseline kernel has the two-sided ratio bound
+\begin{equation}\label{eq:ratio-correct}
+ \alpha p_b\le P_{ab}\le \alpha^{-1}p_b
+ \qquad(a,b).
+\end{equation}
+In particular every cell has size
+$N_{ab}\ge \alpha n p_ap_b$.
+\item Until a row has lost $\gamma m_a$ targets, every residual target in
+that row has conditional selection probability in
+$[e^{-\beta}/s,e^\beta/s]$, where $s$ is the residual row size.
+The same assertion holds under the root-avoiding law.
+\item Under the root-avoiding law, at the $j$th visit to row $c(v)$ the
+closure hazard satisfies
+\begin{equation}\label{eq:hazard-correct-ass}
+ \lambda_j=\frac{e^{\xi_j}}{m_{c(v)}-j},\qquad |\xi_j|\le\beta.
+\end{equation}
+\item The environment failure probability is $O(n^{-B})$ for every fixed
+$B$ after the constants in the construction are chosen.
+\end{enumerate}
+Finally, the mesh is chosen so that the balance error $\chi_n$ defined in
+\eqref{eq:chi} below obeys, for the cycle scale $k$ under consideration,
+\begin{equation}\label{eq:parameter-input}
+ \beta+\chi_n\le C\bigl(\rho^k+n^{-c}\bigr)
+\end{equation}
+for some fixed $\rho\in(0,1)$ and $c>0$.
+\end{assumption}
+
+The lower bound in (H1) is only a convenient sufficient condition.  What is
+really needed below is $np_{\min}\gg\log n$ and polynomially large cells.
+The submitted slab construction does not provide either condition near its
+clock horizon.
+
+\subsection{Corrected balanced depletion}
+
+\begin{lemma}[Balanced depletion with the correct error]\label{lem:balance-correct}
+Let $m$ targets be partitioned into categories of sizes $m_1,\dots,m_d$,
+with $m_b\ge m_*\ge m^\vartheta$ for a fixed $\vartheta>0$.  Targets are
+selected without replacement in a predictable adaptive manner, and whenever
+$s$ targets remain, each individual remaining target has conditional
+selection probability in $[e^{-\beta}/s,e^\beta/s]$.  Fix
+$\gamma\in(0,1/2)$ and $B<\infty$.  Then, with probability at least
+\[
+ 1-Cd\Bigl(m^{-B}+e^{-c\sqrt{m_*}\log m_*}\Bigr),
+\]
+simultaneously for all categories $b$ and all $r\le\gamma m$,
+\begin{equation}\label{eq:balance-correct}
+ \left|X_b(r)-\frac{rm_b}{m}\right|
+ \le C_Bm_b\left(
+ \beta+\frac{\sqrt{\log m}}{m_b^{1/4}}
+       +\frac{\log m}{m_b^{1/2}}
+ \right).
+\end{equation}
+The same estimate, with an additional $O(1/m_b)$ relative error, holds if one
+fixed target is forbidden throughout.
+\end{lemma}
+
+\begin{proof}
+Fix $b$, put $N_r=m_b-X_b(r)$ and $s_r=m-r$, and stop at
+$\tau=\inf\{r:N_r<\sqrt{m_b}\}$.  For
+$Z_r=\log(N_r/s_r)$, Taylor expansion of the two possible increments gives,
+for $r<\tau$,
+\[
+ \left|\E(Z_{r+1}-Z_r\mid\cF_r)\right|
+ \le \frac{C\beta}{s_r}+C\left(\frac1{s_r^2}+\frac1{s_rN_r}\right),
+ \qquad
+ \E\bigl[(\Delta Z_r-\E_r\Delta Z_r)^2\mid\cF_r\bigr]
+ \le\frac{C}{s_rN_r}.
+\]
+The centered increment is bounded by $C/\sqrt{m_b}$.  Up to time
+$\gamma m\wedge\tau$, the predictable quadratic variation is at most
+$C/\sqrt{m_b}$ and the total drift is at most
+$C(\beta+m_b^{-1/2})$.  Freedman's inequality, with
+\[
+ x=C_B\left(\frac{\sqrt{\log m}}{m_b^{1/4}}
+             +\frac{\log m}{m_b^{1/2}}\right),
+\]
+gives a failure probability at most $2m^{-B}$.  To hit $\tau$ before
+$\gamma m$, the martingale must make a downward excursion of order
+$\log m_b$; Freedman's denominator is then of order
+$(\log m_b)/\sqrt{m_b}$, yielding the bound
+$e^{-c\sqrt{m_b}\log m_b}$.  On the complementary event,
+\[
+ \left|\log\frac{N_r/m_b}{s_r/m}\right|
+ \le C\left(\beta+\frac{\sqrt{\log m}}{m_b^{1/4}}
+                   +\frac{\log m}{m_b^{1/2}}\right).
+\]
+Since $s_r/m\ge1-\gamma$, exponentiation and
+$X_b(r)=m_b-N_r$ give \eqref{eq:balance-correct}.  A union bound proves the
+simultaneous assertion.  Forbidding one target changes the relevant initial
+sizes by at most one and gives the stated additional term.
+\end{proof}
+
+Applied row by row, define
+\begin{equation}\label{eq:chi}
+ \chi_n=C\max_{a,b}\left(
+  \beta+\frac{\sqrt{\log n}}{N_{ab}^{1/4}}
+       +\frac{\log n}{N_{ab}^{1/2}}
+ \right).
+\end{equation}
+Let $\sigma$ be the first exploration time at which, in some row that has
+not yet lost $\gamma m_a$ targets, the estimate
+\eqref{eq:balance-correct} fails for one of its cells.  Lemma~\ref{lem:balance-correct},
+applied to the row-selection subsequence in each row and then union-bounded,
+gives, conditionally on a good environment,
+\begin{equation}\label{eq:balance-stop-tail}
+ \Pp^\circ(\sigma\le \delta n\mid\cH,\cG)
+ \le \varepsilon_{\rm bal,n},
+ \qquad
+ \varepsilon_{\rm bal,n}
+ \le C d^2\left(n^{-B}+e^{-c\sqrt{N_{\min}}\log N_{\min}}\right),
+\end{equation}
+where $N_{\min}=\min_{a,b}N_{ab}$.  Under (H1)--(H2), the right side is
+smaller than any prescribed power of $n$ after increasing $B$.  Introducing
+$\sigma$ is essential: one must not condition on the future event that all
+balance inequalities hold, since such conditioning would alter the
+transition probabilities.
+
+\subsection{Stopping the exploration and controlling row visits}
+
+Let
+\[
+ \tau=\inf\left\{t:\text{some row $a$ has been used more than }
+                         \gamma m_a\text{ times by time }t\right\},
+ \qquad T=\tau\wedge\sigma.
+\]
+Before $T$, summing the one-target bounds over a cell gives a conditional slab
+transition kernel $K_t$ satisfying
+\begin{equation}\label{eq:kernel-perturb}
+ K_t(a,b)=P_{ab}(1+\delta_{t,ab}),\qquad
+ |\delta_{t,ab}|\le\eta,
+ \qquad \eta=C(\beta+\chi_n).
+\end{equation}
+This assertion is pathwise only up to $T$; no claim is made that one sample
+event controls every counterfactual history.  For estimates of one-time
+marginals, continue the slab process with the fixed kernel $P$ after $T$.
+
+\begin{lemma}[Adaptive visit bound]\label{lem:adaptive-visits}
+Assume \eqref{eq:ratio-correct} and \eqref{eq:kernel-perturb}.  There is
+$\delta_0=\delta_0(\alpha,\gamma)>0$ such that, for $k\le\delta_0 n$,
+\begin{equation}\label{eq:visit-tail}
+ \Pp^\circ(T\le k\mid\cH,\cG)
+ \le \varepsilon_{\rm bal,n}+d\exp(-c n p_{\min}).
+\end{equation}
+For every fixed row $c$,
+\begin{equation}\label{eq:root-row-tail}
+ \Pp^\circ\left(S_c(k)>\frac{m_c}{2},\ T>k\mid\cH,\cG\right)
+ \le \exp(-c n p_c).
+\end{equation}
+Consequently the same high-visit probability without $T>k$ is bounded by
+the right side of \eqref{eq:root-row-tail} plus the right side of
+\eqref{eq:visit-tail}.
+\end{lemma}
+
+\begin{proof}
+Consider the process continued with $P$ after $T$.  At every step its
+conditional probability of visiting row $c$ is at most
+\[
+ (1+\eta)\alpha^{-1}p_c=:A p_c;
+\]
+before $T$ this is \eqref{eq:kernel-perturb}, and after $T$ it follows from
+\eqref{eq:ratio-correct}.  For adapted Bernoulli variables with conditional
+success probabilities at most $Ap_c$, iteration of conditional moment
+generating functions gives
+\[
+ \E\exp\left(\lambda\sum_{t=1}^k\1_{\{b_t=c\}}\right)
+ \le \exp\bigl(Akp_c(e^\lambda-1)\bigr).
+\]
+Choose $\delta_0$ so that $A\delta_0<\gamma/2$.  Chernoff's bound at level
+$\gamma np_c$ is then $e^{-cnp_c}$.  Union over rows bounds the event that
+$\tau\le k$ occurs before $\sigma$; adding \eqref{eq:balance-stop-tail}
+proves \eqref{eq:visit-tail}.  The same calculation with level $np_c/2$
+proves \eqref{eq:root-row-tail}, after decreasing $\delta_0$ if necessary.
+The possible visit at time zero changes the threshold by one and is absorbed
+because $np_{\min}\to\infty$.
+\end{proof}
+
+This lemma closes the circularity in the submitted proof: balance is used
+only before its own failure time and before row over-depletion, and the
+combined stopping time is then shown to be overwhelmingly unlikely.
+
+\subsection{Oscillation mixing instead of the trace argument}
+
+For a probability law $\mu$ on the slab space, write its density relative to
+$p$ as $u(a)=\mu(a)/p_a$, and set
+$\osc(u)=\max_a u(a)-\min_a u(a)$.
+
+\begin{lemma}[Robust oscillation contraction]\label{lem:oscillation}
+Let $P$ be stationary for $p$ and satisfy
+$P_{ab}\ge\alpha p_b$.  Let $(\bar K_t)$ be any deterministic sequence of
+Markov kernels satisfying
+$|\bar K_t(a,b)/P_{ab}-1|\le\eta$, with $\eta\le\alpha/8$.
+If $u_t$ is the density relative to $p$ of a chain driven by these kernels,
+then, from any point start,
+\begin{equation}\label{eq:osc-bound}
+ \|u_t-1\|_\infty
+ \le C_\alpha(1-\alpha/2)^{t-1}+C_\alpha\eta,
+ \qquad t\ge1.
+\end{equation}
+The same conclusion holds for a history-dependent chain when
+$\bar K_t(a,\cdot)$ is defined by averaging the actual next-step law over
+histories conditional on the current slab being $a$.
+\end{lemma}
+
+\begin{proof}
+The density adjoint of $P$ is the reverse kernel
+\[
+ P^*(b,a)=\frac{p_aP_{ab}}{p_b}\ge\alpha p_a.
+\]
+Hence $P^*=\alpha\Pi+(1-\alpha)R$, where
+$\Pi f=(\E_p f)\1$ and $R$ is Markov.  Therefore
+\[
+ \osc(P^*f)\le(1-\alpha)\osc(f).
+\]
+Write $\bar K_t^*=P^*+D_t^*$.  If $u\ge0$ and $\E_pu=1$, then
+\[
+ |D_t^*u(b)|\le\eta P^*u(b)\le\eta\max u,
+\]
+so
+\[
+ \osc(\bar K_t^*u)
+ \le(1-\alpha)\osc(u)+2\eta\max u
+ \le(1-\alpha+2\eta)\osc(u)+2\eta.
+\]
+Since $\eta\le\alpha/8$, iteration gives
+$\osc(u_t)\le C(1-\alpha/2)^t+C\eta$.  Because $u_t$ is nonnegative with
+$p$-mean one, $\|u_t-1\|_\infty\le\osc(u_t)$.  After one step from a point,
+\eqref{eq:ratio-correct} and the perturbation bound give a uniformly bounded
+density, establishing the initial constant.
+
+For a history-dependent chain, define
+\[
+ \bar K_t(a,b)=\Pp(b_{t+1}=b\mid b_t=a,\cH),
+\]
+with an arbitrary admissible row when the conditioning event has probability
+zero.  It is a convex combination of admissible conditional kernels and hence
+obeys the same entrywise estimate.  The one-time marginals satisfy the usual
+recursion with $\bar K_t$, so the deterministic argument applies.  To handle the stopping times, continue the chain with $P$ after $T$; the
+continued kernels remain admissible, and the original and continued chains
+disagree by at most $\Pp(T\le t)$.
+\end{proof}
+
+The key point is that this proof concerns only one-time marginals.  It does not
+assert a false Markov property for the full residual process, and it does not
+form a path-dependent matrix product or trace.
+
+\subsection{Correct hazard telescoping}
+
+\begin{lemma}[Hazard telescoping away from full depletion]\label{lem:hazard-telescope-correct}
+Let $m\ge1$, let $0\le S\le\gamma m$ with fixed $\gamma<1$, and suppose
+$\lambda_j=e^{\xi_j}/(m-j)$ with $|\xi_j|\le\beta$.  Then
+\begin{equation}\label{eq:hazard-telescope-correct}
+ \prod_{j=0}^{S-1}(1-\lambda_j)\lambda_S
+ =\frac{1+O_\gamma(\beta)}{m}.
+\end{equation}
+No bound of the form $C/m$ is asserted uniformly for $S$ close to $m$.
+\end{lemma}
+
+\begin{proof}
+For the unperturbed hazards $1/(m-j)$, the product is exactly $1/m$.
+Divide the perturbed product by the unperturbed one.  The terminal ratio is
+$(m-S)\lambda_S=e^{\xi_S}$.  For $j<S$, put $\ell=m-j\ge(1-\gamma)m$.
+The mean value theorem gives
+\[
+ \left|\log(1-e^{\xi_j}/\ell)-\log(1-1/\ell)\right|
+ \le C_\gamma\frac{\beta}{\ell}.
+\]
+Summing and using
+$\sum_{j<S}(m-j)^{-1}\le\log(1/(1-\gamma))+O(m^{-1})$ shows that the log of
+the total ratio is $O_\gamma(\beta)$.  Exponentiation proves the claim.
+\end{proof}
+
+\subsection{The repaired local law}
+
+\begin{theorem}[Local cycle law under the slab input]\label{thm:local-conditional}
+Assume Assumption~\ref{ass:slab}.  Then there are constants
+$\delta_0,c_0>0$ such that, uniformly for roots $v$ and
+$1\le k\le\delta_0n$,
+\begin{equation}\label{eq:local-conditional}
+ \Pp(L_n(v)=k+1)
+ =\frac1n\left[1+O\left((1-\alpha/2)^k+\beta+\chi_n\right)\right]
+ +O(n^{-1-c_0}).
+\end{equation}
+Consequently, if \eqref{eq:parameter-input} holds, then for every
+$r_n\to\infty$,
+\[
+ \Pp(L_n(I_n)=r)=\frac1n\left(1+O(\widetilde\rho^{\,r})+O(n^{-c_0})\right)
+\]
+uniformly for $r_n\le r\le\delta_0n$, for some
+$\widetilde\rho\in(0,1)$.
+\end{theorem}
+
+\begin{proof}
+Work first conditional on a good environment.  Continue the root-avoiding
+slab process with $P$ after the stopping time $T$.  By
+Lemma~\ref{lem:oscillation}, its time-$k$ density satisfies
+\[
+ u_k(c(v))=1+O\bigl((1-\alpha/2)^k+\eta\bigr).
+\]
+By Lemma~\ref{lem:adaptive-visits}, replacing the continued process by the
+original process changes the density at $c(v)$ by at most
+$[\varepsilon_{\rm bal,n}+d e^{-cnp_{\min}}]/p_{c(v)}$, which is smaller than
+every prescribed power of $n$ under (H1)--(H2).  The exact root-avoiding hazard identity is
+\[
+ \Pp(L_n(v)=k+1\mid\cH)
+ =\E^\circ\left[
+  \1_{\{b_k=c(v)\}}
+  \prod_{j=0}^{S(k)-1}(1-\lambda_j)\lambda_{S(k)}
+ \right].
+\]
+On $S(k)\le m_{c(v)}/2$, Lemma~\ref{lem:hazard-telescope-correct} replaces
+the hazard product by $(1+O(\beta))/m_{c(v)}$.  On the complement, the integrand is at most one.  Lemma~\ref{lem:adaptive-visits}
+gives probability at most
+$e^{-cnp_{c(v)}}+\varepsilon_{\rm bal,n}+d e^{-cnp_{\min}}$.  Therefore
+\[
+ \Pp(L_n(v)=k+1\mid\cH)
+ =\frac{1+O(\beta)}{m_{c(v)}}
+   \Pp^\circ(b_k=c(v)\mid\cH)
+  +O\!\left(e^{-cnp_{c(v)}}+\varepsilon_{\rm bal,n}
+                 +d e^{-cnp_{\min}}\right).
+\]
+Since $m_{c(v)}=np_{c(v)}$, the main term is
+$n^{-1}(1+O(\beta))u_k(c(v))$.  Substituting the oscillation estimate and
+$\eta=C(\beta+\chi_n)$ proves the conditional bound.  The balance-stopping and environment failure probabilities may be made
+$O(n^{-B})$ with $B>1+c_0$, and are then absorbed after removing the
+conditioning.  Finally use
+\eqref{eq:parameter-input} and enlarge the geometric rate.
+\end{proof}
+
+\begin{remark}[What remains to prove for Luce permutations]
+Theorem~\ref{thm:local-conditional} repairs the probabilistic argument, but it
+does not validate the submitted Proposition 3.1.  To obtain the advertised
+unconditional Luce theorem, one still needs a correct construction of clock
+slabs satisfying Assumption~\ref{ass:slab}, including the late exponential
+tail.  The assertion that all fixed-width slabs up to $(B+1)\log n$ have mass
+of order $h$ cannot be used.
+\end{remark}
+
+\section{Correct downstream consequences}
+
+\subsection{Expectation}
+
+The expectation argument is valid after two corrections: use the quantitative
+bound of Theorem~\ref{thm:local-conditional}, and replace the false Poisson
+claim for the number of macroscopic $\PD$ parts by its expectation.
+
+\begin{proposition}[Expectation from three inputs]\label{prop:expectation-correct}
+Assume:
+\begin{enumerate}[label=(E\arabic*)]
+\item for every fixed $r$, $\E C_r(\sigma_n)\to\lambda_r$, and
+$\sum_{r\ge1}|\lambda_r-r^{-1}|<\infty$;
+\item for some $q\in(0,1)$ and $c>0$,
+\[
+ \left|\E C_r(\sigma_n)-\frac1r\right|
+ \le\frac{C}{r}(q^r+n^{-c})
+ \quad (r\le\delta_0n);
+\]
+\item for every fixed $\delta>0$,
+\[
+ \E\#\{i:L_{n,i}>\delta n\}\longrightarrow\log(1/\delta).
+\]
+\end{enumerate}
+Then
+\[
+ \E N_n^{\cyc}=\log n+\gamma_{\rm E}
+ +\sum_{r\ge1}\left(\lambda_r-\frac1r\right)+o(1).
+\]
+\end{proposition}
+
+\begin{proof}
+Fix $K$ and $\delta\le\delta_0$.  Split at $K$ and $\delta n$.  The fixed
+part tends to $\sum_{r\le K}\lambda_r$.  The quantitative local law gives
+\[
+ \sum_{K<r\le\delta n}\E C_r
+ =\sum_{K<r\le\delta n}\frac1r+O(q^K)+o(1).
+\]
+The macroscopic input contributes $\log(1/\delta)+o(1)$.  Since
+$\sum_{K<r\le\delta n}r^{-1}=\log n+\log\delta-\log K+o(1)$, the
+$\log\delta$ terms cancel.  Let $n\to\infty$, then $K\to\infty$, and use
+$H_K-\log K\to\gamma_{\rm E}$ and absolute summability.
+\end{proof}
+
+\subsection{Mesoscopic Poisson process}
+
+For fixed-dimensional mesoscopic point-process convergence, relative
+$o(1)$ errors are sufficient because the limiting factorial moments are
+finite.  The correct joint input is as follows.
+
+\begin{assumption}[Quantitative joint rooted local law]\label{ass:joint}
+For each fixed $\ell$ there are $q\in(0,1)$ and $c>0$ such that, uniformly for
+lengths $r_1,\dots,r_\ell$ with $\min_jr_j\to\infty$ and
+$\sum_jr_j=o(n)$,
+\begin{equation}\label{eq:joint-correct}
+ \Pp\left(
+  L_n(V_j)=r_j\ \forall j,
+  \text{ and the rooted cycles are distinct}
+ \right)
+ =\frac1{n^\ell}\left[
+ 1+O_\ell\left(\sum_{j=1}^\ell q^{r_j}+n^{-c}\right)
+ \right].
+\end{equation}
+\end{assumption}
+
+The residual exploration proof can yield this statement if the quantitative
+slab input is hereditary after deletion and the row-stopping estimates are
+made conditional with failure probabilities smaller than $n^{-B}$ for
+arbitrarily large $B$.  In the induction step, the correct identity is
+\[
+ \frac{n-K}{n}\cdot\frac1{n-K}=\frac1n.
+\]
+
+\begin{proposition}[Mesoscopic Poisson process]\label{prop:ppp-correct}
+Under Assumption~\ref{ass:joint}, for $a_n\to\infty$, $a_n=o(n)$, the point
+process of cycle lengths rescaled by $a_n$ converges vaguely on
+$(0,\infty)$ to the Poisson point process with intensity $dx/x$.
+\end{proposition}
+
+\begin{proof}
+For disjoint compact intervals $J_j=[u_j,v_j]\subset(0,\infty)$ and fixed
+nonnegative integers $\ell_j$, expand the joint falling factorial of the cycle
+counts.  Marking each selected cycle by a vertex gives the exact identity
+\[
+ \E\mathfrak C_n(r_1,\dots,r_\ell)
+ =\frac{n^\ell}{\prod_jr_j}
+ \Pp(\text{the event in \eqref{eq:joint-correct}}).
+\]
+The error in \eqref{eq:joint-correct} is uniform over all tuples in the
+windows.  Hence the mixed factorial moments converge to
+\[
+ \prod_j\left(\sum_{r\in a_nJ_j}\frac1r\right)^{\ell_j}
+ \longrightarrow
+ \prod_j\left(\log\frac{v_j}{u_j}\right)^{\ell_j}.
+\]
+These are the mixed factorial moments of independent Poisson variables.
+Tightness on a compact subset follows from the uniformly bounded first moment,
+and the standard factorial-moment criterion gives vague convergence.
+\end{proof}
+
+\subsection{A CLT that the local laws can actually support}
+
+The submitted fixed-$K$, fixed-$\delta$ proof cannot be repaired by changing a
+line or two.  A valid route uses moving cutoffs and an error that is
+polynomially small in $n$, not merely relative $o(1)$.
+
+Set
+\[
+ a_n=\lceil(\log n)^2\rceil,
+ \qquad b_n=\left\lfloor\frac{n}{\sqrt{\log n}}\right\rfloor,
+ \qquad
+ M_n=\sum_{a_n<r\le b_n}C_r,
+ \qquad
+ \mu_n=\sum_{a_n<r\le b_n}\frac1r.
+\]
+Then $\mu_n\sim\log n$, while any fixed number of selected lengths in this
+range has total $o(n)$.
+
+\begin{assumption}[Short-cycle second moment]\label{ass:short2}
+Uniformly for $x\le(\log n)^2$,
+\begin{equation}\label{eq:short2}
+ \E\left(\sum_{r\le x}C_r\right)^2\le C(1+\log x)^2.
+\end{equation}
+\end{assumption}
+
+A sufficient condition for \eqref{eq:short2} is the uniform pair bound
+$\E C_rC_s\le C/(rs)$ off the diagonal and
+$\E(C_r)_2\le C/r^2$, together with $\E C_r\le C/r$ in the relevant range
+and finite-length domination.  Fixed-dimensional convergence alone does not
+supply this uniform estimate.
+
+\begin{theorem}[Corrected CLT criterion]\label{thm:clt-correct}
+Assume Assumptions~\ref{ass:joint} and \ref{ass:short2}, with the error in
+\eqref{eq:joint-correct} valid quantitatively for all
+$a_n<r_j\le b_n$.  Assume also the one-point local bound through
+$\delta_0n$ and a uniformly bounded expected number of cycles longer than
+$\delta_0n$.  Then
+\[
+ \frac{N_n^{\cyc}-\E N_n^{\cyc}}{\sqrt{\log n}}
+ \Longrightarrow N(0,1),
+ \qquad
+ \Var N_n^{\cyc}=\log n+o(\log n).
+\]
+\end{theorem}
+
+\begin{proof}
+For fixed $\ell$, expand the falling factorial of $M_n$.  By
+\eqref{eq:joint-correct},
+\[
+ \E(M_n)_\ell
+ =\mu_n^\ell+O_\ell\left(
+   \mu_n^{\ell-1}\sum_{r>a_n}\frac{q^r}{r}
+   +n^{-c}\mu_n^\ell
+ \right)
+ =\mu_n^\ell+O_A((\log n)^{-A})
+\]
+for every fixed $A$, after increasing $n$.  Thus, for each fixed moment order,
+the factorial moments agree with those of $Z_n\sim\Pois(\mu_n)$ to an error
+smaller than every negative power of $\mu_n$.  Passing from factorial to
+ordinary moments and then centering is now legitimate: the polynomial factors
+introduced by centering are powers of $\mu_n$, which are dominated by the
+error above.  Therefore
+\[
+ \E\left(\frac{M_n-\mu_n}{\sqrt{\mu_n}}\right)^j
+ -\E\left(\frac{Z_n-\mu_n}{\sqrt{\mu_n}}\right)^j\longrightarrow0
+\]
+for each fixed $j$.  Standardized Poisson moments converge to Gaussian
+moments, and the Gaussian is moment-determinate.  Hence
+$(M_n-\mu_n)/\sqrt{\mu_n}\Rightarrow N(0,1)$ and
+$\Var M_n=\mu_n+o(\mu_n)$.
+
+Let
+\[
+ R_n^{\rm short}=\sum_{r\le a_n}C_r,
+ \qquad
+ R_n^{\rm long}=\sum_{r>b_n}C_r.
+\]
+Assumption~\ref{ass:short2} gives
+$\E(R_n^{\rm short})^2=O((\log\log n)^2)=o(\log n)$.  For the long part,
+the one-point local law on $(b_n,\delta_0n]$ and the macroscopic expectation
+bound give
+\[
+ \E R_n^{\rm long}=O(\log\log n).
+\]
+Deterministically $R_n^{\rm long}\le n/b_n\le2\sqrt{\log n}$, so
+\[
+ \E(R_n^{\rm long})^2
+ \le 2\sqrt{\log n}\,\E R_n^{\rm long}
+ =o(\log n).
+\]
+Consequently $R_n=R_n^{\rm short}+R_n^{\rm long}$ satisfies
+$\E R_n^2=o(\log n)$, and therefore
+$(R_n-\E R_n)/\sqrt{\log n}\to0$ in $L^2$.  Since
+$\mu_n\sim\log n$, Slutsky's theorem gives the CLT for the total number of
+cycles.  Finally,
+\[
+ \Var(N_n^{\cyc})=\Var(M_n)+o(\log n)
+\]
+by Cauchy--Schwarz and the $L^2$ bound on $R_n$, proving the variance
+asymptotic.
+\end{proof}
+
+\section{Correct formulations for the remaining conjectures}
+
+\subsection{Mixed mesoscopic--macroscopic independence}
+
+A rigorous mixed estimate should be stated in terms of factorial moments and
+bounded continuous test functions.  Let
+$\Xi_n=\sum_i\delta_{L_{n,i}/a_n}$ count cycles once, and let
+$\mathbf P_n=(L_{n,1}/n,L_{n,2}/n,\dots)$.  A sufficient statement is:
+for every bounded continuous $G$ on $S^\downarrow$, every family of disjoint
+compact intervals $J_1,\dots,J_m\subset(0,\infty)$, and fixed
+$\ell_1,\dots,\ell_m$,
+\begin{equation}\label{eq:mixed-correct}
+ \E\left[G(\mathbf P_n)
+       \prod_{j=1}^m(\Xi_n(J_j))_{\ell_j}\right]
+ \longrightarrow
+ \E G(\mathbf P)\,
+ \prod_{j=1}^m\left(\int_{J_j}\frac{dx}{x}\right)^{\ell_j},
+\end{equation}
+where $\mathbf P\sim\PD$.  Together with tightness, this identifies the joint
+limit and its independence.  Equation \eqref{eq:mixed-correct} is a genuine
+missing theorem; it is not implied by separate marginal convergence.
+
+\subsection{Endpoint-singular profiles}
+
+No consequence for weights with ratio $\kappa_n\to\infty$ follows from a
+theorem whose constants depend on a fixed comparable-weights parameter
+$\kappa$.  A valid reduction would have to assume, or prove, an analogue of
+Assumption~\ref{ass:slab} with constants and errors controlled for the
+singular profile.  Without that input, the proposed Proposition 9.3 should be
+removed.
+
+\subsection{The scale \texorpdfstring{$n/\log n$}{n/log n}}
+
+The scale $n/\log n$ is submacroscopic.  The one-point error
+$q^r+n^{-c}$ is excellent there.  An extreme-gap theorem instead needs joint
+control over a moving family of rare long-cycle events, or a direct coupling
+of the upper-tail point process.  The corrected obstruction should be stated
+in those terms, not as a failure of the one-point local law.
+
+\section{Recommended revision of the original paper}
+
+A mathematically honest revision should make the following changes.
+
+\begin{enumerate}[label=\arabic*.]
+\item Change the title and abstract from a claimed resolution to a conditional
+reduction unless a correct tail-slab theorem is supplied.
+\item Replace the current good-event proposition by an exact statement of the
+slab result actually available from the cited manuscript.  Do not assert
+uniform $m_a\asymp nh$ for fixed-width slabs up to order $\log n$.
+\item Replace Sections 4.3--4.4 (mixing, covariance, and trace averaging) by
+Lemmas~\ref{lem:adaptive-visits} and \ref{lem:oscillation} above.
+\item Replace the global hazard upper bound by
+Lemma~\ref{lem:hazard-telescope-correct} and bound the high-visit event
+directly by adaptive Chernoff.
+\item State residual stability only after proving a stopped row-occupancy
+bound, and correct the independent-root denominator from $n-j+1$ to $n$.
+\item Correct the macroscopic proposition: retain convergence to $\PD$ and the
+expectation $\log(1/\delta)$, but delete the Poisson assertion.
+\item Keep the expectation theorem, conditional on the repaired local law.
+Keep the mesoscopic Poisson theorem, conditional on the quantitative joint
+law.
+\item Replace the CLT section by Theorem~\ref{thm:clt-correct}, and explicitly
+prove or assume the uniform short-cycle second-moment bound.
+\item Replace the three ``remaining conjecture'' subsections by the corrected
+formulations in the preceding section.
+\item Relabel the numerical appendix as numerical illustration.  Simulation
+cannot verify a theorem, and the displayed variance ratios around $0.85$ do
+not by themselves establish convergence to one.
+\end{enumerate}
+
+\section{Bottom line}
+
+The expectation and mesoscopic Poisson calculations are close to correct once
+a genuine quantitative local and joint local law is supplied.  The submitted
+proof of that local law is not correct, but its main probabilistic mechanism
+can be repaired by stopping and oscillation contraction, as shown above.  The
+remaining unresolved mathematical task is concrete: construct a slab
+decomposition for comparable exponential rates that satisfies
+Assumption~\ref{ass:slab} uniformly across the late clock tail, and prove its
+heredity under finitely many residual cycle explorations.  Until that is done,
+the advertised resolutions of the conjectures should remain conditional.
+
+\end{document}

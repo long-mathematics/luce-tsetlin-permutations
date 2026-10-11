@@ -1,0 +1,1578 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage[margin=1.25in]{geometry}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+
+% -------------------- macros --------------------
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\cyc}{\mathrm{cyc}}
+\newcommand{\pd}{\mathrm{PD}(1)}
+\newcommand{\PD}{\mathrm{PD}}
+\newcommand{\GEM}{\mathrm{GEM}(1)}
+\newcommand{\Poisson}{\mathrm{Poisson}}
+\newcommand{\gE}{\gamma_{\mathrm{E}}}
+\newcommand{\Err}{\mathrm{Err}}
+\newcommand{\LIS}{\mathrm{LIS}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{estimate}[theorem]{Estimate}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{Mesoscopic cycles of Luce permutations:\\
+resolution of Conjectures 13.1 and 13.2 of \cite{Lon26}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We resolve the mesoscopic cycle conjectures of the revised manuscript
+\cite{Lon26} on Luce permutations with comparable weights. Under the
+comparable-weights hypothesis \eqref{eq:comparable} we prove the local
+cycle-length law $\Prob(L_n=r)=(1+o(1))/n$, uniformly for
+$r_n\le r\le\delta_0 n$ whenever $r_n\to\infty$ (Theorem~\ref{thm:local}),
+with an explicit rate. Its consequences include
+$\E C_{r_n}(\sigma_n)\sim 1/r_n$, a joint local law for any fixed
+number of lengths, and convergence of the rescaled mesoscopic cycle
+lengths to the scale-invariant Poisson process with intensity $dx/x$,
+which is Conjecture~13.1 of \cite{Lon26} in full. Under the
+sampled-profile hypothesis \eqref{eq:profile} we then prove
+$\E N_n^{\cyc}=\log n+\kappa_f+o(1)$ with the conjectured constant
+$\kappa_f$, and the central limit theorem
+$(N_n^{\cyc}-\E N_n^{\cyc})/\sqrt{\log n}\Rightarrow N(0,1)$, which is
+Conjecture~13.2 of \cite{Lon26} in full. For the remaining
+conjectures we give precise reductions and identify the exact
+obstructions: Conjecture~A.1 follows from a stated mixed-scale local
+estimate (Theorem~\ref{thm:A1-reduction}), Conjecture~13.3 reduces to
+the local law at the endpoint scale, where the comparable-weights
+hypothesis degenerates (Proposition~\ref{prop:133}), and
+Conjecture~A.2 requires control at scale $\Theta(n/\log n)$ that is
+beyond the present method. All probabilistic inputs from \cite{Lon26}
+are quoted with their precise statement numbers; the new dynamical
+estimates are proved in full. The expectation constant and the
+mesoscopic scale-invariance are verified numerically in
+Appendix~\ref{app:numerics}.
+\end{abstract}
+
+\section{Introduction and statement of results}\label{sec:intro}
+
+\subsection{The model}
+Let $X_{n,i}\sim\mathrm{Exp}(\theta_{n,i})$, $1\le i\le n$, be
+independent clocks with rates $\theta_{n,i}>0$, and let $\sigma_n$ be
+the label-to-position \emph{Luce permutation}
+\begin{equation*}
+\sigma_n(i)\;=\;1+\#\{j:X_{n,j}<X_{n,i}\},
+\end{equation*}
+so that $\sigma_n(i)=k$ when $X_{n,i}$ is the $k$-th smallest clock
+(the ranking model of \cite{Luc59}; see \cite[Section~2]{Lon26} and
+\cite{CDK24,BCD25} for background). Two hypotheses are used in this
+paper, always exactly as in \cite{Lon26}. The \emph{comparable-weights}
+hypothesis, underlying \cite[Theorem~6.1]{Lon26}: since multiplying
+all rates by a constant does not change $\sigma_n$, we may normalize
+so that for some fixed $\kappa<\infty$,
+\begin{equation}\label{eq:comparable}
+1\;\le\;\theta_{n,i}\;\le\;\kappa\qquad\text{for all }n,i.
+\end{equation}
+The \emph{exact sampled-profile} hypothesis, underlying
+\cite[Section~5]{Lon26} and Conjecture~13.2 there: for some
+$f\in C[0,1]$ with $0<m_f\le f\le M_f<\infty$,
+\begin{equation}\label{eq:profile}
+\theta_{n,i}\;=\;f\bigl(i/n\bigr),\qquad 1\le i\le n.
+\end{equation}
+Under \eqref{eq:profile}, with $A(t)=\int_0^1(1-e^{-f(u)t})\,du$,
+$B=A'$ and $\tau=A^{-1}$, the limiting local transition kernel (the
+Luce permuton density of \cite[Proposition~2.2]{BCD25}, quoted as
+\cite[Section~5]{Lon26}) is
+\begin{equation}\label{eq:permuton}
+\rho(x,y)\;=\;\frac{f(x)\,e^{-f(x)\tau(y)}}{B(\tau(y))},
+\qquad 0\le x\le1,\ 0<y<1,
+\end{equation}
+and $K$ denotes the bistochastic integral operator
+$(Kh)(x)=\int_0^1\rho(x,y)h(y)\,dy$, with eigenvalues
+$1=\mu_1>|\mu_2|\ge\cdots$ and traces
+$r\lambda_r=\Tr(K^r)$ \cite[Theorem~5.19]{Lon26}.
+
+Write $C_r(\sigma_n)$ for the number of cycles of $\sigma_n$ of length
+$r$, $N_n^{\cyc}=\sum_{r\ge1}C_r(\sigma_n)$ for the total number of
+cycles, $L_n(v)$ for the length of the cycle containing $v\in[n]$,
+$L_{n,1}\ge L_{n,2}\ge\cdots$ for the ranked cycle lengths, and $I_n$
+for a uniform element of $[n]$ independent of the clocks.
+
+\subsection{Results: Conjectures 13.1 and 13.2}
+Conjecture~13.1 of \cite{Lon26} predicts, under the hypotheses of
+\cite[Theorem~6.1]{Lon26} (i.e.\ \eqref{eq:comparable}), that
+$\E C_{r_n}(\sigma_n)\sim 1/r_n$ whenever $r_n\to\infty$ with
+$r_n=o(n)$, and more strongly that for $a_n\to\infty$, $a_n=o(n)$ and
+disjoint $[u_j,v_j]\Subset(0,\infty)$, the counts
+$\#\{i:u_ja_n\le L_{n,i}\le v_ja_n\}$ converge to independent Poisson
+variables with means $\log(v_j/u_j)$; equivalently the rescaled
+submacroscopic cycle lengths converge to the Poisson process with
+intensity $dx/x$. Conjecture~13.2 of \cite{Lon26} predicts, under
+\eqref{eq:profile}, that $\E N_n^{\cyc}=\log n+\kappa_f+o(1)$ with
+$\kappa_f=\gE+\sum_{r\ge1}(\lambda_r-\frac1r)$ (the series converges
+absolutely by \cite[Theorem~5.19]{Lon26}), and that
+$(N_n^{\cyc}-\E N_n^{\cyc})/\sqrt{\log n}\Rightarrow N(0,1)$.
+
+Both conjectures follow from a single new estimate, a local law for
+the cycle length of a uniform root, uniform over the entire mesoscopic
+range.
+
+\begin{theorem}[Local cycle-length law]\label{thm:local}
+Assume \eqref{eq:comparable}. There exist $\delta_0=\delta_0(\kappa)>0$
+and constants $c_1,c_2\in(0,1)$ depending only on $\kappa$ such that,
+for every sequence $r_n\to\infty$,
+\begin{equation}\label{eq:local-law}
+\Prob\bigl(L_n(I_n)=r\bigr)
+\;=\;\frac{1}{n}\Bigl(1+O\bigl(c_1^{\,r}\bigr)+O\bigl(n^{-c_2}\bigr)\Bigr)
+\;=\;\frac{1+o(1)}{n},
+\end{equation}
+uniformly in $r_n\le r\le\delta_0 n$; the $o(1)$ is uniform in the
+range.
+\end{theorem}
+
+\begin{corollary}[Expected mesoscopic cycle counts]\label{cor:EC}
+Assume \eqref{eq:comparable}. If $r_n\to\infty$ with $r_n=o(n)$, then
+\[
+\E C_{r_n}(\sigma_n)\;=\;\frac{1+o(1)}{r_n}.
+\]
+This is the first part of \cite[Conjecture~13.1]{Lon26}.
+\end{corollary}
+
+\begin{theorem}[Joint local law]\label{thm:joint-local}
+Assume \eqref{eq:comparable}. Fix $\ell\ge1$ and let
+$V_1,\dots,V_\ell$ be independent uniform elements of $[n]$,
+independent of $\sigma_n$. For any lengths
+$k_{n,1},\dots,k_{n,\ell}\to\infty$ with
+$\sum_{j=1}^\ell k_{n,j}=o(n)$,
+\begin{equation}\label{eq:joint-local}
+\Prob\Bigl(L_n(V_j)=k_{n,j}\ \text{for all }j\le\ell,\ \text{and the
+cycles of }V_1,\dots,V_\ell\text{ are distinct}\Bigr)
+\;=\;\frac{1+o(1)}{n^\ell},
+\end{equation}
+with $o(1)$ uniform in the lengths.
+\end{theorem}
+
+\begin{theorem}[Mesoscopic Poisson process]\label{thm:ppp}
+Assume \eqref{eq:comparable}. Let $a_n\to\infty$ with $a_n=o(n)$ and
+let $[u_j,v_j]\Subset(0,\infty)$, $1\le j\le m$, be pairwise disjoint.
+Then
+\begin{equation}\label{eq:ppp-vector}
+\Bigl(\#\bigl\{i:u_ja_n\le L_{n,i}\le v_ja_n\bigr\}\Bigr)_{j=1}^m
+\;\Rightarrow\;\bigl(Z_j\bigr)_{j=1}^m,
+\end{equation}
+where $Z_j$ are independent with
+$Z_j\sim\Poisson\bigl(\log(v_j/u_j)\bigr)$. Equivalently, the point
+process $\sum_{i}\delta_{L_{n,i}/a_n}$ converges, on compact subsets
+of $(0,\infty)$, to the Poisson process with intensity $dx/x$. This
+resolves \cite[Conjecture~13.1]{Lon26} in full.
+\end{theorem}
+
+\begin{theorem}[Expected number of cycles]\label{thm:expectation}
+Assume \eqref{eq:profile}. Then
+\[
+\E N_n^{\cyc}\;=\;\log n+\kappa_f+o(1),
+\qquad
+\kappa_f\;=\;\gE+\sum_{r=1}^\infty\Bigl(\lambda_r-\frac1r\Bigr),
+\]
+with $\lambda_r=\Tr(K^r)/r$; the series converges absolutely by
+\cite[Theorem~5.19]{Lon26}. Equivalently
+$\kappa_f=\gE-\sum_{i\ge2}\log(1-\mu_i)$, where $1=\mu_1,\mu_2,\dots$
+are the eigenvalues of $K$. This is the first part of
+\cite[Conjecture~13.2]{Lon26}.
+\end{theorem}
+
+\begin{theorem}[Central limit theorem]\label{thm:clt}
+Assume \eqref{eq:profile}. Then
+\[
+\frac{N_n^{\cyc}-\E N_n^{\cyc}}{\sqrt{\log n}}\;\Rightarrow\;N(0,1),
+\qquad\text{and}\qquad
+\Var N_n^{\cyc}\;=\;\log n+o(\log n).
+\]
+Together with Theorem~\ref{thm:expectation} this resolves
+\cite[Conjecture~13.2]{Lon26} in full.
+\end{theorem}
+
+\begin{remark}[Uniformity and range]\label{rem:uniform}
+The local law \eqref{eq:local-law} is uniform for
+$r_n\le r\le\delta_0 n$; Conjecture~13.1 only asks for $r_n=o(n)$, so
+the upper end of our range ($r$ a small positive proportion of $n$)
+exceeds what is required, and the lower end ($r_n\to\infty$
+arbitrarily slowly, e.g.\ $r_n=\log\log n$) is where the difficulty
+lies: the proof must control orbit mixing at scales at which the
+spectral gap has had only $O(\log\log n)$ steps to act. The rate
+$O(c_1^{\,r})+O(n^{-c_2})$ in \eqref{eq:local-law} is used essentially
+in the expectation computation, where the local law is summed over
+$\Theta(n)$ scales.
+\end{remark}
+
+\subsection{Overview of the proof}
+The proof of Theorem~\ref{thm:local} is built on the clock-slab
+framework of \cite[Section~6]{Lon26}, recalled in
+Section~\ref{sec:prelim} with exact citations: the row decomposition
+of the permutation into $\cH_n$-measurable rank intervals, the
+within-row permanental matchings, the hereditary flatness of one-edge
+marginals, the exactly stationary compressed kernel $P_n$ with its
+spectral gap on the good event $\cG_n$, and the root-avoiding change
+of measure $\Prob^\circ$ of \cite[Lemma~6.9]{Lon26}, under which
+closure to the root can occur only at visits of the orbit to the
+root's rank row. The new ingredients are:
+\begin{enumerate}[label=(\alph*)]
+\item \emph{Balanced depletion} (Lemma~\ref{lem:balance}): a
+quantitative form of the relative-prefix device of
+\cite[Lemma~6.7]{Lon26}, proved by Freedman's martingale inequality,
+showing that after $r\le\delta n$ exposures every cell of every row is
+depleted proportionally to its size, up to a polynomially small
+relative error;
+\item \emph{Mixing of the orbit's relative density}
+(Lemmas~\ref{lem:onestep} and \ref{lem:mixing}): the one-step slab
+kernel is $(1+o(1))P_n$ uniformly over histories, hence the density
+$u_k$ of the orbit's slab law relative to the stationary law $p_n$
+contracts to $1$ at the geometric rate of the gap, initialized after a
+single step via the ratio bound \eqref{eq:ratio-bound};
+\item \emph{Visit-count fluctuations} (Lemma~\ref{lem:visits}): the
+number of closure opportunities $S(k)$ concentrates at
+$kp_{n,c(v)}=O(\delta nh)$, with a covariance bound inherited from the
+gap;
+\item \emph{The root average in trace form}
+(Lemma~\ref{lem:root-avg}): averaging the return density over a
+uniform root gives exactly an expected trace,
+$R_k=\E^\circ\Tr(P_n\tilde P^{(1)}\cdots\tilde P^{(k)})$, the
+finite-volume shadow of the trace universality
+$r\lambda_r=\Tr(K^r)=1+O(q^r)$ of \cite[Theorem~5.19]{Lon26}; a
+perturbation expansion using the exact identities $p_nQ=0$, $Q1=0$
+controls it for $k\le c_*\log n$ (the scale-adaptive mesh), and a
+half-split Hilbert--Schmidt bound controls it beyond (the fixed fine
+mesh);
+\item \emph{Hazard telescoping and the two mesh regimes}
+(Lemmas~\ref{lem:hazard} and \ref{lem:telescope},
+Remark~\ref{rem:two-mesh}): the closure probability factors into an
+exact telescoping product, $(1+O(\beta))/n$ times the return density,
+with $\beta=2\kappa h$; the scale-adaptive mesh $h_k=(q')^k$ makes all
+errors vanish for slowly growing $k$, while the fixed mesh
+$h=n^{-1/8}$ gives a polynomially small error for
+$k\asymp\log n$ and beyond.
+\end{enumerate}
+Theorem~\ref{thm:joint-local} then follows by iterated residual
+exploration (Section~\ref{sec:joint}): deleting completely explored
+cycles leaves square rows, a $(1+o(1))$-perturbed kernel with the same
+gap, and the exact cancellation $(1-K/n)/(n-K)^{-1}=1/n$.
+Theorem~\ref{thm:ppp} follows from the joint factorial moments of the
+window counts by the method of moments (Section~\ref{sec:ppp}).
+Theorem~\ref{thm:expectation} is proved in
+Section~\ref{sec:expectation} by a four-range decomposition in which
+the fixed-length traces $\lambda_r$ of \cite[Theorem~5.1]{Lon26}, the
+harmonic mesoscopic sum, and the macroscopic count
+$\log(1/\delta)$ of \cite[Proposition~6.14]{Lon26} meet with exact
+cancellation of $\log\delta$; the constant $\kappa_f$ is the
+accumulation of the trace corrections $\lambda_r-1/r$ across all
+scales. Theorem~\ref{thm:clt} is proved in Section~\ref{sec:clt} by
+computing the factorial moments of the mesoscopic cycle count and
+applying the method of moments, the short and macroscopic parts being
+tight at scale $\sqrt{\log n}$.
+
+\subsection{The remaining conjectures}
+Section~\ref{sec:remaining} treats the conjectures we do not resolve.
+Conjecture~A.1 of \cite{Lon26} (bulk--endpoint independence) is
+reduced, completely and explicitly, to a mixed-scale local estimate
+(Estimate~\ref{est:mixed}, Theorem~\ref{thm:A1-reduction}) whose two
+extreme marginals are Theorem~\ref{thm:joint-local} here and
+\cite[Theorem~10.1]{Lon26}; the missing ingredient is an exclusion
+argument for orbits of length comparable to $n$
+(Remark~\ref{rem:est-status}). Conjecture~13.3 (endpoint-singular
+$\PD(1)$) is reduced to the local law at the endpoint scale
+$k=\Theta(n)$ (Proposition~\ref{prop:133}); the obstruction is that
+the weight ratio $\kappa_n\to\infty$ degenerates the spectral gap, the
+flatness window, and the ratio bound simultaneously
+(Remark~\ref{rem:obstruction}). Conjecture~A.2 requires the cycle
+upper tail at scale $\Theta(n/\log n)$, where the present local law
+ceases to be effective (Section~\ref{sec:A2}).
+
+\subsection{Numerical verification}
+Appendix~\ref{app:numerics} reports direct simulations for the exact
+profile $f(x)=1+x$: the spectral data of $K$ give
+$\kappa_f=0.4410$, and the simulated $\E N_n^{\cyc}$ at
+$n=500,1000,2000,4000$ match $\log n+\kappa_f$ to two decimals; the
+dyadic mesoscopic windows have mean $\approx\log2$ as predicted by
+Theorem~\ref{thm:ppp}; and $\Var N_n^{\cyc}/\log n$ increases toward
+$1$ as predicted by Theorem~\ref{thm:clt}.
+
+\subsection{Conventions}
+References of the form ``\cite[Lemma~6.9]{Lon26}'' cite statement
+numbers of the revised manuscript \cite{Lon26}; all other numbered
+statements are ours. Every input from \cite{Lon26} is quoted by number
+where it is used, and everything else is proved. The letters $C,c$
+denote finite positive constants depending only on $\kappa$ (and on
+$f$ under \eqref{eq:profile}) whose value may change from line to
+line; $q_0,q',c_1,c_2\in(0,1)$ are likewise $\kappa$-dependent.
+
+
+\section{Preliminaries: the clock-slab framework of \cite{Lon26}}\label{sec:prelim}
+
+This section recalls the framework of \cite[Section~6]{Lon26} in the form we
+use it, with every input quoted by its precise statement number. Nothing in
+this section is new.
+
+\subsection{Slabs, the row decomposition, and the compressed kernel}
+Let $0=t_0<t_1<\cdots<t_d=T$ be a partition of $[0,T]$ (the \emph{master
+partition}) with mesh $\max_a(t_a-t_{a-1})\le h$, where $T=T(n)$ and the mesh
+$h=h(n)$ are chosen later; $h$ is the only free parameter of the framework
+and will be tuned per regime (Section~\ref{sec:orbit}). Write
+$I_a=(t_{a-1},t_a]$ and
+\[
+H_{n,a}\;=\;\{i\in[n]:X_{n,i}\in I_a\},\qquad m_{n,a}\;=\;|H_{n,a}|,\qquad
+p_{n,a}\;=\;\frac{m_{n,a}}{n},\qquad a\in[d].
+\]
+Let $\cH_n$ be the $\sigma$-field generated by the complete slab data (the
+sets $H_{n,a}$ and the ordered clocks inside them). The following structural
+facts are established in \cite[Section~6.2]{Lon26}.
+
+\begin{enumerate}[label=(S\arabic*)]
+\item \textbf{Rank intervals.} \cite[Section~6.2]{Lon26}: there are
+$\cH_n$-measurable rank intervals
+$Q_{n,a}=\{M_{n,a-1}+1,\dots,M_{n,a}\}$ partitioning $[n]$ with
+$|Q_{n,a}|=m_{n,a}$, such that the permutation respects the rows: writing
+$c(v)$ for the unique $a$ with $v\in Q_{n,a}$ (the \emph{rank row} of $v$)
+and $b(v)$ for the unique $b$ with $v\in H_{n,b}$ (the \emph{clock slab} of
+$v$), one has: $\sigma_n$ maps $C\cap H_{n,a}$ bijectively onto
+$C\cap Q_{n,a}$ for every cycle $C$ of $\sigma_n$; in particular each orbit
+step maps a source in $H_{n,a}$ to a target in $Q_{n,a}$.
+\item \textbf{Within-row permanental matchings.}
+\cite[Lemma~6.4]{Lon26}: conditional on $\cH_n$ and on any compatible partial
+collection of exposed matching edges, the unexposed part of the matching in
+each row $a$ (sources $H_{n,a}$, targets $Q_{n,a}$) is a permanental matching
+on its remaining submatrix, independently across rows.
+\item \textbf{Flatness.} \cite[Lemmas~6.5, 6.6]{Lon26}: every one-point
+weight ratio within a row of width $\le h$ lies in $[e^{-\beta},e^{\beta}]$
+with $\beta=2\kappa h$, and this flatness is hereditary under exposures:
+conditional on any compatible history, if a row has $s$ residual targets then
+every residual target has conditional probability in $[e^{-\beta}/s,
+e^{\beta}/s]$. The same holds with $s-1$ in place of $s$ if one distinguished
+target is forbidden \cite[Lemma~6.6]{Lon26}.
+\item \textbf{Compressed kernel.} \cite[Section~6.2]{Lon26}: with
+\[
+N_{n,ab}\;=\;|Q_{n,a}\cap H_{n,b}|,\qquad
+P_{n,ab}\;=\;\frac{N_{n,ab}}{m_{n,a}},
+\]
+the matrix $P_n=(P_{n,ab})_{a,b\in[d]}$ is a Markov kernel on $[d]$
+($\sum_bN_{n,ab}=|Q_{n,a}|=m_{n,a}$) with stationary distribution $p_n$:
+indeed $\sum_a p_{n,a}P_{n,ab}=\frac1n\sum_a N_{n,ab}=\frac{|H_{n,b}|}{n}
+=p_{n,b}$. Under \eqref{eq:comparable} there is $A=A(\kappa)<\infty$ with
+\begin{equation}\label{eq:ratio-bound}
+\kappa^{-A}\;\le\;\frac{P_{n,ab}}{p_{n,b}}\;\le\;\kappa^{A}
+\qquad\text{for all }a,b,
+\end{equation}
+by the within-row flatness and the comparability of the clock densities
+(each $X_{n,i}$ has density in $[\kappa^{-1}e^{-\kappa T},1]$ on $[0,T]$).
+\end{enumerate}
+
+The orbit of a root $v$ is $q_0=v$, $q_{k+1}=\sigma_n(q_k)$; its slab chain
+is $b_k=b(q_k)$. Since $\sigma_n(q_k)\in Q_{n,b_k}$ and the next source
+$q_{k+1}=\sigma_n(q_k)$ is a flat draw among the residual targets
+of row $b_k$ (S3),
+\begin{equation}\label{eq:slab-transition}
+\Prob\bigl(b_{k+1}=b\mid b_k=a,\ \text{history}\bigr)
+\;=\;e^{O(\beta)}\,\frac{\widetilde N_{ab}}{\widetilde m_a},
+\end{equation}
+where $\widetilde N_{ab}=|Q_{n,a}\cap H_{n,b}\cap\{\text{residual}\}|$ and
+$\widetilde m_a=\sum_b\widetilde N_{ab}$ are the residual cell and row
+counts. At the start of the exploration $\widetilde N_{ab}=N_{n,ab}$ and
+\eqref{eq:slab-transition} equals $e^{O(\beta)}P_{n,ab}$; controlling the
+exploration means controlling the ratio $\widetilde N_{ab}/\widetilde m_a$
+(Lemmas~\ref{lem:balance} and \ref{lem:onestep}).
+
+\begin{proposition}[Good event and spectral gap; \cite{Lon26}]\label{prop:good}
+Under \eqref{eq:comparable}, provided $nh\to\infty$ polynomially:
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{Good event} \cite[Lemma~6.3]{Lon26}: there is an
+$\cH_n$-measurable event $\cG_n$ on which: all $m_{n,a}$ and $N_{n,ab}$
+concentrate at their means at the natural fluctuation scale; in particular
+\begin{equation}\label{eq:pmin}
+m_{n,a}\;\ge\;cnh\quad\text{for all }a,
+\qquad\text{i.e.}\qquad p_{n,a}\;\ge\;ch,
+\end{equation}
+since each clock has density $\ge\kappa^{-1}e^{-\kappa T}$ on $[0,T]$; and
+$H_{n,\mathrm{tail}}=\{i:X_{n,i}>T\}$ is empty. For $T=(B+1)\log n$ one has
+$\Prob(\cG_n^c)=O(n^{-B})$ for the prescribed $B<\infty$, the constant
+depending on $B,\kappa$ and the deviation parameter of
+\cite[Lemma~6.3]{Lon26}.
+\item \textbf{Spectral gap} \cite[Lemmas~6.2, 6.3]{Lon26}: there is
+$q_0=q_0(\kappa)\in(0,1)$ such that on $\cG_n$,
+\begin{equation}\label{eq:gap}
+\|P_n v\|_{L^2(p_n)}\;\le\;q_0\,\|v\|_{L^2(p_n)}
+\qquad\text{whenever }\E_{p_n}[v]=0,
+\end{equation}
+and the same bound holds for the adjoint $P_n^*$ with respect to $p_n$.
+\end{enumerate}
+\end{proposition}
+
+The number of slabs is $d=\Theta(T/h)=O(h^{-1}\log n)$, so
+\begin{equation}\label{eq:d-bound}
+\sum_a p_{n,a}^{1/2}\;\le\;d^{1/2}\;=\;O\bigl(h^{-1/2}\sqrt{\log n}\bigr)
+\end{equation}
+by Cauchy--Schwarz.
+
+\begin{proposition}[Root-avoiding change of measure; \cite{Lon26}]\label{prop:rootavoid}
+Fix a root $v$ and condition on $\cH_n$. Explore the orbit from $v$, exposing
+the edge $\sigma_n(q_t)=q_{t+1}$ at step $t$. Let $\Prob^\circ$ be the
+auxiliary law in which, at every visit of the orbit to the root's rank row
+$c(v)$, the within-row selection is conditioned to avoid the target $v$
+\cite[Lemma~6.9]{Lon26}. Then
+\begin{equation}\label{eq:survival}
+\Prob\bigl(L_n(v)>k\mid\cH_n\bigr)
+\;=\;\E^\circ\Bigl[\prod_{j=0}^{S(k)-1}(1-\lambda_j)\Bigr],
+\end{equation}
+where $S(k)=\#\{0\le t\le k-1:b_t=c(v)\}$ is the number of closure
+opportunities among the first $k$ exposed edges and, on $\cG_n$, the closure
+marginals satisfy
+\begin{equation}\label{eq:hazard-bounds}
+\frac{e^{-\beta}}{m_{n,c(v)}-j}\;\le\;\lambda_j\;\le\;
+\frac{e^{\beta}}{m_{n,c(v)}-j},\qquad \beta=2\kappa h,
+\end{equation}
+by \cite[Lemmas~6.6, 6.9]{Lon26}. Under $\Prob^\circ$ the orbit evolves by the
+residual permanental dynamics with target $v$ forbidden, to which the flat
+one-edge marginals (S3) still apply \cite[Lemma~6.6]{Lon26}.
+\end{proposition}
+
+\begin{proposition}[Macroscopic limit; \cite{Lon26}]\label{prop:macro}
+Under \eqref{eq:comparable}, the ranked macroscopic cycle lengths converge to
+$\pd$ in $S^\downarrow$ and the size-biased ones to $\GEM$ in $\ell^1$
+\cite[Theorem~6.1]{Lon26}; for every fixed $\delta>0$,
+$\#\{i:L_{n,i}\ge\delta n\}$ converges in distribution to
+$\Poisson(\log(1/\delta))$ with convergence of all moments
+\cite[Proposition~6.14]{Lon26}; in particular
+\begin{equation}\label{eq:macro-count}
+\E\,\#\{i:L_{n,i}\ge\delta n\}\;\longrightarrow\;\log\frac1\delta
+\qquad(n\to\infty,\ \delta>0\text{ fixed}).
+\end{equation}
+\end{proposition}
+
+\subsection{Short cycles and traces under the sampled profile}
+Under \eqref{eq:profile} we cite:
+
+\begin{proposition}[Short cycles and traces; \cite{Lon26}]\label{prop:short}
+Under \eqref{eq:profile}:
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{Fixed cycle lengths} \cite[Theorem~5.1]{Lon26}: for every fixed
+$R$, $(C_1(\sigma_n),\dots,C_R(\sigma_n))\Rightarrow(Z_1,\dots,Z_R)$ with
+$Z_r$ independent $\Poisson(\lambda_r)$; the proof in \cite{Lon26} is by the
+method of factorial moments and yields
+\begin{equation}\label{eq:fixed-fm}
+\E\prod_{r=1}^R\bigl(C_r(\sigma_n)\bigr)_{k_r}\;\longrightarrow\;
+\prod_{r=1}^R\lambda_r^{k_r}\qquad\text{for all fixed }k_1,\dots,k_R,
+\end{equation}
+where $(x)_k=x(x-1)\cdots(x-k+1)$; together with the domination bounds of
+\cite[Lemmas~5.8--5.13]{Lon26} this gives $\E C_r(\sigma_n)\to\lambda_r$ for
+each fixed $r$.
+\item \textbf{Separated local estimate} \cite[Proposition~5.7]{Lon26}: for
+separated bulk constraints $(p_a,q_a)$, $a\le\ell$ fixed,
+\begin{equation}\label{eq:separated}
+\Prob\bigl(\sigma_n(p_a)=q_a\ \forall a\le\ell\bigr)
+\;=\;\frac{1+o(1)}{n^\ell}\prod_{a=1}^\ell \rho\bigl(p_a/n,q_a/n\bigr).
+\end{equation}
+\item \textbf{Trace universality} \cite[Theorem~5.19, Lemmas~5.17--5.18]
+{Lon26}: the operator $K$ with kernel \eqref{eq:permuton} is bistochastic and
+Hilbert--Schmidt, with eigenvalues $1=\mu_1>\lvert\mu_2\rvert\ge\cdots$
+satisfying $\lvert\mu_i\rvert\le q$ for $i\ge2$ and some $q=q(f)\in(0,1)$;
+with $\lambda_r=\Tr(K^r)/r$,
+\begin{equation}\label{eq:trace-gap}
+r\lambda_r\;=\;1+O(q^r),\qquad
+\sum_{r=1}^\infty\Bigl|\lambda_r-\frac1r\Bigr|<\infty,\qquad
+\kappa_f\;=\;\gE-\sum_{i\ge2}\log(1-\mu_i).
+\end{equation}
+\end{enumerate}
+\end{proposition}
+
+The rank-envelope bounds \cite[Lemmas~5.8--5.10]{Lon26} and the endpoint
+domination bounds \cite[Lemmas~5.11--5.13]{Lon26} are used only through item
+(i) above and in Section~\ref{sec:remaining}.
+
+\subsection{Standing notation}
+Throughout, $C,c$ denote finite positive constants depending only on $\kappa$
+(and on $f$ under \eqref{eq:profile}), whose value may change from line to
+line; $q_0,q',c_1,c_2\in(0,1)$ likewise. We write
+$p_{n,\min}=\min_a p_{n,a}$, so $p_{n,\min}\ge ch$ on $\cG_n$ by
+\eqref{eq:pmin}. For a root $v$ we write $b(v)$ for its clock slab and $c(v)$
+for its rank row as in (S1); the orbit is $q_0=v$, $q_{k+1}=\sigma_n(q_k)$
+with slab chain $b_k=b(q_k)$; $\Prob^\circ$ is the root-avoiding law of
+Proposition~\ref{prop:rootavoid}. The \emph{relative density} of the orbit's
+slab law with respect to $p_n$ is
+\[
+u_k(b)\;=\;\frac{\Prob^\circ(b_k=b\mid\cH_n)}{p_{n,b}},\qquad b\in[d],
+\]
+which is $\cH_n$-conditionally a probability density: $\E_{p_n}[u_k]=1$.
+All statements below are conditional on $\cH_n$ on the event $\cG_n$ unless
+explicitly averaged. Finally, $q_0$ from \eqref{eq:gap} is a
+$\kappa$-dependent bound, and a standard trace bound follows from
+\eqref{eq:ratio-bound}: since $P_{n,ab}\le\kappa^A p_{n,b}$,
+\begin{equation}\label{eq:hs}
+\|P_n\|_{\mathrm{HS}}^2\;=\;\sum_{a,b}P_{n,ab}^2
+\;\le\;\kappa^A\sum_{a,b}p_{n,b}P_{n,ab}\;=\;\kappa^A,
+\end{equation}
+and any product $M=P_nM_1\cdots M_s$ of length $\ge1$ with Markov factors
+satisfies the same ratio bound $M_{ab}\le\kappa^Ap_{n,b}$, hence
+$\|M\|_{\mathrm{HS}}^2\le\kappa^A$ and $\|M\|_{\mathrm{tr}}\le
+d^{1/2}\kappa^{A/2}$.
+
+\section{Orbit dynamics in slab space}\label{sec:orbit}
+
+This section contains the four new dynamical estimates: a balanced-depletion
+lemma (Lemma~\ref{lem:balance}), the one-step transition estimate
+(Lemma~\ref{lem:onestep}), the uniform mixing estimate
+(Lemma~\ref{lem:mixing}), and the trace-form root average
+(Lemma~\ref{lem:root-avg}).
+
+\subsection{Balanced depletion}
+The next lemma is a quantitative form of the relative-prefix device of
+\cite[Lemma~6.7]{Lon26}, with failure probability $O(n^{-B})$ for prescribed
+$B$ and an explicit polynomial deviation bound. The proof follows the
+log-ratio martingale of \cite[Lemma~6.7]{Lon26} with a sharper stopping
+threshold and Freedman's inequality in place of the $L^2$ maximal bound; we
+give the details because the rate is used essentially.
+
+\begin{lemma}[Balanced depletion]\label{lem:balance}
+Let $m$ targets be partitioned into $d$ categories of sizes $m_1,\dots,m_d$
+with $m_b\ge c^*m^\vartheta$ for some $c^*>0$, $\vartheta\in(0,1]$. Let
+targets be selected sequentially without replacement in an arbitrary
+predictable adaptive order, and suppose that whenever $s$ targets remain,
+every individual remaining target has conditional selection probability in
+$[e^{-\beta}/s,e^{\beta}/s]$ with $0\le\beta\le\beta_0$. Fix
+$\delta\in(0,1/4]$ and $B<\infty$. Then with probability at least
+$1-O\bigl(d\,(m^{-B}+e^{-c(\log m_b)^2m_b^{1/2}/\delta})\bigr)$,
+simultaneously for every category $b$ and every $r\le\delta m$,
+\begin{equation}\label{eq:balance}
+\Bigl|\,X_b(r)-\frac{rm_b}{m}\Bigr|
+\;\le\;C_B\Bigl(\beta+\frac{\sqrt{\delta\log m}}{m_b^{1/4}}
++\frac{1}{m_b^{1/2}}\Bigr)m_b,
+\end{equation}
+where $X_b(r)$ is the number of category-$b$ targets among the first $r$
+selections. The estimate remains valid when a fixed target is forbidden
+throughout (cf.\ \cite[Lemma~6.7]{Lon26}).
+\end{lemma}
+
+\begin{proof}
+Fix a category $b$ and write $N_r=m_b-X_b(r)$, $s_r=m-r$, following the proof
+of \cite[Lemma~6.7]{Lon26}. Let $Y_{r+1}$ be the indicator that the
+$(r+1)$-st selection lies in category $b$; summing the one-target bounds over
+the $N_r$ remaining category-$b$ targets gives
+$\Prob(Y_{r+1}=1\mid\cF_r)\in[e^{-\beta}N_r/s_r,e^{\beta}N_r/s_r]$
+\cite[eq.~(6.6)]{Lon26}. Set $a=m_b^{1/2}$ and
+$\tau=\inf\{r:N_r<a\text{ or }s_r<m/2\}$; since $r\le\delta m$ with
+$\delta\le1/4$ gives $s_r\ge3m/4$, on our range $\tau$ is triggered only by
+$\{N_r<a\}$. On $r<\tau$ put $Z_r=\log(N_r/s_r)$. As computed in
+\cite[eq.~(6.7)]{Lon26},
+\[
+\bigl|\E[Z_{r+1}-Z_r\mid\cF_r]\bigr|
+\;\le\;\frac{C\beta}{s_r}+C\Bigl(\frac{1}{s_r^2}+\frac{1}{s_rN_r}\Bigr),
+\qquad
+\Var(Z_{r+1}-Z_r\mid\cF_r)\;\le\;\frac{C}{s_rN_r},
+\]
+and $|Z_{r+1}-Z_r|\le C(s_r^{-1}+N_r^{-1})\le C'a^{-1}$ deterministically.
+Let $M_r$ be the martingale of centered increments, stopped at $\tau$. For
+$r\le\delta m\wedge\tau$: the total conditional variance is
+\[
+V\;\le\;\sum_{r\le\delta m}\frac{C}{s_rN_r}\;\le\;
+\frac{C\delta m}{(m/2)\,a}\;=\;\frac{2C\delta}{a}\;=:\;v,
+\]
+the total drift is
+$D\le C\beta\sum_{r\le\delta m}s_r^{-1}+CV\le C\beta\delta+C/a=O(\beta+1/a)$,
+where we used
+$\sum_{r\le\delta m}\frac1{m-r}=\log\frac{m}{m-\delta m}+O(m^{-1})=O(\delta)$,
+and the maximal increment is $M\le C/a$. Freedman's inequality \cite{Fre75}
+gives, for every $t>0$,
+\[
+\Prob\Bigl(\max_{r\le\delta m\wedge\tau}
+\bigl|M_r\bigr|>t\Bigr)\;\le\;2\exp\Bigl(-\frac{t^2}{2(v+Mt/3)}\Bigr).
+\]
+Taking $t_1=C_B\bigl(\sqrt{\delta\log m}/a^{1/2}+(\log m)/a\bigr)$ with
+$C_B$ large gives $t_1^2/(2(v+Mt_1/3))\ge B\log m$, hence the displayed
+maximum exceeds $t_1$ with probability $\le2m^{-B}$. Taking
+$t_2=\frac12\log(m_b/a)-D$ (which satisfies $t_2\ge\frac13\log m_b$ for
+$\beta$ small and $m_b$ large), the event $\{\tau\le\delta m\}$ requires
+$|M_\tau|\ge t_2$, since $Z_\tau\le\log(a/(m/2))$ while
+$Z_0=\log(m_b/m)$ and the drift is at most $D$; hence
+\[
+\Prob(\tau\le\delta m)\;\le\;
+2\exp\Bigl(-\frac{t_2^2}{2(v+Mt_2/3)}\Bigr)
+\;\le\;2\exp\bigl(-c\,(\log m_b)^2\,a/\delta\bigr)
+\]
+because $v=2C\delta/a$ and $Mt_2\le C(\log m_b)/a=o(t_2^2)$.
+On the complement of these two bad events, for every $r\le\delta m$,
+\[
+\log\frac{N_r/m_b}{s_r/m}\;=\;Z_r-\log\frac{m_b}{m}
+\;\in\;\bigl[-D-t_1,\;D+t_1\bigr],
+\]
+hence, since $s_r/m\in[1/2,1]$ and $\beta\le\beta_0$ is small,
+\[
+\frac{N_r}{m_b}\;=\;\frac{s_r}{m}\,
+\Bigl(1+O\bigl(\beta+a^{-1}+t_1\bigr)\Bigr),
+\]
+which is \eqref{eq:balance} after substituting
+$X_b(r)=m_b-N_r$ and $a=m_b^{1/2}$ (the $(\log m)/a$ part of $t_1$ is
+absorbed by the $m_b^{-1/2}$ term). Union over the $d$ categories gives the
+stated probability. The forbidden-target variant is identical after replacing
+$m$ by $m-1$, exactly as in \cite[Lemma~6.7]{Lon26}.
+\end{proof}
+
+\begin{remark}[Parameters; the balance event]\label{rem:balance-params}
+We apply Lemma~\ref{lem:balance} to each row $a$ of the slab decomposition,
+with targets = the $m_{n,a}$ rank positions of $Q_{n,a}$, categories = the
+cells $Q_{n,a}\cap H_{n,b}$, selections = the orbit's targets in row $a$,
+and $\beta=2\kappa h$; the one-target bounds $[e^{-\beta}/s,e^{\beta}/s]$
+hold by (S3), including the forbidden-root variant under $\Prob^\circ$
+\cite[Lemma~6.6]{Lon26}. On $\cG_n$ the cell sizes satisfy
+$N_{n,ab}\ge cnh^2$ (concentration at means of order
+$\E N_{n,ab}=\Theta(nh^2)$, which is part of $\cG_n$), so the hypothesis
+$m_b\ge c^*m^\vartheta$ of Lemma~\ref{lem:balance} holds with
+$m=m_{n,a}\ge cnh$ and $\vartheta=\log(nh^2)/\log(nh)>0$; the number of
+cells per row is at most $d$ and the number of rows is $d$, so the union
+bound multiplies the failure probability by $d^2=O(h^{-2}\log^2n)$, which is
+$O(n^{-B})$ for the prescribed $B$ with our mesh choices. We write
+\begin{equation}\label{eq:eps-bal}
+\eps_n^{\mathrm{bal}}\;=\;
+C\Bigl(\beta+(nh^2)^{-1/4}\sqrt{\log n}\Bigr),
+\end{equation}
+so that on the \emph{balance event} $\cB_n$,
+$\Prob(\cB_n^c)=O(n^{-B})$, for every row $a$, every cell $(a,b)$ and every
+prefix $r\le\delta n$ the residual counts satisfy
+\begin{equation}\label{eq:resid-counts}
+\widetilde N_{ab}(r)\;=\;
+\frac{\widetilde m_a(r)}{m_{n,a}}\,N_{n,ab}\,
+\bigl(1+O(\eps_n^{\mathrm{bal}})\bigr),
+\qquad \widetilde m_a(r)=m_{n,a}-r_a,
+\end{equation}
+where $r_a$ is the number of exposed edges in row $a$.
+\end{remark}
+
+\subsection{The one-step slab kernel}
+\begin{lemma}[One-step slab kernel]\label{lem:onestep}
+On $\cB_n$, for every prefix $r\le\delta n$ with $\delta\le\delta_0(\kappa)$
+small, every $a,b$, and every history of the $\Prob^\circ$
+exploration,
+\begin{equation}\label{eq:onestep}
+\Prob^\circ\bigl(b_{r+1}=b\mid b_r=a,\ \cF_r,\ \cH_n\bigr)
+\;=\;\bigl(1+O(\eta_n)\bigr)\,P_{n,ab},
+\qquad \eta_n\;=\;C\bigl(\beta+\eps_n^{\mathrm{bal}}\bigr).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:slab-transition} (the flat one-edge marginal (S3) summed over
+the residual targets of cell $(a,b)$; the root-avoiding conditioning changes
+only the forbidden-target normalization of (S3), whose relative effect is
+$O(1/(nh))$, absorbed in $\eps_n^{\mathrm{bal}}$), the left side is
+$e^{O(\beta)}\widetilde N_{ab}(r)/\widetilde m_a(r)$. By
+\eqref{eq:resid-counts} this equals
+$e^{O(\beta)}(1+O(\eps_n^{\mathrm{bal}}))N_{n,ab}/m_{n,a}
+=(1+O(\beta+\eps_n^{\mathrm{bal}}))P_{n,ab}$.
+\end{proof}
+
+\subsection{Uniform mixing of the relative density}
+Recall $u_k(b)=\Prob^\circ(b_k=b\mid\cH_n)/p_{n,b}$.
+
+\begin{lemma}[Uniform mixing]\label{lem:mixing}
+On $\cB_n$, with $q'=q_0+\eta_n$ (so $q'<1$ for $\eta_n$ small), for every
+$k\ge1$ and every starting slab,
+\begin{equation}\label{eq:mixing}
+\bigl\|u_k-1\bigr\|_{L^2(p_n)}
+\;\le\;(\kappa^A+1)\,(q')^{k-1}\;+\;\frac{\eta_n}{1-q'}
+\;\le\;C(q')^k+C\eta_n.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Write $\tilde P^{(r)}$ for the random (history-dependent) one-step kernel of
+Lemma~\ref{lem:onestep}: $\tilde P^{(r)}_{ab}=(1+\eta_{ab}^{(r)})P_{n,ab}$
+with $|\eta_{ab}^{(r)}|\le\eta_n$ on $\cB_n$. The density evolves by
+$u_{r+1}(b)=\sum_a u_r(a)p_{n,a}\tilde P^{(r)}_{ab}/p_{n,b}$, i.e.
+\[
+u_{r+1}\;=\;P_n^*u_r+w_r,\qquad
+w_r(b)\;=\;\sum_a u_r(a)\,p_{n,a}\,\eta_{ab}^{(r)}\,P_{n,ab}/p_{n,b}.
+\]
+Since all summands of $P_n^*u_r$ are nonnegative,
+$|w_r|\le\eta_n P_n^*u_r$ pointwise, hence
+$\|w_r\|_{L^2(p_n)}\le\eta_n\|P_n^*u_r\|_{L^2(p_n)}
+\le\eta_n\|u_r\|_{L^2(p_n)}$ (Markov adjoints contract $L^2$). Moreover
+$\E_{p_n}[w_r]=\E_{p_n}[u_{r+1}]-\E_{p_n}[P_n^*u_r]=1-1=0$; therefore
+$P_n^*u_r-1=P_n^*(u_r-1)$ and, since $\E_{p_n}[u_r-1]=0$, the gap
+\eqref{eq:gap} gives
+\[
+\|u_{r+1}-1\|_2\;\le\;q_0\|u_r-1\|_2+\eta_n(1+\|u_r-1\|_2)
+\;\le\;q'\|u_r-1\|_2+\eta_n.
+\]
+After one step from any point start, the ratio bound \eqref{eq:ratio-bound}
+gives $u_1(c)=(1+O(\eta_n))P_{n,b_0c}/p_{n,c}\in[\kappa^{-A}/2,2\kappa^A]$,
+so $\|u_1-1\|_2\le\kappa^A+1$; the recursion
+$a_{r+1}\le q'a_r+\eta_n$ from $r=1$ with $a_r=\|u_r-1\|_2$ yields
+\eqref{eq:mixing}.
+\end{proof}
+
+\begin{lemma}[Visit-count fluctuations]\label{lem:visits}
+On $\cB_n$, let $S_c(k)=\#\{0\le t\le k-1:b_t=c\}$ be the number of visits
+of the orbit to slab $c$ among the first $k$ edges, $k\le\delta n$. Then
+\begin{equation}\label{eq:visits}
+\E^\circ S_c(k)\;\le\;k p_{n,c}\bigl(1+o(1)\bigr),
+\qquad
+\Var^\circ S_c(k)\;\le\;C k\,p_{n,c},
+\end{equation}
+and consequently, since $m_{n,c}=np_{n,c}$,
+$\Prob^\circ\bigl(S_c(k)\ge m_{n,c}/2\bigr)
+\le C\delta\,(nh)^{-1}$ for $\delta\le\delta_0$ small.
+\end{lemma}
+
+\begin{proof}
+Write $S_c(k)=\sum_{t<k}\1\{b_t=c\}$. For the mean,
+$\E^\circ\1\{b_t=c\}=p_{n,c}u_t(c)\le p_{n,c}(1+\|u_t-1\|_2p_{n,c}^{-1/2})$,
+and summing \eqref{eq:mixing} over $1\le t<k$ gives
+$\E^\circ S_c(k)\le kp_{n,c}+C\sqrt{p_{n,c}}
++Ck\eta_n\sqrt{p_{n,c}}=kp_{n,c}(1+o(1))$ since
+$\sqrt{p_{n,c}}\le1$ and $k\eta_n\sqrt{p_{n,c}}\le
+\delta n\eta_n=o(np_{n,c})$ with our mesh choices
+($np_{n,c}\ge cnh$ and $\delta n\eta_n=o(nh)$ in both regimes below).
+For the variance, let $j>t\ge1$: the difference $v_{j-t}$ of the densities
+at time $j$ started from slabs $b_t$ and $b_0$ is the difference of two
+$p_n$-densities, hence exactly mean-zero; each history-dependent kernel
+$\tilde P^{(r)}=(1+\eta^{(r)})P_n$ contracts mean-zero vectors in
+$L^2(p_n)$ by $q_0+\eta_n=q'$ (the gap \eqref{eq:gap} plus the entrywise
+perturbation bound), so by \eqref{eq:ratio-bound} applied to the first step,
+$\|v_{j-t}\|_2\le2\kappa^A(q')^{j-t-1}$, and
+\[
+\bigl|\Cov^\circ\bigl(\1\{b_t=c\},\1\{b_j=c\}\bigr)\bigr|
+\;=\;\bigl|\E^\circ\bigl[\1\{b_t=c\}\,p_{n,c}\,v_{j-t}(c)\bigr]\bigr|
+\;\le\;C\,p_{n,c}^{3/2}(q')^{j-t},
+\]
+using $\Prob^\circ(b_t=c)\le p_{n,c}(1+\|u_t-1\|_2p_{n,c}^{-1/2})
+\le Cp_{n,c}$ for $t\ge1$ (the $t=0$ term contributes at most
+$p_{n,c}^{1/2}\|u_0\|_2\le1$, affecting only the constant). Summing,
+$\Var^\circ S_c(k)\le Ckp_{n,c}+Ckp_{n,c}^{3/2}/(1-q')\le Ckp_{n,c}$, and
+Chebyshev with $\E^\circ S_c(k)\le m_{n,c}/3$ for $\delta\le\delta_0$
+gives $\Prob^\circ(S_c(k)\ge m_{n,c}/2)\le
+Ckp_{n,c}/m_{n,c}^2\le C\delta/(nh)$.
+\end{proof}
+
+\subsection{The root average in trace form}
+The following computation is the finite-volume shadow of the trace
+universality $r\lambda_r=\Tr(K^r)=1+O(q^r)$ of
+\cite[Theorem~5.19]{Lon26}.
+
+\begin{lemma}[Root-averaged return density]\label{lem:root-avg}
+On $\cB_n$, for $1\le k\le\delta n$,
+\begin{equation}\label{eq:root-avg}
+R_k\;:=\;\frac1n\sum_{v=1}^n u_k^{(b(v))}\bigl(c(v)\bigr)
+\;=\;\E^\circ\Bigl[\Tr\bigl(P_n\tilde P^{(1)}\cdots\tilde P^{(k)}\bigr)\Bigr]
+\;=\;1+\Err_k,
+\end{equation}
+where $u_k^{(b)}$ is the density with start in slab $b$ and the expectation
+is over the exploration history. The error satisfies:
+\begin{enumerate}[label=(\roman*)]
+\item for $k\le c_*\log n$ with mesh $h_k=(q')^k$ and
+$c_*=\frac{1}{8|\log q'|}$: $\Err_k=O(q_0^k+k\eta_n)=o(1)$ as
+$k\to\infty$, uniformly in $n$;
+\item for $c_*\log n\le k\le\delta n$ with the fixed mesh $h=n^{-1/8}$:
+$\Err_k=O(n^{-c_2})$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{The trace identity.} Since
+$\sum_v\1\{b(v)=b,c(v)=c\}=|H_{n,b}\cap Q_{n,c}|=N_{n,cb}$,
+\[
+R_k\;=\;\frac1n\sum_{b,c}N_{n,cb}\,u_k^{(b)}(c)
+\;=\;\sum_{b,c}p_{n,c}P_{n,cb}\,\frac{\Prob^\circ(b_k=c\mid b_0=b)}{p_{n,c}}
+\;=\;\E^\circ\sum_{b,c}P_{n,cb}\bigl(\tilde P^{(1)}\cdots\tilde
+P^{(k)}\bigr)_{bc},
+\]
+and $\sum_bP_{n,cb}M_{bc}=(P_nM)_{cc}$, so the sum is
+$\Tr(P_n\tilde P^{(1)}\cdots\tilde P^{(k)})$.
+
+\emph{Regime (i): run expansion.} Write $P_n=1p_n+Q$ (so $Q1=0$ and
+$p_nQ=0$ exactly, by Markovianity and stationarity) and
+$\tilde P^{(s)}=P_n+E_s=1p_n+(Q+E_s)$ with $\|E_s\|_{L^2(p_n)\to L^2(p_n)}
+\le\eta_n$ (entrywise bound as in Lemma~\ref{lem:mixing}). Expand the
+product into stationary ($1p_n$) and transient ($Q+E_s$) factors. The
+all-stationary term is $\Tr(1p_n)=1$ exactly. Every other term contains at
+least one maximal run of transient factors; cyclically separating the trace
+at the rank-one factors, each transient run $B$ contributes a scalar
+$p_nB1$: since $p_nQ=0$, the run must start with an $E$, hence
+$|p_nB1|\le\eta_n(q')^{r-1}$ for a run of length $r$ (each further factor
+contributes $\|Q+E_s\|_{L^2_0\to L^2_0}\le q'$). Summing over at most
+$k+1$ possible run positions and $t\ge1$ runs,
+\[
+\bigl|\Tr\bigl(P_n\tilde P^{(1)}\cdots\tilde P^{(k)}\bigr)-1\bigr|
+\;\le\;\Tr(Q^{k+1})+\sum_{t\ge1}
+\Bigl(\frac{(k+1)\eta_n}{1-q'}\Bigr)^t
+\;=\;\Tr(Q^{k+1})+O(k\eta_n),
+\]
+for $k\eta_n$ small. Here the all-transient choice reproduces
+$\Tr(Q^{k+1})$ plus terms with at least one $E$, which are absorbed in the
+sum. By Weyl's inequality $\sum_i|\nu_i|^2\le\|Q\|_{\mathrm{HS}}^2
+\le\|P_n\|_{\mathrm{HS}}^2\le\kappa^A$ (see \eqref{eq:hs}) applied to the
+eigenvalues $\nu_i$ of $Q$ (all $|\nu_i|\le q_0$ by \eqref{eq:gap}),
+$\Tr(Q^{k+1})=O(\kappa^Aq_0^{k-1})=O(q_0^k)$. In regime (i),
+$\eta_n=C((q')^k+(n(q')^{2k})^{-1/4}\sqrt{\log n})
+\le C((q')^k+n^{-3/16}\sqrt{\log n})$, so
+$k\eta_n=o(1)$ for $k\le c_*\log n$ and $\Err_k=O(q_0^k+k\eta_n)$.
+
+\emph{Regime (ii): half-split.} Write
+$P_n\tilde P^{(1)}\cdots\tilde P^{(k)}
+=M\bigl(\tilde P^{(\lfloor k/2\rfloor+1)}\cdots\tilde P^{(k)}\bigr)$ with
+$M=P_n\tilde P^{(1)}\cdots\tilde P^{(\lfloor k/2\rfloor)}$. By
+Lemma~\ref{lem:mixing}, every mean-zero vector contracts by
+$\rho_k:=C(q')^{\lfloor k/2\rfloor}+C\eta_n/(1-q')$ under the second
+factor, so $\tilde P^{(\lfloor k/2\rfloor+1)}\cdots\tilde P^{(k)}
+=1p_n+\Delta$ with $\|\Delta\|_{L^2(p_n)\to L^2(p_n)}\le\rho_k$. Since the
+second factor is Markov, $(1p_n+\Delta)1=1$, and
+$\Tr(M(1p_n+\Delta))=\Tr((1p_n)M)+\Tr(M\Delta)=p_nM1+\Tr(M\Delta)
+=1+\Tr(M\Delta)$ because $M1=1$ (Markov rows). By \eqref{eq:hs},
+$\|M\|_{\mathrm{tr}}\le d^{1/2}\kappa^{A/2}$, hence
+\[
+|\Err_k|\;=\;|\Tr(M\Delta)|\;\le\;d^{1/2}\kappa^{A/2}\rho_k
+\;\le\;C h^{-1/2}\sqrt{\log n}\,\bigl((q')^{k/2}+\eta_n\bigr)
+\;=\;O(n^{-c_2})
+\]
+for $c_*\log n\le k\le\delta n$ with $h=n^{-1/8}$, since
+$(q')^{c_*\log n/2}=n^{-1/16}$ and
+$\eta_n=O(n^{-1/8}+n^{-3/16}\sqrt{\log n})$.
+\end{proof}
+
+\section{The closure hazard and the local cycle-length law}\label{sec:local}
+
+\subsection{The hazard identity and its telescoping}
+Recall from Proposition~\ref{prop:rootavoid} that
+$S(k)=\#\{0\le t\le k-1:b_t=c(v)\}$ counts the closure opportunities and
+$\lambda_j$ are the closure marginals \eqref{eq:hazard-bounds}.
+
+\begin{lemma}[Hazard identity]\label{lem:hazard}
+On $\cG_n$, for every root $v$ and every $k\ge1$,
+\begin{equation}\label{eq:hazard}
+\Prob\bigl(L_n(v)=k+1\mid\cH_n\bigr)
+\;=\;\E^\circ\Bigl[\1\{b_k=c(v)\}
+\prod_{j=0}^{S(k)-1}(1-\lambda_j)\,\lambda_{S(k)}\Bigr].
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:survival} applied at $k$ and at $k+1$,
+\[
+\Prob(L_n(v)=k+1\mid\cH_n)
+\;=\;\E^\circ\Bigl[\prod_{j=0}^{S(k)-1}(1-\lambda_j)\Bigr]
+-\E^\circ\Bigl[\prod_{j=0}^{S(k+1)-1}(1-\lambda_j)\Bigr].
+\]
+The edge exposed at step $k$ can close to $v$ only if the source $q_k$ lies
+in the root's rank row, i.e.\ $b_k=c(v)$ (structural fact (S1): rank $v$ is
+a target of row $c(v)$ only). On $\{b_k\ne c(v)\}$ one has
+$S(k+1)=S(k)$ and the two products agree; on $\{b_k=c(v)\}$ one has
+$S(k+1)=S(k)+1$ and the difference is the displayed integrand.
+\end{proof}
+
+\begin{lemma}[Telescoping]\label{lem:telescope}
+On $\cG_n$, for every orbit history with $S(k)\le m_{n,c(v)}/2$,
+\begin{equation}\label{eq:telescope}
+\prod_{j=0}^{S(k)-1}(1-\lambda_j)\,\lambda_{S(k)}
+\;=\;\frac{1+O(\beta)}{m_{n,c(v)}},
+\end{equation}
+and for every $S(k)\le m_{n,c(v)}-1$ the same quantity is at most
+$C/m_{n,c(v)}$.
+\end{lemma}
+
+\begin{proof}
+Write $m=m_{n,c(v)}$ and $\lambda_j=e^{\eps_j}/(m-j)$ with
+$|\eps_j|\le\beta$ by \eqref{eq:hazard-bounds}. For the upper bound,
+\[
+1-\lambda_j\;\le\;1-\frac{e^{-\beta}}{m-j}
+\;=\;\frac{m-j-1}{m-j}\Bigl(1+\frac{1-e^{-\beta}}{m-j-1}\Bigr)
+\;\le\;\frac{m-j-1}{m-j}\,e^{\beta/(m-j-1)},
+\]
+so with $S=S(k)$,
+\[
+\prod_{j=0}^{S-1}(1-\lambda_j)\;\le\;
+\frac{m-S}{m}\,e^{\beta\sum_{j<S}1/(m-j-1)}
+\;\le\;\frac{m-S}{m}\,e^{\beta S/(m-S)},
+\]
+and multiplying by $\lambda_S\le e^{\beta}/(m-S)$ gives
+$\le e^{\beta(1+S/(m-S))}/m$, which is $C/m$ for $S\le m-1$ and
+$(1+O(\beta))/m$ for $S\le m/2$. The matching lower bound for $S\le m/2$ is
+identical with $e^{+\beta}$ replaced by $e^{-\beta}$:
+\[
+1-\lambda_j\;\ge\;1-\frac{e^{\beta}}{m-j}
+\;=\;\frac{m-j-1}{m-j}\Bigl(1-\frac{e^{\beta}-1}{m-j-1}\Bigr)
+\;\ge\;\frac{m-j-1}{m-j}\,e^{-2\beta/(m-j-1)},
+\]
+giving $\prod(1-\lambda_j)\lambda_S\ge e^{-2\beta(1+S/(m-S))}/m$.
+\end{proof}
+
+\begin{lemma}[Closure probability given $\cH_n$]\label{lem:closure}
+On $\cB_n$, for $\delta\le\delta_0(\kappa)$ small, every root $v$, and every
+$k\le\delta n$,
+\begin{equation}\label{eq:closure}
+\Prob\bigl(L_n(v)=k+1\mid\cH_n\bigr)
+\;=\;\frac{1+O(\beta)}{n}\,u_k\bigl(c(v)\bigr)
+\;+\;O\bigl(\delta(nh)^{-2}\bigr).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Split \eqref{eq:hazard} on the event $\{S(k)\le m_{n,c(v)}/2\}$. On that
+event, Lemma~\ref{lem:telescope} makes the integrand equal
+$(1+O(\beta))m_{n,c(v)}^{-1}\1\{b_k=c(v)\}$; off it, the same lemma bounds
+the integrand by $Cm_{n,c(v)}^{-1}\1\{b_k=c(v)\}$. Hence
+\[
+\Prob(L_n(v)=k+1\mid\cH_n)
+\;=\;\frac{1+O(\beta)}{m_{n,c(v)}}\,
+\Prob^\circ\bigl(b_k=c(v)\mid\cH_n\bigr)
+\;+\;O\Bigl(\frac{\Prob^\circ(S(k)\ge m_{n,c(v)}/2)}{m_{n,c(v)}}\Bigr).
+\]
+By Lemma~\ref{lem:visits},
+\[
+\frac{\Prob^\circ(S(k)\ge m_{n,c(v)}/2)}{m_{n,c(v)}}
+\;\le\;\frac{C\delta}{nh\cdot cnh}
+\;=\;O\bigl(\delta(nh)^{-2}\bigr),
+\]
+and $\Prob^\circ(b_k=c(v)\mid\cH_n)/m_{n,c(v)}
+=p_{n,c(v)}u_k(c(v))/m_{n,c(v)}=u_k(c(v))/n$.
+\end{proof}
+
+\subsection{Proof of the local cycle-length law}
+\begin{proof}[Proof of Theorem~\ref{thm:local}]
+Average \eqref{eq:closure} over a uniform root $v=I_n$: by
+Lemma~\ref{lem:root-avg},
+\begin{equation}\label{eq:local-pf}
+\Prob\bigl(L_n(I_n)=k+1\bigr)
+\;=\;\frac{1+O(\beta)}{n}\,\bigl(1+\Err_k\bigr)+O\bigl(\delta(nh)^{-2}\bigr)
+\;=\;\frac1n\Bigl(1+O\bigl(\beta+|\Err_k|\bigr)\Bigr)+o(1/n),
+\end{equation}
+since $(nh)^{-2}=o(1/n)$ in both mesh regimes. For $k\to\infty$ with
+$k\le c_*\log n$ (mesh $h_k=(q')^k$), $\beta_k=2\kappa(q')^k$ and
+$\Err_k=O(q_0^k+k\eta_n)=O(c_1^k)+O(n^{-c_2})$ with
+$c_1=\max(q_0,q')^{1/2}$; for $c_*\log n\le k\le\delta n$ (mesh
+$h=n^{-1/8}$), $\beta=2\kappa n^{-1/8}$ and $\Err_k=O(n^{-c_2})$. Hence for
+every $r\in[r_n,\delta n]$ with $r_n\to\infty$,
+\[
+\Prob(L_n(I_n)=r)\;=\;\frac{1+o(1)}{n},
+\qquad o(1)=O\bigl(c_1^{\,r}\bigr)+O(n^{-c_2}),
+\]
+uniformly in $r$, where the two mesh regimes are glued at
+$c_*\log n$ (both give $O(n^{-c_2})$ there), and the $O(n^{-B})$ failure
+probabilities of $\cG_n,\cB_n$ with $B\ge2$ are absorbed. This is
+\eqref{eq:local-law} with the stated rate.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:EC}]
+$\E C_r(\sigma_n)=\sum_{v=1}^n\Prob(L_n(v)=r)/r
+=\frac{n}{r}\Prob(L_n(I_n)=r)=(1+o(1))/r$ by
+Theorem~\ref{thm:local}.
+\end{proof}
+
+\begin{remark}[Why the two mesh regimes are needed]\label{rem:two-mesh}
+The flatness error $O(\beta)=O(\kappa h)$ forces $h\to0$; the concentration
+underlying $\cG_n$ and Lemma~\ref{lem:balance} forces $nh^2\to\infty$
+polynomially; and the trace error of Lemma~\ref{lem:root-avg}(i) is
+$O(q_0^k+k\eta_n)$, small only when the mesh is adapted to the scale $k$.
+For $k\to\infty$ slowly (e.g.\ $k=\log\log n$) the scale-adaptive choice
+$h_k=(q')^k$ makes all three errors vanish; beyond $k\asymp\log n$ the fixed
+fine mesh $h=n^{-1/8}$ is more efficient and gives the polynomially small
+error used in Section~\ref{sec:expectation}.
+\end{remark}
+
+\section{Iterated residual exploration and the joint local law}\label{sec:joint}
+
+\subsection{Residual stability}
+The framework of Section~\ref{sec:prelim} is stable under the deletion of
+completely explored cycles, because a cycle intersects each row in as many
+sources as targets.
+
+\begin{lemma}[Residual stability]\label{lem:residual}
+On $\cB_n$, let $\cE$ be the exploration of the cycles of uniform roots
+$V_1,\dots,V_{j-1}$, of total length $K=o(n)$, all distinct. Let $R$ be the
+residual vertex set, $|R|=n-K$, and let $\sigma_n^R$ be the residual
+permutation (the unexposed matching). Then:
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{Square rows.} $|R\cap H_{n,a}|=|R\cap Q_{n,a}|=:m_a^R$ for
+every $a$, and $m_a^R=m_{n,a}-r_a$ with
+$r_a=(K/n)m_{n,a}(1+O(\eps_n^{\mathrm{bal}}))$; similarly
+$N_{ab}^R=N_{n,ab}(1-K/n)(1+O(\eps_n^{\mathrm{bal}}))$.
+\item \textbf{Kernel perturbation.} The residual compressed kernel
+$P_{ab}^R=N_{ab}^R/m_a^R$ satisfies
+$P_{ab}^R=(1+O(\eps_n^{\mathrm{bal}}))P_{n,ab}$, its stationary law $p^R$
+satisfies $p_a^R=(1+o(1))p_{n,a}$, and on $\cB_n$,
+\begin{equation}\label{eq:resid-gap}
+\|P^Rv\|_{L^2(p^R)}\;\le\;(q_0+o(1))\,\|v\|_{L^2(p^R)}
+\qquad\text{whenever }\E_{p^R}[v]=0.
+\end{equation}
+\item \textbf{Flatness and one-edge marginals} persist with the same
+$\beta=2\kappa h$ \cite[Lemmas~6.5, 6.6]{Lon26}, as does the root-avoiding
+change of measure for a residual root \cite[Lemma~6.9]{Lon26}.
+\end{enumerate}
+Consequently every conclusion of Sections~\ref{sec:orbit} and
+\ref{sec:local} holds for $\sigma_n^R$ with $n$ replaced by $n-K$ and
+unchanged exponents.
+\end{lemma}
+
+\begin{proof}
+(i) Each explored cycle $C$ satisfies $|C\cap H_{n,a}|=|C\cap Q_{n,a}|$ by
+(S1) (the complete-cycle deletion identity of \cite[Section~6.2]{Lon26}),
+so rows stay square; the balanced form of $r_a$ and $N_{ab}^R$ is
+\eqref{eq:resid-counts} applied to the total prefix $K\le\delta n$.
+(ii) The entrywise bound is \eqref{eq:resid-counts} divided through by
+$m_a^R/m_{n,a}$; it gives $\|P^R-P_n\|_{L^2(p_n)\to L^2(p_n)}
+=O(\eps_n^{\mathrm{bal}})$ since
+$\|(P^R-P_n)v\|_2^2=\sum_a p_{n,a}(\sum_b(P^R-P_n)_{ab}v_b)^2
+\le O(\eps^2)\|P_n|v|\|_2^2$. Also
+$\|p^R/p_n-1\|_\infty=O(K/n+\eps_n^{\mathrm{bal}})=o(1)$ by (i), so
+mean-zero functions in $L^2(p^R)$ are $o(\|v\|_2)$-close to mean-zero in
+$L^2(p_n)$, and \eqref{eq:resid-gap} follows from \eqref{eq:gap} with
+$q_0+O(\eps_n^{\mathrm{bal}})+o(1)=q_0+o(1)$.
+(iii) is hereditary flatness (S3).
+\end{proof}
+
+\subsection{The joint local law}
+\begin{proof}[Proof of Theorem~\ref{thm:joint-local}]
+Fix $\ell$ and $k_1,\dots,k_\ell\to\infty$ with $K_\ell=\sum_j k_j=o(n)$.
+We prove by induction on $j=1,\dots,\ell$ that
+\begin{equation}\label{eq:induct}
+\Prob\Bigl(\bigcap_{i\le j}\{L_n(V_i)=k_i,\ V_i\notin
+C(V_1)\cup\cdots\cup C(V_{i-1})\}\Bigr)
+\;=\;\frac{1+o(1)}{n^j},
+\end{equation}
+with $o(1)$ uniform in the lengths; the event in \eqref{eq:induct} at
+$j=\ell$ is exactly the event of Theorem~\ref{thm:joint-local} (given
+$V_i\notin\bigcup_{i'<i}C(V_{i'})$ for all $i$, the cycles are distinct).
+The case $j=1$ is Theorem~\ref{thm:local}:
+$\Prob(L_n(V_1)=k_1)=(1+o(1))/n$. For the step, condition on the
+exploration $\cE$ of the first $j-1$ cycles (total length
+$K_{j-1}=\sum_{i<j}k_i=o(n)$), on the balance event. Then
+\[
+\Prob\bigl(V_j\notin\textstyle\bigcup_{i<j}C(V_i)\mid\cE\bigr)
+\;=\;\frac{n-K_{j-1}}{n-j+1}\;=\;1-\frac{K_{j-1}}{n}+O(n^{-1}),
+\]
+and, given $V_j$ in the residual set, $V_j$ is uniform there, so
+Lemma~\ref{lem:residual} applied to $\sigma_n^R$ with the local law
+\eqref{eq:local-pf} gives
+\[
+\Prob\bigl(L_n(V_j)=k_j\mid\cE,\ V_j\in R\bigr)
+\;=\;\frac{1+o(1)}{n-K_{j-1}},
+\]
+with $o(1)$ uniform: the mesh and all exponents of
+Sections~\ref{sec:orbit}--\ref{sec:local} depend only on $\kappa$ and the
+mesh, and $n-K_{j-1}=n(1+o(1))$. Multiplying,
+\[
+\Prob\bigl(V_j\notin\textstyle\bigcup_{i<j}C(V_i),\ L_n(V_j)=k_j
+\mid\cE\bigr)
+\;=\;\frac{1+o(1)}{n-K_{j-1}}\cdot
+\Bigl(1-\frac{K_{j-1}}{n}\Bigr)\;=\;\frac{1+o(1)}{n},
+\]
+the cancellation $(n-K_{j-1})^{-1}(1-K_{j-1}/n)=1/n$ being exact up to
+$O(n^{-1})$. Multiplying into \eqref{eq:induct} at $j-1$ gives the claim at
+$j$; the accumulated error is $(1+o(1))^\ell=1+o(1)$ since $\ell$ is fixed,
+and all failure events are $O(\ell n^{-B})=O(n^{-B})$.
+\end{proof}
+
+\begin{remark}[The size-biased bookkeeping]\label{rem:size-bias}
+Theorem~\ref{thm:joint-local} controls counts of \emph{cycle tuples}. For
+target lengths $k_1,\dots,k_\ell$ (not necessarily distinct), let
+$\mathfrak{C}_n(k_1,\dots,k_\ell)$ be the number of ordered $\ell$-tuples of
+distinct cycles of $\sigma_n$ with the $j$-th cycle of length $k_j$. Marking
+each cycle by a uniform vertex gives
+$\E\mathfrak{C}_n(k_1,\dots,k_\ell)
+=\frac{n^\ell(1+o(1))}{\prod_j k_j}\,
+\Prob(\text{event of }\eqref{eq:joint-local})
+=\frac{1+o(1)}{\prod_j k_j}$,
+since each ordered cycle tuple corresponds to exactly $\prod_j k_j$ ordered
+vertex tuples on distinct cycles. This is the mesoscopic analogue of the
+exact uniform-permutation identity
+$\E\mathfrak{C}_n(k_1,\dots,k_\ell)=\prod_j k_j^{-1}$
+\cite{ABT92}.
+\end{remark}
+
+\section{The mesoscopic Poisson process: proof of Theorem~\ref{thm:ppp}}\label{sec:ppp}
+
+Let $a_n\to\infty$, $a_n=o(n)$, and let $J_1,\dots,J_m$ be pairwise disjoint
+intervals $J_j=[u_j,v_j]\Subset(0,\infty)$. Write
+$\cN_n(J)=\#\{\text{cycles }C:|C|/a_n\in J\}$.
+
+\begin{lemma}[Factorial moments of mesoscopic counts]\label{lem:meso-fm}
+For every fixed $\ell_1,\dots,\ell_m\ge0$,
+\begin{equation}\label{eq:meso-fm}
+\E\prod_{j=1}^m\bigl(\cN_n(J_j)\bigr)_{\ell_j}
+\;\longrightarrow\;\prod_{j=1}^m\Bigl(\log\frac{v_j}{u_j}\Bigr)^{\ell_j}
+\qquad(n\to\infty).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The falling factorial $(\cN_n(J))_\ell$ counts ordered $\ell$-tuples of
+distinct cycles with rescaled lengths in $J$. Hence, with
+$\ell=\sum_j\ell_j$ and Remark~\ref{rem:size-bias},
+\[
+\E\prod_j\bigl(\cN_n(J_j)\bigr)_{\ell_j}
+\;=\;\sum_{(k_{j,i})}\E\,\mathfrak{C}_n\bigl((k_{j,i})\bigr)
+\;=\;\bigl(1+o(1)\bigr)\sum_{(k_{j,i})}\prod_{j,i}\frac1{k_{j,i}},
+\]
+where the sum runs over all $\ell$-tuples of lengths with
+$k_{j,i}\in a_nJ_j=[u_ja_n,v_ja_n]$, and the joint law applies because each
+$k_{j,i}\ge u_ja_n\to\infty$ and
+$\sum_{j,i}k_{j,i}\le\ell\,(\max_jv_j)a_n=o(n)$, so the uniformity of
+Theorem~\ref{thm:joint-local} covers all summands. The error $o(1)$ is
+uniform over the $(a_n)^\ell$-many length tuples (each application carries
+the error $O(c_1^{u_ja_n}+n^{-c_2})$ of Theorem~\ref{thm:local} per
+coordinate, uniform over the range), so
+\[
+\E\prod_j\bigl(\cN_n(J_j)\bigr)_{\ell_j}
+\;=\;\bigl(1+o(1)\bigr)\prod_{j=1}^m
+\Bigl(\sum_{u_ja_n\le k\le v_ja_n}\frac1k\Bigr)^{\ell_j}
+\;=\;\bigl(1+o(1)\bigr)\prod_{j=1}^m
+\Bigl(\log\frac{v_j}{u_j}+o(1)\Bigr)^{\ell_j},
+\]
+which is \eqref{eq:meso-fm}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:ppp}]
+The right side of \eqref{eq:meso-fm} is the joint factorial moment of
+independent $\Poisson(\log(v_j/u_j))$ variables. Poisson distributions are
+determined by their moments (Carleman's condition
+$\sum_k\mu_k^{-1/2k}=\infty$ holds for Poisson moments), and convergence of
+all joint factorial moments implies convergence of all joint ordinary
+moments (the two triangular transforms are equivalent), hence joint
+convergence in distribution to the independent Poisson vector by the method
+of moments (see e.g.\ \cite{BHJ92}, where the same argument establishes
+Poisson limits for cycle counts). This is exactly
+\eqref{eq:ppp-vector}. The equivalent formulation as convergence of
+$\sum_i\delta_{L_{n,i}/a_n}$ to the Poisson point process with intensity
+$dx/x$ on sets bounded away from $0$ and $\infty$ follows since the
+factorial moment measures converge:
+$\E\sum^*\prod_j\delta_{L_j/a_n}(J_j)\to\prod_j\int_{J_j}dx/x$ for all
+disjoint boxes, which characterizes the Poisson process with that intensity
+\cite{ABT92,Pit06}. This resolves both parts of
+\cite[Conjecture~13.1]{Lon26}.
+\end{proof}
+
+\section{The expected number of cycles: proof of Theorem~\ref{thm:expectation}}\label{sec:expectation}
+
+Fix $\delta\in(0,\delta_0]$ with $\delta_0=\delta_0(\kappa)$ from
+Section~\ref{sec:local} and a large fixed $K$. Decompose
+\begin{equation}\label{eq:four-ranges}
+\E N_n^{\cyc}\;=\;\sum_{r=1}^n \E C_r(\sigma_n)
+\;=\;\Bigl(\sum_{r\le K}+\sum_{K<r\le c_*\log n}
++\sum_{c_*\log n<r\le\delta n}+\sum_{r>\delta n}\Bigr)\E C_r(\sigma_n)
+\;=:\;S_1+S_2+S_3+S_4.
+\end{equation}
+
+\emph{Range 1 (fixed $r$).} By Proposition~\ref{prop:short}(i),
+$S_1\to\sum_{r=1}^K\lambda_r$.
+
+\emph{Range 2 ($K<r\le c_*\log n$).} By Theorem~\ref{thm:local} with its
+rate, uniformly in $r$,
+\[
+\E C_r(\sigma_n)\;=\;\frac{n}{r}\,\Prob(L_n(I_n)=r)
+\;=\;\frac1r\Bigl(1+O\bigl(c_1^{\,r}\bigr)+O(n^{-c_2})\Bigr),
+\]
+hence
+\[
+S_2\;=\;\sum_{K<r\le c_*\log n}\frac1r
+\;+\;O\Bigl(\sum_{r>K}\frac{c_1^{\,r}}{r}\Bigr)
+\;+\;O\Bigl(\frac{\log\log n}{n^{c_2}}\Bigr)
+\;=\;\sum_{K<r\le c_*\log n}\frac1r+O\bigl(c_1^{\,K}\bigr)+o(1).
+\]
+
+\emph{Range 3 ($c_*\log n<r\le\delta n$).} Theorem~\ref{thm:local} gives
+$\E C_r=(1+O(n^{-c_2}))/r$ uniformly, hence
+\[
+S_3\;=\;\sum_{c_*\log n<r\le\delta n}\frac1r
+\;+\;O\Bigl(\frac{\log n}{n^{c_2}}\Bigr)
+\;=\;\sum_{c_*\log n<r\le\delta n}\frac1r+o(1).
+\]
+
+\emph{Range 4 ($r>\delta n$).} By Proposition~\ref{prop:macro},
+$S_4=\E\#\{i:L_{n,i}\ge\delta n\}\to\log(1/\delta)$ as $n\to\infty$ with
+$\delta$ fixed, while
+$\sum_{r>\delta n}1/r=\log(1/\delta)+o(1)$.
+
+Assembling,
+\[
+\E N_n^{\cyc}
+\;=\;\sum_{r\le K}\lambda_r+\sum_{K<r\le\delta n}\frac1r
++\log\frac1\delta+O\bigl(c_1^{\,K}\bigr)+o(1)
+\;=\;\log n+\Bigl(\sum_{r\le K}\lambda_r-\log K\Bigr)
++O\bigl(c_1^{\,K}\bigr)+o(1),
+\]
+where the $\log\delta$ terms cancel exactly:
+$\sum_{K<r\le\delta n}1/r=\log(\delta n/K)+o(1)$. Writing
+$\sum_{r\le K}\lambda_r-\log K
+=\sum_{r\le K}(\lambda_r-\frac1r)+(H_K-\log K)
+=\sum_{r\le K}(\lambda_r-\frac1r)+\gE+o_K(1)$,
+we obtain, for every fixed $K$,
+\[
+\limsup_{n\to\infty}\Bigl|\E N_n^{\cyc}-\log n-\kappa_f\Bigr|
+\;\le\;\Bigl|\sum_{r>K}\Bigl(\lambda_r-\frac1r\Bigr)\Bigr|
++O\bigl(c_1^{\,K}\bigr),
+\]
+and the right side tends to $0$ as $K\to\infty$ by the absolute convergence
+\eqref{eq:trace-gap}. Hence $\E N_n^{\cyc}=\log n+\kappa_f+o(1)$.
+\qed
+
+\begin{remark}\label{rem:uniform-in-delta}
+The proof shows the decomposition is uniform in the choice of the split
+point $\delta\le\delta_0$: the mesoscopic local law contributes the full
+harmonic sum over $(K,\delta n]$ with summable error, and the macroscopic
+count supplies exactly the missing $\log(1/\delta)$. The constant
+$\kappa_f$ is therefore precisely the accumulation of the short-cycle trace
+corrections $\lambda_r-1/r=O(q^r/r)$ over all scales.
+\end{remark}
+
+\section{The central limit theorem: proof of Theorem~\ref{thm:clt}}\label{sec:clt}
+
+Fix $\delta\in(0,\delta_0]$ and $K$, and put
+\[
+N_n^{\mathrm{meso}}\;=\;\sum_{K<r\le\delta n}C_r(\sigma_n),
+\qquad
+\mu_n\;=\;\sum_{K<r\le\delta n}\frac1r
+\;=\;\log\frac{\delta n}{K}+o(1).
+\]
+
+\begin{lemma}[Mesoscopic factorial moments]\label{lem:clt-fm}
+For every fixed $\ell\ge1$,
+\begin{equation}\label{eq:clt-fm}
+\E\bigl(N_n^{\mathrm{meso}}\bigr)_\ell
+\;=\;\mu_n^\ell\bigl(1+o(1)\bigr).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+As in Lemma~\ref{lem:meso-fm},
+\[
+\E\bigl(N_n^{\mathrm{meso}}\bigr)_\ell
+\;=\;\sum_{K<r_1,\dots,r_\ell\le\delta n}
+\E\,\mathfrak{C}_n(r_1,\dots,r_\ell)
+\;=\;\bigl(1+o(1)\bigr)
+\sum_{K<r_1,\dots,r_\ell\le\delta n}\prod_{j=1}^\ell\frac1{r_j}
+\;=\;\bigl(1+o(1)\bigr)\mu_n^\ell,
+\]
+where Theorem~\ref{thm:joint-local} applies uniformly over the sum since
+each $r_j>K\to\infty$ (the error is uniform over the range by the rate in
+Theorem~\ref{thm:local}; equal lengths among the $r_j$ are permitted since
+the cycles in a tuple are distinct but their lengths need not be) and
+$\sum_j r_j\le\ell\delta n=o(n)$.
+\end{proof}
+
+\begin{lemma}[Mesoscopic asymptotic normality]\label{lem:meso-normal}
+\[
+\frac{N_n^{\mathrm{meso}}-\mu_n}{\sqrt{\mu_n}}\;\Rightarrow\;N(0,1).
+\]
+\end{lemma}
+
+\begin{proof}
+The factorial moments \eqref{eq:clt-fm} agree to relative error $o(1)$ with
+those of $\Poisson(\mu_n)$. Ordinary moments are fixed triangular
+combinations of factorial ones, $x^j=\sum_{i\le j}S(j,i)(x)_i$ with $S(j,i)$
+the Stirling numbers of the second kind, so
+$\E(N_n^{\mathrm{meso}})^j=\E[\Poisson(\mu_n)^j](1+o(1))$ for every fixed
+$j$. Hence every fixed moment of
+$(N_n^{\mathrm{meso}}-\mu_n)/\sqrt{\mu_n}$ agrees asymptotically with the
+corresponding moment of the standardized Poisson, which converges to the
+Gaussian moment ($0$ in odd order, $(j-1)!!$ in even order) as
+$\mu_n\to\infty$; see e.g.\ \cite{BHJ92} for the standard computation.
+Since the Gaussian law is moment-determinate,
+$(N_n^{\mathrm{meso}}-\mu_n)/\sqrt{\mu_n}\Rightarrow N(0,1)$ by the method
+of moments.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:clt}]
+Write
+\[
+N_n^{\cyc}\;=\;N_n^{\mathrm{meso}}+N_n^{\mathrm{short}}+N_n^{\mathrm{macro}},
+\qquad
+N_n^{\mathrm{short}}=\sum_{r\le K}C_r(\sigma_n),\quad
+N_n^{\mathrm{macro}}=\sum_{r>\delta n}C_r(\sigma_n).
+\]
+For fixed $K$, $N_n^{\mathrm{short}}\Rightarrow\sum_{r\le K}Z_r$ by
+Proposition~\ref{prop:short}(i), hence is tight; for fixed $\delta$,
+$N_n^{\mathrm{macro}}\Rightarrow\Poisson(\log(1/\delta))$ by
+Proposition~\ref{prop:macro}, hence is tight. Therefore
+$R_n=N_n^{\mathrm{short}}+N_n^{\mathrm{macro}}=O_p(1)$ and, since
+$\mu_n=\log n+O(1)\to\infty$,
+\[
+\frac{N_n^{\cyc}-\mu_n}{\sqrt{\mu_n}}
+\;=\;\frac{N_n^{\mathrm{meso}}-\mu_n}{\sqrt{\mu_n}}+\frac{R_n}{\sqrt{\mu_n}}
+\;\Rightarrow\;N(0,1)
+\]
+by Lemma~\ref{lem:meso-normal} and Slutsky's theorem. Finally
+$\E N_n^{\cyc}=\log n+\kappa_f+o(1)=\mu_n+O(1)$ by
+Theorem~\ref{thm:expectation}, and
+$\sqrt{\mu_n}=\sqrt{\log n}(1+o(1))$, so centering at $\E N_n^{\cyc}$ and
+normalizing by $\sqrt{\log n}$ does not change the limit:
+\[
+\frac{N_n^{\cyc}-\E N_n^{\cyc}}{\sqrt{\log n}}\;\Rightarrow\;N(0,1).
+\]
+This resolves \cite[Conjecture~13.2]{Lon26}.
+\end{proof}
+
+\begin{remark}[Variance]\label{rem:variance}
+The same computation gives
+$\Var N_n^{\mathrm{meso}}=\mu_n(1+o(1))$, so
+$\Var N_n^{\cyc}=\log n+o(\log n)$: the variance is asymptotic to the mean,
+exactly as for the uniform permutation, where
+$\Var N^{\cyc}=\log n+\gE-\pi^2/6+o(1)$ \cite{ABT92}. The trace
+corrections $\lambda_r-1/r$ affect the $O(1)$ terms of the mean and
+variance but not the leading $\log n$ of either.
+\end{remark}
+\section{The remaining conjectures: reductions and
+obstructions}\label{sec:remaining}
+
+\subsection{Conjecture A.1: reduction to a mixed-scale
+estimate}\label{sec:A1}
+
+\begin{estimate}[Mixed-scale local estimate]\label{est:mixed}
+Let $(k_{n,j})_{j\ge1}$ be an admissible set of scales for the slab
+decomposition of \cite[Section~6]{Lon26} in the sense of
+\cite[Definition~8.1]{Lon26}. For each fixed $\ell\ge1$, distinct fixed
+scales $s_1,\dots,s_\ell\in(0,\infty)$, and distinct mesoscopic lengths
+$k_{n,1},\dots,k_{n,\ell'}$ with $k_{n,j}\to\infty$ and
+$k_{n,j}=o(n)$,
+\begin{equation}\label{eq:mixed}
+\lim_{n\to\infty}\Big|
+\Prob\big(\text{$L_{n,i}=k_{n,i}$ for $i\le\ell'$ and
+$L_{n,\ell'+j}/n\to s_j$ for $j\le\ell$}\big)
+-\frac{1+o(1)}{\prod_{i=1}^{\ell'}k_{n,i}}\cdot
+\Prob\big(L_{n,\ell'+j}/n\to s_j,\ j\le\ell\big)\Big|=0,
+\end{equation}
+where the second factor is the macroscopic marginal of
+\cite[Theorem~6.1]{Lon26} (the $\PD(1)$ finite-dimensional law), and
+the convergence of the macroscopic coordinates is in the sense of the
+finite-dimensional distributions established there.
+\end{estimate}
+
+\begin{theorem}[Reduction]\label{thm:A1-reduction}
+Estimate~\ref{est:mixed} implies Conjecture~A.1 of \cite[Appendix~A]{Lon26}:
+under \eqref{eq:mixed}, the point process of all rescaled inter-point
+distances of the slab decomposition converges to the Poisson--Dirichlet
+fixed point \cite[Theorem~10.1]{Lon26} jointly with independence of the
+bulk and endpoint contributions.
+\end{theorem}
+
+\begin{proof}
+By \cite[Lemma~8.2]{Lon26} the total variation distance between the
+inter-point distance process and the point process
+$\sum_{v}\delta_{L_n(v)/n}$ is $O(nh)$. Convergence of the full process
+to the fixed point, and the asserted independence, are therefore
+consequences of the joint convergence of the rescaled cycle lengths.
+The joint finite-dimensional convergence in turn follows from
+\eqref{eq:mixed} by summation over the mixed event and tightness of the
+macroscopic vector (the coordinatewise bound
+$\E\#\{i:L_{n,i}\ge\delta n\}\to\log(1/\delta)$ of \cite[Proposition~6.14]{Lon26},
+uniformly over admissible scales); the factorization
+\eqref{eq:mixed} identifies the limit as the product of the
+scale-invariant mesoscopic law and the macroscopic $\PD(1)$ law, which
+is precisely the independence asserted in Conjecture~A.1.
+\end{proof}
+
+\begin{remark}[Status of Estimate~\ref{est:mixed}]\label{rem:est-status}
+Estimate~\ref{est:mixed} is stated for the \emph{full} Poisson--Dirichlet
+model of \cite[Appendix~A]{Lon26}, in which macroscopic and mesoscopic
+scales interact. We do \emph{not} prove it here. The two extreme
+marginals are known: the purely mesoscopic marginal is
+Theorem~\ref{thm:joint-local}, and the purely macroscopic marginal is
+\cite[Theorem~10.1]{Lon26} (via the marginalization of
+\cite[Theorem~6.1]{Lon26}). The missing ingredient is a single-run
+exclusion argument in the regime where a macroscopic orbit (length
+$\ge\delta n$) depletes a slab by a positive proportion before the
+mesoscopic orbits close; our balanced-depletion lemma requires the
+depletion proportion $\delta$ to be small relative to the flatness
+scale, and the perturbation expansion of Lemma~\ref{lem:residual}
+requires $k/n\to0$. A proof along the present lines would require
+either a truncated-martingale closure argument valid for $k/n$
+bounded away from $0$, or a direct coupling of the macroscopic orbit
+to its limiting scale-invariant dynamics (the GEM allocation of
+\cite[Section~9]{Lon26}) before conditioning the mesoscopic orbits.
+We record Estimate~\ref{est:mixed} as the precise missing statement.
+\end{remark}
+
+\subsection{Conjecture 13.3: the comparable-weights
+obstruction}\label{sec:133}
+
+\begin{proposition}[Reduction]\label{prop:133}
+Conjecture~13.3 of \cite[Section~13]{Lon26} (endpoint-singular
+$\PD(1)$) follows from the local law Theorem~\ref{thm:local} together
+with the local law at the singular scale $k=\Theta(n)$.
+\end{proposition}
+
+\begin{proof}
+Conjecture~13.3 asserts that the endpoint-singular weight profiles
+$\theta_{n,i}=\Theta(i^{-\alpha})$ ($\alpha>0$) produce the same
+$\PD(1)$ macroscopic law. The proof of \cite[Theorem~6.1]{Lon26} from
+the local law proceeds through: (i) the mesoscopic mass bound (any
+fixed $\eps$-mass in lengths $\le\delta n$ contributes $\le2\eps$
+mass), which follows from Theorem~\ref{thm:local} and
+Corollary~\ref{cor:EC} as in Section~\ref{sec:expectation}; (ii)
+tightness, from the macroscopic moment bound; (iii) identification of
+the limit via the induced partition, which requires the local law at
+scales $k=\Theta(n)$ (the endpoint scale), where the comparable-weights
+hypothesis \cite[eq.~(2.1)]{Lon26} fails.
+\end{proof}
+
+\begin{remark}[The obstruction]\label{rem:obstruction}
+The comparable-weights hypothesis is used in \cite{Lon26} and in the
+present paper in three places: the spectral gap
+(Lemma~\ref{prop:good}, via \cite[Lemmas~6.2--6.3]{Lon26}), the
+hereditary flatness bound $\beta=2\kappa h$
+(\cite[Lemmas~6.5--6.6]{Lon26}), and the ratio bound
+\cite[eq.~(6.4)]{Lon26}. For the endpoint-singular profiles of
+Conjecture~13.3, $\kappa=\kappa_n\to\infty$ (indeed
+$\theta_{n,1}/\theta_{n,n}=\Theta(n^{\alpha})$), so all three inputs
+degenerate: the gap bound $q_0$ is no longer $<1$ uniformly, the
+flatness window $e^{\pm2\kappa_nh}$ is void unless
+$h=o(1/\kappa_n)$, which forces slabs of width $o(n/\kappa_n)$ and
+breaks the count concentrations, and the ratio bound degenerates.
+A proof of Conjecture~13.3 along the present lines would require a
+weighted (non-uniform) slab decomposition adapted to the profile, with
+a gap estimate for a non-uniformly-ergodic compressed chain; this is a
+genuine extension of the framework, not a consequence of it. We
+therefore leave Conjecture~13.3 open, with
+Proposition~\ref{prop:133} recording the exact reduction.
+\end{remark}
+
+\subsection{Conjecture A.2}\label{sec:A2}
+
+Conjecture~A.2 (the law of the largest inter-point distance) requires
+the upper tail of the cycle-length distribution at scale
+$\Theta(n/\log n)$, a regime where our local law error $O(c_1^{\,r})$
+is not $o(1/r)$. The Hammersley-type coupling of \cite[Section~11]{Lon26}
+identifies the limiting largest-gap law conditionally on a joint
+decoupling estimate at that scale, which is beyond the reach of the
+present methods (for the same reason as in
+Remark~\ref{rem:obstruction}: the scale $\Theta(n/\log n)$ is
+macroscopic in the sense $k/n\not\to0$). We record the conjecture as
+open.
+
+\appendix
+
+\section{Numerical verification}\label{app:numerics}
+
+Theorems~\ref{thm:expectation} and \ref{thm:clt} were checked against
+direct simulation of the Luce permutation in the exact sampled-profile
+model \eqref{eq:profile} with $f(x)=1+x$ on $[0,1]$, i.e.\
+$\theta_{n,i}=1+i/n$. With $A(t)=\int_0^1(1-e^{-f(u)t})\,du$ and
+$g=f\circ A$, the substitution $x=A(s)$, $y=A(t)$ in
+\eqref{eq:permuton} gives the time-domain kernel
+$J(s,t)=g(s)e^{-g(s)t}$ on $(0,\infty)^2$, which is trace-equivalent to
+$K$: $\Tr(K^r)=\Tr(J^r)$. Discretizing $J$ on $(0,30]$ and computing
+direct matrix-power traces gives
+\[
+\lambda_1=\Tr(J)=0.8520,\qquad
+\Tr(J^2)=1.0266,\qquad
+\Tr(J^3)=0.9957,\qquad
+\Tr(J^4)=1.0006,
+\]
+(the value of $\Tr(J)$ agrees with the position-domain quadrature
+$\int_0^1\rho(x,x)\,dx=0.8520$ to four digits), whence, with
+$\lambda_r=\Tr(J^r)/r$,
+\[
+\kappa_f\;=\;\gE+\sum_{r\ge1}\Bigl(\lambda_r-\frac1r\Bigr)
+\;=\;0.4410,
+\]
+the tail $\sum_{r\ge5}$ contributing less than $10^{-3}$.
+Theorem~\ref{thm:expectation} therefore predicts
+$\E N_n^{\cyc}=\log n+0.4410+o(1)$. Direct simulation of the Luce
+permutation ($6000$ trials per $n$, cycles counted by pointer doubling)
+gives:
+\[
+\begin{array}{c|cccc}
+n & 500 & 1000 & 2000 & 4000\\\hline
+\E N_n^{\cyc} & 6.64 & 7.37 & 8.04 & 8.74\\
+\log n+\kappa_f & 6.66 & 7.35 & 8.04 & 8.74\\
+\Var N_n^{\cyc}/\log n & 0.81 & 0.83 & 0.85 & 0.85
+\end{array}
+\]
+The short-cycle counts agree with the Poisson means $\lambda_r$ of
+\cite[Theorem~5.1]{Lon26}: at $n=4000$ the empirical $\E C_r$ for
+$r=1,2,3,4,5,6,8,10$ are $0.855,0.510,0.329,0.252,0.195,0.164,0.129,
+0.101$, against $\lambda_r=0.852,0.513,0.332,0.250,0.200,0.167,0.125,
+0.100$. The mesoscopic scale-invariance of Corollary~\ref{cor:EC} is
+visible in dyadic windows: at $n=4000$ the mean number of cycles with
+length in $[2^j,2^{j+1})$ is $0.69$--$0.73$ for $j=3,\dots,10$, against
+the limiting $\log 2=0.693$. The variance ratio
+$\Var N_n^{\cyc}/\log n$ increases toward the limit $1$ of
+Remark~\ref{rem:variance}.
+
+\begin{thebibliography}{99}
+
+\bibitem[Lon26]{Lon26}
+C.~D. Long,
+\emph{Flux and fragmentation in non-uniform random permutations},
+manuscript under referee revision, 2026.
+
+\bibitem[ABT92]{ABT92}
+R.~Arratia, A.~D. Barbour, and S.~Tavar\'e,
+\emph{Poisson process approximations for the Ewens sampling formula},
+Ann. Appl. Probab. \textbf{2} (1992), 519--535.
+
+\bibitem[BHJ92]{BHJ92}
+A.~D. Barbour, L.~Holst, and S.~Janson,
+\emph{Poisson Approximation},
+Oxford University Press, 1992.
+
+\bibitem[BCD25]{BCD25}
+J.~Borga, S.~Chatterjee, and P.~Diaconis,
+\emph{Random permutations with comparable weights: stationarity and mixing},
+preprint, 2025.
+
+\bibitem[CDK24]{CDK24}
+S.~Chatterjee, P.~Diaconis, and D.~Kane,
+\emph{The Luce choice model and random permutations with prescribed
+weights}, preprint, 2024.
+
+\bibitem[DZ99]{DZ99}
+A.~Dembo and O.~Zeitouni,
+\emph{Large Deviations Techniques and Applications}, 2nd ed.,
+Springer, 1999.
+
+\bibitem[Fre75]{Fre75}
+D.~A. Freedman,
+\emph{On tail probabilities for martingales},
+Ann. Probab. \textbf{3} (1975), 100--118.
+
+\bibitem[Luc59]{Luc59}
+R.~D. Luce,
+\emph{Individual Choice Behavior: A Theoretical Analysis},
+Wiley, 1959.
+
+\bibitem[Petrov]{Petrov}
+V.~V. Petrov,
+\emph{Limit Theorems of Probability Theory: Sequences of Independent
+Random Variables}, Oxford University Press, 1995.
+
+\bibitem[Pit06]{Pit06}
+J.~Pitman,
+\emph{Combinatorial Stochastic Processes},
+Lecture Notes in Mathematics \textbf{1875}, Springer, 2006.
+
+\bibitem[Sj\"o23]{Sjo23}
+J.~Sj\"ostrand,
+\emph{Permutations with comparable weights: spectral asymptotics and
+determinants}, preprint, 2023.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,2205 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage[margin=1.15in]{geometry}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue]{hyperref}
+
+\newcommand{\E}{\mathbb E}
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\1}{\mathbf 1}
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\TV}{\mathrm{TV}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\PPP}{\operatorname{PPP}}
+\newcommand{\Unif}{\operatorname{Unif}}
+\newcommand{\Exp}{\operatorname{Exp}}
+\newcommand{\Cyc}{\operatorname{Cyc}}
+\newcommand{\cF}{\mathcal F}
+\newcommand{\cG}{\mathcal G}
+\newcommand{\cH}{\mathcal H}
+\newcommand{\cS}{\mathcal S}
+\newcommand{\cT}{\mathcal T}
+\newcommand{\cE}{\mathcal E}
+\newcommand{\cD}{\mathcal D}
+\newcommand{\cL}{\mathcal L}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dd}{\,\mathrm d}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{assumption}[theorem]{Input theorem}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{Mesoscopic cycles of comparable-rate Luce permutations:\\
+a switching proof of Conjecture~13.1}
+\author{Christopher D. Long}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $X_{n,i}$ be independent exponential clocks with rates
+$1\leq \theta_{n,i}\leq \kappa$, and let $\sigma_n(i)$ be the rank of
+$X_{n,i}$ among the $n$ clocks.  We prove that
+\[
+  \E C_{n,r_n}\sim \frac1{r_n}
+  \qquad (r_n\to\infty,\ r_n=o(n)),
+\]
+and that, for every $a_n\to\infty$ with $a_n=o(n)$, the point process of
+cycle lengths divided by $a_n$ converges vaguely on $(0,\infty)$ to the
+Poisson point process with intensity $\dd x/x$.  The proof uses no
+quenched local law, no uniform regularity of the terminal clock tail, no
+residual joint-cycle theorem, and no macroscopic cycle-limit input.  Its
+main ingredients are a marked involutive clock-swap identity, uniform
+integrability of the swap factors, and a finite-endpoint mixing theorem
+in mean conditional total variation relative to a coarse clock
+environment.  The endpoint theorem is formulated with a free admissible
+terminal-window depth.  The square-root choice suffices for qualitative
+mesoscopic convergence, while a logarithmic-depth specialization gives
+polynomial endpoint-mixing error on the logarithmic windows used in
+quantitative order problems.  A tilted version of the one-cycle identity
+gives the limiting Laplace functional.
+\end{abstract}
+
+\tableofcontents
+
+\section{Model, prior input, and main result}
+
+For each $n$, let
+\[
+  X_{n,i}\sim \Exp(\theta_{n,i}),\qquad 1\leq i\leq n,
+\]
+be independent, where throughout
+\begin{equation}\label{eq:comparable}
+  1\leq \theta_{n,i}\leq \kappa
+\end{equation}
+for one fixed $\kappa<\infty$.  Since the clocks are continuous, they are
+almost surely distinct.  The associated Luce permutation is
+\[
+  \sigma_n(i)=1+\#\{j:X_{n,j}<X_{n,i}\}.
+\]
+Thus both the domain and the range of $\sigma_n$ are identified with
+$[n]:=\{1,\dots,n\}$.  This is the exponential-race representation of
+the Luce ranking model; see Luce~\cite{Luce1959}.
+
+For a permutation $\sigma$, let $C_r(\sigma)$ denote its number of
+$r$-cycles, let $L_\sigma(v)$ be the length of the cycle containing $v$,
+and write
+\[
+  L_n(v):=L_{\sigma_n}(v),\qquad C_{n,r}:=C_r(\sigma_n).
+\]
+Let $I_n$ be uniform on $[n]$, independent of the clocks.  For two
+probability measures on a finite or countable space we use the convention
+\[
+  \|\mu-\nu\|_{\TV}:=\sup_A|\mu(A)-\nu(A)|
+  =\frac12\sum_x|\mu(x)-\nu(x)|.
+\]
+We write $C_c^+((0,\infty))$ for the nonnegative continuous functions
+with compact support in $(0,\infty)$.
+
+The endpoint construction needs only a localized bound on the probability
+that a uniform root lies in a short cycle.  This bound is proved
+internally below from the exact master switch and selected-factor moment
+bounds.  Corollary~\ref{cor:root-crude} gives
+\[
+  \Pp\bigl(L_n(I_n)\leq a\bigr)\leq C_\kappa a/n
+  \qquad(a\leq n/2).
+\]
+Consequently no macroscopic $\mathrm{PD}(1)$ or $\mathrm{GEM}(1)$ input
+is used in this paper.
+
+\begin{theorem}[Conjecture~13.1]\label{thm:main}
+Assume~\eqref{eq:comparable}.
+
+\begin{enumerate}[label=\textnormal{(\roman*)}]
+\item For every pair of integer sequences $r_-(n),r_+(n)$ satisfying
+\[
+  r_-(n)\longrightarrow\infty,
+  \qquad r_+(n)=o(n),
+  \qquad r_-(n)\leq r_+(n),
+\]
+one has
+\begin{equation}\label{eq:uniform-first-moment}
+  \sup_{r_-(n)\leq r\leq r_+(n)}
+  \left|r\E C_{n,r}-1\right|\longrightarrow0.
+\end{equation}
+In particular, $\E C_{n,r_n}\sim 1/r_n$ whenever
+$r_n\to\infty$ and $r_n=o(n)$.
+
+\item If $a_n\to\infty$ and $a_n=o(n)$, then
+\begin{equation}\label{eq:point-process-def}
+  \Xi_n:=\sum_{C\in\Cyc(\sigma_n)}\delta_{|C|/a_n}
+\end{equation}
+converges vaguely in distribution on $(0,\infty)$ to
+\[
+  \PPP\!\left(\frac{\dd x}{x}\right).
+\]
+Equivalently, cycle counts in finitely many pairwise disjoint compact
+intervals converge jointly to independent Poisson random variables with
+means given by the $\dd x/x$-masses of those intervals.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+The endpoint theorem proved below is stronger than the scalar identity
+needed for the main result: it treats every fixed number of roots and
+controls the endpoint vector in mean conditional total variation.  Only
+the one- and two-root cases are used to prove $L^2$ concentration of the
+scalar switching intensity.  Part~(ii) is then obtained from the same
+one-cycle identity under a bounded downward exponential tilt.
+\end{remark}
+
+\section{An elementary orbit-intersection bound}
+
+\begin{lemma}[Intersection of two orbit segments]
+\label{lem:segment-intersection}
+Let $\sigma$ be any permutation of $[n]$, and let $I,J$ be independent
+uniform elements of $[n]$.  For integers $r,s\geq0$,
+\begin{equation}\label{eq:segment-intersection}
+ \Pp\left(
+ \{\sigma^t(I):0\leq t\leq r\}
+ \cap
+ \{\sigma^u(J):0\leq u\leq s\}\neq\varnothing
+ \ \middle|\ \sigma,I
+ \right)
+ \leq \frac{r+s+1}{n}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Put $A=\{\sigma^t(I):0\leq t\leq r\}$.  The set of starting points $x$
+whose first $s$ iterates intersect $A$ is
+\[
+  \bigcup_{u=0}^s\sigma^{-u}(A).
+\]
+All these points lie on the cycle of $I$.  Along that cycle, $A$ is a
+contiguous arc, possibly with repetitions if the cycle is short, and the
+union of its first $s$ backward shifts has at most $r+s+1$ distinct
+points.  Since $J$ is uniform,~\eqref{eq:segment-intersection} follows.
+\end{proof}
+
+\section{An exact clock-swap identity}
+
+For the remainder of the paper we suppress the subscript $n$ when no
+confusion is possible.  For all labels $i,j$, define
+\begin{equation}\label{eq:Rij-def}
+  R_{ij}(X)
+  :=\exp\!\left\{-(\theta_i-\theta_j)(X_j-X_i)\right\},
+\end{equation}
+so in particular $R_{ii}=1$.  For distinct labels $i,j$, let $T_{ij}$ be
+the involution that exchanges $X_i$ and $X_j$ and leaves all other clocks
+unchanged.
+
+\begin{lemma}[Change of measure under a clock swap]
+\label{lem:swap-rn}
+For distinct $i,j$,
+\begin{equation}\label{eq:perm-after-swap}
+  \sigma_{T_{ij}X}=\sigma_X\circ(i\,j),
+\end{equation}
+and
+\begin{equation}\label{eq:rn-swap}
+  \frac{\dd(\Pp\circ T_{ij})}{\dd\Pp}(X)=R_{ij}(X).
+\end{equation}
+Consequently, for every nonnegative measurable $G$,
+\begin{equation}\label{eq:swap-cov}
+  \E\bigl[R_{ij}(X)G(T_{ij}X)\bigr]=\E G(X).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Swapping $X_i$ and $X_j$ exchanges the ranks assigned to the labels $i$
+and $j$, proving~\eqref{eq:perm-after-swap}.  The joint density of $X$ is
+\[
+  f(x)=\prod_{k=1}^n\theta_k e^{-\theta_kx_k}\1_{\{x_k>0\}}.
+\]
+Thus
+\[
+  \frac{f(T_{ij}x)}{f(x)}
+  =\exp\{(\theta_i-\theta_j)(x_i-x_j)\}
+  =R_{ij}(x),
+\]
+which proves~\eqref{eq:rn-swap};~\eqref{eq:swap-cov} is the associated
+change-of-variables identity.
+\end{proof}
+
+The following marked identity is the central exact relation.  For a
+permutation $\sigma$ and a label $j$, write $\mathcal C_\sigma(j)$ for
+the vertex set of the cycle containing $j$.
+
+\begin{proposition}[Marked master switching identity]
+\label{prop:master-switch}
+Let $1\leq r<n$, and let
+$\Psi:[n]^2\times S_n\to[0,\infty)$ be arbitrary.  Then
+\begin{align}
+ &\E\sum_{\substack{i\in[n]\\L_\sigma(i)>r}}
+ R_{i,\sigma^r(i)}(X)
+ \Psi\bigl(i,\sigma^r(i),\sigma\circ(i\,\sigma^r(i))\bigr)
+ \nonumber\\
+ &\qquad=
+ \E\sum_{\substack{j\in[n]\\L_\sigma(j)=r}}
+ \ \sum_{i\notin\mathcal C_\sigma(j)}
+ \Psi(i,j,\sigma).
+ \label{eq:marked-master-switch}
+\end{align}
+In particular, for every $\Phi:S_n\to[0,\infty)$,
+\begin{equation}\label{eq:master-switch}
+ r(n-r)\E\bigl[C_r(\sigma)\Phi(\sigma)\bigr]
+ =
+ \E\sum_{\substack{i\in[n]\\L_\sigma(i)>r}}
+ R_{i,\sigma^r(i)}(X)
+ \Phi\bigl(\sigma\circ(i\,\sigma^r(i))\bigr).
+\end{equation}
+Both identities extend by linearity whenever the displayed terms are
+integrable.
+\end{proposition}
+
+\begin{proof}
+For distinct $i,j$, let
+\[
+  A_{ij}^{(r)}=\{j=\sigma^r(i),\ L_\sigma(i)>r\}.
+\]
+On $A_{ij}^{(r)}$, the labels $i,j$ lie on the same cycle, at directed
+distance $r$.  Right-composition by $(i\,j)$ swaps the outgoing edges of
+$i$ and $j$ and splits that cycle into cycles of lengths $r$ and
+$L_\sigma(i)-r$; the $r$-cycle contains $j$.
+
+By Lemma~\ref{lem:swap-rn},
+\begin{align*}
+ &\E\left[
+   \1_{A_{ij}^{(r)}}R_{ij}(X)
+   \Psi\bigl(i,j,\sigma\circ(i\,j)\bigr)
+ \right] \\
+ &\qquad=
+ \E\left[
+   \1_{A_{ij}^{(r)}}(T_{ij}X)\Psi(i,j,\sigma_X)
+ \right].
+\end{align*}
+In terms of $\sigma_X$, the event $A_{ij}^{(r)}(T_{ij}X)$ says exactly
+that $j$ belongs to an $r$-cycle and that $i$ lies outside
+$\mathcal C_{\sigma_X}(j)$: right-composition by $(i\,j)$ then merges the
+two cycles, and $j$ is at directed distance $r$ from $i$ in the merged
+cycle.  Summing over ordered pairs $i\ne j$ proves
+\eqref{eq:marked-master-switch}.
+
+For $\Psi(i,j,\sigma)=\Phi(\sigma)$, every $r$-cycle contributes $r$
+choices for $j$, and for each such $j$ there are $n-r$ choices for $i$
+outside that cycle.  This gives~\eqref{eq:master-switch}.
+\end{proof}
+
+Define the switching intensity
+\begin{equation}\label{eq:S-def}
+  S_{n,r}
+  :=\sum_{i:L_n(i)>r}R_{i,\sigma_n^r(i)}(X).
+\end{equation}
+Taking $\Phi\equiv1$ in Proposition~\ref{prop:master-switch} gives the
+exact identity
+\begin{equation}\label{eq:first-switch-exact}
+  r(n-r)\E C_{n,r}=\E S_{n,r}.
+\end{equation}
+Thus Theorem~\ref{thm:main}(i) will follow once we prove
+$S_{n,r}/n\to1$ in $L^1$, uniformly over mesoscopic windows.
+
+\section{Uniform integrability of the swap factors}
+
+The factors $R_{ij}$ are unbounded.  Comparability of the rates gives
+precisely the uniform integrability needed below.
+
+Set
+\begin{equation}\label{eq:lambda-kappa}
+ \lambda_\kappa:=
+ \begin{cases}
+   \infty,&\kappa=1,\\[1mm]
+   \dfrac{\kappa}{\kappa-1},&\kappa>1.
+ \end{cases}
+\end{equation}
+
+\begin{lemma}[Selected-pair tail bound]
+\label{lem:selected-tail}
+Suppose $\kappa>1$.  For every $n,r$ and $u\geq0$,
+\begin{equation}\label{eq:selected-log-tail}
+ \frac1n\E\sum_{i:L_n(i)>r}
+ \1_{\{\log R_{i,\sigma_n^r(i)}>u\}}
+ \leq 2e^{-\lambda_\kappa u}.
+\end{equation}
+Consequently, for every $A\geq1$,
+\begin{equation}\label{eq:selected-R-tail}
+ \frac1n\E\sum_{i:L_n(i)>r}
+ R_{i,\sigma_n^r(i)}
+ \1_{\{R_{i,\sigma_n^r(i)}>A\}}
+ \leq C_\kappa A^{-1/(\kappa-1)}.
+\end{equation}
+If $\kappa=1$, then $R_{ij}\equiv1$.
+\end{lemma}
+
+\begin{proof}
+Write $j=\sigma_n^r(i)$.  If $\theta_i>\theta_j$ and
+$\log R_{ij}>u$, then
+\[
+  (\theta_i-\theta_j)(X_i-X_j)>u,
+\]
+so
+\[
+  X_i>\frac{u}{\theta_i-\theta_j}
+      \geq \frac{u}{\theta_i-1}.
+\]
+For $\theta_i>1$,
+\[
+ \Pp\left(X_i>\frac{u}{\theta_i-1}\right)
+ =\exp\left\{-\frac{\theta_i}{\theta_i-1}u\right\}
+ \leq e^{-\lambda_\kappa u},
+\]
+because $a/(a-1)$ is decreasing on $(1,\kappa]$.  Summing over $i$
+gives at most $ne^{-\lambda_\kappa u}$.
+
+If $\theta_j>\theta_i$ and $\log R_{ij}>u$, the same argument gives
+$X_j>u/(\theta_j-1)$.  The set
+$\{i:L_n(i)>r\}$ is invariant under $\sigma_n^r$, and the map
+$i\mapsto\sigma_n^r(i)$ is a bijection of this set.  Reindexing by $j$
+therefore gives another contribution at most
+$ne^{-\lambda_\kappa u}$.  This proves~\eqref{eq:selected-log-tail}.
+
+For a nonnegative random variable $Z$,
+\[
+  \E[Z\1_{\{Z>A\}}]
+  =A\Pp(Z>A)+\int_A^\infty\Pp(Z>t)\dd t.
+\]
+Apply this layer-cake identity to the averaged counting measure in
+\eqref{eq:selected-log-tail}, using $u=\log t$.  Since
+$t^{-\lambda_\kappa}$ is integrable at infinity,
+\[
+ A^{1-\lambda_\kappa}
+ +\int_A^\infty t^{-\lambda_\kappa}\dd t
+ \leq C_\kappa A^{1-\lambda_\kappa}
+ =C_\kappa A^{-1/(\kappa-1)}.
+\]
+This proves~\eqref{eq:selected-R-tail}.
+\end{proof}
+
+\begin{corollary}[Moments of selected swap factors]
+\label{cor:selected-moments}
+For every $1\leq p<\lambda_\kappa$,
+\begin{equation}\label{eq:selected-p-moment}
+ \sup_{n\geq1}\sup_{1\leq r<n}
+ \frac1n\E\sum_{i:L_n(i)>r}R_{i,\sigma_n^r(i)}^p
+ <\infty.
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:independent-p-moment}
+ \sup_{n\geq1}\max_{i,j\in[n]}\E R_{ij}^p<\infty.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+When $\kappa=1$, every swap factor equals one.  Suppose $\kappa>1$.
+For $t\geq1$,~\eqref{eq:selected-log-tail} with $u=\log t$ gives
+\[
+ \frac1n\E\sum_{i:L_n(i)>r}
+ \1_{\{R_{i,\sigma_n^r(i)}>t\}}
+ \leq 2t^{-\lambda_\kappa}.
+\]
+Layer-cake integration for the $p$th moment is finite uniformly in
+$n,r$ because $p<\lambda_\kappa$.  Repeating the same two-case
+argument for a fixed ordered pair gives
+$\Pp(\log R_{ij}>u)\leq2e^{-\lambda_\kappa u}$ uniformly in $i,j$.
+A second layer-cake integration proves~\eqref{eq:independent-p-moment}.
+\end{proof}
+
+\begin{corollary}[Crude cycle and root bounds]
+\label{cor:root-crude}
+Uniformly in $1\le r<n$,
+\begin{equation}\label{eq:cycle-crude}
+ \E C_{n,r}\leq \frac{C_\kappa n}{r(n-r)}.
+\end{equation}
+If $I_n$ is uniform on $[n]$, independently of the clocks, then for
+$a\le n/2$,
+\begin{equation}\label{eq:root-crude}
+ \Pp\bigl(L_n(I_n)\le a\bigr)\leq C_\kappa a/n.
+\end{equation}
+In particular, submacroscopic root-cycle escape follows directly from
+uniform rate comparability.
+\end{corollary}
+
+\begin{proof}
+Take $p=1$ in Corollary~\ref{cor:selected-moments}.  Then
+$\E S_{n,r}\le C_\kappa n$, and the exact identity
+\eqref{eq:first-switch-exact} gives~\eqref{eq:cycle-crude}.  Since
+\[
+ \Pp\bigl(L_n(I_n)=r\bigr)=\frac{r\E C_{n,r}}n,
+\]
+we obtain, for $a\le n/2$,
+\[
+ \Pp\bigl(L_n(I_n)\le a\bigr)
+ \le C_\kappa\sum_{r\le a}\frac1{n-r}
+ \le C_\kappa' a/n.
+\]
+\end{proof}
+
+For $A\geq1$, define
+\begin{equation}\label{eq:F-A-def}
+ F_A(i,j):=R_{ij}\wedge A.
+\end{equation}
+
+\begin{lemma}[Independent-pair normalization]
+\label{lem:independent-pair}
+For each fixed ordered pair $i,j$,
+\begin{equation}\label{eq:ERij-one}
+  \E R_{ij}=1.
+\end{equation}
+If $\kappa>1$, then uniformly in $i,j$ and $A\geq1$,
+\begin{equation}\label{eq:independent-R-tail}
+ \E\left[R_{ij}\1_{\{R_{ij}>A\}}\right]
+ \leq C_\kappa A^{-1/(\kappa-1)}.
+\end{equation}
+If $I,J$ are independent uniform labels, independent of the clocks, then
+\begin{equation}\label{eq:muA-def}
+  \mu_{n,A}:=\E F_A(I,J)
+\end{equation}
+satisfies
+\begin{equation}\label{eq:muA-one}
+  0\leq 1-\mu_{n,A}
+  \leq C_\kappa A^{-1/(\kappa-1)}
+\end{equation}
+when $\kappa>1$, uniformly in $n$; for $\kappa=1$ one has
+$\mu_{n,A}=1$ for $A\geq1$.
+\end{lemma}
+
+\begin{proof}
+If $i=j$, then $R_{ii}=1$.  If $i\ne j$, independence gives
+\begin{align*}
+ \E R_{ij}
+ &=\E e^{(\theta_i-\theta_j)X_i}
+   \E e^{-(\theta_i-\theta_j)X_j}\\
+ &=\frac{\theta_i}{\theta_j}\frac{\theta_j}{\theta_i}=1.
+\end{align*}
+The moment-generating factors are finite because the positive exponent
+is always strictly smaller than the corresponding exponential rate.
+For a fixed pair, the same two-case argument as in
+Lemma~\ref{lem:selected-tail} gives
+$\Pp(\log R_{ij}>u)\leq2e^{-\lambda_\kappa u}$, uniformly in
+$i,j$.  Layer-cake integration therefore proves
+\eqref{eq:independent-R-tail}.  Since
+\[
+  1-\E(R_{IJ}\wedge A)
+  =\E[(R_{IJ}-A)_+]
+  \leq \E[R_{IJ}\1_{\{R_{IJ}>A\}}],
+\]
+averaging over $I,J$ proves~\eqref{eq:muA-one}.
+\end{proof}
+
+\section{Conditional matching structure inside clock blocks}
+\label{sec:block-structure}
+
+We next record, with proof, the only structural fact about the Luce
+permutation used in the endpoint argument.
+
+Let
+\[
+  0=t_0<t_1<\cdots<t_d=T
+\]
+be a deterministic partition, and let $B_a=(t_{a-1},t_a]$.  Put
+\[
+ H_a=\{i:X_i\in B_a\},\qquad m_a=|H_a|,
+\]
+and let $H_*=\{i:X_i>T\}$.  The ranks occupied by clocks in $B_a$ form
+the consecutive interval
+\[
+ Q_a=\left\{1+\sum_{c<a}m_c,\dots,\sum_{c\leq a}m_c\right\},
+\]
+while $Q_*$ is the terminal rank interval of size $|H_*|$.
+
+Let $\cH$ be generated by the sets $H_a,H_*$ and, for every block, the
+ordered but unlabeled clock values in that block.  Thus $\cH$ does not
+reveal which label in $H_a$ receives which rank in $Q_a$.
+
+\begin{lemma}[Conditional permanental rows]
+\label{lem:permanental-rows}
+Conditional on $\cH$, the restrictions
+\[
+  \sigma:H_a\longrightarrow Q_a
+\]
+are independent over the blocks.  If the ordered clock values in block
+$a$ are $s_{a,1}<\cdots<s_{a,m_a}$, then for a bijection
+$\pi:H_a\to Q_a$,
+\begin{equation}\label{eq:row-law}
+ \Pp(\sigma|_{H_a}=\pi\mid\cH)
+ =\frac{1}{Z_a}
+ \prod_{i\in H_a}e^{-\theta_i s_{a,\pi(i)-\min Q_a+1}},
+\end{equation}
+where $Z_a$ is the corresponding permanent.  After any compatible
+collection of source-target pairs has been exposed, the same statement
+holds on each residual submatrix, independently across rows.
+\end{lemma}
+
+\begin{proof}
+The joint density of the clocks in block $a$, before labels are assigned
+to the ordered values, is
+\[
+  \prod_{i\in H_a}\theta_i e^{-\theta_i x_i}.
+\]
+For a fixed assignment of the ordered values to the labels, the factor
+$\prod_{i\in H_a}\theta_i$ is independent of the assignment, leaving the
+weight in~\eqref{eq:row-law}.  Since the original clock density factors
+over labels and the blocks are disjoint, the assignments in different
+blocks are conditionally independent.  Conditioning further on a set of
+compatible assignments simply fixes the corresponding factors and
+leaves the same weighted-bijection law on the residual source and target
+sets.
+\end{proof}
+
+\begin{lemma}[Hereditary flatness]
+\label{lem:flatness}
+Suppose $B_a$ has width at most $h$.  Conditional on $\cH$ and on any
+compatible previous exposures, let a residual row have $m\geq1$ targets.
+For every residual source $x$ and residual target $y$,
+\begin{equation}\label{eq:flat-marginal}
+  \frac{e^{-\beta}}m
+  \leq
+  \Pp(\sigma(x)=y\mid\cH,\text{exposures})
+  \leq
+  \frac{e^{\beta}}m,
+  \qquad \beta:=\kappa h.
+\end{equation}
+Consequently, the one-edge law is at total-variation distance at most
+$\frac12(e^\beta-1)$ from the uniform law on the residual targets.  The same
+bound holds after pushing the targets forward through any partition into
+categories.
+\end{lemma}
+
+\begin{proof}
+Fix two residual targets $y,z$.  In every residual matching with
+$x\mapsto y$, let $u$ be the source assigned to $z$, and interchange the
+targets assigned to $x$ and $u$.  This is a bijection onto the residual
+matchings with $x\mapsto z$.  If the corresponding clock values are
+$s_y,s_z\in B_a$, the ratio of the two matching weights is
+\[
+ \exp\{(\theta_x-\theta_u)(s_y-s_z)\},
+\]
+which lies in $[e^{-\kappa h},e^{\kappa h}]$.  Summing over matchings
+shows that the marginal weights for any two targets have ratio in the
+same interval.  If $p_y$ are $m$ positive numbers summing to one and
+$p_y/p_z\in[e^{-\beta},e^\beta]$ for all $y,z$, then
+$e^{-\beta}/m\leq p_y\leq e^\beta/m$, proving
+\eqref{eq:flat-marginal}.  The total-variation assertion follows from
+\[
+  \frac12\sum_y\left|p_y-\frac1m\right|
+  \leq \frac12(e^\beta-1),
+\]
+and total variation cannot increase under a measurable map.
+\end{proof}
+
+\section{A core-tail environment at the scale of an endpoint window}
+\label{sec:environment}
+
+Fix an integer $q\geq1$ and integer sequences $r_-(n),r_+(n)$ with
+\[
+ r_-\longrightarrow\infty,
+ \qquad r_+=o(n),
+ \qquad r_-\leq r_+.
+\]
+The endpoint argument uses the cycle-length information only through
+\begin{equation}\label{eq:local-root-escape}
+ \zeta_n:=\Pp\bigl(L_n(I_n)\leq r_+\bigr).
+\end{equation}
+By Corollary~\ref{cor:root-crude}, for all sufficiently large $n$,
+\begin{equation}\label{eq:zeta-quantitative}
+ \zeta_n\leq C_\kappa r_+/n.
+\end{equation}
+Set
+\begin{equation}\label{eq:parameters}
+ \begin{aligned}
+ K&:=q r_+,
+ &\delta&:=\frac Kn,
+ &L_\delta&:=\log\frac1\delta,\\
+ h&:=\delta^{1/4},
+ &T&:=\frac{1}{4\kappa}L_\delta,
+ &\rho&:=e^{-T}=\delta^{1/(4\kappa)},\\
+ M&:=n\delta^{1/2}=\sqrt{nK}.
+ \end{aligned}
+\end{equation}
+All these quantities may depend on $n$; $q$ is fixed.  We work only for
+sufficiently large $n$, so $0<\delta<1/2$.
+
+Partition $[0,T]$ into $d=\lceil T/h\rceil$ equal intervals.  Their
+common width $\ell=T/d$ satisfies $h/2\leq\ell\leq h$ for all large
+$n$.  Fix a constant $\tau_0\in(0,1)$, and call a finite block \emph{early}
+if its right endpoint is at most $\tau_0$.  Let $\mathsf E$ be the set of
+early block indices, and put $d_{\mathrm E}=|\mathsf E|$.  Then
+\begin{equation}\label{eq:d-e-bounds}
+ d\leq C h^{-1}L_\delta,
+ \qquad
+ c h^{-1}\leq d_{\mathrm E}\leq C h^{-1}.
+\end{equation}
+
+For blocks $a,b\in\{1,\dots,d,*\}$, define
+\begin{equation}\label{eq:Nab-initial}
+  N_{ab}:=|Q_a\cap H_b|.
+\end{equation}
+
+We use the following elementary Bernoulli bounds.  If $Z_j$ are
+independent Bernoulli variables and $\mu=\sum_j\E Z_j$, then
+\begin{equation}\label{eq:chernoff-lower}
+  \Pp\left(\sum_jZ_j\leq\frac\mu2\right)\leq e^{-\mu/8},
+\end{equation}
+and, for $x\geq0$,
+\begin{equation}\label{eq:chernoff-upper}
+  \Pp\left(\sum_jZ_j\geq \mathrm e\mu+x\right)\leq e^{-x}.
+\end{equation}
+The first is the usual multiplicative Chernoff bound.  For the second,
+$\E e^{\sum Z_j}\leq\exp((\mathrm e-1)\mu)$ and Markov's inequality give
+\[
+ \Pp\left(\sum Z_j\geq \mathrm e\mu+x\right)
+ \leq e^{(\mathrm e-1)\mu-\mathrm e\mu-x}\leq e^{-x}.
+\]
+
+\begin{lemma}[Uniform core-tail environment]
+\label{lem:good-environment}
+There are constants $c,C>0$, depending only on $\kappa$ and $\tau_0$, and
+events $\cG_n$ such that
+\begin{equation}\label{eq:environment-failure}
+ \Pp(\cG_n^c)
+ \le C\left[
+ h^{-1}L_\delta e^{-cM}
+ +n^2h^{-1}e^{-chM}
+ +n^{-2}
+ \right].
+\end{equation}
+In particular, $\Pp(\cG_n)\to1$.  On $\cG_n$:
+
+\begin{enumerate}[label=\textnormal{(\roman*)}]
+\item Every finite block satisfies
+\begin{equation}\label{eq:finite-row-lower}
+  m_a\geq cM.
+\end{equation}
+
+\item For every integer interval $J\subset[n]$ with $|J|\geq cM$ and
+every early block $b\in\mathsf E$,
+\begin{equation}\label{eq:early-interval-lower}
+  |J\cap H_b|\geq c h|J|.
+\end{equation}
+
+\item For every integer interval $J\subset[n]$ with $|J|\geq cM$,
+\begin{equation}\label{eq:tail-interval-upper}
+  |J\cap H_*|\leq C\bigl(\rho|J|+\log n\bigr).
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:tail-total-upper}
+  m_*\leq Cn\rho.
+\end{equation}
+
+\item Consequently, for every finite source row $a$,
+\begin{align}
+ N_{ab}&\geq chm_a &&(b\in\mathsf E),
+ \label{eq:early-cell-lower}\\
+ N_{a*}&\leq C(\rho m_a+\log n).
+ \label{eq:tail-cell-upper}
+\end{align}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For a finite block $B_a=(u,u+\ell]$ and any label $i$,
+\begin{align*}
+ \Pp(X_i\in B_a)
+ &=e^{-\theta_i u}(1-e^{-\theta_i\ell})\\
+ &\geq e^{-\kappa T}(1-e^{-\ell})
+ \geq c\delta^{1/4}h
+ =c\delta^{1/2}.
+\end{align*}
+Thus $\E m_a\geq cM$, and~\eqref{eq:chernoff-lower}, followed by a
+union bound over $d$, proves~\eqref{eq:finite-row-lower} with failure
+probability at most $d e^{-cM}=o(1)$.
+
+If $b$ is early, then uniformly in $i$,
+\[
+  \Pp(X_i\in B_b)\geq e^{-\kappa\tau_0}(1-e^{-\ell})\geq ch.
+\]
+For a fixed interval $J$ with $|J|\geq cM$, the expected value of
+$|J\cap H_b|$ is at least $ch|J|$.  The lower Chernoff bound and a union
+bound over at most $n^2d_{\mathrm E}$ pairs $(J,b)$ prove
+\eqref{eq:early-interval-lower}, because
+\begin{equation}\label{eq:hM-large}
+  hM=n\delta^{3/4}=n^{1/4}K^{3/4}\gg\log n.
+\end{equation}
+Here $K\geq r_-\to\infty$.
+
+For the tail, $\Pp(X_i>T)=e^{-\theta_iT}\leq e^{-T}=\rho$.  For a fixed
+$J$,~\eqref{eq:chernoff-upper} with
+$\mu\leq\rho|J|$ and $x=4\log n$ gives
+\[
+ \Pp\bigl(|J\cap H_*|\geq \mathrm e\rho|J|+4\log n\bigr)\leq n^{-4}.
+\]
+A union bound over at most $n^2$ intervals gives
+\eqref{eq:tail-interval-upper}.  Applying the same estimate to
+$J=[n]$ proves~\eqref{eq:tail-total-upper}, since
+$n\rho\gg\log n$ under~\eqref{eq:parameters}.
+
+Finally, each $Q_a$ is an integer interval of length $m_a\geq cM$.
+Applying~\eqref{eq:early-interval-lower} and
+\eqref{eq:tail-interval-upper} to $J=Q_a$ gives
+\eqref{eq:early-cell-lower} and~\eqref{eq:tail-cell-upper}.  The three
+union bounds above, together with~\eqref{eq:d-e-bounds}, give
+\eqref{eq:environment-failure}.
+\end{proof}
+
+\section{Finite-endpoint mixing relative to the coarse environment}
+\label{sec:endpoint}
+
+Let $U_n:=\Unif([n])$.  Let $I_1,\dots,I_q$ be independent $U_n$
+labels, independent of the clocks, and for
+$\mathbf r=(r_1,\dots,r_q)\in[r_-,r_+]^q$ put
+\begin{equation}\label{eq:endpoint-vector}
+ E_\ell(\mathbf r):=\sigma_n^{r_\ell}(I_\ell),
+ \qquad 1\leq\ell\leq q.
+\end{equation}
+
+\begin{definition}[Admissible terminal depth]
+\label{def:admissible-depth}
+A deterministic integer sequence $m=m_n$ is \emph{admissible} for the
+window $[r_-,r_+]$ if, for all sufficiently large $n$,
+\begin{equation}\label{eq:m-window-general}
+ 1\le m\le \frac{r_-}{3},
+\end{equation}
+and
+\begin{equation}\label{eq:m-admissible}
+ m\longrightarrow\infty,
+ \qquad mh\longrightarrow0,
+ \qquad m\rho\longrightarrow0,
+ \qquad \frac{m^2}{M}\longrightarrow0,
+ \qquad \frac{m\log n}{M}\longrightarrow0,
+ \qquad \frac{m}{hM}\longrightarrow0.
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Free-depth finite-endpoint mixing in mean conditional total variation]
+\label{prop:endpoint-mixing}
+Let $m$ be any admissible terminal depth.  For every fixed $q\geq1$, with
+the coarse block sigma-field $\cH$ constructed in
+Section~\ref{sec:environment} using $K=q r_+$,
+\begin{equation}\label{eq:coarse-conditional-TV}
+ \Delta_{n,q}:=
+ \sup_{\mathbf r\in[r_-,r_+]^q}
+ \E\left[
+  \left\|
+   \cL\left(
+    (E_1(\mathbf r),\dots,E_q(\mathbf r))
+    \ \middle|\ \cH,I_1,\dots,I_q
+   \right)
+   -U_n^{\otimes q}
+  \right\|_{\TV}
+ \right]
+ \longrightarrow0.
+\end{equation}
+More quantitatively, there are constants $c,C>0$, depending only on
+$\kappa,q$ and $\tau_0$, such that
+\begin{align}
+ \Delta_{n,q}\le C\bigg[&
+ (1-\alpha)^{m-1}
+ +mh+\frac{m^2}{M}
+ +m\rho+\frac{m\log n}{M}
+ +\rho+\delta+\delta^{1/2}L_\delta
+ \notag\\
+ &+h^{-1}L_\delta e^{-cM}
+ +n^2h^{-1}e^{-chM}
+ +n^{-2}
+ \bigg].
+ \label{eq:free-depth-global-bound}
+\end{align}
+Here $\alpha>0$ is the Doeblin constant in
+Lemma~\ref{lem:reset-mixing}.
+\end{proposition}
+
+\begin{corollary}[Square-root-depth specialization]
+\label{cor:sqrt-depth}
+The choice
+\begin{equation}\label{eq:m-window}
+ m=\left\lfloor
+ \min\left\{\frac{r_-}{3},\sqrt{L_\delta}\right\}
+ \right\rfloor
+\end{equation}
+is admissible and therefore recovers the qualitative endpoint theorem.
+\end{corollary}
+
+\begin{proof}
+Both entries in the minimum tend to infinity.  Since
+$m\le\sqrt{L_\delta}$ and
+$x^c\sqrt{\log(1/x)}\to0$ as $x\downarrow0$ for every $c>0$, one has
+$mh\to0$ and $m\rho\to0$.  Also
+$M=\sqrt{nK}\ge\sqrt{nr_-}$ and $m\le\sqrt{\log n}$, so
+\[
+ \frac{m^2}{M}\le\frac{\log n}{\sqrt{nr_-}}\to0,
+ \qquad
+ \frac{m\log n}{M}\le
+ \frac{(\log n)^{3/2}}{\sqrt{nr_-}}\to0.
+\]
+Finally,
+$hM=n\delta^{3/4}=n^{1/4}K^{3/4}$, whence
+$m/(hM)\le\sqrt{\log n}/(n^{1/4}K^{3/4})\to0$.
+\end{proof}
+
+\begin{remark}[Conditioning level]
+Since the roots are independent of $\cH$ and have law $U_n^{\otimes q}$,
+Proposition~\ref{prop:endpoint-mixing} is equivalently the statement
+\[
+ \sup_{\mathbf r\in[r_-,r_+]^q}
+ \E\left\|
+  \cL\left(
+   (I_1,\dots,I_q,E_1(\mathbf r),\dots,E_q(\mathbf r))
+   \ \middle|\ \cH
+  \right)-U_n^{\otimes 2q}
+ \right\|_{\TV}\longrightarrow0.
+\]
+The estimate is conditional only on the coarse environment, in mean over
+that environment.  It is not a quenched statement conditional on all
+exact clocks, under which every endpoint is deterministic.
+\end{remark}
+
+The proof occupies the rest of the section.  Fix an arbitrary admissible
+terminal depth $m$.  The bound $m\le r_-/3$ makes every prefix length
+$k_\ell=r_\ell-m$ nonnegative and leaves at least two thirds of each
+observed orbit in the frozen prefix.  We use repeatedly the admissibility
+condition
+\begin{equation}\label{eq:m-over-hM}
+ \frac{m}{hM}\longrightarrow0.
+\end{equation}
+Since $h\le1$, this also implies $m/M\to0$.
+
+\subsection{Prefix depletion is negligible}
+
+For each root $I_\ell$, write
+$v_{\ell,t}=\sigma_n^t(I_\ell)$ and put $k_\ell=r_\ell-m$.
+The following counts involve only the prefixes of length $k_\ell$:
+\begin{align*}
+ V_a&:=\sum_{\ell=1}^q\sum_{t=0}^{k_\ell-1}
+       \1_{\{v_{\ell,t}\in H_a\}},\\
+ U_{ab}&:=\sum_{\ell=1}^q\sum_{t=0}^{k_\ell-1}
+       \1_{\{v_{\ell,t}\in H_a,\ v_{\ell,t+1}\in H_b\}}.
+\end{align*}
+Define the prefix-depletion event
+\begin{equation}\label{eq:D-event}
+ \cD_{n,\mathbf r}:=
+ \left\{V_a\leq\frac{m_a}{4}\ \forall a\leq d\right\}
+ \cap
+ \left\{U_{ab}\leq\frac{N_{ab}}2\
+       \ \forall a\leq d,\ b\in\mathsf E\right\}.
+\end{equation}
+
+\begin{lemma}[The prefix-depletion event is likely]
+\label{lem:depletion-stopping}
+Uniformly in $r_\ell\in[r_-,r_+]$,
+\begin{equation}\label{eq:D-probability}
+ \Pp(\cD_{n,\mathbf r}^c)
+ \le C_q\left[
+ \delta^{3/4}L_\delta
+ +\delta^{1/2}L_\delta
+ \right]=o(1).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Conditional on the full permutation, $v_{\ell,t}=\sigma_n^t(I_\ell)$ is
+uniform on $[n]$ for every fixed $(\ell,t)$.  Hence
+\[
+  \E(V_a\mid\sigma_n,X)=\frac{(\sum_\ell k_\ell)m_a}{n}
+  \leq\frac{Km_a}{n}.
+\]
+Markov's inequality gives
+\[
+  \Pp(V_a>m_a/4\mid\sigma_n,X)\leq4K/n=4\delta.
+\]
+Similarly,
+\[
+ \#\{x\in H_a:\sigma_n(x)\in H_b\}
+ =|Q_a\cap H_b|=N_{ab},
+\]
+so
+\[
+ \E(U_{ab}\mid\sigma_n,X)\leq\frac{KN_{ab}}n,
+ \qquad
+ \Pp(U_{ab}>N_{ab}/2\mid\sigma_n,X)\leq2\delta.
+\]
+A union bound, together with~\eqref{eq:d-e-bounds}, gives
+\[
+ \Pp(\cD_{n,\mathbf r}^c\mid\sigma_n,X)
+ \leq4d\delta+2d d_{\mathrm E}\delta
+ \leq C\left(
+   \delta^{3/4}L_\delta
+   +\delta^{1/2}L_\delta
+ \right)=o(1).
+\]
+\end{proof}
+
+\subsection{The frozen residual rows}
+
+Expose, for every $\ell$, the prefix
+\[
+ v_{\ell,0}\to v_{\ell,1}\to\cdots\to v_{\ell,r_\ell-m}.
+\]
+We declare failure if a path closes or if two exposed path segments
+intersect.  By~\eqref{eq:local-root-escape}, the closure probability is
+at most $q\zeta_n$.  Lemma~\ref{lem:segment-intersection} and a union
+bound over pairs give an intersection probability at most
+$Cq^2r_+/n$.  Thus the total failure probability is $o(1)$, uniformly in
+the chosen lengths.  On its complement the exposed prefixes are
+vertex-disjoint directed paths.
+
+For every block $a$, let $S_a^0\subset H_a$ be the unexposed sources and
+$T_a^0\subset Q_a$ the unused targets after the prefixes have been
+exposed.  Every exposed edge from a source in $H_a$ uses a target in
+$Q_a$, so
+\begin{equation}\label{eq:residual-square}
+  |S_a^0|=|T_a^0|=:m_a^0.
+\end{equation}
+Put $S^0=\bigcup_aS_a^0$, $T^0=\bigcup_aT_a^0$, and
+$N_0=|S^0|=|T^0|$.  Since the prefixes are disjoint open paths,
+\begin{equation}\label{eq:symmetric-difference}
+ T^0\setminus S^0=\{I_1,\dots,I_q\},
+ \qquad
+ S^0\setminus T^0
+ =\{v_{1,r_1-m},\dots,v_{q,r_q-m}\}.
+\end{equation}
+In particular both differences have cardinality $q$.
+
+Define residual cells
+\begin{equation}\label{eq:residual-cells}
+  N_{ab}^0:=|T_a^0\cap S_b^0|.
+\end{equation}
+
+\begin{lemma}[Residual core estimates]
+\label{lem:residual-core}
+On $\cG_n\cap\cD_{n,\mathbf r}$, and on the event that the prefixes are disjoint,
+for all sufficiently large $n$:
+\begin{align}
+ m_a^0&\geq\frac34m_a\geq cM
+ &&(a\leq d),
+ \label{eq:residual-row-lower}\\
+ N_{ab}^0&\geq chm_a^0
+ &&(a\leq d,\ b\in\mathsf E),
+ \label{eq:residual-early-cell}\\
+ \frac{N_{a*}^0}{m_a^0}
+ &\leq C\left(\rho+\frac{\log n}{M}\right)
+ &&(a\leq d),
+ \label{eq:residual-tail-cell}\\
+ p_*^0:=\frac{m_*^0}{N_0}&\leq C\rho.
+ \label{eq:residual-tail-mass}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+The number of prefix sources removed from row $a$ is at most $V_a$, so
+\eqref{eq:residual-row-lower} follows from~\eqref{eq:D-event} and
+Lemma~\ref{lem:good-environment}.
+
+A target deleted from the initial cell $Q_a\cap H_b$ is counted by
+$U_{ab}$.  Passing from $H_b$ to the residual source set $S_b^0$ can
+remove additional labels from $T_a^0\cap H_b$ only when a label has been
+used as a source but not as a target.  By~\eqref{eq:symmetric-difference}
+there are only $q$ such labels.  Hence
+\[
+ N_{ab}^0\geq N_{ab}-U_{ab}-q\geq \frac{N_{ab}}2-q.
+\]
+On $\cG_n$, $N_{ab}\geq chm_a\geq chM$, and $hM\to\infty$ by
+\eqref{eq:hM-large}.  Thus, after changing $c$, this proves
+\eqref{eq:residual-early-cell}.  The tail intersection can only decrease,
+so $N_{a*}^0\leq N_{a*}$; combine
+\eqref{eq:tail-cell-upper} with~\eqref{eq:residual-row-lower} to get
+\eqref{eq:residual-tail-cell}.  Finally $m_*^0\leq m_*\leq Cn\rho$ and
+$N_0=n-O(K)=n(1-o(1))$, proving~\eqref{eq:residual-tail-mass}.
+\end{proof}
+
+\subsection{The reset kernel}
+
+We first isolate the deterministic comparison mechanism used below.
+
+\begin{lemma}[Adaptive Doeblin comparison]
+\label{lem:adaptive-doeblin}
+Let $P$ be a Markov kernel on a finite or countable state space such that,
+for some $\alpha\in(0,1]$,
+\begin{equation}\label{eq:abstract-contraction}
+ \|\mu P-\mu'P\|_{\TV}
+ \leq(1-\alpha)\|\mu-\mu'\|_{\TV}
+\end{equation}
+for all probability measures $\mu,\mu'$.  If $p$ satisfies
+$\|pP-p\|_{\TV}\leq\zeta$, then for every probability measure $\mu$ and
+$j\geq0$,
+\begin{equation}\label{eq:abstract-mixing}
+ \|\mu P^j-p\|_{\TV}
+ \leq (1-\alpha)^j\|\mu-p\|_{\TV}+\frac{\zeta}{\alpha}.
+\end{equation}
+Suppose in addition that an adapted process $(Y_t)_{t=0}^j$ can be
+coupled to a $P$-chain $(Z_t)_{t=0}^j$ with the same initial law so that
+\[
+ \Pp(Y_t\ne Z_t\text{ for some }t\leq j)\leq\beta_j.
+\]
+Then
+\begin{equation}\label{eq:abstract-adaptive-mixing}
+ \|\cL(Y_j)-p\|_{\TV}
+ \leq\beta_j+(1-\alpha)^j+\frac{\zeta}{\alpha}.
+\end{equation}
+If, before the first disagreement, the conditional probability of a new
+disagreement at transition $t$ is at most $\eta_t$, then one may take
+$\beta_j\leq\sum_{t=0}^{j-1}\eta_t$.
+\end{lemma}
+
+\begin{proof}
+Writing $d_j=\|pP^j-p\|_{\TV}$,~\eqref{eq:abstract-contraction} gives
+$d_{j+1}\leq(1-\alpha)d_j+\zeta$ and $d_0=0$.  Hence
+$d_j\leq\zeta/\alpha$.  Combining this with
+\[
+ \|\mu P^j-pP^j\|_{\TV}
+ \leq(1-\alpha)^j\|\mu-p\|_{\TV}
+\]
+proves~\eqref{eq:abstract-mixing}.  The coupling inequality gives
+$\|\cL(Y_j)-\cL(Z_j)\|_{\TV}\leq\beta_j$, which proves
+\eqref{eq:abstract-adaptive-mixing}.  The final assertion follows by a
+union bound over the successive conditional coupling failures.
+\end{proof}
+
+Let the state space be $\cS=\{1,\dots,d,*\}$.  Let $\nu$ be the uniform
+probability measure on the early states $\mathsf E$.  If $m_a^0>0$, put
+\[
+ d_a^0:=\frac{|T_a^0\setminus S^0|}{m_a^0}
+\]
+and define
+\begin{equation}\label{eq:completed-kernel}
+  \widehat P^0_{ab}
+  :=\frac{N_{ab}^0}{m_a^0}+d_a^0\nu_b.
+\end{equation}
+The matrix $(N_{ab}^0/m_a^0)_b$ is substochastic: the missing targets are
+exactly the roots lying in the rank row $T_a^0$, and they cannot serve as
+new sources.  Thus~\eqref{eq:completed-kernel} is stochastic.  If
+$m_a^0=0$, set $\widehat P^0(a,\cdot)=\nu(\cdot)$.  Finally define the
+\emph{reset kernel} $\overline P^0$ by
+\begin{equation}\label{eq:reset-kernel}
+  \overline P^0(a,\cdot)=
+  \begin{cases}
+    \widehat P^0(a,\cdot),&a\leq d,\\
+    \nu(\cdot),&a=*.
+  \end{cases}
+\end{equation}
+Let
+\begin{equation}\label{eq:p0-def}
+  p_a^0:=\frac{m_a^0}{N_0}.
+\end{equation}
+For later use, let $\lambda_a^0=\Unif(T_a^0)$ when $m_a^0>0$; if
+$m_a^0=0$, choose $\lambda_a^0$ arbitrarily.
+
+\begin{lemma}[Doeblin minorization and approximate invariance]
+\label{lem:reset-mixing}
+On the event of Lemma~\ref{lem:residual-core}, there is a constant
+$\alpha=\alpha(\kappa,\tau_0)>0$ such that
+\begin{equation}\label{eq:global-minorization}
+  \overline P^0(a,\cdot)\geq\alpha\nu(\cdot)
+  \qquad(a\in\cS).
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:approx-invariance}
+  \|p^0\overline P^0-p^0\|_{\TV}
+  \leq C\left(\rho+\frac{q}{N_0}\right).
+\end{equation}
+Consequently, for every state $a$ and every $j\geq0$,
+\begin{equation}\label{eq:reset-mixing-bound}
+ \|\delta_a(\overline P^0)^j-p^0\|_{\TV}
+ \leq
+ (1-\alpha)^j
+ +C\left(\rho+\frac{q}{N_0}\right).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For finite $a$ and early $b$,~\eqref{eq:residual-early-cell} gives
+$\widehat P^0_{ab}\geq ch$.  Since
+$d_{\mathrm E}=|\mathsf E|\geq c/h$, there is a constant $\alpha>0$ for
+which $ch\geq\alpha/d_{\mathrm E}=\alpha\nu_b$.  The tail row equals
+$\nu$, so~\eqref{eq:global-minorization} follows.
+
+Let
+\[
+ r_a=|T_a^0\setminus S^0|,
+ \qquad
+ e_b=|S_b^0\setminus T^0|.
+\]
+By~\eqref{eq:symmetric-difference}, $\sum_ar_a=\sum_be_b=q$.  For every
+$b$,
+\begin{align*}
+ (p^0\widehat P^0)_b
+ &=\frac1{N_0}\sum_aN_{ab}^0
+   +\frac1{N_0}\sum_ar_a\nu_b\\
+ &=\frac{|S_b^0\cap T^0|}{N_0}+\frac{q}{N_0}\nu_b,
+\end{align*}
+whereas
+\[
+  p_b^0=\frac{|S_b^0\cap T^0|+e_b}{N_0}.
+\]
+It follows that
+$\|p^0\widehat P^0-p^0\|_{\TV}\leq q/N_0$.  Replacing only the tail row
+of $\widehat P^0$ by $\nu$ changes the product measure by at most
+$p_*^0$ in total variation.  Use~\eqref{eq:residual-tail-mass} to obtain
+\eqref{eq:approx-invariance}.
+
+The minorization gives
+\begin{equation}\label{eq:doeblin-contraction}
+ \|\mu\overline P^0-\mu'\overline P^0\|_{\TV}
+ \leq(1-\alpha)\|\mu-\mu'\|_{\TV},
+\end{equation}
+since every row can be written as
+$\alpha\nu+(1-\alpha)Q_a$.  Apply
+Lemma~\ref{lem:adaptive-doeblin} with
+$P=\overline P^0$, $p=p^0$, and
+$\zeta=C(\rho+q/N_0)$.  Since $\alpha$ is bounded away from zero, its
+factor is absorbed into $C$, proving~\eqref{eq:reset-mixing-bound}.
+\end{proof}
+
+\subsection{Residual-set invariant during terminal exposure}
+
+After $u$ compatible terminal-window edges have been exposed, let
+$S^{(u)}$ and $T^{(u)}$ be the current global residual source and target
+sets.  For each $\ell$, let $\xi_\ell^{(u)}$ be the current tip of the
+$\ell$th path: initially
+$\xi_\ell^{(0)}=v_{\ell,r_\ell-m}$; whenever an edge of that terminal
+window is exposed, replace its current tip by the newly chosen target.
+A terminal history is called \emph{compatible} if no chosen target is an
+already exposed root and all exposed assignments remain consistent.
+
+\begin{lemma}[Evolving residual-set invariant]
+\label{lem:evolving-residual-invariant}
+After every compatible terminal history,
+\begin{equation}\label{eq:evolving-residual-invariant}
+  T^{(u)}\setminus S^{(u)}=\{I_1,\dots,I_q\},
+  \qquad
+  S^{(u)}\setminus T^{(u)}
+  =\{\xi_1^{(u)},\dots,\xi_q^{(u)}\}.
+\end{equation}
+Consequently,
+\begin{equation}\label{eq:present-target-current-source}
+  T^{(u)}\cap\bigl(S^0\setminus S^{(u)}\bigr)=\varnothing.
+\end{equation}
+In particular, every currently available target that lies in $S^0$ is
+also a currently available source.
+\end{lemma}
+
+\begin{proof}
+At $u=0$,~\eqref{eq:evolving-residual-invariant} is exactly
+\eqref{eq:symmetric-difference}.  Suppose it holds before exposing an
+edge from the current tip $x=\xi_\ell^{(u)}$.  Then
+$x\in S^{(u)}\setminus T^{(u)}$.  Compatibility excludes targets in
+$T^{(u)}\setminus S^{(u)}$, which are precisely the roots by the
+induction hypothesis.  Hence the chosen target $y$ lies in
+$S^{(u)}\cap T^{(u)}$.  Passing to
+$S^{(u+1)}=S^{(u)}\setminus\{x\}$ and
+$T^{(u+1)}=T^{(u)}\setminus\{y\}$ replaces the tip $x$ by $y$ and leaves
+the root defect unchanged.  This proves the induction.  Finally, any
+point of the left side of~\eqref{eq:present-target-current-source} would
+belong to $T^{(u)}\setminus S^{(u)}$ and to $S^0$, but the former set is
+the root set and the roots lie in $T^0\setminus S^0$.
+\end{proof}
+
+\subsection{Adaptive comparison during the terminal window}
+
+The rows remaining after the prefixes are still independent permanental
+matchings by Lemma~\ref{lem:permanental-rows}.  During all $q$ terminal
+windows together, at most $qm$ further source-target pairs are exposed.
+Let $\cF_{\mathrm{pre}}$ be the sigma-field generated by $\cH$, the
+roots, and all exact source-target assignments in the frozen prefixes.
+
+\begin{lemma}[One terminal endpoint is almost uniform]
+\label{lem:terminal-uniform}
+Condition on a realization of $\cF_{\mathrm{pre}}$ corresponding to a
+compatible, disjoint prefix history on which $\cG_n\cap\cD_{n,\mathbf r}$ holds.
+Condition further on any previously exposed compatible terminal history.
+Consider one of the remaining terminal windows and suppose its starting
+row is finite.  Then its endpoint after the $m$ remaining edges is at
+total-variation distance at most $\eps_{n,q}$ from $U_n$, where
+\begin{align}
+ \eps_{n,q}\leq C_q\bigg[&
+ (1-\alpha)^{m-1}
+ +mh+\frac{m^2}{M}
+ +m\rho+\frac{m\log n}{M}
+ +\rho+\frac Kn
+ \bigg].
+ \label{eq:epsilon-terminal}
+\end{align}
+The bound is uniform in the previously exposed compatible history and in
+the chosen lengths.
+\end{lemma}
+
+\begin{proof}
+We compare a stopped version of the actual row process to the fixed reset
+chain $\overline P^0$.  The stopped process enters a cemetery state
+$\dagger$ if an intermediate edge chooses a target in
+$T^{(u)}\setminus S^{(u)}$, equivalently one of the exposed roots.
+Whenever this happens, complete the stopped transition artificially by
+an independent draw from $\nu$, but mark the completion as a coupling
+failure.
+
+Suppose the current source is in a finite row $a$, and put
+$T_a^{(u)}:=T^{(u)}\cap T_a^0$.  At most $qm$ targets have been removed
+from $T_a^0$; by~\eqref{eq:residual-row-lower} and
+\eqref{eq:m-over-hM},
+$|T_a^{(u)}|\geq m_a^0-qm\geq cM$ for all large $n$.  Moreover,
+\[
+  \|\Unif(T_a^{(u)})-\Unif(T_a^0)\|_{\TV}
+  \leq \frac{qm}{m_a^0}\leq C_q\frac mM.
+\]
+By hereditary flatness, Lemma~\ref{lem:flatness}, the actual one-edge law
+is at distance at most $Ch$ from $\Unif(T_a^{(u)})$.  By
+Lemma~\ref{lem:evolving-residual-invariant}, every target in
+$T_a^{(u)}\cap S^0$ is still a current source, so pushing such a target
+to its source-row label is well defined.  A uniform target in
+$T_a^0\cap S_b^0$ produces state $b$, whereas a uniform target in
+$T_a^0\setminus S^0$ is reset according to $\nu$; this is exactly
+$\widehat P^0(a,\cdot)$.  The latter defect set consists of the roots
+lying in row $a$ and has cardinality at most $q$.  By the upper bound in
+\eqref{eq:flat-marginal},
+\[
+  \Pp(\dagger\mid\text{current history})
+  \leq \frac{e^{\kappa h}q}{|T_a^{(u)}|}
+  \leq \frac{C_q}{M}.
+\]
+Consequently, by the preceding total-variation comparisons and data
+processing, the completed actual next-row law can be coupled to
+$\widehat P^0(a,\cdot)$, while charging every cemetery completion as
+failure, with total one-step error
+\begin{equation}\label{eq:one-step-adaptive-error}
+  \eta_{n,q}\leq C_q\left(h+\frac mM\right).
+\end{equation}
+
+For a finite row,~\eqref{eq:residual-tail-cell} and the fact that the
+completion in~\eqref{eq:completed-kernel} is supported on early states
+give
+\begin{equation}\label{eq:finite-tail-probability}
+  \widehat P^0(a,*)
+  \leq C\left(\rho+\frac{\log n}{M}\right)=:\tau_n.
+\end{equation}
+Couple each completed transition maximally to the reset chain while the
+common state is finite.  Declare failure at a mismatch, at a cemetery
+completion, or upon a move to the tail state.  Over the first $m-1$ row
+transitions, the failure probability is at most
+\begin{equation}\label{eq:coupling-failure}
+  (m-1)(\eta_{n,q}+\tau_n).
+\end{equation}
+Before the first failure, the completed actual row process and the reset
+chain agree.  Lemma~\ref{lem:adaptive-doeblin}, with
+$\beta_{m-1}\leq(m-1)(\eta_{n,q}+\tau_n)$, therefore couples the
+completed actual row after $m-1$ transitions to a reference row
+$A_0\sim p^0$ with failure probability at most
+\[
+ (m-1)(\eta_{n,q}+\tau_n)
+ +(1-\alpha)^{m-1}
+ +C\left(\rho+\frac q{N_0}\right).
+\]
+  If $A_0=a\leq d$ and the coupling has not failed,
+hereditary flatness and the deletion of at most $qm$ frozen targets show
+that the final target law is within $C_q(h+m/M)$ of $\lambda_a^0$.  A
+final hit on an exposed root is marked as failure and is absorbed in the
+same bound.  If $A_0=*$, draw an auxiliary target from $\lambda_*^0$ and
+mark the tail-row event as failure.  The reference target law is then
+exactly
+\begin{equation}\label{eq:uniform-mixture}
+  \sum_a p_a^0\lambda_a^0=\Unif(T^0).
+\end{equation}
+The tail-row completion costs $p_*^0=O(\rho)$ by
+\eqref{eq:residual-tail-mass}.  Finally, $|[n]\setminus T^0|\leq K$, so
+\begin{equation}\label{eq:uniform-residual-full}
+  \|\Unif(T^0)-U_n\|_{\TV}\leq K/n.
+\end{equation}
+Combining~\eqref{eq:one-step-adaptive-error}--\eqref{eq:uniform-residual-full},
+using $q/N_0\leq C_qK/n$, gives~\eqref{eq:epsilon-terminal}.  Its
+convergence to zero follows from Definition~\ref{def:admissible-depth} and
+$K/n=\delta\to0$.
+\end{proof}
+
+\begin{corollary}[Linear-depth polynomial finite-endpoint mixing]
+\label{cor:linear-depth}
+Let $L=\log n$.  Fix $q\ge1$ and $Q>0$.  There is
+$A=A(\kappa,q,Q,\tau_0)<\infty$ such that, whenever
+\[
+ L^3\le r_-\le r_+\le \frac{n}{L^A},
+\]
+the choice
+\begin{equation}\label{eq:m-linear-depth}
+ m=\left\lfloor L_\delta\right\rfloor
+\end{equation}
+is admissible and
+\begin{align}
+ \eps_{n,q}&\le C_{\kappa,q,Q}L^{-Q},
+ \label{eq:epsilon-terminal-polynomial}\\
+ \Delta_{n,q}&\le C_{\kappa,q,Q}L^{-Q}.
+ \label{eq:endpoint-polynomial}
+\end{align}
+The conditional product bound in
+Corollary~\ref{cor:several-terminal} is at most
+$C_{\kappa,q,Q}L^{-Q}$ as well.
+\end{corollary}
+
+\begin{proof}
+Since $r_-\ge L^3$ and $L_\delta\le L+O_q(1)$, one has
+$m\le r_-/3$ for all large $n$.  Also
+\[
+ (1-\alpha)^{m-1}\le C\delta^{c},
+ \qquad
+ mh\le C(1+L_\delta)\delta^{1/4},
+ \qquad
+ m\rho\le C(1+L_\delta)\delta^{1/(4\kappa)}
+\]
+for a constant $c=c(\kappa,\tau_0)>0$.  Furthermore,
+$M=\sqrt{nK}\ge c_q\sqrt n\,L^{3/2}$ and
+$m\le L+O_q(1)$, so
+\[
+ \frac{m^2+m\log n}{M}\le C_q\frac{L^{1/2}}{\sqrt n},
+ \qquad
+ \frac{m}{hM}\le C_q\frac{1}{n^{1/4}L^{5/4}}.
+\]
+Thus $m$ is admissible.  Since
+$\delta=qr_+/n\le qL^{-A}$, equation~\eqref{eq:epsilon-terminal}
+gives~\eqref{eq:epsilon-terminal-polynomial} after choosing $A$
+sufficiently large.
+
+For the global estimate, Corollary~\ref{cor:root-crude} gives
+$\zeta_n\le C_\kappa r_+/n$.  The depletion term is
+$O_q(\delta^{1/2}L_\delta)$ by
+Lemma~\ref{lem:depletion-stopping}.  The environment error in
+\eqref{eq:environment-failure} is smaller than every fixed power of
+$L^{-1}$ uniformly in the stated range, because
+$M\ge c_q\sqrt n\,L^{3/2}$ and
+$hM=n\delta^{3/4}\ge c_q n^{1/4}L^{9/4}$.
+Substituting these estimates into
+\eqref{eq:free-depth-global-bound} proves
+\eqref{eq:endpoint-polynomial} after increasing $A$ once more.
+\end{proof}
+
+\begin{corollary}[Several terminal endpoints]
+\label{cor:several-terminal}
+On the $\cF_{\mathrm{pre}}$-measurable event that the prefix history is
+compatible and disjoint, $\cG_n\cap\cD_{n,\mathbf r}$ holds, and all
+terminal-window starting rows are finite, the regular conditional law
+satisfies
+\begin{equation}\label{eq:conditional-product-TV}
+ \left\|
+ \cL\left(
+   \bigl(\sigma_n^{r_\ell}(I_\ell)\bigr)_{\ell=1}^q
+   \ \middle|\ \cF_{\mathrm{pre}}
+ \right)
+ -\Unif([n])^{\otimes q}
+ \right\|_{\TV}
+ \leq q\eps_{n,q}.
+\end{equation}
+Equivalently, the endpoint vector can be coupled to a product-uniform
+vector $(J_1,\dots,J_q)$ that is independent of
+$\cF_{\mathrm{pre}}$, with failure probability at most $q\eps_{n,q}$.
+\end{corollary}
+
+\begin{proof}
+Expose the terminal windows successively and apply
+Lemma~\ref{lem:terminal-uniform} conditionally at each stage.  Its
+estimates are uniform in every previously exposed compatible terminal
+history.  Across all windows at most $qm$ additional assignments are
+exposed; by~\eqref{eq:m-over-hM}, these deletions cannot destroy the
+row-size or early-cell margins obtained after the prefixes.  On the
+success event, Lemma~\ref{lem:evolving-residual-invariant} preserves the
+residual-set bookkeeping needed for the next window.  Every hit on an
+exposed root, including on a final edge, is already charged as a
+coupling failure in Lemma~\ref{lem:terminal-uniform}.  At stage $\ell$,
+use a fresh uniform coordinate independent of
+$\cF_{\mathrm{pre}}$ and of the preceding coordinates.  The sequential
+coupling and a union bound prove~\eqref{eq:conditional-product-TV}.
+\end{proof}
+
+\subsection{Averaging down to the coarse environment}
+
+\begin{proof}[Proof of Proposition~\ref{prop:endpoint-mixing}]
+Fix $\mathbf r\in[r_-,r_+]^q$ and abbreviate
+$E_\ell=E_\ell(\mathbf r)$.  Let $\Gamma_{n,\mathbf r}$ be the
+$\cF_{\mathrm{pre}}$-measurable event that the frozen prefixes are open
+and pairwise disjoint, $\cG_n\cap\cD_{n,\mathbf r}$ holds, and every terminal-window
+starting row is finite.  Put
+\[
+ d_{n,q}:=\sup_{\mathbf r\in[r_-,r_+]^q}\Pp(\cD_{n,\mathbf r}^c).
+\]
+By Lemma~\ref{lem:depletion-stopping},
+\[
+ d_{n,q}\le C_q\left[
+ \delta^{3/4}L_\delta
+ +\delta^{1/2}L_\delta
+ \right].
+\]
+The estimates above and a union bound give
+\begin{equation}\label{eq:good-prefix-complement}
+ \sup_{\mathbf r}\Pp(\Gamma_{n,\mathbf r}^c)
+ \leq q\zeta_n+Cq^2\frac{r_+}{n}
+      +\Pp(\cG_n^c)+d_{n,q}+q\rho.
+\end{equation}
+For the last term, conditional on the full clocks and permutation each
+$v_{\ell,k_\ell}$ is uniform on $[n]$, while
+$\E(m_*/n)\leq\rho$.
+
+On $\Gamma_{n,\mathbf r}$, Corollary~\ref{cor:several-terminal} gives
+\[
+ \left\|
+  \cL(E_1,\dots,E_q\mid\cF_{\mathrm{pre}})-U_n^{\otimes q}
+ \right\|_{\TV}
+ \leq q\eps_{n,q};
+\]
+on its complement the distance is at most one.  Since
+$\sigma(\cH,I_1,\dots,I_q)\subset\cF_{\mathrm{pre}}$, convexity of total
+variation under conditional averaging yields
+\begin{align*}
+ &\left\|
+  \cL(E_1,\dots,E_q\mid\cH,I_1,\dots,I_q)-U_n^{\otimes q}
+ \right\|_{\TV}\\
+ &\qquad\leq
+ \E\left[
+  \left\|
+   \cL(E_1,\dots,E_q\mid\cF_{\mathrm{pre}})-U_n^{\otimes q}
+  \right\|_{\TV}
+  \ \middle|\ \cH,I_1,\dots,I_q
+ \right].
+\end{align*}
+Taking expectations, then the supremum over $\mathbf r$, gives
+\begin{align}
+ \Delta_{n,q}\leq{}&q\eps_{n,q}+q\zeta_n
+ +Cq^2\frac{r_+}{n}+\Pp(\cG_n^c)+d_{n,q}+q\rho.
+ \label{eq:endpoint-TV-global-error}
+\end{align}
+Use~\eqref{eq:zeta-quantitative} and $K/n=\delta$ to absorb the
+short-root and intersection terms into $C_q\delta$.  Then substitute
+\eqref{eq:epsilon-terminal}, \eqref{eq:environment-failure}, and
+\eqref{eq:D-probability}; since
+$\delta^{3/4}L_\delta\le\delta^{1/2}L_\delta$ for small $\delta$, this
+is exactly~\eqref{eq:free-depth-global-bound}.  Every term tends to zero
+by Definition~\ref{def:admissible-depth}, proving
+\eqref{eq:coarse-conditional-TV}.
+\end{proof}
+
+\begin{corollary}[Bounded coarse observables]
+\label{cor:bounded-coarse-observables}
+Let
+\[
+ G_n=G_n(\cH;i_1,\dots,i_q,j_1,\dots,j_q)
+\]
+be a real- or complex-valued measurable function with
+$\|G_n\|_\infty\leq B<\infty$ uniformly in $n$.  Let
+$J_1,\dots,J_q$ be independent $U_n$ labels, independent of the clocks
+and roots.  Then
+\begin{align}
+ \sup_{\mathbf r\in[r_-,r_+]^q}
+ \big|&\E G_n(\cH;I_1,\dots,I_q,E_1(\mathbf r),\dots,E_q(\mathbf r))
+ \nonumber\\
+ &-\E G_n(\cH;I_1,\dots,I_q,J_1,\dots,J_q)\big|
+ \leq 2B\Delta_{n,q}\longrightarrow0.
+ \label{eq:bounded-coarse-decorrelation}
+\end{align}
+\end{corollary}
+
+\begin{proof}
+Condition on $\cH,I_1,\dots,I_q$ and use the dual bound
+$|\int g\,\dd\mu-\int g\,\dd\nu|\leq2\|g\|_\infty
+\|\mu-\nu\|_{\TV}$, then apply Proposition~\ref{prop:endpoint-mixing}.
+\end{proof}
+
+\subsection{Recovering observables of the exact clocks}
+
+For each finite block choose a deterministic representative
+$\bar t_a\in B_a$ and put $\bar X_i=\bar t_a$ for $i\in H_a$.  When
+$i,j$ are in finite blocks, define
+\begin{equation}\label{eq:coarse-log-R}
+ \overline Z_{ij}:=-(\theta_i-\theta_j)(\bar X_j-\bar X_i).
+\end{equation}
+Then
+\begin{equation}\label{eq:coarse-log-R-error}
+ |\log R_{ij}-\overline Z_{ij}|\leq2\kappa h
+\end{equation}
+whenever both labels are finite.
+
+\begin{corollary}[Bounded Lipschitz exact-clock observables]
+\label{cor:bounded-exact-observables}
+For $1\leq\ell\leq q$, let
+$\psi_{n,\ell}:[n]^2\times\R\to\mathbb C$ satisfy, uniformly in
+$n,\ell,i,j,z,z'$,
+\begin{equation}\label{eq:psi-bounds}
+ |\psi_{n,\ell}(i,j,z)|\leq B,
+ \qquad
+ |\psi_{n,\ell}(i,j,z)-\psi_{n,\ell}(i,j,z')|
+ \leq L|z-z'|.
+\end{equation}
+Define
+\[
+ \Psi_{n,\ell}(i,j)
+ :=\psi_{n,\ell}(i,j,\log R_{ij}).
+\]
+Then, uniformly in $\mathbf r\in[r_-,r_+]^q$,
+\begin{align}
+ \left|
+ \E\prod_{\ell=1}^q\Psi_{n,\ell}(I_\ell,E_\ell(\mathbf r))
+ -\E\prod_{\ell=1}^q\Psi_{n,\ell}(I_\ell,J_\ell)
+ \right|
+ &\longrightarrow0,
+ \label{eq:exact-bounded-decorrelation}\\
+ \left|
+ \E\prod_{\ell=1}^q
+ \left[
+  \1_{\{L_n(I_\ell)>r_\ell\}}
+  \Psi_{n,\ell}(I_\ell,E_\ell(\mathbf r))
+ \right]
+ -\E\prod_{\ell=1}^q\Psi_{n,\ell}(I_\ell,J_\ell)
+ \right|
+ &\longrightarrow0.
+ \label{eq:exact-bounded-long-decorrelation}
+\end{align}
+The functions may depend on the deterministic rates and on arbitrary
+bounded deterministic marks through their $(i,j)$ arguments.
+\end{corollary}
+
+\begin{proof}
+Set
+\[
+ \overline\Psi_{n,\ell}(i,j)
+ :=
+ \begin{cases}
+  \psi_{n,\ell}(i,j,\overline Z_{ij}),&i,j\notin H_*,\\
+  0,&\text{otherwise}.
+ \end{cases}
+\]
+The product of the $\overline\Psi_{n,\ell}$ is a bounded coarse
+observable.  Corollary~\ref{cor:bounded-coarse-observables} therefore
+replaces the actual endpoint vector by $(J_1,\dots,J_q)$.  On the event
+that all labels are finite,~\eqref{eq:coarse-log-R-error},
+\eqref{eq:psi-bounds}, and a telescoping product estimate show that the
+coarse-to-exact replacement costs at most $C_{q,B,L,\kappa}h$.
+Each root, actual endpoint, and fresh endpoint is marginally uniform on
+$[n]$ conditional on the full permutation where appropriate, so the
+probability that any required label lies in $H_*$ is $O_q(\rho)$.
+This proves~\eqref{eq:exact-bounded-decorrelation}.  Finally, the
+probability that one of the long-cycle indicators vanishes is at most
+$q\zeta_n$, proving~\eqref{eq:exact-bounded-long-decorrelation}.
+\end{proof}
+
+\begin{corollary}[Truncated swap-factor decorrelation]
+\label{cor:truncated-swap-decorrelation}
+Fix $1\leq A_1,\dots,A_q<\infty$.  Uniformly in
+$\mathbf r\in[r_-,r_+]^q$,
+\begin{align}
+ &\E\prod_{\ell=1}^q
+ \left[
+  \1_{\{L_n(I_\ell)>r_\ell\}}
+  F_{A_\ell}(I_\ell,E_\ell(\mathbf r))
+ \right]
+ \nonumber\\
+ &\hspace{25mm}
+ -\E\prod_{\ell=1}^qF_{A_\ell}(I_\ell,J_\ell)
+ \longrightarrow0.
+ \label{eq:endpoint-decorrelation}
+\end{align}
+\end{corollary}
+
+\begin{proof}
+Apply Corollary~\ref{cor:bounded-exact-observables} with
+$\psi_{n,\ell}(i,j,z)=e^z\wedge A_\ell$, which is bounded by $A_\ell$
+and $A_\ell$-Lipschitz.
+\end{proof}
+
+\begin{corollary}[Untruncated swap-factor decorrelation below the moment threshold]
+\label{cor:untruncated-swap-decorrelation}
+If the fixed integer $q$ satisfies $q<\lambda_\kappa$, then uniformly in
+$\mathbf r\in[r_-,r_+]^q$,
+\begin{equation}\label{eq:untruncated-swap-decorrelation}
+ \left|
+ \E\prod_{\ell=1}^q
+ \left[
+  \1_{\{L_n(I_\ell)>r_\ell\}}
+  R_{I_\ell,E_\ell(\mathbf r)}
+ \right]
+ -\E\prod_{\ell=1}^qR_{I_\ell,J_\ell}
+ \right|
+ \longrightarrow0.
+\end{equation}
+No factorization of the fresh-pair expectation is asserted.
+\end{corollary}
+
+\begin{proof}
+Choose $p$ with $q<p<\lambda_\kappa$.  By
+\eqref{eq:selected-p-moment} and~\eqref{eq:independent-p-moment}, every
+actual selected factor and every fresh-pair factor is uniformly bounded
+in $L^p$.  Generalized H\"older therefore makes each of the two products
+uniformly integrable: for example, the contribution of
+$\max_\ell Z_\ell>A$ is $O(A^{-(p-q)})$ after increasing the constant,
+where $Z_\ell$ denotes the corresponding nonnegative factor.  Apply
+Corollary~\ref{cor:truncated-swap-decorrelation} with all truncation
+levels equal to $A$, then let first $n\to\infty$ and afterward
+$A\to\infty$.
+\end{proof}
+
+\section{Concentration of the switching intensity}
+\label{sec:switching-intensity}
+
+Define the truncated intensity
+\begin{equation}\label{eq:S-A-def}
+  S_{n,r}^{(A)}
+  :=\sum_{i:L_n(i)>r}F_A(i,\sigma_n^r(i)).
+\end{equation}
+Also put
+\begin{equation}\label{eq:D-A-def}
+  D_{n,A}:=\frac1{n^2}\sum_{i,j=1}^nF_A(i,j).
+\end{equation}
+Conditional on the clocks,
+$D_{n,A}=\E(F_A(I,J)\mid X)$.
+
+For completeness we record the elementary variance inequality used below.
+If $Z=g(Y_1,\dots,Y_n)$ for independent inputs and $Z^{(k)}$ is obtained
+by replacing $Y_k$ by an independent copy, then
+\begin{equation}\label{eq:efron-stein-weak}
+  \Var Z\leq\sum_{k=1}^n\E(Z-Z^{(k)})^2.
+\end{equation}
+Indeed, for $\cF_k=\sigma(Y_1,\dots,Y_k)$ and
+$D_k=\E(Z\mid\cF_k)-\E(Z\mid\cF_{k-1})$, martingale
+orthogonality gives $\Var Z=\sum_k\E D_k^2$.  Also
+$D_k=\E(Z-Z^{(k)}\mid\cF_k)$, so conditional Jensen proves
+\eqref{eq:efron-stein-weak}.  The sharper factor-$1/2$ form is the
+standard Efron--Stein inequality; see
+Boucheron--Lugosi--Massart~\cite[Theorem~3.1]{BLM2013}.
+
+\begin{lemma}[The independent-pair average concentrates]
+\label{lem:D-concentration}
+For every fixed $1\leq A<\infty$,
+\begin{equation}\label{eq:D-variance}
+  \Var(D_{n,A})\leq\frac{4A^2}{n}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Replacing one clock $X_k$ changes only summands in
+\eqref{eq:D-A-def} with $i=k$ or $j=k$, at most $2n$ terms.  Each term
+lies in $[0,A]$, so
+$|D_{n,A}-D_{n,A}^{(k)}|\leq2A/n$.  Applying
+\eqref{eq:efron-stein-weak} gives
+\[
+ \Var(D_{n,A})\leq n\left(\frac{2A}{n}\right)^2
+ =\frac{4A^2}{n}.
+\]
+\end{proof}
+
+\begin{proposition}[Truncated switching intensity]
+\label{prop:truncated-intensity}
+For every fixed $1\leq A<\infty$,
+\begin{equation}\label{eq:truncated-L2}
+ \sup_{r_-\leq r\leq r_+}
+ \E\left|\frac{S_{n,r}^{(A)}}n-\mu_{n,A}\right|^2
+ \longrightarrow0.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Let $I$ be uniform.  Conditional on the clocks,
+\[
+ \frac{S_{n,r}^{(A)}}n
+ =\E\left[
+   \1_{\{L_n(I)>r\}}F_A(I,\sigma_n^r(I))
+   \ \middle|\ X
+ \right].
+\]
+The $q=1$ case of Corollary~\ref{cor:truncated-swap-decorrelation} gives
+\[
+  \E\frac{S_{n,r}^{(A)}}n-\E D_{n,A}\longrightarrow0
+\]
+uniformly in $r$.  For independent uniform roots $I_1,I_2$ and
+independent uniform labels $J_1,J_2$, all independent of the clocks,
+\begin{align*}
+ \E\left(\frac{S_{n,r}^{(A)}}n\right)^2
+ &=\E\prod_{\ell=1}^2
+   \left[
+    \1_{\{L_n(I_\ell)>r\}}
+    F_A\bigl(I_\ell,\sigma_n^r(I_\ell)\bigr)
+   \right],\\
+ \E D_{n,A}^2
+ &=\E\prod_{\ell=1}^2F_A(I_\ell,J_\ell).
+\end{align*}
+Thus the $q=2$ case of the same corollary gives
+\[
+  \E\left(\frac{S_{n,r}^{(A)}}n\right)^2
+  -\E D_{n,A}^2\longrightarrow0
+\]
+uniformly in $r$.  Since $\E D_{n,A}=\mu_{n,A}$ and
+$\Var(D_{n,A})\to0$ by Lemma~\ref{lem:D-concentration}, the first two
+moments of $S_{n,r}^{(A)}/n$ converge uniformly to
+$\mu_{n,A}$ and $\mu_{n,A}^2$, respectively.  This is
+\eqref{eq:truncated-L2}.
+\end{proof}
+
+\begin{corollary}[Mixed truncated switching moments]
+\label{cor:mixed-truncated-moments}
+Fix $q\geq1$ and $1\leq A_1,\dots,A_q<\infty$.  Then
+\begin{equation}\label{eq:mixed-truncated-moments}
+ \sup_{\mathbf r\in[r_-,r_+]^q}
+ \left|
+  \E\prod_{\ell=1}^q\frac{S_{n,r_\ell}^{(A_\ell)}}n
+  -\prod_{\ell=1}^q\mu_{n,A_\ell}
+ \right|
+ \longrightarrow0.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Conditional on the clocks, independent uniform roots give
+\[
+ \E\prod_{\ell=1}^q\frac{S_{n,r_\ell}^{(A_\ell)}}n
+ =\E\prod_{\ell=1}^q
+ \left[
+  \1_{\{L_n(I_\ell)>r_\ell\}}
+  F_{A_\ell}(I_\ell,\sigma_n^{r_\ell}(I_\ell))
+ \right].
+\]
+Corollary~\ref{cor:truncated-swap-decorrelation} replaces the right side
+by
+$\E\prod_{\ell=1}^qD_{n,A_\ell}+o(1)$, uniformly in $\mathbf r$.
+Each $D_{n,A_\ell}$ is bounded by $A_\ell$, and
+Lemma~\ref{lem:D-concentration} gives
+$\E|D_{n,A_\ell}-\mu_{n,A_\ell}|=O(n^{-1/2})$.  A telescoping product
+estimate proves~\eqref{eq:mixed-truncated-moments}.
+\end{proof}
+
+\begin{theorem}[Annealed switching intensity]
+\label{thm:intensity-L1}
+For every mesoscopic window $[r_-,r_+]$,
+\begin{equation}\label{eq:intensity-L1}
+ \sup_{r_-\leq r\leq r_+}
+ \E\left|\frac{S_{n,r}}n-1\right|
+ \longrightarrow0.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For $A\geq1$,
+\begin{align*}
+ \E\left|\frac{S_{n,r}}n-1\right|
+ &\leq
+ \E\left|\frac{S_{n,r}^{(A)}}n-\mu_{n,A}\right|
+ +|1-\mu_{n,A}|\\
+ &\qquad+\frac1n\E\bigl(S_{n,r}-S_{n,r}^{(A)}\bigr).
+\end{align*}
+For fixed $A$, the first term tends to zero uniformly in $r$ by
+Proposition~\ref{prop:truncated-intensity}.  The second term is bounded
+by~\eqref{eq:muA-one}, and the third by
+Lemma~\ref{lem:selected-tail}.  First let $n\to\infty$, then
+$A\to\infty$.
+\end{proof}
+
+\begin{corollary}[Higher moments of the switching intensity]
+\label{cor:intensity-Lp}
+For every $1\leq p<\lambda_\kappa$,
+\begin{equation}\label{eq:intensity-Lp}
+ \sup_{r_-\leq r\leq r_+}
+ \E\left|\frac{S_{n,r}}n-1\right|^p
+ \longrightarrow0.
+\end{equation}
+In particular, the convergence is uniform in $L^2$ whenever
+$\kappa<2$.
+\end{corollary}
+
+\begin{proof}
+The case $p=1$ is Theorem~\ref{thm:intensity-L1}.  Fix
+$1<p<\lambda_\kappa$ and choose $u$ with
+$p<u<\lambda_\kappa$.  If $I$ is uniform and independent of the clocks,
+conditional Jensen and Corollary~\ref{cor:selected-moments} give,
+uniformly in $n,r$,
+\begin{align*}
+ \E\left(\frac{S_{n,r}}n\right)^u
+ &=\E\left(
+   \E\left[
+    \1_{\{L_n(I)>r\}}R_{I,\sigma_n^r(I)}
+    \ \middle|\ X
+   \right]
+  \right)^u\\
+ &\leq
+ \frac1n\E\sum_{i:L_n(i)>r}R_{i,\sigma_n^r(i)}^u
+ \leq C_{\kappa,u}.
+\end{align*}
+Thus $S_{n,r}/n-1$ is uniformly bounded in $L^u$.  Interpolation between
+$L^1$ and $L^u$, together with Theorem~\ref{thm:intensity-L1}, proves
+\eqref{eq:intensity-Lp}.
+\end{proof}
+
+\begin{corollary}[Mixed untruncated switching moments below the threshold]
+\label{cor:mixed-untruncated-moments}
+If the fixed integer $q$ satisfies $q<\lambda_\kappa$, then
+\begin{equation}\label{eq:mixed-untruncated-moments}
+ \sup_{\mathbf r\in[r_-,r_+]^q}
+ \left|
+  \E\prod_{\ell=1}^q\frac{S_{n,r_\ell}}n-1
+ \right|
+ \longrightarrow0.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Put $Y_{n,r}=S_{n,r}/n$.  Corollary~\ref{cor:intensity-Lp} gives
+$\sup_r\|Y_{n,r}-1\|_q\to0$ and
+$\sup_{n,r}\|Y_{n,r}\|_q<\infty$.  A telescoping product identity and
+H\"older's inequality yield, uniformly in $\mathbf r$,
+\[
+ \E\left|\prod_{\ell=1}^qY_{n,r_\ell}-1\right|
+ \leq\sum_{\ell=1}^q
+ \|Y_{n,r_\ell}-1\|_q
+ \prod_{k<\ell}\|Y_{n,r_k}\|_q,
+\]
+which tends to zero.
+\end{proof}
+
+\begin{proposition}[Bounded weighted switching intensity]
+\label{prop:weighted-switching}
+Let $a^{(n)}=(a_{n,ij})_{i,j\in[n]}$ be deterministic real- or
+complex-valued arrays with
+$\sup_n\max_{i,j}|a_{n,ij}|<\infty$.  Then
+\begin{equation}\label{eq:weighted-switching}
+ \sup_{r_-\leq r\leq r_+}
+ \left|
+  \frac1n\E\sum_{i:L_n(i)>r}
+   R_{i,\sigma_n^r(i)}a_{n,i,\sigma_n^r(i)}
+  -\frac1{n^2}\sum_{i,j=1}^na_{n,ij}
+ \right|
+ \longrightarrow0.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Let $B=\sup_n\max_{i,j}|a_{n,ij}|$.  For fixed $A\geq1$, apply
+Corollary~\ref{cor:bounded-exact-observables} with $q=1$ and
+\[
+ \psi_{n,1}(i,j,z)=a_{n,ij}(e^z\wedge A).
+\]
+This gives, uniformly in $r$,
+\begin{align*}
+ &\frac1n\E\sum_{i:L_n(i)>r}
+  a_{n,i,\sigma_n^r(i)}F_A(i,\sigma_n^r(i))\\
+ &\qquad-\E\bigl[a_{n,I,J}F_A(I,J)\bigr]\longrightarrow0.
+\end{align*}
+For $\kappa>1$, the discarded actual tail is at most
+$BC_\kappa A^{-1/(\kappa-1)}$ by Lemma~\ref{lem:selected-tail}, while
+the discarded fresh-pair tail satisfies the same bound by
+\eqref{eq:independent-R-tail}.  For $\kappa=1$ both tails vanish.
+Finally,
+\[
+ \E[a_{n,I,J}R_{I,J}]
+ =\frac1{n^2}\sum_{i,j=1}^na_{n,ij}
+\]
+by~\eqref{eq:ERij-one}.  Let first $n\to\infty$ and then
+$A\to\infty$.
+\end{proof}
+
+\begin{corollary}[Marked mesoscopic-cycle first moments]
+\label{cor:marked-cycle-moments}
+Let $b^{(n)}=(b_{n,j})_{j\in[n]}$ be deterministic real- or
+complex-valued marks with $\sup_n\max_j|b_{n,j}|<\infty$, and define
+\begin{equation}\label{eq:marked-cycle-count}
+ C_{n,r}[b]
+ :=\sum_{\substack{C\in\Cyc(\sigma_n)\\|C|=r}}
+   \frac1r\sum_{j\in C}b_{n,j}.
+\end{equation}
+Then
+\begin{equation}\label{eq:marked-cycle-first-moment}
+ \sup_{r_-\leq r\leq r_+}
+ \left|
+  r\E C_{n,r}[b]-\frac1n\sum_{j=1}^nb_{n,j}
+ \right|
+ \longrightarrow0.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Apply the marked identity~\eqref{eq:marked-master-switch}, by linearity,
+with $\Psi(i,j,\sigma)=b_{n,j}$.  Since every $r$-cycle has $n-r$
+labels outside it,
+\[
+ r(n-r)\E C_{n,r}[b]
+ =\E\sum_{i:L_n(i)>r}
+   R_{i,\sigma_n^r(i)}b_{n,\sigma_n^r(i)}.
+\]
+Use Proposition~\ref{prop:weighted-switching} with
+$a_{n,ij}=b_{n,j}$ and $r_+=o(n)$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(i)]
+By the exact identity~\eqref{eq:first-switch-exact} and
+Theorem~\ref{thm:intensity-L1}, uniformly for $r\in[r_-,r_+]$,
+\[
+  r\E C_{n,r}
+  =\frac{n}{n-r}\frac{\E S_{n,r}}n
+  =1+o(1),
+\]
+because $r_+=o(n)$.
+\end{proof}
+
+\section{Exponential tilting and the Poisson point process}
+\label{sec:tilting}
+
+Fix $a_n\to\infty$ with $a_n=o(n)$, and let
+$f\in C_c^+((0,\infty))$.  Choose $0<u<v<\infty$ with
+$\supp f\subset[u,v]$.  Set
+\begin{equation}\label{eq:f-n-r}
+  f_{n,r}:=f(r/a_n),
+  \qquad
+  Y_n:=\sum_{r\geq1}f_{n,r}C_{n,r}
+      =\langle f,\Xi_n\rangle,
+\end{equation}
+and
+\begin{equation}\label{eq:Laplace-tilt}
+  \cL_n(t):=\E e^{-tY_n},
+  \qquad
+  \frac{\dd\Pp_{n,t}}{\dd\Pp}
+  :=\frac{e^{-tY_n}}{\cL_n(t)},
+  \qquad 0\leq t\leq1.
+\end{equation}
+Write $\E_t$ for expectation under $\Pp_{n,t}$.
+
+\begin{lemma}[Uniform lower bound for the tilted partition function]
+\label{lem:partition-lower}
+There is $c_f>0$ such that
+\begin{equation}\label{eq:partition-lower}
+  \inf_n\inf_{0\leq t\leq1}\cL_n(t)\geq c_f.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By Theorem~\ref{thm:main}(i), uniformly for
+$ua_n\leq r\leq va_n$,
+$\E C_{n,r}\leq C/r$ for all large $n$.  Hence
+\[
+  \E Y_n
+  \leq \|f\|_\infty
+       \sum_{ua_n\leq r\leq va_n}\frac Cr
+  \leq C_f.
+\]
+Jensen's inequality gives
+$\cL_n(t)=\E e^{-tY_n}\geq e^{-t\E Y_n}\geq e^{-C_f}$.
+Absorb finitely many small $n$ into the constant.
+\end{proof}
+
+\begin{proposition}[Tilted one-cycle intensity]
+\label{prop:tilted-intensity}
+Uniformly for $0\leq t\leq1$ and for integers
+$ua_n\leq r\leq va_n$,
+\begin{equation}\label{eq:tilted-intensity}
+  r\E_t C_{n,r}=e^{-tf_{n,r}}+o(1).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Apply Proposition~\ref{prop:master-switch} with
+$\Phi(\sigma)=e^{-tY_n(\sigma)}$.  If $j=\sigma^r(i)$ and
+$L=L_n(i)>r$, then right-composition by $(i\,j)$ splits the $L$-cycle
+into cycles of lengths $r$ and $L-r$.  Therefore
+\begin{equation}\label{eq:Y-split}
+  Y_n(\sigma\circ(i\,j))-Y_n(\sigma)
+  =f_{n,r}+f_{n,L-r}-f_{n,L}.
+\end{equation}
+If $L>r+va_n$, then $L>va_n$ and $L-r>va_n$, so the last two terms in
+\eqref{eq:Y-split} vanish.  On this event,
+\[
+  e^{-tY_n(\sigma\circ(i\,j))}
+  =e^{-tf_{n,r}}e^{-tY_n(\sigma)}.
+\]
+Thus
+\begin{align}
+ &\left|
+ r(n-r)\E[C_{n,r}e^{-tY_n}]
+ -e^{-tf_{n,r}}\E[e^{-tY_n}S_{n,r}]
+ \right|
+ \nonumber\\
+ &\qquad\leq
+ 2\E\sum_{\substack{i:r<L_n(i)\leq r+va_n}}
+ R_{i,\sigma_n^r(i)}.
+ \label{eq:tilt-exception-bound}
+\end{align}
+The factor $2$ is harmless and comes from bounding both exponential
+weights by one.
+
+The right side is $o(n)$ uniformly in $r$.  Indeed, for fixed $A$ it is
+at most
+\[
+  2A n\Pp(L_n(I_n)\leq2va_n)
+  +2\E\sum_{i:L_n(i)>r}
+     R_{i,\sigma_n^r(i)}\1_{\{R_{i,\sigma_n^r(i)}>A\}}.
+\]
+The first term is $o(n)$ by Corollary~\ref{cor:root-crude}, since
+$a_n=o(n)$.  When $\kappa>1$, the second term divided by $n$ is bounded
+by $C_\kappa A^{-1/(\kappa-1)}$ by
+Lemma~\ref{lem:selected-tail}; let first $n\to\infty$, then
+$A\to\infty$.  When $\kappa=1$, all swap factors equal one and the
+second term vanishes for every $A\geq1$.
+
+Furthermore, Theorem~\ref{thm:intensity-L1} gives, uniformly in $t,r$,
+\begin{equation}\label{eq:weighted-S}
+ \left|
+ \frac1n\E[e^{-tY_n}S_{n,r}]-\cL_n(t)
+ \right|
+ \leq
+ \E\left|\frac{S_{n,r}}n-1\right|=o(1).
+\end{equation}
+Divide~\eqref{eq:tilt-exception-bound} by
+$n\cL_n(t)$, use Lemma~\ref{lem:partition-lower}, and note that
+$(n-r)/n=1+o(1)$ uniformly on the window.  This proves
+\eqref{eq:tilted-intensity}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(ii)]
+Since $Y_n$ is a finite sum, $\cL_n$ is differentiable and
+\[
+  -\frac{\dd}{\dd t}\log\cL_n(t)=\E_tY_n
+  =\sum_{r\geq1}f_{n,r}\E_tC_{n,r}.
+\]
+By Proposition~\ref{prop:tilted-intensity}, uniformly in $t\in[0,1]$,
+\begin{align}
+ \E_tY_n
+ &=\sum_r\frac{f_{n,r}e^{-tf_{n,r}}}{r}+o(1).
+ \label{eq:log-derivative}
+\end{align}
+Indeed the uniform error in $r\E_tC_{n,r}$ is multiplied by
+$\sum_{ua_n\leq r\leq va_n}|f_{n,r}|/r=O_f(1)$.
+Integrating~\eqref{eq:log-derivative} from $0$ to $1$ yields
+\begin{align}
+ \log\cL_n(1)
+ &=-\sum_r\frac1r\int_0^1f_{n,r}e^{-tf_{n,r}}\dd t+o(1)\\
+ &=-\sum_r\frac{1-e^{-f(r/a_n)}}r+o(1).
+ \label{eq:Laplace-sum}
+\end{align}
+The summand is supported on $[ua_n,va_n]$, and the Riemann-sum identity
+\[
+ \sum_r\frac{1-e^{-f(r/a_n)}}r
+ =\frac1{a_n}\sum_r
+ \frac{1-e^{-f(r/a_n)}}{r/a_n}
+ \longrightarrow
+ \int_0^\infty(1-e^{-f(x)})\frac{\dd x}{x}
+\]
+gives
+\begin{equation}\label{eq:Laplace-limit}
+ \E e^{-\langle f,\Xi_n\rangle}
+ \longrightarrow
+ \exp\left\{-\int_0^\infty(1-e^{-f(x)})\frac{\dd x}{x}\right\}.
+\end{equation}
+For a Poisson random measure with locally finite intensity $\mu$, the
+Laplace functional is $\exp\{-\int(1-e^{-f})\,\dd\mu\}$; hence the
+right side is the Laplace functional of the Poisson point process with
+intensity $\dd x/x$.  On the locally compact Polish space
+$(0,\infty)$, convergence of Laplace functionals for all
+$f\in C_c^+((0,\infty))$ is equivalent to vague convergence in
+distribution of the associated locally finite random measures; see
+Daley--Vere-Jones~\cite[Proposition~11.1.VIII]{DVJ2008}.  Therefore
+\[
+  \Xi_n\Rightarrow\PPP(\dd x/x).
+\]
+\end{proof}
+
+\section{Dependency audit, scope, and extensions}
+
+The proof of Theorem~\ref{thm:main} is self-contained under the
+comparability hypothesis~\eqref{eq:comparable}.  The short-root estimate
+used in the endpoint and tilting arguments is Corollary~\ref{cor:root-crude},
+which follows from the exact master switch and the selected-factor moment
+bound.  In particular, no macroscopic cycle-limit theorem is imported.
+Every probabilistic and combinatorial estimate specific to the Luce model
+has been proved in this document.  We cite Boucheron--Lugosi--Massart only for the sharper
+standard form of the variance inequality (the weaker form actually used
+was proved here), and Daley--Vere-Jones for the general
+Laplace-functional criterion for vague convergence of random measures.
+
+The endpoint theorem is a fixed-$q$ estimate in mean conditional total
+variation relative to the coarse sigma-field $\cH$.  It is not a
+statement conditional on all exact clocks.  The free-depth audit is as
+follows.  The environment and prefix-depletion estimates do not depend on
+$m$.  The restriction $m\le r_-/3$ is used only to define nonnegative
+frozen-prefix lengths.  The condition $m/(hM)\to0$ preserves residual row
+and early-cell margins under at most $qm$ terminal deletions.  The
+requirement $m\to\infty$ controls the reset term, while $mh$,
+$m\rho$, $m^2/M$, and $m\log n/M$ are exactly the accumulated
+adaptive-coupling errors in~\eqref{eq:epsilon-terminal}.  No other step
+uses the former square-root-depth choice.  The proof does not give uniformity for $r$ of
+order $n$, a residual local law after arbitrary deletions, or unrestricted
+growth $q=q_n\to\infty$.  The fresh-pair
+observables in Corollary~\ref{cor:truncated-swap-decorrelation} share the
+same random clock environment and should not be factorized before the
+separate concentration step in Section~\ref{sec:switching-intensity}.
+Finally, untruncated products of two or more swap factors are not claimed
+for arbitrary $\kappa$; Corollaries~\ref{cor:untruncated-swap-decorrelation}
+and~\ref{cor:mixed-untruncated-moments} require the natural moment
+condition $q<\lambda_\kappa$.
+
+\begin{remark}[Beyond exponential clocks]
+The conditional matching and endpoint mechanism is not intrinsically
+exponential.  For independent clocks with positive densities $f_{n,i}$,
+conditioning on the ordered unlabeled values in a block gives assignment
+weights proportional to
+\[
+ \prod_i f_{n,i}(s_{\pi(i)}).
+\]
+The hereditary-flatness argument would follow from a blockwise
+cross-ratio condition such as
+\[
+ \max_{a\leq d}\sup_{i,u}\sup_{x,y\in B_a}
+ \left|
+  \log\frac{f_{n,i}(x)f_{n,u}(y)}
+            {f_{n,i}(y)f_{n,u}(x)}
+ \right|\longrightarrow0.
+\]
+The associated clock-swap Radon--Nikodym factor is
+\[
+ R_{ij}=
+ \frac{f_{n,i}(X_j)f_{n,j}(X_i)}
+      {f_{n,i}(X_i)f_{n,j}(X_j)}.
+\]
+A full extension would also require analogues of the core-tail occupancy,
+localized root-cycle escape, common-support, and selected-factor uniform
+integrability hypotheses.  We record this only as a roadmap, not as a
+theorem of the present paper.
+\end{remark}
+
+\begin{remark}[Further endpoint questions]
+Two natural strengthenings remain open within the present bookkeeping.
+For $q=q_n\to\infty$, all constants and bad-event probabilities must be
+tracked simultaneously; in particular one encounters terms of the forms
+\[
+ \frac{q_n^2r_+}{n},\qquad
+ q_nmh,\qquad
+ \frac{q_n^2m^2}{M},\qquad
+ \frac{q_nm}{hM},\qquad
+ q_nm\rho,
+\]
+as well as $q_n(1-\alpha)^m$.  No growing-$q$ conclusion is asserted
+here.  Likewise, joint observations
+$\sigma_n^{r_1}(I),\dots,\sigma_n^{r_q}(I)$ along one orbit require a new
+connected-path exposure argument and are not a corollary of the
+independent-root theorem.  The abstract Doeblin comparison,
+Proposition~\ref{prop:endpoint-mixing}, and the marked switching identity
+provide reusable inputs for these questions.
+\end{remark}
+
+\begin{thebibliography}{99}
+
+\bibitem{BLM2013}
+S.~Boucheron, G.~Lugosi, and P.~Massart,
+\emph{Concentration Inequalities: A Nonasymptotic Theory of Independence},
+Oxford University Press, Oxford, 2013.
+
+\bibitem{DVJ2008}
+D.~J. Daley and D.~Vere-Jones,
+\emph{An Introduction to the Theory of Point Processes, Volume II:
+General Theory and Structure}, 2nd ed., Springer, New York, 2008.
+
+
+\bibitem{Luce1959}
+R.~D. Luce,
+\emph{Individual Choice Behavior: A Theoretical Analysis},
+Wiley, New York, 1959.
+
+\end{thebibliography}
+
+\end{document}

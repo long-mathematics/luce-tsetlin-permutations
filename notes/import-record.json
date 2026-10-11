@@ -1,0 +1,38 @@
+{
+  "upstream_repository": "long-mathematics/nonuniform-random-permutations",
+  "upstream_commit": "6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0",
+  "active_imports": [
+    {
+      "id": "mesoscopic-switching",
+      "upstream_source": "papers/02-mesoscopic-luce-cycles/mesoscopic-luce-cycles.tex",
+      "active_source": "papers/mesoscopic-switching/mesoscopic-luce-cycles.tex",
+      "imported_sha256": "30bb9a373aa8d83e37dc96f425417fa35d343aba44504d5f2a5e9314ac6ccaed",
+      "original_pdf_sha256": "4730e42c62d26b37f1f76217024c9afa1a96575d1fe3afd27cb4345ff8b2a9ba",
+      "original_pages": 27
+    },
+    {
+      "id": "erdos-turan-order",
+      "upstream_source": "papers/03-luce-erdos-turan/luce-erdos-turan.tex",
+      "active_source": "papers/erdos-turan-order/luce-erdos-turan.tex",
+      "imported_sha256": "cf628b24b6ef70b1b54ce91b849096562091b406ee05525156e016c2787f50a3",
+      "original_pdf_sha256": "d6b47478000d57b75801882ac5f7382153ee3c1956b0e5750df0b25374c22fce",
+      "original_pages": 15
+    },
+    {
+      "id": "sharp-order-edgeworth",
+      "upstream_source": "papers/04-luce-edgeworth/luce-edgeworth.tex",
+      "active_source": "papers/sharp-order-edgeworth/luce-edgeworth.tex",
+      "imported_sha256": "dfe6a24f7002eaa2c732e2448c290f416cc72a62bdf8dbda47228fe07daeba80",
+      "original_pdf_sha256": "d2cb4e6f0763d99c75c9dbce3cb0ff9d196dbc9a8f9c5b4ae4eeef8047849e1b",
+      "original_pages": 39
+    },
+    {
+      "id": "functional-erdos-turan",
+      "upstream_source": "notes/working/functional-luce-erdos-turan.tex",
+      "active_source": "notes/working/functional-luce-erdos-turan.tex",
+      "imported_sha256": "bae8958e825dc3f3d8bd4290ae4715f9d6fbce1d1eb17ca101699c9ba8e5bffa",
+      "original_pdf_sha256": "f9f2820fc08c13a82b4fb2f9a308c453b5fef43e7ed3e7d9c3496bc88d289527",
+      "original_pages": 21
+    }
+  ]
+}

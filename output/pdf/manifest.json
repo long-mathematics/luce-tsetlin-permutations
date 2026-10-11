@@ -1,4 +1,37 @@
 {
   "schema_version": 1,
-  "documents": []
+  "documents": [
+    {
+      "id": "mesoscopic-switching",
+      "source": "papers/mesoscopic-switching/mesoscopic-luce-cycles.tex",
+      "source_sha256": "30bb9a373aa8d83e37dc96f425417fa35d343aba44504d5f2a5e9314ac6ccaed",
+      "pdf": "output/pdf/mesoscopic-luce-cycles.pdf",
+      "pdf_sha256": "0733c2d354b70434e19bf446d386566a6d681ed43d6e77b095b38eb93586c041",
+      "pages": 27
+    },
+    {
+      "id": "erdos-turan-order",
+      "source": "papers/erdos-turan-order/luce-erdos-turan.tex",
+      "source_sha256": "cf628b24b6ef70b1b54ce91b849096562091b406ee05525156e016c2787f50a3",
+      "pdf": "output/pdf/luce-erdos-turan.pdf",
+      "pdf_sha256": "459ae2a13d023557c30cc9a55343a0128f8582c8df74dabb47a0baeb02d31301",
+      "pages": 15
+    },
+    {
+      "id": "sharp-order-edgeworth",
+      "source": "papers/sharp-order-edgeworth/luce-edgeworth.tex",
+      "source_sha256": "dfe6a24f7002eaa2c732e2448c290f416cc72a62bdf8dbda47228fe07daeba80",
+      "pdf": "output/pdf/luce-edgeworth.pdf",
+      "pdf_sha256": "160cc95c3b7f7889800ad258b5c84c5ca52599bf40d4a44f78e962aaeecfb8fd",
+      "pages": 39
+    },
+    {
+      "id": "functional-erdos-turan",
+      "source": "notes/working/functional-luce-erdos-turan.tex",
+      "source_sha256": "bae8958e825dc3f3d8bd4290ae4715f9d6fbce1d1eb17ca101699c9ba8e5bffa",
+      "pdf": "output/pdf/functional-luce-erdos-turan.pdf",
+      "pdf_sha256": "a0513d8b4eb9298f7b7cba8f8ba25e008c4b7716b5f82df1cbf8e70befaf36a8",
+      "pages": 21
+    }
+  ]
 }

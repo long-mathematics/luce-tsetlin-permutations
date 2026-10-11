@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "upstream_repository": "long-mathematics/nonuniform-random-permutations",
+  "upstream_commit": "6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0",
+  "files": [
+    {
+      "path": "archive/6178a99/output/pdf/manifest.json",
+      "upstream_path": "output/pdf/manifest.json",
+      "sha256": "6eb8165faa2b2f045d55e2d19f822e90910fea3c7ceb32e08538bb591edaf2be",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/output/pdf/manifest.json"
+    },
+    {
+      "path": "archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex",
+      "upstream_path": "papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex",
+      "sha256": "c6d6a4607a2db9c8a5f69e2ec256c33619083fcc81ab467e9b939673fb3a5028",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex"
+    },
+    {
+      "path": "archive/6178a99/output/pdf/luce-boundary-cycle-laws.pdf",
+      "upstream_path": "output/pdf/luce-boundary-cycle-laws.pdf",
+      "sha256": "2e010ca27db3ae73e6f7ef38901eea8691be137367b795712fe14be0a9996d9f",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/output/pdf/luce-boundary-cycle-laws.pdf"
+    },
+    {
+      "path": "archive/6178a99/papers/02-mesoscopic-luce-cycles/mesoscopic-luce-cycles.tex",
+      "upstream_path": "papers/02-mesoscopic-luce-cycles/mesoscopic-luce-cycles.tex",
+      "sha256": "30bb9a373aa8d83e37dc96f425417fa35d343aba44504d5f2a5e9314ac6ccaed",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/papers/02-mesoscopic-luce-cycles/mesoscopic-luce-cycles.tex"
+    },
+    {
+      "path": "archive/6178a99/output/pdf/mesoscopic-luce-cycles.pdf",
+      "upstream_path": "output/pdf/mesoscopic-luce-cycles.pdf",
+      "sha256": "4730e42c62d26b37f1f76217024c9afa1a96575d1fe3afd27cb4345ff8b2a9ba",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/output/pdf/mesoscopic-luce-cycles.pdf"
+    },
+    {
+      "path": "archive/6178a99/papers/03-luce-erdos-turan/luce-erdos-turan.tex",
+      "upstream_path": "papers/03-luce-erdos-turan/luce-erdos-turan.tex",
+      "sha256": "cf628b24b6ef70b1b54ce91b849096562091b406ee05525156e016c2787f50a3",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/papers/03-luce-erdos-turan/luce-erdos-turan.tex"
+    },
+    {
+      "path": "archive/6178a99/output/pdf/luce-erdos-turan.pdf",
+      "upstream_path": "output/pdf/luce-erdos-turan.pdf",
+      "sha256": "d6b47478000d57b75801882ac5f7382153ee3c1956b0e5750df0b25374c22fce",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/output/pdf/luce-erdos-turan.pdf"
+    },
+    {
+      "path": "archive/6178a99/papers/04-luce-edgeworth/luce-edgeworth.tex",
+      "upstream_path": "papers/04-luce-edgeworth/luce-edgeworth.tex",
+      "sha256": "dfe6a24f7002eaa2c732e2448c290f416cc72a62bdf8dbda47228fe07daeba80",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/papers/04-luce-edgeworth/luce-edgeworth.tex"
+    },
+    {
+      "path": "archive/6178a99/output/pdf/luce-edgeworth.pdf",
+      "upstream_path": "output/pdf/luce-edgeworth.pdf",
+      "sha256": "d2cb4e6f0763d99c75c9dbce3cb0ff9d196dbc9a8f9c5b4ae4eeef8047849e1b",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/output/pdf/luce-edgeworth.pdf"
+    },
+    {
+      "path": "archive/6178a99/notes/working/functional-luce-erdos-turan.tex",
+      "upstream_path": "notes/working/functional-luce-erdos-turan.tex",
+      "sha256": "bae8958e825dc3f3d8bd4290ae4715f9d6fbce1d1eb17ca101699c9ba8e5bffa",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/notes/working/functional-luce-erdos-turan.tex"
+    },
+    {
+      "path": "archive/6178a99/output/pdf/functional-luce-erdos-turan.pdf",
+      "upstream_path": "output/pdf/functional-luce-erdos-turan.pdf",
+      "sha256": "f9f2820fc08c13a82b4fb2f9a308c453b5fef43e7ed3e7d9c3496bc88d289527",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/output/pdf/functional-luce-erdos-turan.pdf"
+    },
+    {
+      "path": "archive/6178a99/README.md",
+      "upstream_path": "README.md",
+      "sha256": "94268345e6fdd239be75de5061f146cdfd65c65969dabe7d7862998de00b2e3b",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/README.md"
+    },
+    {
+      "path": "archive/6178a99/LICENSE",
+      "upstream_path": "LICENSE",
+      "sha256": "5ee85be17f36eadd6bd4801b579bfe44e694301474be963880531f15541007dd",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/LICENSE"
+    },
+    {
+      "path": "archive/6178a99/CONTRIBUTING.md",
+      "upstream_path": "CONTRIBUTING.md",
+      "sha256": "ec61d9d95d7e43fc48204b8494ad27655cd5f3781574ed432c4718c4af0f5549",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/CONTRIBUTING.md"
+    },
+    {
+      "path": "archive/6178a99/AGENTS.md",
+      "upstream_path": "AGENTS.md",
+      "sha256": "5d2b5b3329bbaa2810bc4dd63339571699dd7b9118843801de974600a0995e8a",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/AGENTS.md"
+    },
+    {
+      "path": "archive/6178a99/notes/repository-status.md",
+      "upstream_path": "notes/repository-status.md",
+      "sha256": "4c6e90118bde25ff3bd5f4bc3a3a22d7ff4f27debea4f52493c168bfdebb5cce",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/notes/repository-status.md"
+    },
+    {
+      "path": "archive/6178a99/notes/provenance/mesoscopic-total-cycle-resolution-candidate.tex",
+      "upstream_path": "notes/provenance/mesoscopic-total-cycle-resolution-candidate.tex",
+      "sha256": "c0fcb5cd8df982bd9dad58109b5ba8fa81268ddea02a11ad90fcb34f077a21ee",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/notes/provenance/mesoscopic-total-cycle-resolution-candidate.tex"
+    },
+    {
+      "path": "archive/6178a99/notes/provenance/mesoscopic-audit-and-repair.tex",
+      "upstream_path": "notes/provenance/mesoscopic-audit-and-repair.tex",
+      "sha256": "59c45cbc8cc8c047066ed72fb8ddb8293f12428d3af4ab33fec4f25c5410048d",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/notes/provenance/mesoscopic-audit-and-repair.tex"
+    },
+    {
+      "path": "archive/6178a99/notes/provenance/free-depth-endpoint-audit.md",
+      "upstream_path": "notes/provenance/free-depth-endpoint-audit.md",
+      "sha256": "956196513ac39dc61f519e2729eaba95ea70a8c860a837a681f5012b7634a6e7",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/notes/provenance/free-depth-endpoint-audit.md"
+    },
+    {
+      "path": "archive/6178a99/scripts/build.py",
+      "upstream_path": "scripts/build.py",
+      "sha256": "d87072d5c4826952810b4bfb46d961d997910adf477d3e7fc87dc42904a2d3d4",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/scripts/build.py"
+    },
+    {
+      "path": "archive/6178a99/tests/test_repository.py",
+      "upstream_path": "tests/test_repository.py",
+      "sha256": "49a00a43005e5712aecf0c6e4e61fc9baa2d8127f29b75127c989f2d8ff3b12e",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/tests/test_repository.py"
+    },
+    {
+      "path": "archive/6178a99/.github/workflows/latex.yml",
+      "upstream_path": ".github/workflows/latex.yml",
+      "sha256": "89d57e719e62ff9a25c7d57cb0c829112220873ea1e51461287fcd3d8ad2cc9c",
+      "upstream_url": "https://raw.githubusercontent.com/long-mathematics/nonuniform-random-permutations/6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0/.github/workflows/latex.yml"
+    }
+  ]
+}

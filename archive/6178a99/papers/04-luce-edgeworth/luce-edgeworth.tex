@@ -1,0 +1,3045 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.05in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{inputtheorem}[theorem]{Input theorem}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{problem}[theorem]{Problem}
+
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\Ee}{\mathbb E}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\dd}{\,d}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\Pois}{\operatorname{Pois}}
+\newcommand{\Kol}{\mathrm d_{\mathrm K}}
+\newcommand{\TV}{\mathrm d_{\mathrm{TV}}}
+\newcommand{\Cyc}{\operatorname{Cyc}}
+\newcommand{\cL}{\mathcal L}
+
+\title{A Sharp Berry--Esseen Theorem and First Edgeworth Expansion\\
+       for the Erd\H{o}s--Tur\'an Law of Comparable-Rate Luce Permutations}
+\author{Christopher D. Long}
+\date{Research supplement}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $\sigma_n$ be the Luce permutation induced by independent exponential
+clocks whose rates, after a common rescaling, lie in $[1,\kappa]$ for one
+fixed $\kappa<\infty$, and put $L=\log n$.  The companion paper proves the
+Erd\H{o}s--Tur\'an central limit theorem for $\log\ord(\sigma_n)$.  This
+quantitative supplement proves the natural Berry--Esseen rate and the first
+Edgeworth expansion for the actual permutation order.
+
+The original switching characteristic-function argument first gives the
+sharp proxy estimate
+\[
+ \mathrm d_{\mathrm K}\!\left(
+ \frac{B_n^\circ-\mu_n}{\sqrt{v_n}},N(0,1)\right)
+ =O_\kappa(L^{-1/2}).
+\]
+A fixed-order multi-clock identity also yields all fixed moments of the
+product--least-common-multiple remainder and, independently, the
+almost-sharp family $O_{\kappa,\varepsilon}(L^{-1/2+\varepsilon})$.
+
+For the endpoint theorem we use four additional modules.  A free-depth
+finite-endpoint theorem, specialized to terminal depth
+$m\asymp\log(1/\delta)$, gives polynomial product--Poisson approximation of
+the complete intermediate cycle vector, jointly with passive marks.  A
+prime-power linearization replaces the small-prime part of the nonlinear
+least-common-multiple correction by a linear cycle statistic.  The resulting
+independent compound-Poisson statistic admits a first Edgeworth expansion;
+an extended logarithmic Fourier window reduces the smoothing remainder to
+$O((\log L)^2/L)$.  Finally, Poisson Poincar\'e, fixed-order graph estimates,
+and a residual-gap argument control the centered submacroscopic and
+macroscopic arithmetic remainders.
+
+Writing $O_n=\ord(\sigma_n)$ and $m_n=\Ee\log O_n$, we prove
+\[
+ \mathrm d_{\mathrm K}\!\left(
+ \frac{\log O_n-m_n}{\sqrt{L^3/3}},N(0,1)\right)
+ \le \frac{C_\kappa}{\sqrt L},
+\]
+and, uniformly in $x$,
+\[
+ \Pp\!\left\{
+ \frac{\log O_n-m_n}{\sqrt{L^3/3}}\le x
+ \right\}
+ =\Phi(x)-\frac{\sqrt3}{8}(x^2-1)\varphi(x)L^{-1/2}
+ +o_\kappa(L^{-1/2}).
+\]
+Consequently the order $L^{-1/2}$ is optimal.  The exact mean is essential
+at this precision; an explicit deterministic center accurate to $o(L)$ is
+not supplied here.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction and theorem map}
+
+For a permutation $\pi\in S_n$,
+\[
+ \ord(\pi)=\lcm\{\text{cycle lengths of }\pi\}.
+\]
+The classical theorem of Erd\H{o}s and Tur\'an states that the logarithm of
+the order of a uniform random permutation is asymptotically Gaussian on
+the $(\log n)^{3/2}$ scale~\cite{ErdosTuran1967}.  Barbour and Tavar\'e
+proved a sharp rate theorem in the uniform setting~\cite{BarbourTavare1994};
+related quantitative ideas belong to the theory of logarithmic
+combinatorial structures~\cite{ABT2003}.
+
+The companion paper~\cite{LongOrder2026} establishes the qualitative
+Erd\H{o}s--Tur\'an law for every comparable-rate Luce triangular array:
+if, after a common rescaling,
+\[
+ 1\le \theta_{n,i}\le\kappa,
+\]
+then
+\[
+ \frac{\log\ord(\sigma_n)-\frac12(\log n)^2}
+ {\sqrt{\frac13(\log n)^3}}
+ \Rightarrow N(0,1).
+\]
+The present supplement quantifies that law through the first non-Gaussian term.
+
+Throughout, put
+\[
+ L=\log n,
+ \qquad
+ b_n=\lceil L^3\rceil,
+ \qquad
+ U_n=\left\lfloor\frac{n}{L^{A_0}}\right\rfloor,
+\]
+where $A_0$ is chosen sufficiently large in terms of $\kappa$ and the
+polynomial accuracy required below.  For $b_n<r\le U_n$, write
+\[
+ a_{n,r}=\frac{n}{r(n-r)},
+ \qquad
+ w_r=\log r,
+\]
+and define
+\begin{align*}
+ B_n^\circ&=\sum_{b_n<r\le U_n}w_rC_{n,r},\\
+ \mu_n&=\sum_{b_n<r\le U_n}a_{n,r}w_r,\\
+ v_n&=\sum_{b_n<r\le U_n}a_{n,r}w_r^2.
+\end{align*}
+Also put
+\[
+ O_n=\ord(\sigma_n),
+ \qquad
+ m_n=\Ee\log O_n,
+ \qquad
+ R_n=\log O_n-B_n^\circ.
+\]
+
+The previously established checkpoint hierarchy is retained because it uses
+weaker endpoint input and supplies the fixed-order arithmetic estimates used
+again in the sharp proof.
+
+\begin{theorem}[Sharp checkpoint for the additive proxy]
+\label{thm:proxy}
+For every fixed $\kappa<\infty$,
+\[
+ \Kol\!\left(
+ \frac{B_n^\circ-\mu_n}{\sqrt{v_n}},N(0,1)\right)
+ \le \frac{C_\kappa}{\sqrt L}.
+\]
+\end{theorem}
+
+\begin{theorem}[$L^1$ quantitative order checkpoint]
+\label{thm:order-checkpoint}
+One has
+\[
+ \Kol\!\left(
+ \frac{\log O_n-m_n}{\sqrt{v_n}},N(0,1)\right)
+ \le C_\kappa L^{-1/4}\sqrt{\log L}.
+\]
+The same bound holds after replacing $m_n$ and $\sqrt{v_n}$ by
+$\frac12L^2$ and $\sqrt{L^3/3}$, respectively.
+\end{theorem}
+
+\begin{theorem}[Second-moment convergence checkpoint]
+\label{thm:order-second-checkpoint}
+One has
+\[
+ \Kol\!\left(
+ \frac{\log O_n-m_n}{\sqrt{v_n}},N(0,1)\right)
+ \le C_\kappa L^{-1/3}(\log L)^{2/3}.
+\]
+The same rate holds with centering $\frac12L^2$ and scale
+$\sqrt{L^3/3}$.
+\end{theorem}
+
+\begin{theorem}[All fixed moments of the order remainder]
+\label{thm:R-all-moments}
+For every fixed integer $k\ge1$, uniformly over all comparable-rate
+triangular arrays and for all sufficiently large $n$,
+\[
+ \Ee|R_n|^k\le C_{\kappa,k}L^k(\log L)^k.
+\]
+Consequently,
+\[
+ \|R_n-\Ee R_n\|_k\le C_{\kappa,k}L\log L.
+\]
+\end{theorem}
+
+\begin{theorem}[Fixed-moment quantitative order laws]
+\label{thm:order-fixed-moments}
+For every fixed integer $k\ge1$,
+\[
+ \Kol\!\left(
+ \frac{\log O_n-m_n}{\sqrt{v_n}},N(0,1)\right)
+ \le C_{\kappa,k}\left[
+ L^{-1/2}+L^{-k/(2(k+1))}(\log L)^{k/(k+1)}
+ \right].
+\]
+The same bound holds after replacing $m_n$ and $\sqrt{v_n}$ by
+$\frac12L^2$ and $\sqrt{L^3/3}$, respectively.
+\end{theorem}
+
+\begin{corollary}[Almost-sharp Berry--Esseen law]
+\label{cor:order-almost-sharp}
+For every fixed $\varepsilon>0$,
+\[
+ \Kol\!\left(
+ \frac{\log O_n-m_n}{\sqrt{v_n}},N(0,1)\right)
+ \le C_{\kappa,\varepsilon}L^{-1/2+\varepsilon}.
+\]
+The same rate holds with the classical leading centering and scale.
+\end{corollary}
+
+The new endpoint results are the following.
+
+\begin{theorem}[Polynomial passive-mark product--Poisson approximation]
+\label{thm:poly-pp}
+Let
+\[
+ \xi_n=(C_{n,r})_{b_n<r\le U_n}.
+\]
+For every fixed $Q>0$, after choosing $A_0=A_0(\kappa,Q)$ sufficiently
+large,
+\[
+ \TV\!\left(
+ \cL(\xi_n),
+ \bigotimes_{b_n<r\le U_n}\Pois(a_{n,r})
+ \right)
+ \le C_{\kappa,Q}L^{-Q}.
+\]
+More generally the same estimate holds jointly with any standard-Borel,
+permutation-measurable passive mark that is unchanged by every good core
+split.  In particular it holds jointly with
+\[
+ K_n^+=\sum_{r>U_n}C_{n,r},
+\]
+and the Poisson core is independent of the copied mark on the comparison
+space.
+\end{theorem}
+
+\begin{theorem}[Sharp Berry--Esseen law for the order]
+\label{thm:sharp-order}
+Uniformly over all comparable-rate triangular arrays,
+\[
+ \Kol\!\left(
+ \frac{\log O_n-m_n}{\sqrt{L^3/3}},N(0,1)\right)
+ \le \frac{C_\kappa}{\sqrt L}.
+\]
+\end{theorem}
+
+\begin{theorem}[First Edgeworth expansion]
+\label{thm:edgeworth-order}
+Uniformly in $x\in\mathbb R$ and uniformly over all comparable-rate
+triangular arrays,
+\begin{equation}
+\label{eq:edgeworth-main}
+ \Pp\!\left\{
+ \frac{\log O_n-m_n}{\sqrt{L^3/3}}\le x
+ \right\}
+ =\Phi(x)-\frac{\sqrt3}{8}(x^2-1)\varphi(x)L^{-1/2}
+ +o_\kappa(L^{-1/2}).
+\end{equation}
+\end{theorem}
+
+\begin{corollary}[Optimality of the Berry--Esseen order]
+\label{cor:sharp-lower}
+One has
+\[
+ \Kol\!\left(
+ \frac{\log O_n-m_n}{\sqrt{L^3/3}},N(0,1)\right)
+ \ge
+ \left(\frac{\sqrt3}{8\sqrt{2\pi}}+o_\kappa(1)\right)L^{-1/2}.
+\]
+\end{corollary}
+
+\subsection*{Dependency map}
+
+The checkpoint hierarchy through Corollary~\ref{cor:order-almost-sharp}
+uses the square-root-depth switching input isolated in the original
+supplement.  The sharp and Edgeworth theorems additionally use the
+free-depth finite-endpoint theorem proved in the switching manuscript
+\cite{LongSwitch2026}.  Its linear-depth specialization supplies arbitrary
+polynomial endpoint accuracy.  The remaining ingredients---the passive-mark
+Campbell--Stein argument, the independent Poisson Edgeworth analysis, the
+prime-power linearization, and the centered remainder estimates---are proved
+below.
+
+\section{Imported switching and arithmetic inputs}
+
+The model and notation are those of~\cite{LongOrder2026}.  Let
+$X_{n,i}\sim\operatorname{Exp}(\theta_{n,i})$ be independent and let
+$\sigma_n(i)$ be the rank of $X_{n,i}$.  Write $C_{n,r}$ for the number of
+$r$-cycles and $L_n(i)$ for the cycle length containing $i$.  For distinct
+labels $i,j$, define the clock-swap factor
+\[
+ R_{ij}=\exp\{-(\theta_{n,i}-\theta_{n,j})(X_{n,j}-X_{n,i})\},
+\]
+and the switching intensity
+\[
+ S_{n,r}=\sum_{i:L_n(i)>r}R_{i,\sigma_n^r(i)}.
+\]
+
+Fix $1<p<\lambda_\kappa$, where
+\[
+ \lambda_\kappa=
+ \begin{cases}
+ \infty,&\kappa=1,\\
+ \kappa/(\kappa-1),&\kappa>1,
+ \end{cases}
+\]
+and put $\beta=1-1/p$.  We choose
+\begin{equation}
+\label{eq:A0-large}
+ A_0>\max\left\{32\kappa^2,\frac4\beta,4\right\}.
+\end{equation}
+This is far from optimized; it is chosen only to make all polynomial
+endpoint errors smaller than the reset error.
+
+We use the following theorem-level interface from the companion paper.
+
+\begin{inputtheorem}[Quantitative switching ODE]
+\label{input:ode}
+Let
+\[
+ Z_n(s)=\Ee e^{sB_n^\circ},
+ \qquad
+ H_n(s)=\sum_{b_n<r\le U_n}a_{n,r}w_re^{sw_r}.
+\]
+For every $s$ on the imaginary axis,
+\begin{equation}
+\label{eq:ode}
+ Z_n'(s)=H_n(s)Z_n(s)+E_n(s).
+\end{equation}
+Moreover,
+\begin{equation}
+\label{eq:ode-error-raw}
+ \sup_{\xi\in\mathbb R}|E_n(i\xi)|
+ \le
+ \sum_j\log(2a_j)
+ \sup_{a_j\le r<2a_j}
+ \Ee\left|\frac{S_{n,r}}n-1\right|
+ +C_\kappa L^{2-A_0\beta},
+\end{equation}
+where $a_j=2^jb_n$ and the sum is over $a_j\le U_n$.
+The one-block estimate and its explicit endpoint error imply
+\begin{equation}
+\label{eq:ode-error}
+ \mathfrak e_n:=\sup_{\xi\in\mathbb R}|E_n(i\xi)|
+ \le C_\kappa L\exp\{-c_\kappa\sqrt{\log L}\}.
+\end{equation}
+\end{inputtheorem}
+
+\begin{proof}[Derivation of the final bound]
+The proof of the weighted dyadic estimate in~\cite{LongOrder2026} splits
+the one-block error into a reset term and terms carrying positive powers of
+$\delta_j=4a_j/n$, together with superpolynomially small environment
+failures.  The reset contribution is
+\[
+ C L(1+\sqrt{\log L})
+ e^{-c\sqrt{A_0\log L}},
+\]
+which is bounded by $CL e^{-c'\sqrt{\log L}}$ after changing constants.
+After the exponent $1/(2\kappa)$ from the truncation optimization, the
+smallest positive power of $\delta_j$ is at least
+$\delta_j^{1/(8\kappa^2)}$.  The choice~\eqref{eq:A0-large} makes the
+weighted sum of every such term $O(L^{-2})$.  The terms containing
+$(na_j)^{-1/2}$ and the environment failures are smaller.  Finally,
+$L^{2-A_0\beta}=O(L^{-2})$.  This proves~\eqref{eq:ode-error}.
+\end{proof}
+
+We also import the arithmetic comparison from the companion paper.
+
+\begin{inputtheorem}[Truncation and product--LCM discrepancy]
+\label{input:arithmetic}
+Let
+\[
+ B_n=\sum_{r=1}^n(\log r)C_{n,r},
+\]
+and let
+\[
+ O_n=\ord(\sigma_n),
+ \qquad
+ O_n^\circ=\lcm\{r:b_n<r\le U_n,\ C_{n,r}>0\}.
+\]
+Define
+\[
+ \Delta_n=B_n-B_n^\circ,
+ \qquad
+ G_n=B_n^\circ-\log O_n^\circ.
+\]
+Then
+\begin{equation}
+\label{eq:defect-means}
+ \Ee\Delta_n+\Ee G_n\le C_\kappa L\log L.
+\end{equation}
+If
+\[
+ R_n=\log O_n-B_n^\circ,
+\]
+then deterministically
+\begin{equation}
+\label{eq:R-sandwich}
+ -G_n\le R_n\le\Delta_n,
+ \qquad
+ |R_n|\le\Delta_n+G_n.
+\end{equation}
+\end{inputtheorem}
+
+The first input contains the entire probabilistic switching approximation
+needed for Theorem~\ref{thm:proxy}; the second contains the full arithmetic
+information used for Theorem~\ref{thm:order-checkpoint}.
+
+\section{Deterministic exponent sums and the ideal proxy}
+
+For fixed $k\ge1$, put
+\[
+ \rho_{k,n}=\sum_{b_n<r\le U_n}a_{n,r}w_r^k.
+\]
+Thus $\rho_{1,n}=\mu_n$ and $\rho_{2,n}=v_n$.
+
+\begin{lemma}[Exponent sums]
+\label{lem:rho}
+For every fixed integer $k\ge1$,
+\begin{equation}
+\label{eq:rho}
+ \rho_{k,n}=\frac{L^{k+1}}{k+1}+O_k(L^k\log L).
+\end{equation}
+In particular,
+\begin{align}
+ \mu_n&=\frac12L^2+O(L\log L),\label{eq:mu-asymp}\\
+ v_n&=\frac13L^3+O(L^2\log L),\label{eq:v-asymp}\\
+ \rho_{3,n}&=\frac14L^4+O(L^3\log L),\label{eq:rho3}\\
+ \rho_{4,n}&=\frac15L^5+O(L^4\log L).\label{eq:rho4}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+Use the exact identity
+\[
+ a_{n,r}=\frac1r+\frac1{n-r}.
+\]
+Since $U_n=o(n)$,
+\[
+ \sum_{b_n<r\le U_n}\frac{(\log r)^k}{n-r}
+ \le C\frac{U_nL^k}{n}
+ =O(L^{k-A_0}).
+\]
+Integral comparison gives
+\[
+ \sum_{b_n<r\le U_n}\frac{(\log r)^k}{r}
+ =\frac{(\log U_n)^{k+1}-(\log b_n)^{k+1}}{k+1}
+ +O_k(1).
+\]
+Now
+\[
+ \log U_n=L-A_0\log L+O(1),
+ \qquad
+ \log b_n=3\log L+O(1),
+\]
+and expansion proves~\eqref{eq:rho}.
+\end{proof}
+
+Let $(N_{n,r})_{b_n<r\le U_n}$ be independent Poisson variables with
+\[
+ N_{n,r}\sim\Pois(a_{n,r}),
+\]
+and define the ideal compound-Poisson statistic
+\[
+ Y_n^\circ=\sum_{b_n<r\le U_n}w_rN_{n,r}.
+\]
+Its mean is $\mu_n$, its variance is $v_n$, and its centered characteristic
+function is
+\begin{equation}
+\label{eq:ideal-cf}
+ \psi_n(t)=
+ \exp\left\{
+ \sum_{b_n<r\le U_n}a_{n,r}
+ \left(e^{itw_r/\sqrt{v_n}}-1-\frac{itw_r}{\sqrt{v_n}}\right)
+ \right\}.
+\end{equation}
+
+\begin{proposition}[Ideal standardized cumulants]
+\label{prop:cumulants}
+For every fixed $j\ge3$, the $j$th standardized cumulant of $Y_n^\circ$
+is
+\[
+ \frac{\rho_{j,n}}{v_n^{j/2}}
+ =\frac{3^{j/2}}{j+1}L^{1-j/2}(1+o(1)).
+\]
+In particular,
+\begin{align*}
+ \frac{\rho_{3,n}}{v_n^{3/2}}
+ &=\frac{3\sqrt3}{4}L^{-1/2}(1+o(1)),\\
+ \frac{\rho_{4,n}}{v_n^2}
+ &=\frac95L^{-1}(1+o(1)).
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+For a Poisson variable, every cumulant equals its mean.  Cumulants add over
+independent summands, so the $j$th cumulant of $Y_n^\circ$ is
+$\rho_{j,n}$.  Apply Lemma~\ref{lem:rho}.
+\end{proof}
+
+\begin{remark}
+Proposition~\ref{prop:cumulants} identifies the natural first Edgeworth
+scale of the ideal proxy.  It does not, by itself, prove a Kolmogorov lower
+bound for $B_n^\circ$ or for $\log O_n$, because transferring a first
+Edgeworth coefficient requires an error smaller than $L^{-1/2}$ and
+control of the arithmetic remainder at the level of third cumulants.
+\end{remark}
+
+\section{A sharp Berry--Esseen bound for the additive proxy}
+
+Let
+\[
+ \phi_n(t)=\Ee\exp\left\{
+ \frac{it(B_n^\circ-\mu_n)}{\sqrt{v_n}}
+ \right\}.
+\]
+Write
+\[
+ \Psi_n(s)=\sum_{b_n<r\le U_n}a_{n,r}(e^{sw_r}-1).
+\]
+Then the ideal characteristic function in~\eqref{eq:ideal-cf} is
+\[
+ \psi_n(t)=e^{-it\mu_n/\sqrt{v_n}}
+ e^{\Psi_n(it/\sqrt{v_n})}.
+\]
+
+We use the standard Esseen smoothing inequality in the form
+\begin{equation}
+\label{eq:esseen}
+ \Kol(X,N(0,1))
+ \le C\int_{-T}^T
+ \frac{|\phi_X(t)-e^{-t^2/2}|}{|t|}\dd t
+ +\frac{C}{T},
+\end{equation}
+where the integrand at zero is interpreted by continuity; see, for
+example,~\cite[Chapter~V]{Petrov1975}.
+
+\begin{lemma}[Gaussian window for the ideal exponent]
+\label{lem:gaussian-window}
+There are constants $c_0,c_1,C>0$ such that, with
+\[
+ T_n=c_0\sqrt L,
+\]
+the following hold for all sufficiently large $n$ and $|t|\le T_n$:
+\begin{align}
+ \log|\psi_n(t)|&\le-c_1t^2,\label{eq:ideal-decay}\\
+ |\psi_n(t)-e^{-t^2/2}|
+ &\le C L^{-1/2}|t|^3e^{-c_1t^2}.
+ \label{eq:ideal-normal-cf}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+Put
+\[
+ x_{n,r}=\frac{w_r}{\sqrt{v_n}}.
+\]
+By~\eqref{eq:v-asymp},
+\[
+ \max_{r\le U_n}x_{n,r}\le\frac{C}{\sqrt L}.
+\]
+Choose $c_0$ so small that
+\[
+ |t|x_{n,r}\le\theta_0<\frac\pi2
+\]
+whenever $|t|\le T_n$.  On this interval,
+$1-\cos y\ge c y^2$.  Hence
+\[
+ \log|\psi_n(t)|
+ =-\sum_ra_{n,r}(1-\cos(tx_{n,r}))
+ \le-c t^2\sum_ra_{n,r}x_{n,r}^2
+ =-ct^2,
+\]
+which proves~\eqref{eq:ideal-decay}.
+
+Let
+\[
+ \chi_n(t)=\log\psi_n(t).
+\]
+Taylor's formula and $|tx_{n,r}|\le\theta_0$ give
+\begin{align*}
+ \left|\chi_n(t)+\frac12t^2\right|
+ &\le C|t|^3\sum_ra_{n,r}|x_{n,r}|^3\\
+ &=C|t|^3\frac{\rho_{3,n}}{v_n^{3/2}}
+ \le C L^{-1/2}|t|^3.
+\end{align*}
+Moreover, both $\Re\chi_n(t)$ and $-t^2/2$ are at most $-ct^2$ after
+possibly decreasing $c$.  The integral identity
+\[
+ e^{\chi_n(t)}-e^{-t^2/2}
+ =\left(\chi_n(t)+\frac12t^2\right)
+ \int_0^1
+ e^{s\chi_n(t)-(1-s)t^2/2}\dd s
+\]
+therefore yields~\eqref{eq:ideal-normal-cf}.
+\end{proof}
+
+\begin{lemma}[Frequency-uniform switching comparison]
+\label{lem:switch-cf}
+For $|t|\le T_n$,
+\begin{equation}
+\label{eq:switch-cf}
+ |\phi_n(t)-\psi_n(t)|
+ \le C\frac{\mathfrak e_n}{\sqrt{v_n}}
+ \min\{|t|,|t|^{-1}\},
+\end{equation}
+where the right side is interpreted as zero at $t=0$.
+\end{lemma}
+
+\begin{proof}
+The ODE~\eqref{eq:ode}, with $Z_n(0)=1$, gives
+\[
+ Z_n(s)=e^{\Psi_n(s)}
+ \left[1+\int_0^s e^{-\Psi_n(z)}E_n(z)\dd z\right].
+\]
+Take $s=it/\sqrt{v_n}$ and, by symmetry, assume $t\ge0$.  Parameterizing
+$z=iu/\sqrt{v_n}$ gives
+\begin{align*}
+ |\phi_n(t)-\psi_n(t)|
+ \le\frac{\mathfrak e_n}{\sqrt{v_n}}
+ \int_0^t
+ \exp\left\{
+ \Re\left[
+ \Psi_n(it/\sqrt{v_n})-\Psi_n(iu/\sqrt{v_n})
+ \right]\right\}\dd u.
+\end{align*}
+For $0\le u\le t\le T_n$, all phases lie in $[0,\theta_0]$.  Since
+$\sin y\ge cy$ there,
+\[
+ \cos(tx)-\cos(ux)\le-c(t^2-u^2)x^2.
+\]
+Summing with $x=x_{n,r}$ gives
+\[
+ \Re\left[
+ \Psi_n(it/\sqrt{v_n})-\Psi_n(iu/\sqrt{v_n})
+ \right]
+ \le-c(t^2-u^2),
+\]
+because $\sum_ra_{n,r}x_{n,r}^2=1$.  Thus the integral is at most $t$
+when $t\le1$, while for $t\ge1$,
+\[
+ \int_0^t e^{-c(t^2-u^2)}\dd u
+ \le\int_0^t e^{-ct(t-u)}\dd u
+ \le\frac{C}{t}.
+\]
+This proves~\eqref{eq:switch-cf}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:proxy}]
+Apply~\eqref{eq:esseen} with $T=T_n$.  Split
+\[
+ \phi_n(t)-e^{-t^2/2}
+ =\bigl(\phi_n(t)-\psi_n(t)\bigr)
+ +\bigl(\psi_n(t)-e^{-t^2/2}\bigr).
+\]
+By Lemma~\ref{lem:switch-cf},
+\begin{align*}
+ \int_{-T_n}^{T_n}
+ \frac{|\phi_n(t)-\psi_n(t)|}{|t|}\dd t
+ &\le C\frac{\mathfrak e_n}{\sqrt{v_n}}
+ \left(\int_0^1\dd t+\int_1^{T_n}\frac{\dd t}{t^2}\right)\\
+ &\le C\frac{\mathfrak e_n}{\sqrt{v_n}}
+ =o(L^{-1/2})
+\end{align*}
+by~\eqref{eq:ode-error} and~\eqref{eq:v-asymp}.  Lemma
+\ref{lem:gaussian-window} gives
+\[
+ \int_{-T_n}^{T_n}
+ \frac{|\psi_n(t)-e^{-t^2/2}|}{|t|}\dd t
+ \le\frac{C}{\sqrt L}
+ \int_{\mathbb R}t^2e^{-ct^2}\dd t
+ \le\frac{C}{\sqrt L}.
+\]
+Finally, $T_n^{-1}=O(L^{-1/2})$.  Theorem~\ref{thm:proxy} follows.
+\end{proof}
+
+\begin{remark}[The reset depth is not rate-limiting]
+The estimate~\eqref{eq:ode-error} implies
+\[
+ \frac{\mathfrak e_n}{\sqrt{v_n}}
+ \le C_\kappa e^{-c_\kappa\sqrt{\log L}}L^{-1/2}
+ =o(L^{-1/2}).
+\]
+Thus the reset depth $m\asymp\sqrt{\log(n/a)}$ used in the main paper is
+already sufficient for the proxy Berry--Esseen theorem.  Increasing it to
+order $\log(n/a)$ may be useful for stronger process approximations, but it
+is unnecessary for Theorem~\ref{thm:proxy}.
+\end{remark}
+
+\section{Transfer to the permutation order}
+
+We first record a general perturbation inequality.
+
+\begin{lemma}[Centered $L^1$ transfer]
+\label{lem:L1-transfer}
+Let $X$ and $Z$ be real random variables, and suppose
+\[
+ \Kol(X,N(0,1))\le\varepsilon,
+ \qquad
+ \Ee|Z|\le\delta.
+\]
+Then
+\begin{equation}
+\label{eq:L1-transfer}
+ \Kol(X+Z,N(0,1))
+ \le\varepsilon+C\sqrt\delta.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For every $h>0$ and $x\in\mathbb R$,
+\begin{align*}
+ \Pp(X+Z\le x)
+ &\le\Pp(X\le x+h)+\Pp(|Z|>h),\\
+ \Pp(X+Z\le x)
+ &\ge\Pp(X\le x-h)-\Pp(|Z|>h).
+\end{align*}
+The normal distribution function is $1/\sqrt{2\pi}$-Lipschitz, so
+\[
+ \Kol(X+Z,N(0,1))
+ \le\varepsilon+Ch+\frac{\delta}{h}.
+\]
+Choose $h=\sqrt\delta$ when $\delta\le1$; the remaining case is absorbed
+by the constant.
+\end{proof}
+
+Recall that
+\[
+ R_n=\log O_n-B_n^\circ,
+ \qquad
+ m_n=\Ee\log O_n.
+\]
+By Input Theorem~\ref{input:arithmetic},
+\begin{equation}
+\label{eq:R-L1}
+ \Ee|R_n|\le C_\kappa L\log L.
+\end{equation}
+At $s=0$, the ODE~\eqref{eq:ode} gives
+\begin{equation}
+\label{eq:mean-proxy-mismatch}
+ |\Ee B_n^\circ-\mu_n|=|E_n(0)|\le\mathfrak e_n.
+\end{equation}
+Define
+\[
+ X_n=\frac{B_n^\circ-\mu_n}{\sqrt{v_n}}
+\]
+and
+\begin{equation}
+\label{eq:Zn}
+ Z_n^*=
+ \frac{R_n-\Ee R_n+\mu_n-\Ee B_n^\circ}{\sqrt{v_n}}.
+\end{equation}
+Then exactly
+\begin{equation}
+\label{eq:exact-transfer}
+ \frac{\log O_n-m_n}{\sqrt{v_n}}=X_n+Z_n^*.
+\end{equation}
+Moreover, by~\eqref{eq:R-L1},~\eqref{eq:mean-proxy-mismatch}, and
+\eqref{eq:v-asymp},
+\begin{equation}
+\label{eq:Z-L1}
+ \Ee|Z_n^*|
+ \le\frac{2\Ee|R_n|+\mathfrak e_n}{\sqrt{v_n}}
+ \le C_\kappa\frac{\log L}{\sqrt L}.
+\end{equation}
+
+\begin{proof}[Proof of Theorem~\ref{thm:order-checkpoint}]
+Apply Lemma~\ref{lem:L1-transfer} to~\eqref{eq:exact-transfer}, use
+Theorem~\ref{thm:proxy}, and then~\eqref{eq:Z-L1}.  This gives
+\[
+ \Kol\!\left(
+ \frac{\log O_n-m_n}{\sqrt{v_n}},N(0,1)\right)
+ \le C_\kappa\left(
+ L^{-1/2}+\left(\frac{\log L}{\sqrt L}\right)^{1/2}
+ \right),
+\]
+which is the asserted bound.
+\end{proof}
+
+\begin{corollary}[Classical centering and scale]
+\label{cor:classical}
+One has
+\[
+ \Kol\!\left(
+ \frac{\log O_n-\frac12L^2}{\sqrt{L^3/3}},N(0,1)\right)
+ \le C_\kappa L^{-1/4}\sqrt{\log L}.
+\]
+\end{corollary}
+
+\begin{proof}
+Equations~\eqref{eq:mu-asymp},~\eqref{eq:R-L1}, and
+\eqref{eq:mean-proxy-mismatch} imply
+\[
+ |m_n-\tfrac12L^2|\le C_\kappa L\log L.
+\]
+Also,~\eqref{eq:v-asymp} gives
+\[
+ \frac{\sqrt{v_n}}{\sqrt{L^3/3}}=1+O\left(\frac{\log L}{L}\right).
+\]
+If $a$ stays in a fixed compact subset of $(0,\infty)$, then
+\[
+ \sup_x|\Phi((x-b)/a)-\Phi(x)|
+ \le C(|a-1|+|b|),
+\]
+where $\Phi$ is the standard normal distribution function.  Applying this
+normal shift-and-scale bound to Theorem~\ref{thm:order-checkpoint}, the
+additional error is
+\[
+ O_\kappa\left(\frac{\log L}{\sqrt L}\right),
+\]
+which is smaller than $L^{-1/4}\sqrt{\log L}$.
+\end{proof}
+
+\section{Moment transfer and the fixed-moment hierarchy}
+
+We first retain the general transfer principle from the first checkpoint.
+
+\begin{lemma}[$L^k$ transfer]
+\label{lem:Lk-transfer}
+Let $k\ge1$.  If
+\[
+ \Kol(X,N(0,1))\le\varepsilon,
+ \qquad
+ \|Z\|_k\le d,
+\]
+then
+\begin{equation}
+\label{eq:Lk-transfer}
+ \Kol(X+Z,N(0,1))
+ \le\varepsilon+C_k d^{k/(k+1)}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For every $h>0$, the proof of Lemma~\ref{lem:L1-transfer} gives
+\[
+ \Kol(X+Z,N(0,1))
+ \le\varepsilon+Ch+\Pp(|Z|>h)
+ \le\varepsilon+Ch+\frac{d^k}{h^k}.
+\]
+Choose $h=d^{k/(k+1)}$.
+\end{proof}
+
+\begin{criterion}[Moment-to-rate criterion]
+\label{crit:moment-rate}
+Suppose that, for a fixed $k\ge1$ and $d\ge0$,
+\begin{equation}
+\label{eq:R-k}
+ \|R_n-\Ee R_n\|_k
+ \le C_{\kappa,k}L(\log L)^d.
+\end{equation}
+Then
+\begin{equation}
+\label{eq:rate-k}
+ \Kol\!\left(
+ \frac{\log O_n-m_n}{\sqrt{v_n}},N(0,1)\right)
+ \le C_{\kappa,k}
+ \left[
+ L^{-1/2}
+ +L^{-k/(2(k+1))}(\log L)^{dk/(k+1)}
+ \right].
+\end{equation}
+\end{criterion}
+
+\begin{proof}
+By~\eqref{eq:exact-transfer}, the perturbation of the proxy is
+\[
+ Z_n^*=\frac{R_n-\Ee R_n+\mu_n-\Ee B_n^\circ}{\sqrt{v_n}}.
+\]
+The deterministic mean mismatch satisfies
+$|\mu_n-\Ee B_n^\circ|\le\mathfrak e_n=o(L)$, while
+$\sqrt{v_n}\asymp L^{3/2}$.  Divide~\eqref{eq:R-k} by $\sqrt{v_n}$ and
+apply Lemma~\ref{lem:Lk-transfer} together with
+Theorem~\ref{thm:proxy}.
+\end{proof}
+
+The next section supplies factorial domination for every fixed number of
+cycles.  Section~\ref{sec:variance} gives the transparent $k=2$ case, and
+Section~\ref{sec:all-moments} proves~\eqref{eq:R-k} with $d=1$ for every
+fixed integer $k\ge1$.
+
+\section{A fixed-order multi-clock switching theorem}
+\label{sec:multiclock}
+
+The two-clock one-cycle identity and the three-clock identity of the
+companion paper are the first cases of a general finite-order construction.
+The four-cycle case gives the variance checkpoint, while the full fixed-$q$
+statement is the input needed for the all-moment argument.
+
+For a coordinate permutation $\tau\in S_n$, define
+\[
+ (T_\tau x)_a=x_{\tau(a)}
+\]
+and, if $p_n$ is the joint density of the independent clocks, put
+\begin{equation}
+\label{eq:Rtau-general}
+ R_\tau(x)=\frac{p_n(T_\tau x)}{p_n(x)}
+ =\exp\left\{\sum_{a=1}^n
+ \theta_{n,a}(x_a-x_{\tau(a)})\right\}.
+\end{equation}
+Then
+\begin{equation}
+\label{eq:tau-cov-general}
+ \Ee\bigl[R_\tau(X)F(T_\tau X)\bigr]=\Ee F(X)
+\end{equation}
+for every nonnegative measurable $F$.
+
+Give the labels a deterministic total order by sorting first by decreasing
+rate and then by increasing label.  For distinct labels
+$z_0,\ldots,z_q$, let
+\[
+ h_0,h_1,\ldots,h_q
+\]
+be those labels in this order and define the rate-oriented cycle
+\begin{equation}
+\label{eq:tau-star-q}
+ \tau^\star(z_0,\ldots,z_q)=(h_0\,h_1\cdots h_q).
+\end{equation}
+Cycle notation is understood up to cyclic rotation.
+
+For positive integers $r_1,\ldots,r_q$, let
+\begin{equation}
+\label{eq:Cq}
+ \mathcal C_n(r_1,\ldots,r_q)
+ =\sum_{\substack{(C_1,\ldots,C_q)\in\Cyc(\sigma_n)^q\\
+                   C_1,\ldots,C_q\ \mathrm{distinct}}}
+ \prod_{j=1}^q\one_{\{|C_j|=r_j\}}.
+\end{equation}
+This is an ordered distinct-cycle count, even when some $r_j$ coincide.
+
+\begin{theorem}[Exact fixed-order multi-clock identity]
+\label{thm:multiclock}
+Fix $q\ge1$ and positive integers $r_1,\ldots,r_q$.  Put
+\[
+ R=r_1+\cdots+r_q.
+\]
+There is a nonnegative random sum $\mathcal I_{n;\mathbf r}^{(q)}$ with at
+most $q!n$ summands such that, whenever $R<n$,
+\begin{equation}
+\label{eq:multiclock-identity}
+ \left(\prod_{j=1}^q r_j\right)(n-R)
+ \Ee\mathcal C_n(r_1,\ldots,r_q)
+ =\Ee\mathcal I_{n;\mathbf r}^{(q)}.
+\end{equation}
+Moreover, for $\kappa>1$ and $u\ge0$,
+\begin{equation}
+\label{eq:multiclock-tail}
+ \frac1n\Ee
+ \sum_{\text{summands in }\mathcal I_{n;\mathbf r}^{(q)}}
+ \one_{\{\log R_\tau>u\}}
+ \le q!(q+1)e^{-\lambda_\kappa u},
+\end{equation}
+where $\lambda_\kappa=\kappa/(\kappa-1)$.  Consequently,
+\begin{equation}
+\label{eq:multiclock-first}
+ \Ee\mathcal I_{n;\mathbf r}^{(q)}\le C_{\kappa,q}n.
+\end{equation}
+For $\kappa=1$, every factor is one and~\eqref{eq:multiclock-first}
+holds as well.
+\end{theorem}
+
+\begin{proof}
+Let $\pi\in S_q$.  For a source label $i$ with $L_n(i)>R$, put
+\[
+ s_{\pi,j}=\sum_{\ell=1}^j r_{\pi(\ell)},
+ \qquad
+ z_{\pi(j)}=\sigma_n^{s_{\pi,j}}(i),
+ \qquad 1\le j\le q,
+\]
+and define
+\begin{equation}
+\label{eq:tau-pi}
+ \tau_{i,\pi}=(i\,z_{\pi(q)}\,z_{\pi(q-1)}\cdots z_{\pi(1)}).
+\end{equation}
+Set
+\begin{equation}
+\label{eq:Iq}
+ \mathcal I_{n;\mathbf r}^{(q)}
+ =\sum_{i:L_n(i)>R}\ \sum_{\pi\in S_q}
+ \one_{\{\tau^\star(i,z_1,\ldots,z_q)=\tau_{i,\pi}\}}
+ R_{\tau_{i,\pi}}(X).
+\end{equation}
+There are at most $q!n$ summands.
+
+For a target permutation, mark an ordered $q$-tuple of distinct cycles of
+lengths $r_1,\ldots,r_q$, choose a marked label $z_j$ in the $j$th cycle,
+and choose $i$ outside their union.  The number of such target marks is
+\[
+ (n-R)\left(\prod_{j=1}^q r_j\right)
+ \mathcal C_n(r_1,\ldots,r_q).
+\]
+For each deterministic target mark, rotate
+$\tau^\star(i,z_1,\ldots,z_q)$ so that it begins at $i$.  There is a unique
+$\pi\in S_q$ for which
+\[
+ \tau^\star=(i\,z_{\pi(q)}\cdots z_{\pi(1)}).
+\]
+Right composition by $\tau^\star$ cuts a single source cycle whose marked
+points occur in the order
+\[
+ i,z_{\pi(1)},\ldots,z_{\pi(q)}
+\]
+and whose successive segment lengths are
+$r_{\pi(1)},\ldots,r_{\pi(q)}$ and the residual length.  Indeed,
+$\tau^\star$ replaces the outgoing image of $i$ by the old outgoing image
+of $z_{\pi(q)}$ and the outgoing image of $z_{\pi(j)}$ by that of
+$z_{\pi(j-1)}$.  The resulting cycles are exactly the $q$ marked segments
+and the residual segment.  Conversely, right composition by
+$(\tau^\star)^{-1}$ merges those $q+1$ target cycles uniquely.  Thus the
+marked transformation is bijective.  Summing~\eqref{eq:tau-cov-general}
+over target marks and reorganizing by the source gives
+\eqref{eq:multiclock-identity}.
+
+For the tail bound, write the rate-oriented cycle as
+$\tau=(h_0\,h_1\cdots h_q)$ with
+\[
+ \theta_{h_0}\ge\theta_{h_1}\ge\cdots\ge\theta_{h_q}.
+\]
+Then
+\begin{align*}
+ \log R_\tau
+ &=\sum_{j=0}^q\theta_{h_j}(X_{h_j}-X_{h_{j+1}})\\
+ &=(\theta_{h_0}-\theta_{h_q})X_{h_0}
+   +\sum_{j=1}^q(\theta_{h_j}-\theta_{h_{j-1}})X_{h_j},
+ \qquad h_{q+1}=h_0.
+\end{align*}
+Only the coefficient of $X_{h_0}$ is positive.  If it is zero, then
+$R_\tau\le1$.  Otherwise,
+\[
+ \{\log R_\tau>u\}
+ \subseteq
+ \left\{X_{h_0}>\frac{u}{\theta_{h_0}-\theta_{h_q}}\right\}
+ \subseteq
+ \left\{X_{h_0}>\frac{u}{\theta_{h_0}-1}\right\},
+\]
+whose probability is at most $e^{-\lambda_\kappa u}$.
+
+Partition the selected summands by $\pi\in S_q$ and by the position of
+$h_0$ among $i,z_1,\ldots,z_q$.  Within one class,
+$h_0=\sigma_n^t(i)$ for one fixed
+$t\in\{0,s_{\pi,1},\ldots,s_{\pi,q}\}$.  Since $\sigma_n^t$ is a
+permutation, its restriction to the selected source set is injective.
+Reindexing by $h_0$ gives at most $ne^{-\lambda_\kappa u}$ per class,
+and there are $q!(q+1)$ classes.  This proves
+\eqref{eq:multiclock-tail}.
+
+Finally, for each nonnegative factor $Z$,
+\[
+ Z\le1+\int_0^\infty e^u\one_{\{\log Z>u\}}\dd u.
+\]
+Use~\eqref{eq:multiclock-tail} and $\lambda_\kappa>1$ to obtain
+\eqref{eq:multiclock-first}.
+\end{proof}
+
+\begin{corollary}[Fixed-order factorial domination]
+\label{cor:factorial-domination}
+For every fixed $q\ge1$, there is $C_{\kappa,q}<\infty$ such that
+\begin{equation}
+\label{eq:factorial-domination}
+ \Ee\mathcal C_n(r_1,\ldots,r_q)
+ \le\frac{C_{\kappa,q}}{r_1\cdots r_q}
+\end{equation}
+whenever $r_1+\cdots+r_q\le n/2$.
+Consequently, if $f_1,\ldots,f_q$ are nonnegative functions supported on
+$\{1,\ldots,W\}$ and $qW\le n/2$, then
+\begin{equation}
+\label{eq:factorial-functional}
+ \Ee\!\sum_{\substack{(C_1,\ldots,C_q)\in\Cyc(\sigma_n)^q\\
+                       C_1,\ldots,C_q\ \mathrm{distinct}}}
+ \prod_{j=1}^q f_j(|C_j|)
+ \le C_{\kappa,q}\prod_{j=1}^q
+ \left(\sum_{r\le W}\frac{f_j(r)}r\right).
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Equation~\eqref{eq:factorial-domination} follows from
+Theorem~\ref{thm:multiclock} and $n/(n-r_1-\cdots-r_q)\le2$.
+Summing it against $\prod_jf_j(r_j)$ gives
+\eqref{eq:factorial-functional}.
+\end{proof}
+
+\section{Second moments of the omitted-cycle and arithmetic remainders}
+\label{sec:variance}
+
+We now prove the variance estimate needed for the next checkpoint.  Recall
+\[
+ \Delta_n=B_n-B_n^\circ,
+ \qquad
+ G_n=B_n^\circ-\log O_n^\circ,
+\]
+and $|R_n|\le\Delta_n+G_n$.
+
+\begin{lemma}[Second moment of the omitted-cycle term]
+\label{lem:Delta-second}
+One has
+\begin{equation}
+\label{eq:Delta-second}
+ \Ee\Delta_n^2\le C_\kappa L^2(\log L)^2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Write
+\[
+ \Delta_n=\Delta_n^-+\Delta_n^++V_n,
+\]
+where the three sums range over $r\le b_n$,
+$U_n<r\le n/4$, and $r>n/4$, respectively.  Deterministically,
+$V_n\le4L$.
+
+For a nonnegative weight $f$ supported on lengths at most $n/4$,
+Corollary~\ref{cor:factorial-domination} with $q=2$, together with the
+one-cycle bound $\Ee C_{n,r}\le C_\kappa/r$, gives
+\begin{equation}
+\label{eq:linear-second}
+ \Ee\left(\sum_rf(r)C_{n,r}\right)^2
+ \le C_\kappa\left(\sum_r\frac{f(r)}r\right)^2
+   +C_\kappa\sum_r\frac{f(r)^2}r.
+\end{equation}
+For $f(r)=\log r\,\one_{\{r\le b_n\}}$, the right side is
+$O((\log L)^4)$.  For
+$f(r)=\log r\,\one_{\{U_n<r\le n/4\}}$, it is
+$O(L^2(\log L)^2)$, because
+\begin{align*}
+ \sum_{U_n<r\le n/4}\frac{\log r}{r}&=O(L\log L),\\
+ \sum_{U_n<r\le n/4}\frac{(\log r)^2}{r}&=O(L^2\log L).
+\end{align*}
+The inequality $(x+y+z)^2\le3(x^2+y^2+z^2)$ completes the proof.
+\end{proof}
+
+For the arithmetic term, let
+\[
+ \mathcal R_n=\{r:b_n<r\le U_n\},
+ \qquad
+ D_{n,m}=\sum_{\substack{r\in\mathcal R_n\\m\mid r}}C_{n,r}.
+\]
+Then
+\begin{equation}
+\label{eq:G-vonmangoldt}
+ G_n=\sum_{m\le U_n}\Lambda(m)(D_{n,m}-1)_+,
+\end{equation}
+where $\Lambda$ is the von Mangoldt function.
+
+\begin{lemma}[Prime-power least-common-multiple sums]
+\label{lem:lcm-sums}
+Let $y\ge2$ and let $\mathcal Q_y$ be the set of prime powers larger than
+$y$.  Then
+\begin{align}
+ \sum_{m,m'\in\mathcal Q_y}
+ \frac{\Lambda(m)\Lambda(m')}{\lcm(m,m')^2}
+ &\le C\frac{\log y}{y},
+ \label{eq:lcm-square-sum}\\
+ \sum_{m,m'\in\mathcal Q_y}
+ \frac{\Lambda(m)\Lambda(m')}{mm'\lcm(m,m')}
+ &\le C\frac{\log y}{y^2}.
+ \label{eq:lcm-cubic-sum}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+The Chebyshev estimate $\sum_{k\le x}\Lambda(k)=O(x)$ and partial
+summation give
+\begin{equation}
+\label{eq:Lambda-tail}
+ \sum_{m>y}\frac{\Lambda(m)}{m^2}=O(1/y).
+\end{equation}
+If $m$ and $m'$ are powers of different primes, then
+$\lcm(m,m')=mm'$, and their contribution to either sum is
+$O(y^{-2})$ by~\eqref{eq:Lambda-tail}.
+
+It remains to take $m=p^a$, $m'=p^b$.  By symmetry assume $a\le b$.
+For~\eqref{eq:lcm-square-sum}, the same-prime contribution is at most
+\[
+ 2\sum_p(\log p)^2
+ \sum_{b:p^b>y}b p^{-2b}.
+\]
+The terms with $b=1$ satisfy
+\[
+ \sum_{p>y}\frac{(\log p)^2}{p^2}
+ =O\left(\frac{\log y}{y}\right)
+\]
+by partial summation from $\sum_{p\le x}\log p=O(x)$.  For $b\ge2$, use
+$p^{-2b}\le y^{-1}p^{-b}$ and
+\[
+ \sum_p\sum_{b\ge2}b(\log p)^2p^{-b}<\infty.
+\]
+This proves~\eqref{eq:lcm-square-sum}.
+
+For~\eqref{eq:lcm-cubic-sum}, the same-prime contribution is at most
+\begin{align*}
+ 2\sum_p(\log p)^2
+ \sum_{b:p^b>y}p^{-2b}
+ \sum_{\substack{a\le b\\p^a>y}}p^{-a}
+ &\le\frac{C}{y}\sum_p(\log p)^2
+ \sum_{b:p^b>y}p^{-2b}\\
+ &\le C\frac{\log y}{y^2},
+\end{align*}
+using the estimate just proved.  This completes the proof.
+\end{proof}
+
+For $m\le U_n$, define
+\begin{equation}
+\label{eq:alpha-m}
+ \alpha_m=\sum_{\substack{r\in\mathcal R_n\\m\mid r}}\frac1r.
+\end{equation}
+Then
+\begin{equation}
+\label{eq:alpha-bound}
+ \alpha_m\le C\frac{\log(1+U_n/m)}m\le C\frac{L}{m}.
+\end{equation}
+
+\begin{lemma}[Second moment of the arithmetic overlap]
+\label{lem:G-second}
+One has
+\begin{equation}
+\label{eq:G-second}
+ \Ee G_n^2\le C_\kappa L^2(\log L)^2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Put $y=L^2$ and split $G_n=G_n^{\le y}+G_n^{>y}$.
+
+For the small prime powers, use
+\[
+ G_n^{\le y}
+ \le A_n:=\sum_{m\le y}\Lambda(m)D_{n,m}
+ =\sum_{\substack{C\in\Cyc(\sigma_n)\\|C|\in\mathcal R_n}}g_y(|C|),
+\]
+where only cycles with lengths in $\mathcal R_n$ are included and
+\[
+ g_y(r)=\sum_{\substack{m\le y\\m\mid r}}\Lambda(m)\le\log r\le L.
+\]
+By~\eqref{eq:linear-second},
+\[
+ \Ee A_n^2
+ \le C_\kappa\left(\sum_{r\in\mathcal R_n}\frac{g_y(r)}r\right)^2
+ +C_\kappa\sum_{r\in\mathcal R_n}\frac{g_y(r)^2}r.
+\]
+Now
+\begin{align*}
+ \sum_{r\in\mathcal R_n}\frac{g_y(r)}r
+ &\le L\sum_{m\le y}\frac{\Lambda(m)}m
+ \le C L\log y,\\
+ \sum_{r\in\mathcal R_n}\frac{g_y(r)^2}r
+ &\le L\sum_{r\in\mathcal R_n}\frac{g_y(r)}r
+ \le C L^2\log y.
+\end{align*}
+Thus
+\begin{equation}
+\label{eq:G-small-second}
+ \Ee(G_n^{\le y})^2\le C_\kappa L^2(\log L)^2.
+\end{equation}
+
+For the large prime powers,
+\[
+ (D-1)_+\le\frac12(D)_2,
+\]
+so
+\begin{equation}
+\label{eq:Hn}
+ G_n^{>y}\le \mathcal H_n:=\frac12\sum_{m>y}\Lambda(m)(D_{n,m})_2.
+\end{equation}
+For prime powers $m,m'>y$, put $\ell=\lcm(m,m')$.  Expanding the two
+ordered pairs of distinct cycles and classifying by whether their union
+has four, three, or two cycles, Corollary~\ref{cor:factorial-domination}
+with $q=4,3,2$ gives
+\begin{equation}
+\label{eq:D2D2}
+ \Ee[(D_{n,m})_2(D_{n,m'})_2]
+ \le C_\kappa\left(
+ \alpha_m^2\alpha_{m'}^2
+ +\alpha_\ell\alpha_m\alpha_{m'}
+ +\alpha_\ell^2
+ \right).
+\end{equation}
+Indeed, the three-cycle case has four possible cross-identifications and
+the two-cycle case has two; these fixed multiplicities are absorbed into
+$C_\kappa$.
+
+Using~\eqref{eq:alpha-bound},~\eqref{eq:Lambda-tail}, and
+Lemma~\ref{lem:lcm-sums}, we obtain
+\begin{align*}
+ \Ee\mathcal H_n^2
+ &\le C_\kappa
+ \left(\sum_{m>y}\Lambda(m)\alpha_m^2\right)^2\\
+ &\quad+C_\kappa L^3
+ \sum_{m,m'>y}
+ \frac{\Lambda(m)\Lambda(m')}{mm'\lcm(m,m')}\\
+ &\quad+C_\kappa L^2
+ \sum_{m,m'>y}
+ \frac{\Lambda(m)\Lambda(m')}{\lcm(m,m')^2}\\
+ &\le C_\kappa\left(
+ \frac{L^4}{y^2}
+ +\frac{L^3\log y}{y^2}
+ +\frac{L^2\log y}{y}
+ \right)\\
+ &\le C_\kappa(1+\log L).
+\end{align*}
+Together with~\eqref{eq:G-small-second} and
+$(x+y)^2\le2x^2+2y^2$, this proves~\eqref{eq:G-second}.
+\end{proof}
+
+\begin{theorem}[Variance of the centered arithmetic remainder]
+\label{thm:R-variance}
+One has
+\begin{equation}
+\label{eq:R-variance}
+ \Var(R_n)\le C_\kappa L^2(\log L)^2.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By~\eqref{eq:R-sandwich},
+$|R_n|\le\Delta_n+G_n$.  Hence
+\[
+ \Var(R_n)\le\Ee R_n^2
+ \le2\Ee\Delta_n^2+2\Ee G_n^2.
+\]
+Apply Lemmas~\ref{lem:Delta-second} and~\ref{lem:G-second}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:order-second-checkpoint}]
+By Theorem~\ref{thm:R-variance},
+\[
+ \|R_n-\Ee R_n\|_2\le C_\kappa L\log L.
+\]
+Apply Criterion~\ref{crit:moment-rate} with $k=2$ and $d=1$ to obtain
+\[
+ \Kol\!\left(
+ \frac{\log O_n-m_n}{\sqrt{v_n}},N(0,1)\right)
+ \le C_\kappa\left[L^{-1/2}
+ +L^{-1/3}(\log L)^{2/3}\right].
+\]
+The second term dominates.  The classical centering and scaling follow as
+in Corollary~\ref{cor:classical}, because the resulting deterministic
+shift-and-scale error is $O_\kappa(L^{-1/2}\log L)$.
+\end{proof}
+
+\section{All fixed moments of the arithmetic remainder}
+\label{sec:all-moments}
+
+Throughout this section, the moment order $k$ is fixed as $n\to\infty$;
+constants may depend on $k$.  In particular, for all sufficiently large
+$n$, the support conditions $kb_n\le n/2$ and $2kU_n\le n/2$ hold.
+
+\subsection{Set-partition bounds for linear cycle statistics}
+
+Let $\mathfrak P_k$ denote the set of set partitions of
+$\{1,\ldots,k\}$.
+
+\begin{lemma}[Set-partition moment bound]
+\label{lem:set-partition-moment}
+Let $f$ be a nonnegative function supported on $\{1,\ldots,W\}$, where
+$kW\le n/2$, and put
+\[
+ S_f=\sum_{C\in\Cyc(\sigma_n)}f(|C|),
+ \qquad
+ A_j(f)=\sum_{r\le W}\frac{f(r)^j}{r}.
+\]
+Then
+\begin{equation}
+\label{eq:set-partition-moment}
+ \Ee S_f^k
+ \le C_{\kappa,k}
+ \sum_{\pi\in\mathfrak P_k}
+ \prod_{B\in\pi}A_{|B|}(f).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Expand $S_f^k$ as a sum over ordered $k$-tuples of cycles and partition the
+slots according to which slots contain the same cycle.  For a fixed
+$\pi\in\mathfrak P_k$, order its blocks by their least elements.  The
+corresponding term is a sum over $|\pi|$ distinct cycles, with the weight
+$f^{|B|}$ attached to the cycle indexed by the block $B$.  Since
+$|\pi|W\le kW\le n/2$, Corollary~\ref{cor:factorial-domination} bounds that
+term by the corresponding product in~\eqref{eq:set-partition-moment}.
+Summing over $\pi$ proves the result.
+\end{proof}
+
+\subsection{All moments of the omitted-cycle term}
+
+\begin{lemma}[All fixed moments of the omitted-cycle term]
+\label{lem:Delta-all-moments}
+For every fixed integer $k\ge1$,
+\begin{equation}
+\label{eq:Delta-all-moments}
+ \Ee\Delta_n^k\le C_{\kappa,k}L^k(\log L)^k.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Put $W_{n,k}=\lfloor n/(2k)\rfloor$ and write
+\[
+ \Delta_n=\Delta_{n,k}^-+\Delta_{n,k}^++V_{n,k},
+\]
+where the three sums range over $r\le b_n$,
+$U_n<r\le W_{n,k}$, and $r>W_{n,k}$, respectively.  Fewer than $2k$
+cycles can have length larger than $W_{n,k}$, so
+\begin{equation}
+\label{eq:Vnk-bound}
+ V_{n,k}\le2kL.
+\end{equation}
+
+For $j\ge1$, integral comparison gives
+\begin{align}
+ \sum_{r\le b_n}\frac{(\log r)^j}{r}
+ &\le C_j(\log L)^{j+1},
+ \label{eq:small-omitted-sum}\\
+ \sum_{U_n<r\le W_{n,k}}\frac{(\log r)^j}{r}
+ &\le C_{j,k}L^j\log L.
+ \label{eq:upper-omitted-sum}
+\end{align}
+For the second estimate, use
+$\log U_n=L-A_0\log L+O(1)$ and
+$\log W_{n,k}=L+O_k(1)$.
+
+Apply Lemma~\ref{lem:set-partition-moment} first to
+$f(r)=\log r\,\one_{\{r\le b_n\}}$.  A partition $\pi$ contributes at most
+\[
+ C_{\kappa,k}(\log L)^{\sum_{B\in\pi}(|B|+1)}
+ =C_{\kappa,k}(\log L)^{k+|\pi|},
+\]
+so
+\[
+ \Ee(\Delta_{n,k}^-)^k\le C_{\kappa,k}(\log L)^{2k}.
+\]
+Applying the same lemma to
+$f(r)=\log r\,\one_{\{U_n<r\le W_{n,k}\}}$, a partition $\pi$ contributes
+at most
+\[
+ C_{\kappa,k}L^k(\log L)^{|\pi|},
+\]
+and hence
+\[
+ \Ee(\Delta_{n,k}^+)^k
+ \le C_{\kappa,k}L^k(\log L)^k.
+\]
+Combine these estimates with~\eqref{eq:Vnk-bound} and
+$(x+y+z)^k\le3^{k-1}(x^k+y^k+z^k)$.
+\end{proof}
+
+\subsection{Small prime powers}
+
+Put $y=L^2$ and split
+\[
+ G_n=G_n^{\le y}+G_n^{>y}
+\]
+according to whether the prime power in~\eqref{eq:G-vonmangoldt} is at most
+or larger than $y$.
+
+\begin{lemma}[All fixed moments of the small-prime-power overlap]
+\label{lem:G-small-all-moments}
+For every fixed integer $k\ge1$,
+\begin{equation}
+\label{eq:G-small-all-moments}
+ \Ee(G_n^{\le y})^k
+ \le C_{\kappa,k}L^k(\log L)^k.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+As in the second-moment proof,
+\[
+ G_n^{\le y}
+ \le A_{n,y}:=
+ \sum_{\substack{C\in\Cyc(\sigma_n)\\|C|\in\mathcal R_n}}g_y(|C|),
+ \qquad
+ g_y(r)=\sum_{\substack{m\le y\\m\mid r}}\Lambda(m).
+\]
+The identity $\sum_{m\mid r}\Lambda(m)=\log r$ gives
+$0\le g_y(r)\le\log r\le L$.  Define
+\[
+ M_j(y)=\sum_{r\in\mathcal R_n}\frac{g_y(r)^j}{r}.
+\]
+Using~\eqref{eq:alpha-bound} and the Chebyshev estimate,
+\[
+ M_1(y)
+ =\sum_{m\le y}\Lambda(m)\alpha_m
+ \le CL\sum_{m\le y}\frac{\Lambda(m)}m
+ \le CL\log y.
+\]
+Therefore, for every $j\ge1$,
+\begin{equation}
+\label{eq:Mj-bound}
+ M_j(y)\le L^{j-1}M_1(y)\le C L^j\log L.
+\end{equation}
+For fixed $k$, the statistic $A_{n,y}$ is supported on lengths at most
+$U_n$, and $kU_n\le n/2$ for all sufficiently large $n$.  Apply
+Lemma~\ref{lem:set-partition-moment}.  By~\eqref{eq:Mj-bound}, a partition
+$\pi$ contributes at most
+$C_{\kappa,k}L^k(\log L)^{|\pi|}$, which proves
+\eqref{eq:G-small-all-moments}.
+\end{proof}
+
+\subsection{Prime-class graph sums}
+
+\begin{lemma}[One-prime graph sum]
+\label{lem:one-prime-graph}
+Let $H=(V,E)$ be a fixed loopless multigraph with no isolated vertices,
+$s=|E|\ge1$, and $q=|V|\ge2$.  For $y\ge2$, put
+\[
+ \mathcal Q_H(y)
+ =\sum_{\mathfrak p}(\log\mathfrak p)^s
+ \sum_{\substack{(a_e)_{e\in E}\in\mathbb N^E\\
+                   \mathfrak p^{a_e}>y\ \text{for all }e}}
+ \mathfrak p^{-\sum_{x\in V}\max_{e\ni x}a_e},
+\]
+where $\mathfrak p$ ranges over primes.  Then
+\begin{equation}
+\label{eq:one-prime-graph}
+ \mathcal Q_H(y)
+ \le C_H\frac{(\log y)^{s-1}}{y^{q-1}}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For a prime $\mathfrak p$, let
+\[
+ h_{\mathfrak p}=\min\{a\ge1:\mathfrak p^a>y\}.
+\]
+If
+$j=\max_{e\in E}(a_e-h_{\mathfrak p})$, then every vertex contributes the
+baseline $h_{\mathfrak p}$, and the two endpoints of an edge attaining the
+maximum each contribute an additional $j$.  Hence
+\[
+ \sum_{x\in V}\max_{e\ni x}a_e
+ \ge qh_{\mathfrak p}+2j.
+\]
+There are at most $(j+1)^s$ exponent vectors with this value of the maximum.
+Consequently,
+\begin{equation}
+\label{eq:fixed-prime-graph}
+ \sum_{\substack{(a_e)_{e\in E}\in\mathbb N^E\\
+                   \mathfrak p^{a_e}>y\ \text{for all }e}}
+ \mathfrak p^{-\sum_x\max_{e\ni x}a_e}
+ \le C_s\mathfrak p^{-qh_{\mathfrak p}}.
+\end{equation}
+
+If $\mathfrak p>y$, then $h_{\mathfrak p}=1$, and partial summation from
+$\sum_{\mathfrak p\le x}\log\mathfrak p=O(x)$ gives
+\[
+ \sum_{\mathfrak p>y}\frac{(\log\mathfrak p)^s}{\mathfrak p^q}
+ \le C_{s,q}\frac{(\log y)^{s-1}}{y^{q-1}}.
+\]
+If $\mathfrak p\le y$, then
+\[
+ \mathfrak p^{-qh_{\mathfrak p}}
+ \le y^{-(q-1)}\mathfrak p^{-h_{\mathfrak p}}
+\]
+and $\mathfrak p^{-h_{\mathfrak p}}<y^{-1}$.  Thus
+\[
+ \sum_{\mathfrak p\le y}(\log\mathfrak p)^s
+ \mathfrak p^{-qh_{\mathfrak p}}
+ \le \frac{(\log y)^{s-1}}{y^q}
+ \sum_{\mathfrak p\le y}\log\mathfrak p
+ \le C\frac{(\log y)^{s-1}}{y^{q-1}}.
+\]
+Combine these bounds with~\eqref{eq:fixed-prime-graph}.
+\end{proof}
+
+\subsection{All moments of the large-prime-power overlap}
+
+\begin{lemma}[All fixed moments of the large-prime-power overlap]
+\label{lem:G-large-all-moments}
+For every fixed integer $k\ge1$,
+\begin{equation}
+\label{eq:G-large-all-moments}
+ \Ee(G_n^{>y})^k
+ \le C_{\kappa,k}(1+\log L)^{k-1}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By~\eqref{eq:Hn},
+\[
+ G_n^{>y}\le\mathcal H_n
+ =\frac12\sum_{y<m\le U_n}\Lambda(m)(D_{n,m})_2.
+\]
+Expand $\mathcal H_n^k$.  Each factor $(D_{n,m_e})_2$ contributes an
+ordered pair of distinct cycle slots.  An identification pattern among the $2k$ slots determines a loopless
+multigraph $\Gamma$ with $k$ labeled edges and $v$ nonisolated vertices,
+where $2\le v\le2k$.  Endpoint order contributes only a finite
+$k$-dependent multiplicity, so there are finitely many relevant patterns for
+fixed $k$.
+
+For a vertex $x\in V(\Gamma)$, put
+\[
+ \ell_x=\lcm\{m_e:e\ni x\},
+\]
+and extend $\alpha_m$ by zero for $m>U_n$.  Applying
+Corollary~\ref{cor:factorial-domination} to the distinct cycles represented
+by the vertices gives
+\begin{equation}
+\label{eq:identification-graph-bound}
+ \Ee\prod_{e=1}^k(D_{n,m_e})_2
+ \le C_{\kappa,k}
+ \sum_{\Gamma}\prod_{x\in V(\Gamma)}\alpha_{\ell_x}
+ \le C_{\kappa,k}
+ \sum_{\Gamma}L^v\prod_{x\in V(\Gamma)}\ell_x^{-1}.
+\end{equation}
+Here $vU_n\le2kU_n\le n/2$ for all sufficiently large $n$.
+
+Fix one identification graph $\Gamma$ and partition its edge set according
+to the base primes of the prime powers $m_e$.  Let the resulting nonempty
+classes be $B_1,\ldots,B_c$.  For class $B_i$, let $H_i$ be the loopless
+subgraph consisting of those edges and their incident vertices, and put
+\[
+ s_i=|B_i|,
+ \qquad
+ q_i=|V(H_i)|.
+\]
+Distinct prime bases factor multiplicatively in $\prod_x\ell_x$.  On that
+factorized sum, drop both the upper bounds $m_e\le U_n$ and the requirement
+that the primes assigned to different classes be distinct.  Applying
+Lemma~\ref{lem:one-prime-graph} to each class then gives
+\begin{equation}
+\label{eq:prime-class-product}
+ \sum_{\substack{m_1,\ldots,m_k>y\\
+                   \text{with the fixed base-prime partition}}}
+ \frac{\prod_{e=1}^k\Lambda(m_e)}
+      {\prod_{x\in V(\Gamma)}\ell_x}
+ \le C_k\prod_{i=1}^c
+ \frac{(\log y)^{s_i-1}}{y^{q_i-1}}
+ =C_k\frac{(\log y)^{k-c}}{y^S},
+\end{equation}
+where
+\[
+ S=\sum_{i=1}^c(q_i-1).
+\]
+Every class contains an edge, so $q_i\ge2$ and hence $S\ge c$.  Every
+vertex of $\Gamma$ occurs in at least one class, so
+$\sum_iq_i\ge v$ and $S\ge v-c$.  Therefore
+\[
+ S\ge\max\{c,v-c\}\ge\frac v2.
+\]
+Since $y=L^2$,
+\[
+ L^vy^{-S}=L^{v-2S}\le1.
+\]
+Equations~\eqref{eq:identification-graph-bound} and
+\eqref{eq:prime-class-product}, followed by summation over the finitely many
+identification patterns and edge partitions, yield
+\[
+ \Ee\mathcal H_n^k
+ \le C_{\kappa,k}(1+\log L)^{k-1}.
+\]
+This proves~\eqref{eq:G-large-all-moments}.
+\end{proof}
+
+\subsection{Completion of the fixed-moment hierarchy}
+
+\begin{proof}[Proof of Theorem~\ref{thm:R-all-moments}]
+By Lemmas~\ref{lem:G-small-all-moments} and
+\ref{lem:G-large-all-moments},
+\[
+ \Ee G_n^k\le C_{\kappa,k}L^k(\log L)^k.
+\]
+Together with Lemma~\ref{lem:Delta-all-moments} and the deterministic bound
+$|R_n|\le\Delta_n+G_n$, this gives
+\[
+ \Ee|R_n|^k\le C_{\kappa,k}L^k(\log L)^k.
+\]
+Finally,
+\[
+ \|R_n-\Ee R_n\|_k
+ \le\|R_n\|_k+|\Ee R_n|
+ \le2\|R_n\|_k,
+\]
+which proves the centered estimate.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:order-fixed-moments}]
+Apply Criterion~\ref{crit:moment-rate} with $d=1$ and the moment order $k$.
+For the classical centering and scale, use
+\[
+ |m_n-\tfrac12L^2|\le C_\kappa L\log L,
+ \qquad
+ \frac{\sqrt{v_n}}{\sqrt{L^3/3}}
+ =1+O\!\left(\frac{\log L}{L}\right).
+\]
+The resulting normal shift-and-scale error is
+\[
+ O_\kappa(L^{-1/2}\log L).
+\]
+For every fixed $k$, this is
+\[
+ o\!\left(
+ L^{-k/(2(k+1))}(\log L)^{k/(k+1)}
+ \right).
+\]
+\end{proof}
+
+\begin{corollary}[Third-moment checkpoint]
+\label{cor:third-moment-checkpoint}
+One has
+\[
+ \Kol\!\left(
+ \frac{\log O_n-m_n}{\sqrt{v_n}},N(0,1)\right)
+ \le C_\kappa L^{-3/8}(\log L)^{3/4},
+\]
+and the same rate holds with the classical centering and scale.
+\end{corollary}
+
+\begin{proof}
+Take $k=3$ in Theorem~\ref{thm:order-fixed-moments}.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:order-almost-sharp}]
+Fix $\varepsilon>0$ and choose an integer $k$ so large that
+$1/(2(k+1))<\varepsilon/2$.  Then
+\[
+ L^{-k/(2(k+1))}(\log L)^{k/(k+1)}
+ =L^{-1/2+1/(2(k+1))}(\log L)^{k/(k+1)}
+ \le L^{-1/2+\varepsilon}
+\]
+for all sufficiently large $n$.  Apply
+Theorem~\ref{thm:order-fixed-moments}; its classical-centering statement
+gives the second assertion.
+\end{proof}
+
+
+\part{Sharp rate and first Edgeworth expansion}
+
+\section{Audit gate I: free-depth endpoint input and polynomial switching}
+\label{sec:free-depth-gate}
+
+The polynomial approximation requires a stronger specialization of the
+finite-endpoint construction than the square-root reset used in
+Theorem~\ref{thm:proxy}.  The source theorem is formulated with a free
+terminal depth.  We record the precise quantitative consequence used here.
+
+For a window $r_-\le r\le r_+$ and a fixed number $q$ of independent roots,
+put
+\[
+ K=qr_+,
+ \qquad
+ \delta=K/n,
+ \qquad
+ h=\delta^{1/4},
+ \qquad
+ \rho=\delta^{1/(4\kappa)},
+ \qquad
+ M=\sqrt{nK}.
+\]
+
+\begin{inputtheorem}[Free-depth finite-endpoint comparison]
+\label{input:free-depth}
+Let $m$ satisfy
+\[
+ 1\le m\le r_-/3
+\]
+and
+\[
+ m\to\infty,
+ \quad mh\to0,
+ \quad m\rho\to0,
+ \quad m^2/M\to0,
+ \quad mL/M\to0,
+ \quad m/(hM)\to0.
+\]
+For every fixed $q$, the conditional endpoint comparison of
+\cite{LongSwitch2026} has error at most
+\begin{align}
+ \mathcal E_{n,q}(m)\le C_{\kappa,q}\bigg[&
+ (1-\alpha)^{m-1}+mh+\frac{m^2}{M}+m\rho+\frac{mL}{M}
+ +\rho+\delta+\delta^{1/2}\log(1/\delta)
+ \notag\\
+ &+h^{-1}\log(1/\delta)e^{-cM}
+ +n^2h^{-1}e^{-chM}+n^{-2}\bigg].
+ \label{eq:free-depth-input-error}
+\end{align}
+The bound is uniform in every previously exposed compatible terminal
+history.  It also applies to products of bounded Lipschitz functions of the
+selected swap factors: if $F_A(i,j)=R_{ij}\wedge A$, then the one-root error
+is at most $C_\kappa A\mathcal E_{n,1}(m)$ and the two-root error is at most
+$C_\kappa A^2\mathcal E_{n,2}(m)$.
+
+For every fixed $q,Q$, on a window
+\[
+ L^3\le r_-\le r_+\le n/L^A,
+\]
+the choice $m=\lfloor\log(1/\delta)\rfloor$ is admissible and, after choosing
+$A=A(\kappa,q,Q)$ sufficiently large,
+\[
+ \mathcal E_{n,q}(m)\le C_{\kappa,q,Q}L^{-Q}.
+\]
+\end{inputtheorem}
+
+\begin{proof}[Verification of the polynomial specialization]
+The complete proof of the free-depth theorem is in
+\cite{LongSwitch2026}; here we verify the specialization and the observable
+constants used below.  On the stated window,
+$m\le L+O_q(1)\ll r_-$, while
+\[
+ M\ge c_q\sqrt n\,L^{3/2},
+ \qquad
+ hM=n\delta^{3/4}\ge c_qn^{1/4}L^{9/4}.
+\]
+Hence every admissibility ratio tends to zero uniformly.  Moreover,
+\[
+ (1-\alpha)^m\le C\delta^c,
+ \qquad
+ mh\le C(1+\log(1/\delta))\delta^{1/4},
+ \qquad
+ m\rho\le C(1+\log(1/\delta))\delta^{1/(4\kappa)}.
+\]
+The inverse-row terms are $O(L^{1/2}n^{-1/2})$, and the environment terms
+are smaller than every fixed power of $L^{-1}$.  Since
+$\delta\le qL^{-A}$, increasing $A$ makes
+\eqref{eq:free-depth-input-error} $O(L^{-Q})$.
+
+For a bounded function of one exact swap factor, replacing an exact clock by
+its block representative changes $\log R_{ij}$ by $O_\kappa(h)$; the map
+$z\mapsto e^z\wedge A$ is bounded and $A$-Lipschitz.  Thus the
+coarse-to-exact replacement costs $O_\kappa(Ah)$, already present in
+$\mathcal E_{n,1}$.  Conditional total variation contributes
+$O(A\mathcal E_{n,1})$.  A telescoping product gives the corresponding
+$O(A^2\mathcal E_{n,2})$ two-root bound.  This proves the stated observable
+form.
+\end{proof}
+
+For a dyadic block $a\le r<2a$, define
+\[
+ X_{n,r}^{(A)}=\frac1n\sum_{i:L_n(i)>r}F_A(i,\sigma_n^r(i)),
+ \qquad
+ D_{n,A}=\frac1{n^2}\sum_{i,j=1}^nF_A(i,j),
+ \qquad
+ \mu_{n,A}=\Ee D_{n,A}.
+\]
+
+\begin{proposition}[Polynomial one-block switching]
+\label{prop:poly-block}
+For every fixed $Q>0$, after choosing $A_0$ sufficiently large,
+\[
+ \sup_{b_n\le a\le U_n}\ \sup_{a\le r<2a}
+ \Ee\left|\frac{S_{n,r}}n-1\right|
+ \le C_{\kappa,Q}L^{-Q-2}.
+\]
+Consequently,
+\begin{equation}
+\label{eq:poly-unweighted-dyadic}
+ \sum_{j:a_j\le U_n}
+ \sup_{a_j\le r<2a_j}
+ \Ee\left|\frac{S_{n,r}}n-1\right|
+ \le C_{\kappa,Q}L^{-Q},
+ \qquad a_j=2^jb_n.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Apply Input Theorem~\ref{input:free-depth} on $[a,2a]$, first with one root
+and then with two independent roots.  For any prescribed $M_0>0$, increasing
+$A_0$ gives
+\begin{align}
+ |\Ee X_{n,r}^{(A)}-\mu_{n,A}|&\le C_\kappa A L^{-M_0},
+ \label{eq:poly-first-A}\\
+ |\Ee(X_{n,r}^{(A)})^2-\Ee D_{n,A}^2|&\le C_\kappa A^2L^{-M_0}.
+ \label{eq:poly-second-A}
+\end{align}
+Replacing one clock changes at most $2n$ summands of $D_{n,A}$, each by at
+most $A$, so Efron--Stein gives
+\[
+ \Var(D_{n,A})\le4A^2/n.
+\]
+Equations~\eqref{eq:poly-first-A} and~\eqref{eq:poly-second-A} therefore
+imply
+\[
+ \Ee|X_{n,r}^{(A)}-\mu_{n,A}|^2
+ \le C_\kappa A^2(L^{-M_0}+n^{-1}).
+\]
+The selected-pair and fresh-pair tail estimates from the switching
+manuscript give, for $\kappa>1$,
+\[
+ \Ee\frac{S_{n,r}-S_{n,r}^{(A)}}n+|1-\mu_{n,A}|
+ \le C_\kappa A^{-1/(\kappa-1)}.
+\]
+Choose $A=L^{(\kappa-1)(Q+4)}$ and then choose $M_0$ so large that the
+truncated $L^2$ term is $O(L^{-Q-4})$.  This proves the asserted one-block
+bound.  When $\kappa=1$, all swap factors equal one and the same conclusion
+follows with $A=1$.  There are $O(L)$ dyadic blocks, which proves
+\eqref{eq:poly-unweighted-dyadic}.
+\end{proof}
+
+\section{Audit gate II: polynomial passive-mark product--Poisson approximation}
+\label{sec:poly-pp}
+
+Let
+\[
+ \mathcal I_n=\{r\in\mathbb Z:b_n<r\le U_n\},
+ \qquad
+ \xi_n=(C_{n,r})_{r\in\mathcal I_n}.
+\]
+A permutation-measurable random element $M_n=M_n(\sigma_n)$ is called a
+\emph{passive mark} if every good split with $r\in\mathcal I_n$ and
+source-cycle length greater than $r+U_n$ leaves $M_n$ unchanged.  More
+general clock-dependent marks would require the marked switching identity to
+be formulated on the full clock space; no such extension is used here.
+
+\begin{lemma}[Passive-mark Campbell--Poisson transfer]
+\label{lem:passive-Stein}
+Let $I$ be finite, let $\mathsf M$ be a standard Borel space, let $(X,M)$
+take values in $\mathbb Z_+^I\times\mathsf M$, and let $\lambda_i\ge0$.
+Suppose that for every measurable family
+$g_i:\mathbb Z_+^I\times\mathsf M\to[-1,1]$,
+\[
+ \left|
+ \Ee\sum_{i\in I}X_i g_i(X-e_i,M)
+ -\sum_{i\in I}\lambda_i\Ee g_i(X,M)
+ \right|\le\varepsilon.
+\]
+If $Z_i$ are independent $\Pois(\lambda_i)$ variables and $\widetilde M$ is
+an independent copy of $M$, independent of $Z$, then
+\[
+ \TV\bigl(\cL(X,M),\cL(Z,\widetilde M)\bigr)\le\varepsilon.
+\]
+The constant is independent of $|I|$ and $\sum_i\lambda_i$.
+\end{lemma}
+
+\begin{proof}
+Let $A\subseteq\mathbb Z_+^I\times\mathsf M$ be measurable and, for
+$m\in\mathsf M$, put $f_m(x)=\one_A(x,m)$.  Let $\mathcal A$ be the
+immigration--death generator with immigration rates $(\lambda_i)_{i\in I}$,
+and let $P_t$ be its semigroup.  With $\pi$ denoting the product--Poisson
+law, define
+\[
+ h_A(x,m)=-\int_0^\infty\{P_tf_m(x)-\pi f_m\}\dd t.
+\]
+Coupling the chain started from $x$ to a stationary chain bounds the
+integrand by
+$\min\{1,e^{-t}(|x|+\sum_i\lambda_i)\}$, so the integral is finite.
+Because the first coordinate is countable and $\mathsf M$ is standard
+Borel, this is jointly measurable.  The usual coupling of chains started
+from $x$ and $x+e_i$ shows that
+\[
+ g_i(x,m):=h_A(x+e_i,m)-h_A(x,m)
+ \quad\text{satisfies}\quad |g_i(x,m)|\le1
+\]
+uniformly in $x,m,i$.  The Stein equation gives
+\[
+ \mathcal A h_A(x,m)=f_m(x)-\pi f_m.
+\]
+Consequently,
+\begin{align*}
+ &\Pp\{(X,M)\in A\}
+ -\Pp\{(Z,\widetilde M)\in A\}\\
+ &\quad=\Ee\mathcal A h_A(X,M)\\
+ &\quad=\sum_{i\in I}\lambda_i\Ee g_i(X,M)
+ -\Ee\sum_{i\in I}X_i g_i(X-e_i,M).
+\end{align*}
+The assumed Campbell discrepancy bounds the absolute value by
+$\varepsilon$.  Taking the supremum over $A$ proves the claim.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:poly-pp}]
+Let $M_n=M_n(\sigma_n)$ be a permutation-measurable passive mark and let
+$g_r:\mathbb Z_+^{\mathcal I_n}\times\mathsf M\to[-1,1]$.  Apply the marked
+one-switch identity with
+\[
+ \Phi_r(\pi)=
+ \begin{cases}
+ g_r(\xi(\pi)-e_r,M(\pi)),&C_r(\pi)\ge1,\\
+ 0,&C_r(\pi)=0.
+ \end{cases}
+\]
+On a good split, the core vector increases by $e_r$ and the mark is
+unchanged.  On the exceptional source-cycle range the two test functions
+have modulus at most one.  Exactly as in the unmarked Campbell calculation,
+\begin{align*}
+ &\left|
+ \Ee\sum_{r\in\mathcal I_n}C_{n,r}g_r(\xi_n-e_r,M_n)
+ -\sum_{r\in\mathcal I_n}a_{n,r}\Ee g_r(\xi_n,M_n)
+ \right|\\
+ &\qquad\le
+ C\sum_j\sup_{a_j\le r<2a_j}
+ \Ee\left|\frac{S_{n,r}}n-1\right|
+ +C_\kappa L\left(\frac{U_n}{n}\right)^\beta.
+\end{align*}
+The first term is $O(L^{-Q})$ by
+Proposition~\ref{prop:poly-block}; the second is $L^{1-A_0\beta}$ and is
+made $O(L^{-Q})$ by increasing $A_0$.  Lemma~\ref{lem:passive-Stein} proves
+the joint product--Poisson estimate.
+
+Taking a constant mark proves the unmarked assertion.  For
+$K_n^+=\sum_{r>U_n}C_{n,r}$, a good split replaces one upper cycle by one
+upper residual cycle, so the mark is passive.
+\end{proof}
+
+\begin{corollary}[Polynomial lower tail for the number of core cycles]
+\label{cor:core-lower-tail}
+Let
+\[
+ K_n^\circ=\sum_{b_n<r\le U_n}C_{n,r}.
+\]
+Then
+\[
+ \Pp\{K_n^\circ\le4\}\le C_\kappa L^{-3}.
+\]
+\end{corollary}
+
+\begin{proof}
+Under the comparison law, the sum of the core coordinates is Poisson with
+mean
+\[
+ \lambda_n=\sum_{b_n<r\le U_n}a_{n,r}
+ =L-(A_0+3)\log L+O(1)\ge L/2
+\]
+for all large $n$.  Its lower tail at four is $O(L^4e^{-L/2})$.  Apply
+Theorem~\ref{thm:poly-pp} with $Q=4$ and use contraction of total variation
+under summation.
+\end{proof}
+
+\section{Audit gate III: the independent linearized Poisson Edgeworth theorem}
+\label{sec:poisson-edgeworth}
+
+Fix once and for all a constant $B_*>4$, and put
+\[
+ y=y_n=\left\lfloor\frac{L}{(\log L)^{B_*}}\right\rfloor.
+\]
+For an integer $r\ge1$, define
+\[
+ g_y(r)=\sum_{\substack{m\le y\\m\mid r}}\Lambda(m),
+ \qquad
+ q_y(r)=\log r-g_y(r).
+\]
+The identity $\sum_{m\mid r}\Lambda(m)=\log r$ gives
+$0\le q_y(r)\le\log r$.
+
+Let $(N_{n,r})_{r\in\mathcal I_n}$ be independent with
+$N_{n,r}\sim\Pois(a_{n,r})$, and define
+\[
+ Y_n=\sum_{r\in\mathcal I_n}q_y(r)N_{n,r},
+ \quad
+ \mu_{q,n}=\sum_{r\in\mathcal I_n}a_{n,r}q_y(r),
+ \quad
+ \sigma_{q,n}^2=\sum_{r\in\mathcal I_n}a_{n,r}q_y(r)^2.
+\]
+Also put
+\[
+ \rho_{3,q,n}=\sum_{r\in\mathcal I_n}a_{n,r}q_y(r)^3,
+ \qquad
+ \gamma_{q,n}=\rho_{3,q,n}/\sigma_{q,n}^3.
+\]
+
+\begin{lemma}[Linearized cumulants]
+\label{lem:linearized-cumulants}
+One has
+\begin{align}
+ \sigma_{q,n}^2&=\frac13L^3+O(L^2\log L),
+ \label{eq:q-variance}\\
+ \rho_{3,q,n}&=\frac14L^4+O(L^3\log L),
+ \label{eq:q-third}\\
+ \sum_{r\in\mathcal I_n}a_{n,r}q_y(r)^4&=O(L^5).
+ \label{eq:q-fourth}
+\end{align}
+Consequently,
+\begin{equation}
+\label{eq:q-skewness}
+ \gamma_{q,n}=\frac{3\sqrt3}{4}L^{-1/2}
+ +O\!\left(\frac{\log L}{L^{3/2}}\right).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For fixed $k\ge0$, the same integral comparison as in
+Lemma~\ref{lem:rho} gives
+\[
+ \sum_{r\in\mathcal I_n}a_{n,r}(\log r)^k
+ =\frac{L^{k+1}}{k+1}+O_k(L^k\log L).
+\]
+For $j\ge0$,
+\begin{align*}
+ \sum_{r\in\mathcal I_n}a_{n,r}(\log r)^jg_y(r)
+ &=\sum_{m\le y}\Lambda(m)
+   \sum_{\substack{r\in\mathcal I_n\\m\mid r}}
+   a_{n,r}(\log r)^j\\
+ &\le C_jL^{j+1}\sum_{m\le y}\frac{\Lambda(m)}m
+ \le C_jL^{j+1}\log y.
+\end{align*}
+Since
+\[
+ 0\le(\log r)^k-q_y(r)^k
+ \le k(\log r)^{k-1}g_y(r),
+\]
+the assertions for $k=2,3$ follow.  The fourth moment follows from
+$q_y(r)\le\log r$.  Dividing~\eqref{eq:q-third} by the three-halves power
+of~\eqref{eq:q-variance} proves~\eqref{eq:q-skewness}.
+\end{proof}
+
+Let
+\[
+ X_n=\frac{Y_n-\mu_{q,n}}{\sigma_{q,n}},
+ \qquad
+ \phi_n(t)=\Ee e^{itX_n}.
+\]
+
+\begin{lemma}[Low-frequency Edgeworth expansion]
+\label{lem:edgeworth-low}
+There are $c,C>0$ such that, for $|t|\le c\sqrt L$,
+\[
+ |\phi_n(t)|\le e^{-ct^2}.
+\]
+If
+\[
+ \widehat G_n(t)=e^{-t^2/2}\left(1+\frac{(it)^3}{6}\gamma_{q,n}\right),
+\]
+then
+\[
+ \int_{|t|\le c\sqrt L}
+ \frac{|\phi_n(t)-\widehat G_n(t)|}{|t|}\dd t
+ \le \frac CL.
+\]
+\end{lemma}
+
+\begin{proof}
+The compound-Poisson exponent is
+\[
+ \log\phi_n(t)=\sum_{r\in\mathcal I_n}a_{n,r}
+ \left(e^{itq_y(r)/\sigma_{q,n}}-1-\frac{itq_y(r)}{\sigma_{q,n}}\right).
+\]
+Since $\max_rq_y(r)/\sigma_{q,n}=O(L^{-1/2})$, Taylor expansion on
+$|t|\le c\sqrt L$ gives
+\[
+ \log\phi_n(t)=-\frac12t^2+\frac{(it)^3}{6}\gamma_{q,n}+R_n(t),
+ \qquad |R_n(t)|\le Ct^4/L.
+\]
+The cosine bound gives the Gaussian modulus estimate.  On
+$|t|\le L^{1/12}$, exponentiation yields
+\[
+ |\phi_n(t)-\widehat G_n(t)|
+ \le \frac C L(t^4+t^6)e^{-ct^2}.
+\]
+On $L^{1/12}<|t|\le c\sqrt L$, both terms have exponentially small
+modulus.  Integration proves the claim.
+\end{proof}
+
+\begin{lemma}[Uniform logarithmic Riemann sum]
+\label{lem:log-Riemann-edgeworth}
+Let
+\[
+ \lambda_n=\sum_{r\in\mathcal I_n}a_{n,r},
+ \qquad
+ M_n(u)=\frac1{\lambda_n}\sum_{r\in\mathcal I_n}
+ a_{n,r}e^{iuq_y(r)/L}.
+\]
+Uniformly for $|u|\le\sqrt L/(\log L)^2$,
+\begin{equation}
+\label{eq:log-Riemann-edgeworth}
+ M_n(u)=\int_0^1e^{iux}\dd x
+ +O\!\left(\frac{\log L}{L}+\frac{|u|\log y}{L}\right).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Replacing $q_y(r)$ by $\log r$ costs at most
+\[
+ \frac{|u|}{L\lambda_n}\sum_{r\in\mathcal I_n}a_{n,r}g_y(r)
+ \le C\frac{|u|\log y}{L}.
+\]
+Replacing $a_{n,r}$ by $1/r$ costs $O(U_n/(nL))$.  Uniformly on the stated
+range, the derivative of
+$x^{-1}e^{iu\log x/L}$ is $O(x^{-2})$, so sum--integral comparison gives
+\[
+ \sum_{b_n<r\le U_n}\frac1r e^{iu\log r/L}
+ =L\int_{\log b_n/L}^{\log U_n/L}e^{iuv}\dd v+O(b_n^{-1}).
+\]
+Now
+$\lambda_n=L-(A_0+3)\log L+O(1)$, while the two omitted endpoint intervals
+in $[0,1]$ have total length $O(\log L/L)$.  Division by $\lambda_n$ proves
+\eqref{eq:log-Riemann-edgeworth}.
+\end{proof}
+
+\begin{lemma}[Extended Fourier window]
+\label{lem:extended-window}
+There are constants $c_0,c_1,c_2>0$ such that
+\[
+ |\phi_n(t)|\le e^{-c_2L}
+\]
+whenever
+\[
+ c_0\sqrt L\le|t|\le T_n,
+ \qquad
+ T_n=\frac{c_1L}{(\log L)^2}.
+\]
+\end{lemma}
+
+\begin{proof}
+Choose $u_0>0$.  Since
+\[
+ \Re\int_0^1e^{iux}\dd x=\frac{\sin u}{u},
+\]
+there is $\eta>0$ such that this real part is at most $1-\eta$ for
+$|u|\ge u_0$.  Lemma~\ref{lem:log-Riemann-edgeworth} transfers the same gap,
+with $\eta/2$, uniformly up to $|u|\le\sqrt L/(\log L)^2$.
+Set $u=tL/\sigma_{q,n}$.  The stated $t$-window maps into this $u$-window
+and stays outside $(-u_0,u_0)$ after suitable choices of $c_0,c_1$.  Since
+\[
+ \log|\phi_n(t)|=\lambda_n\{\Re M_n(u)-1\}
+\]
+and $\lambda_n\asymp L$, the conclusion follows.
+\end{proof}
+
+\begin{lemma}[Signed Esseen smoothing]
+\label{lem:signed-Esseen}
+Let $F$ be a distribution function and let $G$ be the cumulative function
+of a finite signed measure of total mass one.  Assume that $G$ is absolutely
+continuous with density $g\in L^1(\mathbb R)\cap L^\infty(\mathbb R)$,
+and assume
+$\int |x|\dd F(x)+\int |x||g(x)|\dd x<\infty$.  Write
+\[
+ \widehat F(t)=\int_{\mathbb R}e^{itx}\dd F(x),
+ \qquad
+ \widehat G(t)=\int_{\mathbb R}e^{itx}g(x)\dd x.
+\]
+Then, for every $T>0$,
+\begin{equation}
+\label{eq:signed-Esseen}
+ \sup_x|F(x)-G(x)|
+ \le C\int_{-T}^{T}
+ \frac{|\widehat F(t)-\widehat G(t)|}{|t|}\dd t
+ +\frac{C\|g\|_\infty}{T},
+\end{equation}
+where the integrand at zero is interpreted by continuity.  The constant is
+absolute; monotonicity of $G$ is not required.
+\end{lemma}
+
+\begin{proof}
+Choose an even nonnegative probability density $K$ such that
+$\widehat K$ is supported on $[-1,1]$ and
+$\int |x|K(x)\dd x<\infty$; a normalized fourth power of a sinc function
+has these properties.  Put $K_T(x)=TK(Tx)$ and $H=F-G$.  Since the two
+underlying signed measures have the same total mass,
+$H(-\infty)=H(+\infty)=0$.
+
+We first prove the one-sided smoothing estimate
+\begin{equation}
+\label{eq:one-sided-smoothing}
+ \|H\|_\infty
+ \le C\|H*K_T\|_\infty+
+ \frac{C\|g\|_\infty}{T}.
+\end{equation}
+Let $D=\|H\|_\infty$.  If $H(x)\ge D-\varepsilon$, then, for every
+$z\ge0$, monotonicity of $F$ and the Lipschitz bound for $G$ give
+$H(x+z)\ge H(x)-\|g\|_\infty z$.  Choose $c>0$ so that
+$p:=\int_{-\infty}^cK(u)\dd u>1/2$, and evaluate the convolution at
+$x+c/T$.  After the change of variables $u=Ty$, the region $u\le c$
+gives the preceding lower bound, while the complementary region is bounded
+below by $-D$.  Hence
+\[
+ (H*K_T)(x+c/T)
+ \ge (2p-1)D-p\varepsilon-
+ \frac{\|g\|_\infty}{T}
+ \int_{u\le c}(c-u)K(u)\dd u.
+\]
+Letting $\varepsilon\downarrow0$ bounds the positive maximum of $H$.
+For a point where $H$ is near $-D$, use instead
+$H(x-z)\le H(x)+\|g\|_\infty z$ for $z\ge0$ and evaluate at $x-c/T$.
+This bounds the negative minimum and proves
+\eqref{eq:one-sided-smoothing}.
+
+Let $\mu=\dd F-g(x)\dd x$, a finite signed measure of total mass zero.
+The first-moment assumption implies $H\in L^1(\mathbb R)$: on each
+half-line, integrate the corresponding tail bound
+$|H(x)|\le |\mu|((x,\infty))$ or
+$|H(x)|\le |\mu|(({-}\infty,x])$.  Integration by parts therefore gives
+\[
+ \widehat H(t)=
+ \frac{\widehat F(t)-\widehat G(t)}{-it},
+ \qquad t\ne0.
+\]
+Since $\widehat K(t/T)$ is supported on $[-T,T]$, ordinary Fourier
+inversion gives
+\[
+ (H*K_T)(x)=\frac1{2\pi}
+ \int_{-T}^{T}e^{-itx}
+ \frac{\widehat F(t)-\widehat G(t)}{-it}
+ \widehat K(t/T)\dd t.
+\]
+Because $|\widehat K|\le1$, the absolute value is bounded by the integral
+in~\eqref{eq:signed-Esseen}, up to an absolute constant.  Combining this
+with~\eqref{eq:one-sided-smoothing} proves the lemma.  This is the standard
+signed form of Esseen's smoothing argument; compare
+\cite[Chapter~VI]{Petrov1975}.
+\end{proof}
+
+\begin{theorem}[Independent linearized Poisson Edgeworth expansion]
+\label{thm:poisson-edgeworth}
+Define
+\[
+ G_n(x)=\Phi(x)+\frac{\gamma_{q,n}}6(1-x^2)\varphi(x).
+\]
+Then
+\begin{equation}
+\label{eq:poisson-edgeworth-rate}
+ \sup_x\left|
+ \Pp\{X_n\le x\}-G_n(x)
+ \right|
+ \le C\frac{(\log L)^2}{L}.
+\end{equation}
+Consequently, uniformly in $x$,
+\begin{equation}
+\label{eq:poisson-edgeworth-asymp}
+ \Pp\{X_n\le x\}
+ =\Phi(x)-\frac{\sqrt3}{8}(x^2-1)\varphi(x)L^{-1/2}
+ +o(L^{-1/2}).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The signed density of $G_n$ is
+\[
+ g_n(x)=G_n'(x)=\varphi(x)
+ \left[1+\frac{\gamma_{q,n}}6(x^3-3x)\right].
+\]
+It belongs to $L^1\cap L^\infty$, has integral one and a finite first
+absolute moment, and satisfies
+$\sup_n\|g_n\|_\infty<\infty$.  The compound-Poisson variable $X_n$
+also has a finite first absolute moment.  Its Fourier transform is
+$\widehat G_n$ from Lemma~\ref{lem:edgeworth-low}.  Combine
+Lemmas~\ref{lem:edgeworth-low} and~\ref{lem:extended-window}; on the
+extended portion the Gaussian approximant is also exponentially small.
+Thus
+\[
+ \int_{-T_n}^{T_n}
+ \frac{|\phi_n(t)-\widehat G_n(t)|}{|t|}\dd t\le C/L.
+\]
+Lemma~\ref{lem:signed-Esseen} and
+$T_n^{-1}=O((\log L)^2/L)$ prove
+\eqref{eq:poisson-edgeworth-rate}.  Substitute
+\eqref{eq:q-skewness} to obtain
+\eqref{eq:poisson-edgeworth-asymp}.
+\end{proof}
+
+\section{Transfer to the full linearized Luce additive statistic}
+\label{sec:linearized-transfer}
+
+Let
+\[
+ A_{n,y}^\circ=\sum_{r\in\mathcal I_n}q_y(r)C_{n,r},
+ \qquad
+ T_n^\sharp=A_{n,y}^\circ+LK_n^+.
+\]
+
+\begin{lemma}[Second moment of the upper-cycle mark]
+\label{lem:upper-mark}
+One has
+\[
+ \Ee(K_n^+)^2\le C_\kappa(\log L)^2.
+\]
+\end{lemma}
+
+\begin{proof}
+For $U_n<r\le n/4$, the one- and two-cycle factorial estimates give the
+usual linear-statistic second-moment bound with weight one; the relevant
+harmonic mass is $O(\log(n/U_n))=O(\log L)$.  There are deterministically at
+most three cycles longer than $n/4$.  Splitting at $n/4$ proves the result.
+\end{proof}
+
+\begin{proposition}[Edgeworth expansion for the marked principal statistic]
+\label{prop:marked-edgeworth}
+Uniformly in $x$,
+\begin{equation}
+\label{eq:marked-edgeworth}
+ \Pp\left\{
+ \frac{T_n^\sharp-\Ee T_n^\sharp}{\sigma_{q,n}}\le x
+ \right\}
+ =G_n(x)+o_\kappa(L^{-1/2}).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{thm:poly-pp}, the joint law of the core vector and $K_n^+$
+is polynomially close to a product of the Poisson core and an independent
+copy $\widetilde K_n^+$ of the mark.  Moreover, the one-switch identity and
+Proposition~\ref{prop:poly-block} give
+\[
+ |\Ee A_{n,y}^\circ-\mu_{q,n}|\le C_{\kappa,Q}L^{-Q}.
+\]
+It therefore suffices to study
+\[
+ Y_n+L(\widetilde K_n^+-\Ee K_n^+).
+\]
+Put
+\[
+ Z_n=\frac{L(\widetilde K_n^+-\Ee K_n^+)}{\sigma_{q,n}}.
+\]
+Then $\Ee Z_n=0$ and, by Lemma~\ref{lem:upper-mark},
+\[
+ \Ee Z_n^2\le C_\kappa\frac{(\log L)^2}{L}=o(L^{-1/2}).
+\]
+The functions $G_n$ have uniformly bounded second derivatives, so Taylor's
+theorem gives
+\[
+ \sup_x|\Ee G_n(x-Z_n)-G_n(x)|\le C\Ee Z_n^2=o(L^{-1/2}).
+\]
+Convolving Theorem~\ref{thm:poisson-edgeworth} with the independent mark,
+and then using polynomial total variation and the negligible mean mismatch,
+proves~\eqref{eq:marked-edgeworth}.
+\end{proof}
+
+Write
+\[
+ A_{n,y}=\sum_{r=1}^nq_y(r)C_{n,r}=T_n^\sharp+D_{n,y},
+\]
+where
+\[
+ D_{n,y}=\sum_{r\le b_n}q_y(r)C_{n,r}
+ +\sum_{r>U_n}(q_y(r)-L)C_{n,r}.
+\]
+
+\begin{lemma}[Omitted linearized additive terms]
+\label{lem:omitted-linearized}
+Let $W=n/8$.  There is a decomposition
+\[
+ D_{n,y}=D_{n,y}^{\mathrm{sm}}+D_{n,y}^{\mathrm{bd}}
+\]
+such that
+\[
+ \Ee|D_{n,y}^{\mathrm{sm}}|^2\le C_\kappa(\log L)^4,
+ \qquad
+ \|D_{n,y}^{\mathrm{bd}}\|_\infty\le C y.
+\]
+\end{lemma}
+
+\begin{proof}
+Take $D^{\mathrm{sm}}$ over $r\le b_n$ and $U_n<r\le W$, and take the
+remaining $r>W$ contribution as $D^{\mathrm{bd}}$.  The short range is
+bounded by the linear-statistic second-moment inequality with weight
+$\log r$, giving $O((\log L)^4)$.
+
+For $U_n<r\le W$,
+\[
+ |q_y(r)-L|\le L-\log r+g_y(r).
+\]
+Harmonic integration gives
+\[
+ \sum_{U_n<r\le W}\frac{L-\log r}{r}=O((\log L)^2),
+ \qquad
+ \sum_{U_n<r\le W}\frac{(L-\log r)^2}{r}=O((\log L)^3).
+\]
+Also
+\[
+ \sum_{U_n<r\le W}\frac{g_y(r)}r=O((\log L)^2).
+\]
+Expanding $g_y(r)^2$ and summing first over multiples of
+$\lcm(m,m')$ gives
+\[
+ \sum_{U_n<r\le W}\frac{g_y(r)^2}{r}
+ \le C\log L
+ \sum_{m,m'\le y}\frac{\Lambda(m)\Lambda(m')}{\lcm(m,m')}
+ =O((\log L)^3).
+\]
+Here the double prime-power sum is $O((\log y)^2)$: different prime bases
+factor, and equal prime bases are summed by the larger exponent.  Since four
+lengths in this range have total at most $n/2$, the fixed-order factorial
+bound gives the stated second moment.
+
+Finally, at most seven cycles have length greater than $W$, and for such
+$r$,
+\[
+ |q_y(r)-L|\le\log8+\psi(y)\le Cy.
+\]
+This proves the bounded part.
+\end{proof}
+
+\section{Audit gate IV: the centered nonlinear arithmetic remainder}
+\label{sec:remainder-gate}
+
+For all cycle lengths define
+\[
+ \widehat D_{n,m}=\sum_{\substack{1\le r\le n\\m\mid r}}C_{n,r}.
+\]
+The full product--least-common-multiple identity is
+\[
+ \sum_{r=1}^n(\log r)C_{n,r}-\log O_n
+ =\sum_{m\le n}\Lambda(m)(\widehat D_{n,m}-1)_+.
+\]
+For $m\le y$ use
+$(D-1)_+=D-1+\one_{\{D=0\}}$.  This gives the exact linearization
+\begin{equation}
+\label{eq:exact-linearization}
+ \log O_n=A_{n,y}+\psi(y)-V_{n,y}-H_{n,y},
+\end{equation}
+where
+\[
+ V_{n,y}=\sum_{m\le y}\Lambda(m)\one_{\{\widehat D_{n,m}=0\}},
+ \qquad
+ H_{n,y}=\sum_{m>y}\Lambda(m)(\widehat D_{n,m}-1)_+.
+\]
+The vacancy term is deterministically bounded by
+\begin{equation}
+\label{eq:vacancy-bound}
+ 0\le V_{n,y}\le\psi(y)\le Cy.
+\end{equation}
+
+\subsection{The core large-prime-power correction}
+
+Let
+\[
+ D_{n,m}^\circ=\sum_{\substack{r\in\mathcal I_n\\m\mid r}}C_{n,r},
+ \qquad
+ H_{n,y}^\circ=\sum_{m>y}\Lambda(m)(D_{n,m}^\circ-1)_+.
+\]
+Define $D_{n,m}^P$ and $H_{n,y}^P$ from the independent Poisson core.
+
+\begin{lemma}[Product-Poisson Poincar\'e inequality]
+\label{lem:product-poisson-poincare}
+Let $N_i$ be independent Poisson variables with means $\lambda_i$.  For
+every square-integrable function $F$,
+\[
+ \Var F(N)\le\sum_i\lambda_i\Ee
+ \bigl|F(N+e_i)-F(N)\bigr|^2.
+\]
+\end{lemma}
+
+\begin{proof}
+By tensorization of conditional variance it suffices to prove the
+one-dimensional inequality.  Let $(P_t)_{0\le t\le\lambda}$ be a unit-rate
+Poisson process and put $Z=P_\lambda$.  For bounded $f$, the Doob martingale
+$M_t=\Ee[f(P_\lambda)\mid\mathcal F_t]$ has jump amplitude
+\[
+ P_{\lambda-t}(\Delta f)(P_{t-}),
+ \qquad \Delta f(k)=f(k+1)-f(k),
+\]
+where $P_s$ also denotes the Poisson semigroup.  The predictable quadratic
+variation identity and Jensen's inequality give
+\begin{align*}
+ \Var f(Z)
+ &=\Ee\int_0^\lambda
+   \bigl|P_{\lambda-t}(\Delta f)(P_t)\bigr|^2\dd t\\
+ &\le\int_0^\lambda
+   \Ee P_{\lambda-t}(|\Delta f|^2)(P_t)\dd t
+ =\lambda\Ee|\Delta f(Z)|^2.
+\end{align*}
+Approximation proves the result for every square-integrable $f$, and
+successive conditioning over the independent coordinates gives the stated
+product inequality.
+\end{proof}
+
+\begin{lemma}[Poisson Poincar\'e bound for the core correction]
+\label{lem:poisson-poincare-H}
+One has
+\begin{equation}
+\label{eq:poisson-H-variance}
+ \Var(H_{n,y}^P)
+ \le C\left[
+ L^3\frac{\log y}{y^2}+L^2\frac{\log y}{y}
+ \right]
+ \le C L(\log L)^{2B_*+1}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Lemma~\ref{lem:product-poisson-poincare} gives
+\[
+ \Var F(N)\le\sum_r a_{n,r}\Ee|F(N+e_r)-F(N)|^2.
+\]
+Here adding one $r$-cycle changes $H_{n,y}^P$ by
+\[
+ \sum_{\substack{m>y\\m\mid r}}\Lambda(m)
+ \one_{\{D_{n,m}^P\ge1\}}.
+\]
+Put
+\[
+ \alpha_m^P=\sum_{\substack{r\in\mathcal I_n\\m\mid r}}a_{n,r}
+ \le CL/m.
+\]
+For $\ell=\lcm(m,m')$,
+\[
+ \Ee[D_{n,m}^PD_{n,m'}^P]
+ =\alpha_m^P\alpha_{m'}^P+\alpha_\ell^P.
+\]
+Bounding the two occupancy indicators by this product gives
+\[
+ \Var(H_{n,y}^P)
+ \le C\sum_{m,m'>y}\Lambda(m)\Lambda(m')
+ \left(\frac{L^3}{mm'\ell}+\frac{L^2}{\ell^2}\right).
+\]
+Apply Lemma~\ref{lem:lcm-sums}.
+\end{proof}
+
+\begin{lemma}[Transfer of the core variance]
+\label{lem:core-H-transfer}
+One has
+\[
+ \Var(H_{n,y}^\circ)\le C_{\kappa,B_*}L(\log L)^{2B_*+1}.
+\]
+\end{lemma}
+
+\begin{proof}
+The identification-graph proof of
+Lemma~\ref{lem:G-large-all-moments}, with the present cutoff $y$, gives for
+every fixed $k$
+\[
+ \Ee(H_{n,y}^\circ)^k+\Ee(H_{n,y}^P)^k
+ \le C_{\kappa,k,B_*}L^k(\log L)^{C_{k,B_*}}.
+\]
+Indeed, a graph with $v\le2k$ vertices contributes $L^vy^{-S}$ with
+$S\ge v/2$, and hence at most $L^k$ times a fixed power of $\log L$.
+
+Use Theorem~\ref{thm:poly-pp} with an arbitrarily large exponent and truncate
+both corrections at $L^2$.  Total variation compares their truncated first
+and second moments, while the fixed eighth moments make the tails $o(1)$.
+Thus the first two moments, and hence the variances, differ by $o(1)$.
+Apply Lemma~\ref{lem:poisson-poincare-H}.
+\end{proof}
+
+\subsection{Adding the omitted submacroscopic cycles}
+
+Let
+\[
+ \mathcal O_n=\{1\le r\le W:r\notin\mathcal I_n\},
+ \qquad W=n/8,
+\]
+and
+\[
+ E_{n,m}=\sum_{\substack{r\in\mathcal O_n\\m\mid r}}C_{n,r}.
+\]
+Let $H_{n,y}^{\mathrm{sub}}$ be the large-prime correction formed from all
+cycles of length at most $W$.
+
+\begin{lemma}[Submacroscopic remainder variance]
+\label{lem:sub-H-variance}
+One has
+\[
+ \Var(H_{n,y}^{\mathrm{sub}})
+ \le C_{\kappa,B_*}L(\log L)^{2B_*+1}.
+\]
+\end{lemma}
+
+\begin{proof}
+For integers $a,b\ge0$,
+\[
+ (a+b-1)_+-(a-1)_+\le ab+\frac12(b)_2.
+\]
+Hence
+\[
+ 0\le H_{n,y}^{\mathrm{sub}}-H_{n,y}^\circ\le J_1+J_2,
+\]
+where
+\[
+ J_1=\sum_{m>y}\Lambda(m)D_{n,m}^\circ E_{n,m},
+ \qquad
+ J_2=\frac12\sum_{m>y}\Lambda(m)(E_{n,m})_2.
+\]
+Put
+\[
+ \alpha_m=\sum_{\substack{r\in\mathcal I_n\\m\mid r}}\frac1r\le CL/m,
+ \qquad
+ \beta_m=\sum_{\substack{r\in\mathcal O_n\\m\mid r}}\frac1r
+ \le C\frac{\log L}{m}.
+\]
+Every length is at most $W$, so the factorial-functional bound applies to
+all configurations of at most four selected cycles.  Expanding $J_1^2$ by
+the equality pattern of its two core--omitted pairs gives, with
+$\ell=\lcm(m,m')$,
+\begin{align*}
+ \Ee J_1^2\le C_\kappa\sum_{m,m'>y}\Lambda(m)\Lambda(m')\bigl[
+ &\alpha_m\beta_m\alpha_{m'}\beta_{m'}
+ +\beta_\ell\alpha_m\alpha_{m'}\\
+ &+\alpha_\ell\beta_m\beta_{m'}
+ +\alpha_\ell\beta_\ell\bigr].
+\end{align*}
+Similarly,
+\[
+ \Ee J_2^2\le C_\kappa\sum_{m,m'>y}\Lambda(m)\Lambda(m')
+ \left[\beta_m^2\beta_{m'}^2
+ +\beta_\ell\beta_m\beta_{m'}+\beta_\ell^2\right].
+\]
+Using $\sum_{m>y}\Lambda(m)/m^2=O(1/y)$ and
+Lemma~\ref{lem:lcm-sums}, both expressions are bounded by a fixed power of
+$\log L$.  This is absorbed by the right side of the asserted variance
+bound.  Combine with Lemma~\ref{lem:core-H-transfer}.
+\end{proof}
+
+\subsection{The macroscopic increment}
+
+Let $D_{n,m}^{\mathrm{mac}}$ count cycles of length greater than $W=n/8$,
+and define $H_{n,y}^{\mathrm{mac}}$ as the increase in $H_{n,y}$ when these
+cycles are added to the submacroscopic configuration.
+
+\begin{lemma}[Residual-gap harmonic sum]
+\label{lem:residual-gap-sum}
+Let $T=b_n$, $W=n/8$, and $d\ge1$.  Uniformly in $N\le n$,
+\[
+ \sum_{\substack{W<r\le N-T\\d\mid r}}
+ \frac{n}{r(N-r)}
+ \le C\left(\frac Ld+\frac1T\right).
+\]
+Also
+\[
+ \sum_{\substack{r\le n\\d\mid r}}\frac1r\le\frac{CL}{d},
+ \qquad
+ \sum_{\substack{W<r\le n\\d\mid r}}\frac1r\le\frac C d.
+\]
+\end{lemma}
+
+\begin{proof}
+Since a contributing $r$ is greater than $n/8$, one has $n/N\le8$, and
+\[
+ \frac{n}{r(N-r)}\le C\left(\frac1r+\frac1{N-r}\right).
+\]
+The first progression has bounded logarithmic range and mass $O(1/d)$.  In
+the second put $t=N-r$.  Then $t\ge T$ and lies in one residue class modulo
+$d$, so its mass is at most $1/T+(C/d)\log(n/T)$.  The remaining assertions
+are ordinary harmonic summation.
+\end{proof}
+
+\begin{lemma}[Macroscopic remainder variance]
+\label{lem:macro-H-variance}
+One has
+\[
+ \Var(H_{n,y}^{\mathrm{mac}})
+ \le C_{\kappa,B_*}L(\log L)^{2B_*+1}.
+\]
+\end{lemma}
+
+\begin{proof}
+There are at most seven cycles longer than $W$, and adding one cycle changes
+the correction by at most its logarithm.  Hence
+\begin{equation}
+\label{eq:Hmac-bounded}
+ 0\le H_{n,y}^{\mathrm{mac}}\le7L.
+\end{equation}
+For
+\[
+ \omega_y(r,s)=\sum_{\substack{m>y\\m\mid r,\ m\mid s}}\Lambda(m),
+\]
+the elementary inequality used in the preceding proof gives
+$H_{n,y}^{\mathrm{mac}}\le J_{n,y}$, where, up to a fixed multiplicity,
+\[
+ J_{n,y}=\sum_{\substack{C\ne D\\\max\{|C|,|D|\}>W}}
+ \omega_y(|C|,|D|).
+\]
+The square of $J_{n,y}$ contains at most four distinct cycle vertices.
+
+Let $\mathcal G_n=\{K_n^\circ\ge5\}$.  Every monomial in
+$J_{n,y}^2$ selects at most four distinct cycles.  On $\mathcal G_n$ at
+least one core cycle is therefore unselected; its length is at least
+$b_n=T$.  Hence a selected length tuple with total $R$ contributes on
+$\mathcal G_n$ only if $R\le n-T$.  More explicitly,
+\begin{equation}
+\label{eq:macro-indicator-drop}
+ \Ee\left[
+ \mathcal C_n(r_1,\ldots,r_q)\one_{\mathcal G_n}
+ \right]
+ \le
+ \one_{\{R\le n-T\}}
+ \frac{C_{\kappa,q}n}{r_1\cdots r_q(n-R)},
+ \qquad q\le4.
+\end{equation}
+Indeed, the left side vanishes when $R>n-T$; when $R\le n-T$ we drop the
+indicator and apply the exact multi-clock identity and its first-moment
+bound.
+
+Expand the two edge weights by prime powers $m,m'>y$ and put
+$\ell=\lcm(m,m')$.  There are three identification graphs.  We spell out
+the residual-gap summations, dropping only constraints whose removal
+increases the sums.
+
+For the two-vertex graph the two edges are parallel, so both selected
+lengths are multiples of $\ell$, and at least one is greater than $W$.
+By symmetry choose the first one to be macroscopic.  Fixing the second
+length and applying Lemma~\ref{lem:residual-gap-sum} to the first gives
+\begin{align*}
+ \mathcal S_2(m,m')
+ &\le C\sum_{\substack{r_2\le n\\\ell\mid r_2}}
+ \frac1{r_2}
+ \left(\frac L\ell+\frac1T\right)
+ \le C\left(\frac{L^2}{\ell^2}
+ +\frac{L}{T\ell}\right).
+\end{align*}
+
+For the three-vertex path, the vertex moduli are $m,\ell,m'$.  If the
+middle vertex is macroscopic, applying the residual-gap lemma there and
+ordinary harmonic bounds at the two outer vertices gives
+\[
+ \frac Lm\frac L{m'}
+ \left(\frac L\ell+\frac1T\right).
+\]
+If the middle vertex is not macroscopic, both outer vertices must be
+macroscopic.  Applying the residual-gap lemma to one outer vertex and the
+bounded-range macroscopic harmonic bound to the other gives the smaller
+quantity
+\[
+ C\frac L\ell\frac1{m'}
+ \left(\frac Lm+\frac1T\right)
+\]
+(up to exchanging $m,m'$).  Thus
+\[
+ \mathcal S_3(m,m')\le C\left(\frac{L^3}{mm'\ell}
+ +\frac{L^2}{Tmm'}\right).
+\]
+
+For the four-vertex graph the two edges are disjoint and each has a
+macroscopic endpoint.  Choose one macroscopic endpoint of each edge, apply
+the residual-gap lemma to the first, the bounded-range macroscopic harmonic
+bound to the second, and ordinary harmonic bounds to the two remaining
+vertices.  Summing over the finitely many choices yields
+\[
+ \mathcal S_4(m,m')\le C\left(\frac{L^3}{m^2m'^2}
+ +\frac{L^2}{T}\left(\frac1{mm'^2}+\frac1{m^2m'}\right)\right).
+\]
+
+Besides Lemma~\ref{lem:lcm-sums}, use
+\[
+ \sum_{m>y}\frac{\Lambda(m)}{m^2}=O(1/y),
+ \qquad
+ \sum_{m\le n}\frac{\Lambda(m)}m=O(L),
+\]
+and
+\[
+ \sum_{m,m'\le n}
+ \frac{\Lambda(m)\Lambda(m')}{\lcm(m,m')}=O(L^2).
+\]
+For unequal prime bases the last sum factorizes into two copies of
+$\sum_{m\le n}\Lambda(m)/m$.  For equal prime bases it is bounded by
+$C\sum_{p\le n}(\log p)^2/p=O(L^2)$, proving the last estimate.
+The three graph contributions are respectively bounded by
+\begin{align*}
+ &C\left( L^2\frac{\log y}{y}+\frac{L^3}{T}\right),\\
+ &C\left(
+ L^3\frac{\log y}{y^2}+\frac{L^4}{T}\right),\\
+ &C\left(
+ \frac{L^3}{y^2}+\frac{L^3}{Ty}\right).
+\end{align*}
+Since $T=b_n\asymp L^3$ and $y=L/(\log L)^{B_*}$, their sum is at most
+$C_{\kappa,B_*}L(\log L)^{2B_*+1}$.  Hence
+\[
+ \Ee[J_{n,y}^2\one_{\mathcal G_n}]
+ \le C_{\kappa,B_*}L(\log L)^{2B_*+1}.
+\]
+On $\mathcal G_n^c$, equations~\eqref{eq:Hmac-bounded} and
+Corollary~\ref{cor:core-lower-tail} give a contribution $O(L^{-1})$.
+This proves the result.
+\end{proof}
+
+\begin{theorem}[Full centered arithmetic remainder]
+\label{thm:full-H-variance}
+One has
+\begin{equation}
+\label{eq:full-H-variance}
+ \Var(H_{n,y})\le C_{\kappa,B_*}L(\log L)^{2B_*+1}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The full correction is the sum of the submacroscopic correction and its
+macroscopic increment.  Apply
+$\Var(X+Y)\le2\Var X+2\Var Y$ together with
+Lemmas~\ref{lem:sub-H-variance} and~\ref{lem:macro-H-variance}.
+\end{proof}
+
+\section{Final perturbation transfer}
+\label{sec:final-edgeworth}
+
+\begin{proof}[Proof of Theorem~\ref{thm:edgeworth-order}]
+By~\eqref{eq:exact-linearization} and the definition of $D_{n,y}$,
+\[
+ \log O_n-m_n
+ =(T_n^\sharp-\Ee T_n^\sharp)+\mathcal R_n,
+\]
+where
+\[
+ \mathcal R_n=(D_{n,y}-\Ee D_{n,y})
+ -(V_{n,y}-\Ee V_{n,y})
+ -(H_{n,y}-\Ee H_{n,y}).
+\]
+Put
+\[
+ u_n=L^{3/4}(\log L)^{B_*+2},
+ \qquad
+ \tau_n=Cy+2u_n.
+\]
+Lemma~\ref{lem:omitted-linearized} and Chebyshev give
+\[
+ \Pp\{|D_{n,y}^{\mathrm{sm}}-\Ee D_{n,y}^{\mathrm{sm}}|>u_n\}
+ =o(L^{-1/2}).
+\]
+Theorem~\ref{thm:full-H-variance} gives
+\[
+ \Pp\{|H_{n,y}-\Ee H_{n,y}|>u_n\}
+ \le C L^{-1/2}(\log L)^{-3}=o(L^{-1/2}).
+\]
+The bounded parts of Lemma~\ref{lem:omitted-linearized} and
+\eqref{eq:vacancy-bound} are absorbed by $Cy$.  Therefore
+\begin{equation}
+\label{eq:remainder-strong}
+ \Pp\{|\mathcal R_n|>\tau_n\}=o(L^{-1/2}).
+\end{equation}
+Moreover,
+\[
+ \delta_n:=\tau_n/\sigma_{q,n}=o(L^{-1/2}),
+\]
+because $y/\sigma_{q,n}=L^{-1/2}(\log L)^{-B_*}$ and
+$u_n/\sigma_{q,n}=L^{-3/4}(\log L)^{B_*+2}$.
+
+Let $F_n$ be the distribution function of
+$(T_n^\sharp-\Ee T_n^\sharp)/\sigma_{q,n}$.  For every $x$,
+\[
+ F_n(x-\delta_n)-\Pp\{|\mathcal R_n|>\tau_n\}
+ \le
+ \Pp\left\{\frac{\log O_n-m_n}{\sigma_{q,n}}\le x\right\}
+ \le
+ F_n(x+\delta_n)+\Pp\{|\mathcal R_n|>\tau_n\}.
+\]
+The Edgeworth approximants $G_n$ have uniformly bounded derivatives.
+Proposition~\ref{prop:marked-edgeworth} and
+\eqref{eq:remainder-strong} therefore imply
+\[
+ \sup_x\left|
+ \Pp\left\{\frac{\log O_n-m_n}{\sigma_{q,n}}\le x\right\}-G_n(x)
+ \right|=o_\kappa(L^{-1/2}).
+\]
+Use~\eqref{eq:q-skewness}.  Finally,
+\[
+ \frac{\sigma_{q,n}}{\sqrt{L^3/3}}
+ =1+O\!\left(\frac{\log L}{L}\right)
+ =1+o(L^{-1/2}),
+\]
+and the normal and Edgeworth terms have bounded scale derivatives.  This
+proves~\eqref{eq:edgeworth-main}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:sharp-order}]
+The Edgeworth correction is uniformly $O(L^{-1/2})$ and the remainder is
+$o(L^{-1/2})$.  Apply Theorem~\ref{thm:edgeworth-order}.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:sharp-lower}]
+Evaluate~\eqref{eq:edgeworth-main} at $x=0$.  Since
+$\varphi(0)=1/\sqrt{2\pi}$, the absolute difference from $\Phi(0)$ is
+\[
+ \left(\frac{\sqrt3}{8\sqrt{2\pi}}+o_\kappa(1)\right)L^{-1/2}.
+\]
+\end{proof}
+
+\section{Scope, centering, and further questions}
+
+The endpoint and Edgeworth theorems use the exact mean $m_n$.  The currently
+available estimate
+\[
+ |m_n-\tfrac12L^2|=O_\kappa(L\log L)
+\]
+is negligible for every $L^{-1/2+\varepsilon}$ rate but not at the sharp
+scale.  An explicit deterministic center in
+Theorem~\ref{thm:edgeworth-order} must approximate $m_n$ to $o(L)$; its
+determination remains separate from normal approximation.
+
+The fixed-moment hierarchy remains useful even after the endpoint theorem.
+It is derived from weaker square-root-depth input, provides independent
+checks at $k=1,2,3$, and supplies the finite-order graph bounds used in the
+centered remainder proof.  What fails at the endpoint is not fixed-order
+switching itself, but the generic $L^k$ perturbation inequality applied
+before prime-power linearization.
+
+Natural next questions include an explicit second-order center, a second
+Edgeworth term, a local limit theorem, and multivariate Edgeworth expansions
+for the cycle-count/order field.
+
+\begin{remark}[Status and dependency audit]
+The checkpoint hierarchy, polynomial passive-mark approximation, sharp
+Berry--Esseen theorem, and first Edgeworth expansion are proved from two
+source interfaces: the quantitative switching ODE used in the original
+proxy proof, and the free-depth finite-endpoint theorem of
+\cite{LongSwitch2026}.  The latter is used only through
+Input Theorem~\ref{input:free-depth}; all Campbell--Stein, Fourier,
+linearization, graph, and perturbation arguments are contained in this
+supplement.  No growing-order multi-clock estimate, residual-uniform
+factorial theorem, or macroscopic local law is assumed.
+\end{remark}
+
+\begin{thebibliography}{99}
+
+\bibitem{ABT2003}
+R. Arratia, A. D. Barbour, and S. Tavar\'e,
+\newblock \emph{Logarithmic Combinatorial Structures: A Probabilistic
+Approach},
+\newblock EMS Monographs in Mathematics, European Mathematical Society,
+Z\"urich, 2003.
+
+\bibitem{BarbourHolstJanson1992}
+A. D. Barbour, L. Holst, and S. Janson,
+\newblock \emph{Poisson Approximation},
+\newblock Oxford Studies in Probability, vol.~2, Clarendon Press, Oxford,
+1992.
+
+\bibitem{BarbourTavare1994}
+A. D. Barbour and S. Tavar\'e,
+\newblock A rate for the Erd\H{o}s--Tur\'an law,
+\newblock \emph{Combinatorics, Probability and Computing} 3 (1994), no.~2,
+167--176.
+\newblock \href{https://doi.org/10.1017/S0963548300001097}
+{doi:10.1017/S0963548300001097}.
+
+\bibitem{ErdosTuran1967}
+P. Erd\H{o}s and P. Tur\'an,
+\newblock On some problems of a statistical group theory. III,
+\newblock \emph{Acta Mathematica Academiae Scientiarum Hungaricae} 18
+(1967), 309--320.
+
+\bibitem{HardyWright2008}
+G. H. Hardy and E. M. Wright,
+\newblock \emph{An Introduction to the Theory of Numbers}, sixth edition,
+\newblock Oxford University Press, Oxford, 2008.
+
+\bibitem{LongOrder2026}
+C. D. Long,
+\newblock An Erd\H{o}s--Tur\'an law for comparable-rate Luce permutations,
+\newblock manuscript, 2026.
+
+\bibitem{LongSwitch2026}
+C. D. Long,
+\newblock Mesoscopic cycles of comparable-rate Luce permutations: a
+switching proof with free-depth finite-endpoint mixing,
+\newblock manuscript, 2026.
+
+\bibitem{Petrov1975}
+V. V. Petrov,
+\newblock \emph{Sums of Independent Random Variables},
+\newblock Ergebnisse der Mathematik und ihrer Grenzgebiete, vol.~82,
+Springer-Verlag, Berlin--New York, 1975.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,4 +1,45 @@
 {
   "schema_version": 1,
-  "documents": []
+  "documents": [
+    {
+      "id": "mesoscopic-switching",
+      "title": "Mesoscopic cycles of comparable-rate Luce permutations",
+      "source": "papers/mesoscopic-switching/mesoscopic-luce-cycles.tex",
+      "pdf": "output/pdf/mesoscopic-luce-cycles.pdf",
+      "status": "imported",
+      "dependencies": []
+    },
+    {
+      "id": "erdos-turan-order",
+      "title": "An Erdos--Turan Law for Comparable-Rate Luce Permutations",
+      "source": "papers/erdos-turan-order/luce-erdos-turan.tex",
+      "pdf": "output/pdf/luce-erdos-turan.pdf",
+      "status": "imported",
+      "dependencies": [
+        "mesoscopic-switching"
+      ]
+    },
+    {
+      "id": "sharp-order-edgeworth",
+      "title": "A Sharp Berry--Esseen Theorem and First Edgeworth Expansion for Logarithmic Luce Order",
+      "source": "papers/sharp-order-edgeworth/luce-edgeworth.tex",
+      "pdf": "output/pdf/luce-edgeworth.pdf",
+      "status": "imported",
+      "dependencies": [
+        "mesoscopic-switching",
+        "erdos-turan-order"
+      ]
+    },
+    {
+      "id": "functional-erdos-turan",
+      "title": "Functional Erdos--Turan Universality for Comparable-Rate Luce Permutations",
+      "source": "notes/working/functional-luce-erdos-turan.tex",
+      "pdf": "output/pdf/functional-luce-erdos-turan.pdf",
+      "status": "working",
+      "dependencies": [
+        "mesoscopic-switching",
+        "erdos-turan-order"
+      ]
+    }
+  ]
 }
