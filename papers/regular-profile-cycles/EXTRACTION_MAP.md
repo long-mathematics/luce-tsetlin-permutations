@@ -34,20 +34,20 @@ Labels are unchanged, so every old label is also the current label.
 | Lemma | One-point rank envelope | `lem:one-rank-envelope` | 1348 | 922 |
 | Lemma | Gap envelope | `lem:gap-envelope` | 1395 | 969 |
 | Lemma | Summability of the gap envelope | `lem:gap-sum` | 1418 | 992 |
-| Lemma | Endpoint domination | `lem:endpoint-dom` | 1494 | 1079 |
-| Lemma | Bulk collision domination | `lem:collision-dom` | 1523 | 1108 |
-| Corollary | Endpoint tightness and improper integrability | `cor:endpoint-tightness` | 1552 | 1137 |
-| Proposition | Fixed-point factorial moments | `prop:regular-fixed-factorial` | 1600 | 1191 |
-| Proposition | Mixed short-cycle factorial moments | `prop:regular-cycle-factorial` | 1633 | 1224 |
-| Corollary | Total-variation convergence for fixed cycle vectors | `cor:regular-cycles-tv` | 1697 | 1307 |
-| Lemma | Bistochastic Hilbert--Schmidt kernel | `lem:bistochastic-hs` | 1734 | 1349 |
-| Lemma | Cyclic trace formula | `lem:cyclic-trace-formula` | 1791 | 1406 |
-| Theorem | Long trace universality | `thm:long-trace` | 1817 | 1432 |
-| Theorem | Fixed-width diagonal bands | `thm:diagonal-band` | 1904 | 1538 |
-| Theorem | Sparse bulk entry sets | `thm:sparse-entry` | 1976 | 1610 |
-| Corollary | General thin-graph Poisson law | `cor:thin-graph-general` | 2075 | 1717 |
-| Corollary | Overlaps with deterministic permutations | `cor:overlap-permutation` | 2111 | 1753 |
-| Theorem | Transverse thin-curve Poisson law | `thm:thin-curve-transverse` | 2167 | 1815 |
+| Lemma | Endpoint domination | `lem:endpoint-dom` | 1494 | 1080 |
+| Lemma | Bulk collision domination | `lem:collision-dom` | 1523 | 1109 |
+| Corollary | Endpoint tightness and improper integrability | `cor:endpoint-tightness` | 1552 | 1138 |
+| Proposition | Fixed-point factorial moments | `prop:regular-fixed-factorial` | 1600 | 1193 |
+| Proposition | Mixed short-cycle factorial moments | `prop:regular-cycle-factorial` | 1633 | 1226 |
+| Corollary | Total-variation convergence for fixed cycle vectors | `cor:regular-cycles-tv` | 1697 | 1310 |
+| Lemma | Bistochastic Hilbert--Schmidt kernel | `lem:bistochastic-hs` | 1734 | 1353 |
+| Lemma | Cyclic trace formula | `lem:cyclic-trace-formula` | 1791 | 1410 |
+| Theorem | Long trace universality | `thm:long-trace` | 1817 | 1436 |
+| Theorem | Fixed-width diagonal bands | `thm:diagonal-band` | 1904 | 1543 |
+| Theorem | Sparse bulk entry sets | `thm:sparse-entry` | 1976 | 1615 |
+| Corollary | General thin-graph Poisson law | `cor:thin-graph-general` | 2075 | 1723 |
+| Corollary | Overlaps with deterministic permutations | `cor:overlap-permutation` | 2111 | 1759 |
+| Theorem | Transverse thin-curve Poisson law | `thm:thin-curve-transverse` | 2167 | 1822 |
 
 ## Closure and repair checks
 
