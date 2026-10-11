@@ -4,7 +4,7 @@ from pathlib import Path
 import hashlib, json, os, subprocess
 
 ROOT=Path(__file__).resolve().parents[1]
-PARENT="d5f6e850e55fb651265e2d322531b03fe746c956"
+PARENT="b2f6192a595a6632f0ad2e71813738a633cf5a82"
 BASE_BRANCH="migration/regular-profile-extraction"
 BASE_HEAD="1f40456f23e2eba20561539637f286ed490ff688"
 
