@@ -58,7 +58,7 @@
       "title": "Microscopic Cycles and Sparse Entries for Regular Luce Profiles",
       "source": "papers/regular-profile-cycles/regular-profile-cycles.tex",
       "pdf": "output/pdf/regular-profile-cycles.pdf",
-      "status": "working",
+      "status": "current-research",
       "dependencies": []
     },
     {
