@@ -65,8 +65,7 @@ $$
 \mathbb P\!\left\{
 \frac{\log O_n-m_n}{\sqrt{L^3/3}}\le x
 \right\}
-=
-\Phi(x)-\frac{\sqrt3}{8}(x^2-1)\varphi(x)L^{-1/2}
+= \Phi(x)-\frac{\sqrt3}{8}(x^2-1)\varphi(x)L^{-1/2}
 +o_\kappa(L^{-1/2}).
 $$
 The proof combines polynomial endpoint control, prime-power linearization, compound-Poisson approximation, an extended Fourier window, and bounds for the nonlinear arithmetic remainder.
@@ -106,8 +105,7 @@ The main intermediate theorem is a growing-dimensional product-Poisson approxima
 Let $K_n$ be the total number of cycles and $\mu_n=\mathbb E K_n$. For comparable-rate Luce permutations this paper proves the stronger exact-mean Poisson approximation
 $$
 d_{\mathrm{TV}}\!\left(\mathcal L(K_n),\operatorname{Pois}(\mu_n)\right)
-=
-O_\kappa\!\left(\frac{(\log\log n)^2}{\log n}\right),
+= O_\kappa\!\left(\frac{(\log\log n)^2}{\log n}\right),
 $$
 which yields the sharp Berry--Esseen order $(\log n)^{-1/2}$. Its first lattice Edgeworth expansion determines the exact leading Kolmogorov constant $2/(3\sqrt{2\pi})$.
 
