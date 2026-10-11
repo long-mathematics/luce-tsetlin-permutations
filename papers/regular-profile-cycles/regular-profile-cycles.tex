@@ -480,7 +480,6 @@ For a finite set of specified labels \(P\subset[n]\), define empirical functions
         B_{n,P}(t)=A_{n,P}'(t)=\frac1n\sum_{j\notin P}\theta_{n,j}e^{-\theta_{n,j}t}.
 \]
 If \(|P|\) is fixed, then \(A_{n,P}\to A\) and \(B_{n,P}\to B\) uniformly on compact subsets of \([0,\infty)\).
-
 % BEGIN AUDIT REPAIR 1: uniform profile approximation
 \medskip
 \noindent\textit{Uniform profile approximation.}
@@ -506,6 +505,7 @@ array, uniformly over the displayed labels, bounded-size removed sets, and
 admissible target positions; no quantitative rate uniform over all
 perturbation arrays without a common modulus of convergence is asserted.
 % END AUDIT REPAIR 1: uniform profile approximation
+
 
 \begin{lemma}[Uniform saddle geometry]\label{lem:regular-saddle-geometry}
 Fix \(\ell\ge1\), \(\delta>0\), and \(\eta>0\).  Uniformly over sets \(P\subset[n]\) of cardinality at most \(\ell\) and over integers
@@ -862,7 +862,7 @@ and
 \[
         g_n(t)=\prod_{a=1}^\ell\theta_{n,p_a}e^{-\theta_{n,p_a}t_a}.
 \]
-The functions \(g_n\) are uniformly bounded and equicontinuous in the saddle neighborhood, since the specified rates are uniformly bounded and the neighborhood is compact.
+The functions \(g_n\) are uniformly bounded and equicontinuous in the saddle neighborhood, since the specified rates are uniformly bounded and the neighborhood is compact.  
 % BEGIN AUDIT REPAIR 2: integrated-saddle checklist
 For clarity, the hypotheses of Lemma \ref{lem:integrated-lattice-saddle}
 are verified as follows.  The preceding uniform profile approximation gives
@@ -878,7 +878,7 @@ majorant on the saddle window.  Finally the displayed product defining
 of the integrated-saddle lemma is satisfied uniformly over the separated bulk
 configurations.
 % END AUDIT REPAIR 2: integrated-saddle checklist
-Here
+Thus the hypotheses of Lemma \ref{lem:integrated-lattice-saddle} are satisfied uniformly over the separated bulk configurations.  Here
 \[
         DA_n(t_n^*)=
         \diag(B_{n,P}(t_{n,1}^*),\ldots,B_{n,P}(t_{n,\ell}^*)).
@@ -1046,6 +1046,7 @@ remaining possible value is \(r=N-h\); since \(h<N/2\) and
 \]
 Thus the endpoint convention does not alter the asserted power bound.
 % END AUDIT REPAIR 3A: gap endpoint term
+
 Assume the result for $\ell-1$.  After the first gap $r$, put $s=N-r$.
 The induction hypothesis gives
 \[
@@ -1178,6 +1179,7 @@ and to every cyclic trace integral
  \dd x_1\cdots\dd x_r,
 \]
 as well as to their finite products in mixed factorial moments.
+
 % BEGIN AUDIT REPAIR 3B: order of limits
 The limiting procedure used here and in the factorial-moment arguments is
 therefore explicit: first \(n\to\infty\) with \(\delta,\eta>0\) fixed, then
@@ -1238,7 +1240,6 @@ Let \(\calC_{n,r}\) be the set of directed \(r\)-cycles on \([n]\), counted up t
         \sigma_n(i_r)=i_1\}.
 \]
 Then \(C_r(\sigma_n)=\sum_{\gamma\in\calC_{n,r}}\one_{E_\gamma}\).  Put \(L=\sum_{r=1}^R r k_r\).  Expanding the mixed factorial moment gives a sum over ordered collections of distinct cycles.  For \(k_r\) cycles of the same length \(r\), the factorial moment \((C_r(\sigma_n))_{k_r}\) keeps those cycles ordered, so no additional \(k_r!\) denominator appears; the only normalization inside a single directed \(r\)-cycle is the factor \(1/r\) for cyclic rotations.  If two distinct cycles share a label, their events are incompatible; hence only disjoint collections contribute.
-
 % BEGIN AUDIT REPAIR 4: cycle combinatorial normalization
 Equivalently, if each selected cycle is first represented by an ordered list
 of its vertices, then the conversion from ordered lists to the ordered cycle
@@ -1252,6 +1253,7 @@ the target tuple is determined from the source tuple by the prescribed cyclic
 shifts, so only a fixed combinatorial factor depending on
 \(R,k_1,\ldots,k_R\) enters the envelope estimates.
 % END AUDIT REPAIR 4: cycle combinatorial normalization
+
 
 For a disjoint collection, the event imposes \(L\) distinct point constraints \(\sigma_n(p_a)=q_a\).  The labels \(p_a\) are distinct, and the target positions \(q_a\) are the same labels cyclically shifted within each cycle, hence are also distinct.  The separated local estimate requires separation of the target positions; no separate metric separation of the labels is needed.
 
@@ -1289,7 +1291,8 @@ factorial moments:
 These are exactly the mixed factorial moments of independent Poisson variables
 \(Z_r\sim\Pois(\lambda_r)\).  Since ordinary mixed moments are finite linear
 combinations of mixed factorial moments, all fixed mixed ordinary moments also
-converge to those of \((Z_1,\ldots,Z_R)\).  % BEGIN AUDIT REPAIR 5A: moment-method reference
+converge to those of \((Z_1,\ldots,Z_R)\).  
+% BEGIN AUDIT REPAIR 5A: moment-method reference
 For a standard statement of the multivariate method of moments, see
 \cite{Billingsley1995}.  This citation is only to the convergence criterion:
 the model-specific factorial-moment estimates are proved above.
@@ -1317,6 +1320,7 @@ For every fixed $R$,
 \begin{proof}
 Let $p_n$ and $p$ be the probability mass functions of the two laws on the
 countable discrete space $\Zz_{\ge0}^R$.  Theorem \ref{thm:regular-cycles} implies
+
 % BEGIN AUDIT REPAIR 5B: discrete Scheffe reference
 The finite-set argument below is the counting-measure form of Scheff\'e's
 lemma; see \cite{Billingsley1995}.  No unbounded-moment passage is used in
@@ -1471,7 +1475,7 @@ with equality only when \(h\) is a scalar multiple of the constant function
 almost everywhere for that measure.  Strict positivity of \(\rho\) makes
 this equivalent to Lebesgue almost-everywhere constancy.
 % END AUDIT REPAIR 6A: complex Jensen equality
-Thus the only eigenvectors with eigenvalue of modulus one are the
+  Thus the only eigenvectors with eigenvalue of modulus one are the
 constants.  The eigenvalue $1$ is algebraically simple as well.  Indeed, if
 $(K-I)g=c\one$ with $c\ne0$, then $K^ng=g+nc\one$, contradicting
 $\|K^n\|\le1$.
@@ -1515,6 +1519,7 @@ Therefore
         \le q^{r-2}\sum_{j\ge2}|\zeta_j|^2
         \le q^{r-2}\|T\|_{\mathrm{HS}}^2.
 \]
+
 % BEGIN AUDIT REPAIR 6B: first-moment link
 For each fixed \(r\), Proposition \ref{prop:regular-cycle-factorial} with
 \(k_r=1\) and all other \(k_s=0\) gives
@@ -1674,6 +1679,7 @@ with a repeated edge.  Their number is at most
 edges in the factorial moment and excluding repeated rows in the compatible
 tuple sum are both negligible in the deterministic comparison.
 % END AUDIT REPAIR 6C: repeated-edge bookkeeping
+
 The number containing a pair of target columns at distance at most $\eta n$ is
 at most
 \[
@@ -1801,7 +1807,8 @@ Theorem \ref{thm:sparse-entry} to the graph edges with target in
 $[\delta',\delta]\cup[1-\delta,1-\delta']$ identifies the corresponding
 limiting integral with the limit of their expected overlap count.  The latter
 is bounded by the endpoint estimate above and is therefore
-$O(\delta+\delta^\beta)$.  % BEGIN AUDIT REPAIR 5C: converging-together reference
+$O(\delta+\delta^\beta)$.  
+% BEGIN AUDIT REPAIR 5C: converging-together reference
 The limit order is: for each fixed \(\delta\), first let \(n\to\infty\);
 then let \(\delta\downarrow0\), under which the omitted count vanishes in
 probability and the truncated Poisson means converge.  See
