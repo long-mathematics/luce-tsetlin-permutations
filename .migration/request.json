@@ -1,5 +1,6 @@
 {
   "stage": "macroscopic-pd-audit-repair",
   "baseline_commit": "f7eb751eb6d5a7afd21e2139f0d17176557120b4",
-  "payload_sha256": "3ececa6ee8d054bc0066445c480a6308756c7540f584e85ef3059bd645815a65"
+  "payload_sha256": "3ececa6ee8d054bc0066445c480a6308756c7540f584e85ef3059bd645815a65",
+  "retry": 1
 }

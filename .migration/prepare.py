@@ -12,6 +12,7 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 STAGE = 'macroscopic-pd-audit-repair'
 BASELINE = 'f7eb751eb6d5a7afd21e2139f0d17176557120b4'
+REQUEST_PARENT = '57b8bd22b49ff44e7e4c176ba41f074682702937'
 PAYLOAD_SHA256 = '3ececa6ee8d054bc0066445c480a6308756c7540f584e85ef3059bd645815a65'
 PAYLOAD_FILES = [ROOT/f'.migration/macroscopic-pd-repair-payload-part-{j}.b64' for j in range(1, 7)]
 
@@ -41,8 +42,8 @@ if request.get('stage') != STAGE or request.get('baseline_commit') != BASELINE:
 if not os.environ.get('GITHUB_REF_NAME', '').startswith('migration/'):
     raise SystemExit('Preparation requires an explicit migration branch')
 headers = subprocess.check_output(['git','cat-file','-p','HEAD'], cwd=ROOT, text=True).split('\n\n',1)[0].splitlines()
-if 'parent '+BASELINE not in headers:
-    raise ValueError('Repair request must directly follow the audited extraction head')
+if 'parent '+REQUEST_PARENT not in headers:
+    raise ValueError('Repair retry must directly follow the reviewed request commit')
 
 compressed = base64.b64decode(''.join(path.read_text() for path in PAYLOAD_FILES))
 if hashlib.sha256(compressed).hexdigest() != PAYLOAD_SHA256:
@@ -76,10 +77,10 @@ for rec in archive:
     if sha(path) != archive_before[rec['path']] or sha(path) != rec['sha256']:
         raise ValueError('Frozen archive changed: '+rec['path'])
 
-# Restore the exact helper and workflow from the audited parent.  The temporary
-# request commit is therefore absent from the final focused PR diff.
+# Restore exact baseline tooling so neither the helper nor the temporary workflow
+# appears in the final focused repair diff.
 for rel in ('.migration/prepare.py', '.github/workflows/prepare-migration.yml'):
-    baseline_bytes = subprocess.check_output(['git','show',f'HEAD^:{rel}'], cwd=ROOT)
+    baseline_bytes = subprocess.check_output(['git','show',f'{BASELINE}:{rel}'], cwd=ROOT)
     (ROOT/rel).write_bytes(baseline_bytes)
 for path in PAYLOAD_FILES:
     path.unlink()
