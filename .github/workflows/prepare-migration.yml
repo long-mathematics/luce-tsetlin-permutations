@@ -1,0 +1,67 @@
+name: Prepare migration snapshots
+on:
+  push:
+    branches: ['migration/**']
+    paths: ['.migration/**']
+permissions:
+  contents: write
+concurrency:
+  group: migration-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'long-mathematics/luce-tsetlin-permutations'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.ref_name }}
+      - name: Validate explicit migration request
+        run: |
+          test -f .migration/request.json
+          python3 -c "import json; r=json.load(open('.migration/request.json')); assert r['stage'] in ('import','integration')"
+      - name: Install TeX and numerical tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends latexmk texlive-latex-extra texlive-fonts-recommended texlive-science lmodern poppler-utils python3 python3-numpy python3-scipy python3-sympy make
+      - name: Prepare explicitly selected stage
+        run: python3 .migration/prepare.py
+      - run: make pdf
+      - run: make test
+      - run: make check
+      - run: make verify
+      - name: Commit prepared snapshot to this migration branch only
+        env:
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          case "$BRANCH" in migration/*) ;; *) exit 1;; esac
+          rm .migration/request.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m 'Prepare verified migration sources and deterministic snapshots'
+            git push origin "HEAD:$BRANCH"
+          fi
+      - name: Export prepared sources and PDFs
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: prepared-migration
+          path: |
+            README.md
+            papers.json
+            THEOREM_STATUS.md
+            DEPENDENCIES.md
+            papers/
+            notes/
+            audits/
+            archive/
+            scripts/
+            tests/
+            output/
+            .build/**/*.log
+            .build/**/build-console.txt
+          include-hidden-files: true
+          retention-days: 14
