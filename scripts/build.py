@@ -85,7 +85,11 @@ def check_markdown(allow_pending: bool = False) -> None:
 
 
 def check_readme_math(text: str) -> None:
-    for token in (r'\(', r'\)', r'\[', r'\]', r'\newcommand', r'\renewcommand', r'\def'):
+    for token in (
+        r'\(', r'\)', r'\[', r'\]',
+        r'\newcommand', r'\renewcommand', r'\def',
+        r'\operatorname', r'\,',
+    ):
         if token in text:
             raise ValueError('Unsupported README TeX delimiter/definition: ' + token)
     if re.search(r'\\(?:Ee|Pp|TV|Kol|one|Pois|dd|cL)\b', text):
