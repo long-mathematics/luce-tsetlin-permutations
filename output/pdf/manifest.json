@@ -42,6 +42,14 @@
       "pages": 13
     },
     {
+      "id": "regular-profile-cycles",
+      "source": "papers/regular-profile-cycles/regular-profile-cycles.tex",
+      "source_sha256": "7c4bbf5a78a7e78bb13a9b0ce63061dc8301d8fd61ff89880415277f66c79f7a",
+      "pdf": "output/pdf/regular-profile-cycles.pdf",
+      "pdf_sha256": "55c1a9cb015d9808e70667b18c1432192fefb496b67aec27cce20685430429c1",
+      "pages": 27
+    },
+    {
       "id": "macroscopic-pd",
       "source": "papers/macroscopic-pd/poisson-dirichlet-luce.tex",
       "source_sha256": "0fdde5028985c4b639c7679e4f59256fb23e4983119a22bf60ea9d55bfbccdaa",

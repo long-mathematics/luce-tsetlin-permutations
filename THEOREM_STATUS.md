@@ -17,10 +17,23 @@ Status date: 11 October 2026. This register distinguishes mathematical assertion
 | Exact-mean total-cycle Poisson approximation and sharp Berry–Esseen | Current quantitative total-cycle paper; the independent copied omitted count and mean-matched smoothing proof are explicit. Only the named switching modules, not the log-order Edgeworth theorem, are inputs. |
 | First lattice Edgeworth expansion and exact leading Kolmogorov constant | Current total-cycle paper, with the right-continuous integer phase. |
 | Variance asymptotic, second signed/lattice expansion, fixed-order Poisson–Charlier hierarchy | Current total-cycle paper, using fixed-order factorial domination and explicit moment transfer. Expansion order is fixed; no analytic residue convergence is inferred. |
+| Regular positive-profile microscopic cycles and sparse entries | **Working mechanical extraction** in `papers/regular-profile-cycles/`. The exact sampled-profile hypothesis, fixed-vector independent Poisson limits, trace means, long-trace asymptotic, diagonal-band laws, sparse-entry theorem, thin-graph laws, and deterministic-overlap conclusions are preserved from the archive. The separated bulk estimate and all endpoint, collision, and target-crowding envelopes used by the proof are internal. A dedicated proof audit is pending; no status upgrade is asserted. |
 | Macroscopic PD/GEM theorem | **Audited current manuscript** in `papers/macroscopic-pd/`. The exact comparability hypothesis, PD(1) and GEM(1) conclusions, independently resampled uniform-root construction, uniform-root conclusion, and `ell^1` topologies are unchanged. The adversarial audit found no fatal gap in conditioning, adaptive exposure, rooted closure, deletion stability, regeneration, GEM induction, residual-mass control, or the `ell^1` passage. Six localized clarification repairs were applied; no quantitative, quenched, endpoint-singular, mesoscopic, or total-cycle strengthening is claimed. |
 | Singular endpoint results in the 139-page draft | Frozen archive. Dedicated thematic extraction and proof audits are still required. |
 
 The original total-cycle/Conjecture 13.2 candidate remains a **Historical rejected candidate**. The newer Campbell–Stein proof does not reinstate its proposed profile expectation expansion.
+
+## Regular-profile extraction boundary
+
+The standalone regular-profile paper is byte-preserving across three source
+blocks: the exponential/Gumbel input, the analytic Bernoulli and lattice-LLT
+input, and the complete regular positive-profile section. All model-specific
+lemmas used by the fixed-cycle and sparse-entry results are internal, and the
+catalog records no active-paper dependency. The extraction checks coverage,
+reference closure, theorem scope, and archive immutability only. It does not
+audit the multivariate local limit argument, endpoint/collision domination,
+improper trace passage, factorial-moment summation, or sparse-entry and overlap
+applications.
 
 ## Macroscopic audit and repair boundary
 
@@ -36,6 +49,6 @@ The sampled-profile mean constant, a uniformly bounded mean shift for arbitrary 
 
 ## Review records
 
-[Total-cycle integration audit](audits/total-cycle-integration.md), [PD/GEM extraction record](audits/macroscopic-pd-extraction.md), [PD/GEM proof audit](audits/macroscopic-pd-proof-audit.md), [PD/GEM repair record](audits/macroscopic-pd-repair-record.md), [PD/GEM old-label/new-label map](papers/macroscopic-pd/EXTRACTION_MAP.md), [dependency register](DEPENDENCIES.md), and [preserved scoped audit and proof notes](archive/total-cycle-source-notes/README.md). Original finite result records are provenance; current checks are rerun in CI.
+[Regular-profile extraction record](audits/regular-profile-extraction.md), [regular-profile provenance map](papers/regular-profile-cycles/EXTRACTION_MAP.md), [Total-cycle integration audit](audits/total-cycle-integration.md), [PD/GEM extraction record](audits/macroscopic-pd-extraction.md), [PD/GEM proof audit](audits/macroscopic-pd-proof-audit.md), [PD/GEM repair record](audits/macroscopic-pd-repair-record.md), [PD/GEM old-label/new-label map](papers/macroscopic-pd/EXTRACTION_MAP.md), [dependency register](DEPENDENCIES.md), and [preserved scoped audit and proof notes](archive/total-cycle-source-notes/README.md). Original finite result records are provenance; current checks are rerun in CI.
 
 Formalization status: **not started in this repository**. Finite exact identities, numerical checks, and token-preserving extraction tests do not constitute Lean verification or proofs of asymptotic estimates. No independent novelty certification or peer review is claimed.

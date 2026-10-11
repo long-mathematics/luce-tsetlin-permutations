@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "stage": "regular-profile-extraction",
+  "baseline_commit": "fab8f0150e81ade0458bebed442f044141c2d2eb",
+  "archive_source": "archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex",
+  "archive_source_sha256": "c6d6a4607a2db9c8a5f69e2ec256c33619083fcc81ab467e9b939673fb3a5028",
+  "active_source": "papers/regular-profile-cycles/regular-profile-cycles.tex",
+  "active_source_sha256": "7c4bbf5a78a7e78bb13a9b0ce63061dc8301d8fd61ff89880415277f66c79f7a",
+  "source_ranges": [
+    {
+      "name": "Exponential race and Gumbel input",
+      "first_line": 224,
+      "last_line": 336,
+      "sentinel": "% BEGIN ARCHIVED BLOCK: exponential-race-and-gumbel-input"
+    },
+    {
+      "name": "Analytic input",
+      "first_line": 353,
+      "last_line": 531,
+      "sentinel": "% BEGIN ARCHIVED BLOCK: analytic-input"
+    },
+    {
+      "name": "Regular-profile theory",
+      "first_line": 865,
+      "last_line": 2198,
+      "sentinel": "% BEGIN ARCHIVED BLOCK: regular-positive-profile-theory"
+    }
+  ],
+  "theorem_environments": 27,
+  "labels": 33,
+  "reference_targets": 21,
+  "citation_keys": [
+    "Petrov1975",
+    "BCD2025",
+    "Simon2005"
+  ],
+  "proof_status": "mechanical extraction; adversarial audit pending"
+}
