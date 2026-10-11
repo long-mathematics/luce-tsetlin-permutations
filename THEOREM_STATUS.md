@@ -11,9 +11,9 @@ Status date: 11 October 2026. This is a result/dependency register, not a refere
 - **Historical rejected candidate:** preserved for provenance and forbidden as a theorem dependency.
 - **Open:** neither an integration nor a successful build changes this status.
 
-## Foundation state
+## Preservation import state
 
-No manuscript is imported or promoted by the foundation PR. The coming import pins `long-mathematics/nonuniform-random-permutations` at commit `6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0`.
+Four editable manuscript copies and the archived original have been imported without source changes. No theorem is promoted by the import. The preserved upstream snapshot pins `long-mathematics/nonuniform-random-permutations` at commit `6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0`.
 
 The historical total-cycle/Conjecture 13.2 candidate remains a historical rejected candidate. A later functional proof and total-cycle quantitative notes must be distinguished from it at integration. In particular, a new total-cycle CLT must not silently reinstate the historical profile-dependent expectation proof.
 
