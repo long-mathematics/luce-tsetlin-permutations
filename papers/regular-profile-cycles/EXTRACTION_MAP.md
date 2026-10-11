@@ -40,14 +40,14 @@ Labels are unchanged, so every old label is also the current label.
 | Proposition | Fixed-point factorial moments | `prop:regular-fixed-factorial` | 1600 | 1191 |
 | Proposition | Mixed short-cycle factorial moments | `prop:regular-cycle-factorial` | 1633 | 1224 |
 | Corollary | Total-variation convergence for fixed cycle vectors | `cor:regular-cycles-tv` | 1697 | 1307 |
-| Lemma | Bistochastic Hilbert--Schmidt kernel | `lem:bistochastic-hs` | 1734 | 1350 |
-| Lemma | Cyclic trace formula | `lem:cyclic-trace-formula` | 1791 | 1407 |
-| Theorem | Long trace universality | `thm:long-trace` | 1817 | 1433 |
+| Lemma | Bistochastic Hilbert--Schmidt kernel | `lem:bistochastic-hs` | 1734 | 1349 |
+| Lemma | Cyclic trace formula | `lem:cyclic-trace-formula` | 1791 | 1406 |
+| Theorem | Long trace universality | `thm:long-trace` | 1817 | 1432 |
 | Theorem | Fixed-width diagonal bands | `thm:diagonal-band` | 1904 | 1538 |
 | Theorem | Sparse bulk entry sets | `thm:sparse-entry` | 1976 | 1610 |
 | Corollary | General thin-graph Poisson law | `cor:thin-graph-general` | 2075 | 1717 |
 | Corollary | Overlaps with deterministic permutations | `cor:overlap-permutation` | 2111 | 1753 |
-| Theorem | Transverse thin-curve Poisson law | `thm:thin-curve-transverse` | 2167 | 1814 |
+| Theorem | Transverse thin-curve Poisson law | `thm:thin-curve-transverse` | 2167 | 1815 |
 
 ## Closure and repair checks
 
