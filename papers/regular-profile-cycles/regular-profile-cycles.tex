@@ -1460,7 +1460,18 @@ Equality must therefore hold in the pointwise Jensen inequality used in the
 proof of Lemma \ref{lem:bistochastic-hs} for almost every $x$.  Because
 $\rho(x,y)>0$ for every $x\in[0,1]$ and every $y\in(0,1)$, equality in Jensen's
 inequality forces $h(y)$ to be almost everywhere constant.  It follows that
-$\zeta=1$.  Thus the only eigenvectors with eigenvalue of modulus one are the
+$\zeta=1$.
+% BEGIN AUDIT REPAIR 6A: complex Jensen equality
+For complex-valued \(h\), this is the equality case of Cauchy--Schwarz for
+the probability measure \(\rho(x,y)\dd y\):
+\[
+ \left|\int h\,\rho(x,\cdot)\right|^2
+ \le \int |h|^2\,\rho(x,\cdot),
+\]
+with equality only when \(h\) is a scalar multiple of the constant function
+almost everywhere for that measure.  Strict positivity of \(\rho\) makes
+this equivalent to Lebesgue almost-everywhere constancy.
+% END AUDIT REPAIR 6A: complex Jensen equality  Thus the only eigenvectors with eigenvalue of modulus one are the
 constants.  The eigenvalue $1$ is algebraically simple as well.  Indeed, if
 $(K-I)g=c\one$ with $c\ne0$, then $K^ng=g+nc\one$, contradicting
 $\|K^n\|\le1$.
