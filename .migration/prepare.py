@@ -68,9 +68,9 @@ if request.get("baseline_commit") != BASELINE:
     raise ValueError("Unexpected extraction baseline")
 if not os.environ.get("GITHUB_REF_NAME", "").startswith("migration/"):
     raise SystemExit("Preparation requires an explicit migration branch")
-parent = subprocess.check_output(["git", "rev-parse", "HEAD^"], cwd=ROOT, text=True).strip()
-if parent != BASELINE:
-    raise ValueError(f"Extraction request must directly follow {BASELINE}; got {parent}")
+headers = subprocess.check_output(["git", "cat-file", "-p", "HEAD"], cwd=ROOT, text=True).split("\n\n", 1)[0].splitlines()
+if "parent " + BASELINE not in headers:
+    raise ValueError(f"Extraction request must directly follow {BASELINE}")
 
 archive_path = ROOT / ARCHIVE_REL
 if sha(archive_path) != ARCHIVE_SHA256:
@@ -416,7 +416,7 @@ before promotion from working mechanical extraction.
 """
 write("audits/regular-profile-extraction.md", audit)
 
-test_source = f"""import json
+test_source = rf"""import json
 from pathlib import Path
 import re
 import unittest
@@ -446,7 +446,7 @@ def source_block(text: str, start: str, end: str) -> str:
 
 
 def active_block(text: str, start_marker: str, end_marker: str) -> str:
-    return text.split(start_marker + "\\n", 1)[1].split(end_marker, 1)[0]
+    return text.split(start_marker + "\n", 1)[1].split(end_marker, 1)[0]
 
 
 class RegularProfileExtractionTests(unittest.TestCase):
@@ -464,13 +464,13 @@ class RegularProfileExtractionTests(unittest.TestCase):
                 )
 
     def test_label_reference_and_citation_closure(self):
-        labels = set(re.findall(r"\\\\label\\{{([^}}]+)\\}}", self.active))
-        refs = set(re.findall(r"\\\\(?:ref|eqref|autoref)\\{{([^}}]+)\\}}", self.active))
+        labels = set(re.findall(r"\\label\{{([^}}]+)\}}", self.active))
+        refs = set(re.findall(r"\\(?:ref|eqref|autoref)\{{([^}}]+)\}}", self.active))
         self.assertFalse(refs - labels)
         cites = set()
-        for match in re.finditer(r"\\\\cite(?:\\[[^\\]]*\\])*\\{{([^}}]+)\\}}", self.active):
+        for match in re.finditer(r"\\cite(?:\[[^\]]*\])*\{{([^}}]+)\}}", self.active):
             cites.update(k.strip() for k in match.group(1).split(","))
-        bibitems = set(re.findall(r"\\\\bibitem(?:\\[[^\\]]*\\])?\\{{([^}}]+)\\}}", self.active))
+        bibitems = set(re.findall(r"\\bibitem(?:\[[^\]]*\])?\{{([^}}]+)\}}", self.active))
         self.assertFalse(cites - bibitems)
 
     def test_principal_scope_is_unchanged(self):
