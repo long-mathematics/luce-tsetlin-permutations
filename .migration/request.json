@@ -1,6 +1,0 @@
-{
-  "stage": "macroscopic-pd-extraction",
-  "baseline_commit": "c796e177fbf961bffe710ac8a1db30a6320e3f75",
-  "payload_sha256": "ee42171ae2c942cefa59dbeef55ab6a8b3beded550da07119a1c48a6e350d521",
-  "archive_source_sha256": "c6d6a4607a2db9c8a5f69e2ec256c33619083fcc81ab467e9b939673fb3a5028"
-}

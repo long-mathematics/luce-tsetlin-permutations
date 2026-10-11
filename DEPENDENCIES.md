@@ -2,6 +2,27 @@
 
 The catalog records document-level input edges and tests reject cycles. References for historical context or later applications are not proof dependencies. The precise modules below determine the review boundary.
 
+## Macroscopic PD/GEM extraction
+
+The standalone paper `papers/macroscopic-pd/poisson-dirichlet-luce.tex` is mechanically extracted from archived lines 2199--3565. It has no proof dependency on another active manuscript in `papers.json` and does not use the mesoscopic-cycle theorem, scalar or functional Erdős--Turán laws, total-cycle CLT, or quantitative total-cycle results.
+
+Its model-specific dependency chain is internal:
+
+1. subsequential marked-profile kernel and common `L^2` contraction;
+2. slab law, deterministic good events, and conditional permanental row factorization;
+3. hereditary flatness and predictable adaptive row exposure;
+4. the quantitative relative-prefix law;
+5. scale-sensitive two-scale orbit balance for regular residual histories;
+6. root-avoiding change of measure and harmonic-product approximation;
+7. uniform conditional residual-fraction law;
+8. deletion stability for an interior macroscopic cycle;
+9. finite-dimensional independent residual fractions;
+10. `ell^1` tail restoration and decreasing rearrangement to GEM(1)/PD(1).
+
+All ten components are stated and proved in the standalone source. The external inputs are standard compactness and disintegration on compact standard Borel spaces, Kolmogorov's maximal inequality, Doob's `L^2` maximal inequality, the continuous mapping theorem, and the standard relation between GEM(1) and PD(1), cited to Pitman. The [extraction map](papers/macroscopic-pd/EXTRACTION_MAP.md) records every moved label and reference. The regression test compares the archived and standalone macroscopic-section TeX token streams up to whitespace.
+
+This dependency closure is an extraction statement, not a proof-audit verdict. In particular, it does not certify the conditioning sigma-field, uniformity over adaptive histories, rooted closure estimate, deletion/regeneration induction, or `ell^1` passage.
+
 ## Count proof
 
 | Input | Source | Scope actually used |
@@ -24,4 +45,4 @@ The qualitative functional manuscript uses square-root-depth unweighted dyadic s
 
 ## Archive and prohibited dependencies
 
-The 139-page research draft is outside the total-cycle proof chain. The historical resolution candidate is never a dependency. No growing-number-of-roots, arbitrary-deletion quenched, profile smoothness, or mod-Poisson convergence hypothesis has been silently added. Distributional convergence alone does not imply unbounded moment convergence; the higher-order count theorem supplies the necessary moment estimates explicitly.
+The frozen 139-page source remains outside the total-cycle proof chain. The active macroscopic manuscript is an extraction from that archive, not an input to the count proof. The historical resolution candidate is never a dependency. No growing-number-of-roots, arbitrary-deletion quenched, profile smoothness, or mod-Poisson convergence hypothesis has been silently added. Distributional convergence alone does not imply unbounded moment convergence; the higher-order count theorem supplies the necessary moment estimates explicitly.

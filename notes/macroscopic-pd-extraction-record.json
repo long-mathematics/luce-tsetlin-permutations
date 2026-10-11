@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "stage": "macroscopic-pd-extraction",
+  "baseline_commit": "c796e177fbf961bffe710ac8a1db30a6320e3f75",
+  "reviewed_payload_sha256": "ee42171ae2c942cefa59dbeef55ab6a8b3beded550da07119a1c48a6e350d521",
+  "archive_source_sha256": "c6d6a4607a2db9c8a5f69e2ec256c33619083fcc81ab467e9b939673fb3a5028",
+  "operations": [
+    {
+      "operation": "create",
+      "path": "papers/macroscopic-pd/poisson-dirichlet-luce.tex",
+      "after_sha256": "a14de186ecc0fdb48763bebf260ca56755bc6670570c31bfbce6c419c2f9f73e"
+    },
+    {
+      "operation": "create",
+      "path": "papers/macroscopic-pd/EXTRACTION_MAP.md",
+      "after_sha256": "7f375da43a90def865ca129fb6f5f15a75bc87d0d0812ff207bd8070de9181ea"
+    },
+    {
+      "operation": "create",
+      "path": "tests/test_macroscopic_extraction.py",
+      "after_sha256": "8d7754f630b9cb57172fe2702e9baaa86ab169070c42ec8a1289b8c02f8c4fcf"
+    },
+    {
+      "operation": "create",
+      "path": "audits/macroscopic-pd-extraction.md",
+      "after_sha256": "9818cbaccde30331e89db795677912a92e73d1b971c9e2a23269fb60d5186387"
+    },
+    {
+      "operation": "replace",
+      "path": "README.md",
+      "after_sha256": "afa381415c3e71e300f1958a9c6d9313f6c66e0dc3f01ecd272370869464f143"
+    },
+    {
+      "operation": "replace",
+      "path": "THEOREM_STATUS.md",
+      "after_sha256": "1edbc964a685fce222de08acd64696497e4c1ca921323d8a02b897da5ce9d931"
+    },
+    {
+      "operation": "replace",
+      "path": "DEPENDENCIES.md",
+      "after_sha256": "adc7d3476e0fdb7af2427f593d315e3eb70c5dc20c6f0ed37eab7dd5d75a6c5c"
+    },
+    {
+      "operation": "replace",
+      "path": "papers.json",
+      "after_sha256": "bba49aab96afd5cf47b879dde996a8cf41eee24c93545593ddecd8c247741ef2"
+    },
+    {
+      "operation": "replace",
+      "path": "notes/migration-plan.md",
+      "after_sha256": "6dee02357bec38a38e8b16843be60120f4fe8488ebaf80d7a7838df2b37ceb31"
+    }
+  ],
+  "preserved_archive_files": 40,
+  "proof_status": "mechanical extraction; audit pending"
+}
