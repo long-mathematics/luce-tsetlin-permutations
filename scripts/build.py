@@ -85,9 +85,23 @@ def check_markdown(allow_pending: bool = False) -> None:
 
 
 def check_readme_math(text: str) -> None:
-    for token in (r'\(', r'\)', r'\[', r'\]', r'\newcommand', r'\renewcommand', r'\def'):
+    # GitHub Markdown math is intentionally kept to a conservative, portable
+    # MathJax subset.  Use only $...$ and $...$ delimiters, no document-level
+    # macro definitions/environments, no repository-private aliases, and no
+    # commands rejected by GitHub's safe renderer (notably \\operatorname).
+    forbidden_tokens = (
+        r'\\(', r'\\)', r'\\[', r'\\]',
+        r'\\newcommand', r'\\renewcommand', r'\\providecommand',
+        r'\\def', r'\\gdef', r'\\xdef', r'\\let',
+        r'\\DeclareMathOperator', r'\\operatorname',
+        r'\\begin{', r'\\end{',
+        r'\\input', r'\\include', r'\\require',
+        r'\\href', r'\\url', r'\\htmlClass', r'\\htmlId',
+        r'\\htmlStyle', r'\\class', r'\\style', r'\\cssId',
+    )
+    for token in forbidden_tokens:
         if token in text:
-            raise ValueError('Unsupported README TeX delimiter/definition: ' + token)
+            raise ValueError('Unsupported README TeX command/delimiter: ' + token)
     if re.search(r'\\(?:Ee|Pp|TV|Kol|one|Pois|dd|cL)\b', text):
         raise ValueError('Private manuscript macro in README')
     display = False
