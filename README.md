@@ -41,7 +41,7 @@ The proof develops the switching calculus used throughout the later series: a ma
 
 This paper proves that the classical Erdős--Turán central limit theorem for permutation order survives throughout the comparable-rate Luce class, with no limiting rate profile:
 $$
-\frac{\log\operatorname{ord}(\sigma_n)-\frac12(\log n)^2}
+\frac{\log\mathrm{ord}(\sigma_n)-\frac12(\log n)^2}
 {\sqrt{\frac13(\log n)^3}}
 \Rightarrow N(0,1).
 $$
@@ -53,7 +53,7 @@ The additive cycle-product statistic is handled by the marked switching theory, 
 
 [PDF](output/pdf/luce-edgeworth.pdf) · [LaTeX](papers/sharp-order-edgeworth/luce-edgeworth.tex)
 
-This quantitative supplement strengthens the scalar Erdős--Turán law. Writing $O_n=\operatorname{ord}(\sigma_n)$, $m_n=\mathbb E\log O_n$, and $L=\log n$, it states
+This quantitative supplement strengthens the scalar Erdős--Turán law. Writing $O_n=\mathrm{ord}(\sigma_n)$, $m_n=\mathbb E\log O_n$, and $L=\log n$, it states
 $$
 d_{\mathrm K}\!\left(
 \frac{\log O_n-m_n}{\sqrt{L^3/3}},N(0,1)
@@ -80,7 +80,7 @@ For arbitrary comparable-rate triangular arrays, define the cycle-count and trun
 $$
 K_n(t)=\sum_{r\le n^t}C_{n,r},
 \qquad
-\mathcal O_n(t)=\log\operatorname{lcm}\{r\le n^t:C_{n,r}>0\}.
+\mathcal O_n(t)=\log\mathrm{lcm}\{r\le n^t:C_{n,r}>0\}.
 $$
 This paper proves their joint functional convergence to the common Brownian field
 $$
@@ -90,7 +90,7 @@ $$
 {\sqrt{\frac13(\log n)^3}}
 \right)
 \Rightarrow
-\left(W(t),\sqrt3\int_0^t u\,dW(u)\right).
+\left(W(t),\sqrt3\int_0^t u dW(u)\right).
 $$
 In particular it gives the total-cycle CLT and the joint endpoint Gaussian law, whose cycle-count/order correlation is $\sqrt3/2$.
 
@@ -104,12 +104,12 @@ The main intermediate theorem is a growing-dimensional product-Poisson approxima
 
 Let $K_n$ be the total number of cycles and $\mu_n=\mathbb E K_n$. For comparable-rate Luce permutations this paper proves the stronger exact-mean Poisson approximation
 $$
-d_{\mathrm{TV}}\!\left(\mathcal L(K_n),\operatorname{Pois}(\mu_n)\right)
+d_{\mathrm{TV}}\!\left(\mathcal L(K_n),\mathrm{Pois}(\mu_n)\right)
 = O_\kappa\!\left(\frac{(\log\log n)^2}{\log n}\right),
 $$
 which yields the sharp Berry--Esseen order $(\log n)^{-1/2}$. Its first lattice Edgeworth expansion determines the exact leading Kolmogorov constant $2/(3\sqrt{2\pi})$.
 
-The paper also gives the variance asymptotic, a continuity-corrected second-order lattice expansion retaining the exact coefficient $\operatorname{Var}K_n-\mu_n$, and signed Poisson--Charlier approximations at every fixed order. The proof uses a passive-mark Poisson core from the switching theory and discrete Poisson smoothing; it does not use the nonlinear arithmetic analysis required for logarithmic permutation order.
+The paper also gives the variance asymptotic, a continuity-corrected second-order lattice expansion retaining the exact coefficient $\mathrm{Var}K_n-\mu_n$, and signed Poisson--Charlier approximations at every fixed order. The proof uses a passive-mark Poisson core from the switching theory and discrete Poisson smoothing; it does not use the nonlinear arithmetic analysis required for logarithmic permutation order.
 
 **Status:** current research manuscript. Exact-mean centering and the lattice phase are essential; profile-dependent limiting mean and higher-cumulant constants remain separate open questions.
 
@@ -137,7 +137,7 @@ The same local-entry theory yields fixed-width diagonal-band Poisson laws, spars
 
 [PDF](output/pdf/poisson-dirichlet-luce.pdf) · [LaTeX](papers/macroscopic-pd/poisson-dirichlet-luce.tex)
 
-Under only a fixed bound on the ratio of the largest to the smallest positive rate, the ranked normalized cycle lengths converge in $\ell^1$ to $\operatorname{PD}(1)$, while the size-biased deletion sequence converges in $\ell^1$ to $\operatorname{GEM}(1)$. Consequently, the normalized cycle length containing a uniformly chosen label converges to $\operatorname{Unif}(0,1)$.
+Under only a fixed bound on the ratio of the largest to the smallest positive rate, the ranked normalized cycle lengths converge in $\ell^1$ to $\mathrm{PD}(1)$, while the size-biased deletion sequence converges in $\ell^1$ to $\mathrm{GEM}(1)$. Consequently, the normalized cycle length containing a uniformly chosen label converges to $\mathrm{Unif}(0,1)$.
 
 The proof is independent of the mesoscopic and total-cycle theorems. Its main ingredients are the clock-slab permanental representation, hereditary flatness under predictable exploration, scale-sensitive rooted closure, deletion stability, and a regenerative GEM induction with residual-mass control.
 
@@ -155,7 +155,7 @@ $$
 and the exact leading normal-approximation constant
 
 $$
-\sqrt L\,\mathrm{d}_{\mathrm K}((K_n-\mu_n)/\sqrt L,N(0,1))
+\sqrt L \mathrm{d}_{\mathrm K}((K_n-\mu_n)/\sqrt L,N(0,1))
 \longrightarrow \frac{2}{3\sqrt{2\pi}}.
 $$
 
