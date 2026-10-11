@@ -40,6 +40,14 @@
       "pdf": "output/pdf/total-cycle-edgeworth.pdf",
       "pdf_sha256": "a7da9bd3aa7b1ab7fc12a33161d6020359a05f23ad73b479614965dc255c9f81",
       "pages": 13
+    },
+    {
+      "id": "macroscopic-pd",
+      "source": "papers/macroscopic-pd/poisson-dirichlet-luce.tex",
+      "source_sha256": "0fdde5028985c4b639c7679e4f59256fb23e4983119a22bf60ea9d55bfbccdaa",
+      "pdf": "output/pdf/poisson-dirichlet-luce.pdf",
+      "pdf_sha256": "1e1da609aeb2abcb07a264c585165a5c0bd248d4bffb49ae0fab4a44eaa8c03e",
+      "pages": 21
     }
   ]
 }

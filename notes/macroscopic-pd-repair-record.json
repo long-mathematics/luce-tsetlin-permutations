@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "stage": "macroscopic-pd-audit-repair",
+  "audit_commit": "e71bfa3fa32c8095ce78e5d039006215386db82e",
+  "audit_merge_commit": "f7eb751eb6d5a7afd21e2139f0d17176557120b4",
+  "pre_repair_source_sha256": "a14de186ecc0fdb48763bebf260ca56755bc6670570c31bfbce6c419c2f9f73e",
+  "post_repair_source_sha256": "0fdde5028985c4b639c7679e4f59256fb23e4983119a22bf60ea9d55bfbccdaa",
+  "resolved_findings": [
+    "reduced slab conditioning and permanental-law derivation",
+    "post-stopping relative-prefix cases and explicit small-beta choice",
+    "stage table for the noncircular GEM cutoff hierarchy",
+    "independent residual-root wording and explicit bounded-Lipschitz ell1 truncation",
+    "power-sum weak-convergence wording",
+    "textbook references for standard external inputs"
+  ],
+  "principal_theorem_changed": false,
+  "frozen_archive_changed": false,
+  "review_boundary": "internal adversarial audit; not formal verification or independent external refereeing"
+}
