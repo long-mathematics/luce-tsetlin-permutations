@@ -4,7 +4,7 @@ The catalog records document-level input edges and tests reject cycles. Referenc
 
 ## Macroscopic PD/GEM extraction
 
-The standalone paper `papers/macroscopic-pd/poisson-dirichlet-luce.tex` is mechanically extracted from archived lines 2199--3565. It has no proof dependency on another active manuscript in `papers.json` and does not use the mesoscopic-cycle theorem, scalar or functional Erdős--Turán laws, total-cycle CLT, or quantitative total-cycle results.
+The standalone paper `papers/macroscopic-pd/poisson-dirichlet-luce.tex` was mechanically extracted from archived lines 2199--3565 and then revised only by the six localized clarifications listed in `audits/macroscopic-pd-repair-record.md`. It has no proof dependency on another active manuscript in `papers.json` and does not use the mesoscopic-cycle theorem, scalar or functional Erdős--Turán laws, total-cycle CLT, or quantitative total-cycle results.
 
 Its model-specific dependency chain is internal:
 
@@ -19,9 +19,9 @@ Its model-specific dependency chain is internal:
 9. finite-dimensional independent residual fractions;
 10. `ell^1` tail restoration and decreasing rearrangement to GEM(1)/PD(1).
 
-All ten components are stated and proved in the standalone source. The external inputs are standard compactness and disintegration on compact standard Borel spaces, Kolmogorov's maximal inequality, Doob's `L^2` maximal inequality, the continuous mapping theorem, and the standard relation between GEM(1) and PD(1), cited to Pitman. The [extraction map](papers/macroscopic-pd/EXTRACTION_MAP.md) records every moved label and reference. The regression test compares the archived and standalone macroscopic-section TeX token streams up to whitespace.
+All ten components are stated and proved in the standalone source. The external inputs are weak compactness and disintegration on standard Borel spaces, Kolmogorov's and Doob's maximal inequalities, weak convergence and continuous mapping, the bounded-Lipschitz criterion, and the standard relation between GEM(1) and PD(1); the manuscript now gives textbook references for each. The [extraction map](papers/macroscopic-pd/EXTRACTION_MAP.md) records every moved label and reference, while the [repair record](audits/macroscopic-pd-repair-record.md) records every post-extraction clarification.
 
-This dependency closure is an extraction statement, not a proof-audit verdict. In particular, it does not certify the conditioning sigma-field, uniformity over adaptive histories, rooted closure estimate, deletion/regeneration induction, or `ell^1` passage.
+The adversarial audit found no fatal gap in this chain. Its verdict is internal and scoped: it does not assert a rate, arbitrary-history quenched uniformity, endpoint-singular macroscopic universality, or any theorem outside the displayed chain. The repair checker verifies that all original theorem labels and internal references remain present, the main theorem scope is unchanged, and all six audit findings are represented in the active source.
 
 ## Count proof
 

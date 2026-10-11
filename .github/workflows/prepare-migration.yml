@@ -17,11 +17,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ github.ref_name }}
-          fetch-depth: 0
       - name: Validate explicit migration request
         run: |
           test -f .migration/request.json
-          python3 -c "import json; r=json.load(open('.migration/request.json')); assert r['stage'] in ('import','integration','macroscopic-pd-audit-repair')"
+          python3 -c "import json; r=json.load(open('.migration/request.json')); assert r['stage'] in ('import','integration')"
       - name: Install TeX and numerical tools
         run: |
           sudo apt-get update
@@ -37,6 +36,7 @@ jobs:
           BRANCH: ${{ github.ref_name }}
         run: |
           case "$BRANCH" in migration/*) ;; *) exit 1;; esac
+          git diff --exit-code -- .github/
           rm .migration/request.json
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

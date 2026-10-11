@@ -16,6 +16,13 @@
         "--output",
         ".build/verification/edgeworth_checks.json"
       ]
+    },
+    {
+      "script": "scripts/macroscopic-pd/check_audit_repairs.py",
+      "args": [
+        "--output",
+        ".build/verification/macroscopic_pd_repairs.json"
+      ]
     }
   ]
 }
