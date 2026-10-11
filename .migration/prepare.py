@@ -1,110 +1,102 @@
 #!/usr/bin/env python3
-"""One-shot, pinned preservation import; never edits the upstream repository."""
+"""Apply the reviewed text payload, verify its hashes, and leave readable sources."""
 from __future__ import annotations
 import hashlib
 import json
+import lzma
+import os
 from pathlib import Path
-import time
-import urllib.request
+import shutil
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-SHA = '6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0'
-UPSTREAM = 'long-mathematics/nonuniform-random-permutations'
-BASE = f'https://raw.githubusercontent.com/{UPSTREAM}/{SHA}/'
-ARCHIVE = ROOT/'archive'/SHA[:7]
+BASELINE = '1524e027382e2d6f10a392790d00075717d752ef'
+PAYLOAD_SHA256 = 'a6a7d71ff87930d084ff0e278fe932962594ed9316c9d3b0e98a39659880ea3c'
+
+
+def sha(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def safe(rel: str) -> Path:
+    parts = Path(rel).parts
+    if Path(rel).is_absolute() or '..' in parts or '.git' in parts:
+        raise ValueError('Unsafe payload path: '+rel)
+    dest = (ROOT/rel).resolve()
+    if not dest.is_relative_to(ROOT.resolve()):
+        raise ValueError('Payload path escapes checkout')
+    return dest
+
+
+def require_hash(path: Path, expected: str) -> None:
+    if not path.is_file() or sha(path) != expected:
+        raise ValueError('Content hash mismatch: '+str(path.relative_to(ROOT)))
+
+
 request = json.loads((ROOT/'.migration/request.json').read_text())
-if request['stage'] != 'import':
-    raise SystemExit('This script implements the preservation import only')
-if (ROOT/'archive/manifest.json').exists():
-    raise SystemExit('Preservation import already exists; refusing to overwrite it')
-
-
-def fetch(path: str) -> bytes:
-    for attempt in range(4):
-        try:
-            req = urllib.request.Request(BASE+path, headers={'User-Agent': 'luce-tsetlin-preservation-import'})
-            with urllib.request.urlopen(req, timeout=90) as response:
-                return response.read()
-        except OSError:
-            if attempt == 3:
-                raise
-            time.sleep(2**attempt)
-
-
-def write(path: Path, data: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_bytes(data)
-
-
-manifest_bytes = fetch('output/pdf/manifest.json')
-upstream_manifest = json.loads(manifest_bytes)
-records = {r['source']: r for r in upstream_manifest['documents']}
-items = [
- ('archive-monolith', 'papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex', None, 'Boundary, Terminal, Diagonal, and Cycle Limit Laws for Luce Permutations', []),
- ('mesoscopic-switching', 'papers/02-mesoscopic-luce-cycles/mesoscopic-luce-cycles.tex', 'papers/mesoscopic-switching/mesoscopic-luce-cycles.tex', 'Mesoscopic cycles of comparable-rate Luce permutations', []),
- ('erdos-turan-order', 'papers/03-luce-erdos-turan/luce-erdos-turan.tex', 'papers/erdos-turan-order/luce-erdos-turan.tex', 'An Erdos--Turan Law for Comparable-Rate Luce Permutations', ['mesoscopic-switching']),
- ('sharp-order-edgeworth', 'papers/04-luce-edgeworth/luce-edgeworth.tex', 'papers/sharp-order-edgeworth/luce-edgeworth.tex', 'A Sharp Berry--Esseen Theorem and First Edgeworth Expansion for Logarithmic Luce Order', ['mesoscopic-switching', 'erdos-turan-order']),
- ('functional-erdos-turan', 'notes/working/functional-luce-erdos-turan.tex', 'notes/working/functional-luce-erdos-turan.tex', 'Functional Erdos--Turan Universality for Comparable-Rate Luce Permutations', ['mesoscopic-switching', 'erdos-turan-order']),
-]
-expected_sources = {
- 'archive-monolith': 'c6d6a4607a2db9c8a5f69e2ec256c33619083fcc81ab467e9b939673fb3a5028',
- 'mesoscopic-switching': '30bb9a373aa8d83e37dc96f425417fa35d343aba44504d5f2a5e9314ac6ccaed',
- 'erdos-turan-order': 'cf628b24b6ef70b1b54ce91b849096562091b406ee05525156e016c2787f50a3',
- 'sharp-order-edgeworth': 'dfe6a24f7002eaa2c732e2448c290f416cc72a62bdf8dbda47228fe07daeba80',
- 'functional-erdos-turan': 'bae8958e825dc3f3d8bd4290ae4715f9d6fbce1d1eb17ca101699c9ba8e5bffa',
-}
-frozen = []
-docs = []
-imports = []
-
-
-def preserve(path: str, data: bytes) -> None:
-    dest = ARCHIVE/path
-    write(dest, data)
-    frozen.append({'path': str(dest.relative_to(ROOT)), 'upstream_path': path, 'sha256': hashlib.sha256(data).hexdigest(), 'upstream_url': BASE+path})
-
-
-preserve('output/pdf/manifest.json', manifest_bytes)
-for ident, source, target, title, dependencies in items:
-    record = records[source]
-    data = fetch(source)
-    source_hash = hashlib.sha256(data).hexdigest()
-    if source_hash != expected_sources[ident] or source_hash != record['source_sha256']:
-        raise ValueError('Pinned source hash mismatch: '+source)
-    pdf_data = fetch(record['pdf'])
-    if hashlib.sha256(pdf_data).hexdigest() != record['pdf_sha256']:
-        raise ValueError('Pinned PDF hash mismatch: '+record['pdf'])
-    preserve(source, data)
-    preserve(record['pdf'], pdf_data)
-    if target is not None:
-        write(ROOT/target, data)
-        pdf = 'output/pdf/'+Path(record['pdf']).name
-        write(ROOT/pdf, pdf_data)
-        docs.append(dict(id=ident, title=title, source=target, pdf=pdf, status='working' if ident == 'functional-erdos-turan' else 'imported', dependencies=dependencies))
-        imports.append(dict(id=ident, upstream_source=source, active_source=target, imported_sha256=source_hash, original_pdf_sha256=record['pdf_sha256'], original_pages=record['pages']))
-for source in ['README.md', 'LICENSE', 'CONTRIBUTING.md', 'AGENTS.md', 'notes/repository-status.md', 'notes/provenance/mesoscopic-total-cycle-resolution-candidate.tex', 'notes/provenance/mesoscopic-audit-and-repair.tex', 'notes/provenance/free-depth-endpoint-audit.md', 'scripts/build.py', 'tests/test_repository.py', '.github/workflows/latex.yml']:
-    preserve(source, fetch(source))
-write(ROOT/'archive/manifest.json', (json.dumps({'schema_version': 1, 'upstream_repository': UPSTREAM, 'upstream_commit': SHA, 'files': frozen}, indent=2)+'\n').encode())
-write(ROOT/'notes/import-record.json', (json.dumps({'upstream_repository': UPSTREAM, 'upstream_commit': SHA, 'active_imports': imports}, indent=2)+'\n').encode())
-write(ROOT/'papers.json', (json.dumps({'schema_version': 1, 'documents': docs}, indent=2)+'\n').encode())
-write(ROOT/'archive/README.md', f'''# Frozen preservation archive
-
-The directory `{SHA[:7]}/` preserves five Luce source/PDF pairs and the supporting status, audit, license, and build records from `{UPSTREAM}` at commit `{SHA}`. Every preserved file is checked against `manifest.json`.
-
-The 139-page original is here, not an active editing target. The historical total-cycle resolution candidate remains rejected and is not an input to the newer functional proof. No theorem is re-audited or promoted by this import.
-
-Active source copies initially match their imported source bytes. Active PDFs are rebuilt deterministically in the new repository; these may have different binary metadata from the preserved original PDFs, whose bytes remain unchanged here.
-'''.encode())
-readme = (ROOT/'README.md').read_text()
-start = readme.index('## Migration status')
-end = readme.index('## Reading and status')
-rows = ['## Manuscripts', '', '| Manuscript | PDF | LaTeX | Import status |', '| --- | --- | --- | --- |']
-for d in docs:
-    rows.append(f"| {d['title']} | [PDF]({d['pdf']}) | [Source]({d['source']}) | {d['status']} |")
-rows.extend(['', f"The **139-page original research draft** is preserved as [PDF](archive/{SHA[:7]}/output/pdf/luce-boundary-cycle-laws.pdf) and [LaTeX](archive/{SHA[:7]}/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex). It has not yet been split or newly audited.", '', '## Migration status', '', 'The preservation import is pinned and byte-checked. Importing a source does not upgrade its proof status. Total-cycle integration is the next separate PR; the functional manuscript remains a working branch until that integration.', '', 'The original [Nonuniform Random Permutations](https://github.com/long-mathematics/nonuniform-random-permutations) repository remains unchanged. Riffle, shelf, Thorp, and caching manuscripts remain there. This repository will be the canonical editing destination for the migrated Luce series; preserved copies are archival.', '', '[Preservation manifest](archive/manifest.json) · [Import mapping](notes/import-record.json)', ''])
-(ROOT/'README.md').write_text(readme[:start]+'\n'.join(rows)+'\n'+readme[end:])
-status = (ROOT/'THEOREM_STATUS.md').read_text()
-status = status.replace('## Foundation state', '## Preservation import state')
-status = status.replace('No manuscript is imported or promoted by the foundation PR. The coming import pins', 'Four editable manuscript copies and the archived original have been imported without source changes. No theorem is promoted by the import. The preserved upstream snapshot pins')
-(ROOT/'THEOREM_STATUS.md').write_text(status)
-print(f'Preserved {len(frozen)} files; registered {len(docs)} editable manuscripts without mathematical changes.')
+if request.get('stage') != 'integration':
+    raise SystemExit('This preparation script handles integration only')
+if not os.environ.get('GITHUB_REF_NAME', '').startswith('migration/'):
+    raise SystemExit('Preparation requires an explicit migration branch')
+headers = subprocess.check_output(['git', 'cat-file', '-p', 'HEAD'], cwd=ROOT, text=True).split('\n\n', 1)[0].splitlines()
+if 'parent '+BASELINE not in headers:
+    raise ValueError('Integration request must be a direct child of the preserved baseline')
+chunks = [ROOT/f'.migration/payload-part-{j}.bin' for j in range(1, 6)]
+data = b''.join(path.read_bytes() for path in chunks)
+if hashlib.sha256(data).hexdigest() != PAYLOAD_SHA256:
+    raise ValueError('Composite integration payload hash mismatch')
+payload = json.loads(lzma.decompress(data))
+if payload.get('schema_version') != 1 or payload.get('baseline_commit') != BASELINE:
+    raise ValueError('Unexpected integration payload schema or baseline')
+original_archive = json.loads((ROOT/'archive/manifest.json').read_text())['files']
+record = []
+for operation in payload['operations']:
+    kind = operation['operation']
+    path = safe(operation['path'])
+    print(f'{kind}: {operation["path"]}', flush=True)
+    if kind in ('patch', 'delete'):
+        require_hash(path, operation['before_sha256'])
+    if kind == 'patch':
+        patch = operation['patch'].encode('utf-8')
+        expected_headers = f'--- a/{operation["path"]}\n+++ b/{operation["path"]}\n'
+        if not operation['patch'].startswith(expected_headers):
+            raise ValueError('Unexpected patch headers')
+        subprocess.run(['git', 'apply', '--check', '-'], input=patch, cwd=ROOT, check=True)
+        subprocess.run(['git', 'apply', '-'], input=patch, cwd=ROOT, check=True)
+    elif kind == 'create':
+        if path.exists():
+            raise ValueError('Refusing to overwrite existing create target')
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(operation['content'], encoding='utf-8')
+    elif kind == 'copy':
+        source = safe(operation['source'])
+        require_hash(source, operation['before_sha256'])
+        if path.exists():
+            raise ValueError('Refusing to overwrite existing copy target')
+        path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, path)
+    elif kind == 'delete':
+        path.unlink()
+    else:
+        raise ValueError('Unexpected integration operation: '+kind)
+    if 'after_sha256' in operation:
+        require_hash(path, operation['after_sha256'])
+    record.append({k: v for k, v in operation.items() if k not in ('content', 'patch')})
+for archived in original_archive:
+    require_hash(safe(archived['path']), archived['sha256'])
+# Export fresh finite-check results and enough metadata for independent artifact review.
+workflow_changes = []
+for rel in ('.github/workflows/check.yml', '.github/workflows/prepare-migration.yml'):
+    path = ROOT/rel
+    before = sha(path)
+    text = path.read_text()
+    needle = '            .build/**/build-console.txt\n'
+    if text.count(needle) != 1:
+        raise ValueError('Unexpected artifact-path configuration: '+rel)
+    text = text.replace(needle, needle+'            .build/verification/*.json\n            verification.json\n            Makefile\n            AGENTS.md\n            CONTRIBUTING.md\n            LICENSE*\n            .github/workflows/*.yml\n')
+    path.write_text(text)
+    workflow_changes.append({'path': rel, 'before_sha256': before, 'after_sha256': sha(path), 'purpose': 'Export fresh check results and review metadata'})
+(ROOT/'notes/integration-record.json').write_text(json.dumps({'schema_version': 1, 'baseline_commit': BASELINE, 'reviewed_payload_sha256': PAYLOAD_SHA256, 'operations': record, 'artifact_export_changes': workflow_changes, 'preserved_original_archive_files': len(original_archive)}, indent=2)+'\n')
+for path in chunks:
+    path.unlink()
+print(f'Applied and hash-verified {len(record)} operations; original {len(original_archive)} archive files unchanged.')
