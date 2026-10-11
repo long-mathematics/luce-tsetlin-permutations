@@ -13,9 +13,9 @@ Manuscript author: **Christopher D. Long**.
 | A Sharp Berry--Esseen Theorem and First Edgeworth Expansion for Logarithmic Luce Order | [PDF](output/pdf/luce-edgeworth.pdf) | [Source](papers/sharp-order-edgeworth/luce-edgeworth.tex) | imported |
 | Functional Erdos--Turan and Total-Cycle Laws for Luce Permutations | [PDF](output/pdf/functional-luce-erdos-turan.pdf) | [Source](papers/functional-erdos-turan/functional-luce-erdos-turan.tex) | current-research |
 | Poisson Approximation and Lattice Edgeworth Expansions for Total Luce Cycles | [PDF](output/pdf/total-cycle-edgeworth.pdf) | [Source](papers/total-cycle-edgeworth/total-cycle-edgeworth.tex) | current-research |
-| Poisson--Dirichlet Universality for Luce Permutations | [PDF](output/pdf/poisson-dirichlet-luce.pdf) | [Source](papers/macroscopic-pd/poisson-dirichlet-luce.tex) | working mechanical extraction; proof audit pending |
+| Poisson--Dirichlet Universality for Luce Permutations | [PDF](output/pdf/poisson-dirichlet-luce.pdf) | [Source](papers/macroscopic-pd/poisson-dirichlet-luce.tex) | audited current manuscript |
 
-The **139-page original research draft** is preserved as [PDF](archive/6178a99/output/pdf/luce-boundary-cycle-laws.pdf) and [LaTeX](archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex). It is not an active monolithic editing target. The standalone PD/GEM manuscript is a mechanical extraction whose [label map](papers/macroscopic-pd/EXTRACTION_MAP.md) and regression test preserve the archived proof token stream; this does not yet constitute the separate mathematical audit required for promotion.
+The **139-page original research draft** is preserved as [PDF](archive/6178a99/output/pdf/luce-boundary-cycle-laws.pdf) and [LaTeX](archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex). It is not an active monolithic editing target. The standalone PD/GEM manuscript was mechanically extracted, checked for completeness, adversarially audited, and revised only by the six localized clarifications recorded in the [proof audit](audits/macroscopic-pd-proof-audit.md) and [repair record](audits/macroscopic-pd-repair-record.md). The [label map](papers/macroscopic-pd/EXTRACTION_MAP.md) and regression checks preserve the theorem scope and document the exact departure from the frozen token stream.
 
 ## Total-cycle results
 
@@ -39,9 +39,9 @@ It also proves first and second lattice Edgeworth expansions and signed Poisson�
 
 The initial import pins the original collection at commit `6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0`. Original sources, PDFs, licenses, and historical audits are immutable hash-checked archival records. The invalid historical total-cycle candidate remains separate from the later functional and quantitative proofs.
 
-The PD/GEM extraction adds an active standalone copy without changing any archived byte. Its source is marked **audit pending**; the extraction check certifies coverage and internal cross-reference closure only, not correctness of the clock-slab, rooted-closure, deletion-stability, regeneration, or $\ell^1$ arguments.
+The PD/GEM paper adds an active standalone copy without changing any archived byte. The extraction check certifies coverage and cross-reference closure; the later adversarial audit separately checks the clock-slab conditioning, adaptive prefix law, rooted closure, deletion stability, regeneration, GEM induction, residual-mass control, and $\ell^1$ passage. The audit found no fatal gap and recommended six publication-level clarifications, all of which are recorded and regression-checked. This remains an internal review, not formal verification or independent external refereeing.
 
-[Preservation manifest](archive/manifest.json) · [Import mapping](notes/import-record.json) · [Source proof notes](archive/total-cycle-source-notes/README.md) · [Total-cycle integration audit](audits/total-cycle-integration.md) · [PD/GEM extraction record](audits/macroscopic-pd-extraction.md) · [Migration plan](notes/migration-plan.md)
+[Preservation manifest](archive/manifest.json) · [Import mapping](notes/import-record.json) · [Source proof notes](archive/total-cycle-source-notes/README.md) · [Total-cycle integration audit](audits/total-cycle-integration.md) · [PD/GEM extraction record](audits/macroscopic-pd-extraction.md) · [PD/GEM proof audit](audits/macroscopic-pd-proof-audit.md) · [PD/GEM repair record](audits/macroscopic-pd-repair-record.md) · [Migration plan](notes/migration-plan.md)
 
 Compilation, finite computations, extraction regression checks, and CI are not independent refereeing, novelty certification, or formal verification. Formalization has not started in this repository.
 

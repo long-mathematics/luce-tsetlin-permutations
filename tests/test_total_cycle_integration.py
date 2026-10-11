@@ -21,9 +21,12 @@ class IntegrationTests(unittest.TestCase):
         self.assertNotIn('switching proof under submacroscopic root-cycle escape',text)
     def test_renewed_checks_are_not_archive_scripts(self):
         checks=json.loads((ROOT/'verification.json').read_text())['checks']
-        self.assertEqual(len(checks),3)
-        for c in checks:
-            self.assertTrue(c['script'].startswith('scripts/total-cycles/'))
+        scripts=[c['script'] for c in checks]
+        total=[s for s in scripts if s.startswith('scripts/total-cycles/')]
+        self.assertEqual(len(total),3)
+        self.assertIn('scripts/macroscopic-pd/check_audit_repairs.py',scripts)
+        for script in scripts:
+            self.assertFalse(script.startswith('archive/'))
     def test_profile_limits_remain_open(self):
         text=(ROOT/'THEOREM_STATUS.md').read_text()
         self.assertIn('## Open questions',text)

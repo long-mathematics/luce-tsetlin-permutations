@@ -58,7 +58,7 @@
       "title": "Poisson--Dirichlet Universality for Luce Permutations",
       "source": "papers/macroscopic-pd/poisson-dirichlet-luce.tex",
       "pdf": "output/pdf/poisson-dirichlet-luce.pdf",
-      "status": "working",
+      "status": "current-research",
       "dependencies": []
     }
   ]

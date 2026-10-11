@@ -32,7 +32,7 @@
 
 \title{Poisson--Dirichlet Universality for\\Luce Permutations}
 \author{Christopher D. Long}
-\date{Mechanical extraction --- audit pending}
+\date{Audited revision --- 11 October 2026}
 
 \begin{document}
 \maketitle
@@ -46,11 +46,14 @@ converges in $\ell^1$ to $\operatorname{GEM}(1)$.  In particular, the cycle
 length of a uniformly chosen label, divided by the number of labels, converges
 to the uniform distribution on $(0,1)$.
 
-This manuscript is a mechanical extraction of the macroscopic-cycle section of
-the archived 139-page Luce manuscript at pinned repository commit
-\texttt{6178a99}.  The theorem hypotheses,
-conclusions, topology, labels, and proof content are preserved.  The extraction
-does not constitute a new proof audit or an upgrade of mathematical status.
+This manuscript was mechanically extracted from the macroscopic-cycle section
+of the archived 139-page Luce manuscript at pinned repository commit
+\texttt{6178a99}.  A subsequent adversarial audit found no fatal gap in the
+stated theorem.  The present revision applies only the six localized
+clarifications recorded in the accompanying audit and repair records; it does
+not change a principal hypothesis, conclusion, topology, or proof strategy.
+The review is internal and is not formal verification or independent external
+refereeing.
 \end{abstract}
 
 \section{Model, scope, and proof dependencies}
@@ -71,11 +74,15 @@ delete-and-regenerate stability, and the finite-dimensional GEM induction.
 The proof does not import the mesoscopic-cycle theorem, the total-cycle CLT, or
 any result from another active manuscript in this repository.
 
-The external inputs are standard compactness and disintegration facts for
-probability measures on compact standard Borel spaces, Kolmogorov's maximal
-inequality, Doob's $L^2$ maximal inequality, the continuous mapping theorem,
-and the standard relation between $\operatorname{GEM}(1)$ and
-$\operatorname{PD}(1)$; for the last point see Pitman
+The external inputs are standard.  For weak compactness and disintegration on
+standard Borel spaces we use Kallenberg \cite[Chapters~4 and~6]{Kallenberg2002};
+for Kolmogorov's maximal inequality and Doob's $L^2$ maximal inequality we use
+Durrett \cite[Chapters~2 and~4]{Durrett2019}; and for convergence of
+expectations against bounded continuous functions and the continuous mapping
+theorem we use Billingsley \cite[Theorems~2.1 and~2.7]{Billingsley1999}.  The
+bounded-Lipschitz criterion on separable metric spaces is recorded in Dudley
+\cite[Section~11.3]{Dudley2002}.  The standard relation between
+$\operatorname{GEM}(1)$ and $\operatorname{PD}(1)$ is cited to Pitman
 \cite[Chapter~3]{Pitman2006}.  The old-label/new-label register accompanying
 this extraction records every theorem, proposition, lemma, equation label, and
 bibliographic key moved from the archive.
@@ -114,9 +121,10 @@ If $L_{n,1}\ge L_{n,2}\ge\cdots$ are the cycle lengths of $\sigma_n$, then
  \Rightarrow\operatorname{PD}(1)
 \]
 in $\mathcal S^\downarrow$.  Moreover, if
-$\widetilde L_{n,1},\widetilde L_{n,2},\ldots$ are obtained by choosing a
-uniform vertex, listing the length of its cycle, deleting that cycle, and
-repeating on the residual vertex set, then
+$\widetilde L_{n,1},\widetilde L_{n,2},\ldots$ are obtained by choosing, at
+each stage, a new vertex independently and uniformly from the current residual
+vertex set, listing the length of its cycle, deleting that cycle, and
+repeating, then
 \[
  \left(\frac{\widetilde L_{n,1}}n,
  \frac{\widetilde L_{n,2}}n,\ldots\right)
@@ -396,18 +404,29 @@ $Q_{n,a}$, and the ordered clock values
 \[
         s_{a,1}<\cdots<s_{a,m_{n,a}}
 \]
-in every slab.  Write
+in every slab.  The ordered list is \emph{unlabeled}: the conditioning
+sigma-field does not record which label in $H_{n,a}$ realizes which value
+$s_{a,j}$, and hence it does not determine the ranking inside the slab.  Write
 $Q_{n,a}=\{q_{a,1}<\cdots<q_{a,m_{n,a}}\}$, and let
 $\phi_a:H_{n,a}\to[m_{n,a}]$ be defined by
-$\sigma_n(i)=q_{a,\phi_a(i)}$.  Then
+$\sigma_n(i)=q_{a,\phi_a(i)}$.  For a bijection $\phi:H_{n,a}\to[m_{n,a}]$, the joint exponential density of
+the assignment $i\mapsto s_{a,\phi(i)}$ is
+\[
+        \prod_{i\in H_{n,a}}
+        \theta_{n,i}e^{-\theta_{n,i}s_{a,\phi(i)}}.
+\]
+Summing this product over all bijections gives the conditional normalizing
+constant.  The factors $\prod_i\theta_{n,i}$ do not depend on the assignment
+and cancel, so
 \begin{equation}
  \Pp(\phi_a=\phi\mid\text{slab data})
  =\frac{\prod_{i\in H_{n,a}}e^{-\theta_{n,i}s_{a,\phi(i)}}}
  {\operatorname{per}(e^{-\theta_{n,i}s_{a,j}})_{i,j}}.
  \tag{6.3a}\label{eq:pd-permanental-row}
 \end{equation}
-The row matchings are conditionally independent.  The factors
-$\prod_i\theta_{n,i}$ cancel from the conditional density.
+Because the original clock density is a product and the slab label sets are
+disjoint, these conditional assignment laws factor over the slabs.  Thus the
+row matchings are conditionally independent.
 
 \begin{lemma}[Residual permanental factorization]
 \label{lem:pd-residual-factorization}
@@ -592,7 +611,13 @@ On the complementary event, for every $r<\tau$,
  \le C_2\beta\log\frac m{s_r}+C_2(v_m^{1/4}+v_m).
  \tag{6.10}\label{eq:pd-prefix-log}
 \]
-Choose $\beta_0$ so that $C_2\beta_0\le1/2$.  Writing $u=s_r/m$ and
+Choose $\beta_0$ so that
+\[
+        C_2\beta_0\le\frac12,
+        \qquad \beta_0\le\log 2.
+\]
+The second harmless restriction ensures that every later harmonic-product
+exponent $e^{\pm\beta}$ lies in $[1/2,2]$.  Writing $u=s_r/m$ and
 $\eta_m=C_2(v_m^{1/4}+v_m)$, \eqref{eq:pd-prefix-log} yields
 \[
  e^{-\eta_m}u^{1+C_2\beta}
@@ -612,13 +637,29 @@ $\sup_{0<u\le1}u|\log u|<\infty$.  Hence, before $\tau$,
  \tag{6.12}\label{eq:pd-prefix-before-stop}
 \]
 
-At the stopping time, if $s_\tau<a_m$, then
-$s_\tau/m=O(m^{-1/3})$ and the upper bound in
-\eqref{eq:pd-prefix-power}, applied one step earlier, gives
-$N_\tau/m_b=o(1)$.  If $N_\tau<a_m$, then the lower bound in
-\eqref{eq:pd-prefix-power} gives $s_\tau/m=o(1)$.  In either case, after
-$\tau$ both normalized remaining counts are nonincreasing and their difference
-is bounded by $C_3\beta+o(1)$.  Thus
+At the stopping time there are two cases.  If $s_\tau<a_m$, then
+$s_\tau/m=O(m^{-1/3})$.  At time $\tau-1$ we have
+$s_{\tau-1}<a_m+1$, and the upper bound in
+\eqref{eq:pd-prefix-power} gives
+\[
+ \frac{N_\tau}{m_b}
+ \le \frac{N_{\tau-1}}{m_b}
+ \le e^{\eta_m}\left(\frac{a_m+1}{m}\right)^{1-C_2\beta}
+ =o(1),
+\]
+uniformly because $1-C_2\beta\ge1/2$.  If instead $N_\tau<a_m$, then
+$N_{\tau-1}<a_m+1$ and the lower bound in
+\eqref{eq:pd-prefix-power} yields
+\[
+ \frac{s_{\tau-1}}m
+ \le\left(e^{\eta_m}\frac{a_m+1}{m_b}\right)^{1/(1+C_2\beta)}
+ =o(1),
+\]
+so also $s_\tau/m=o(1)$.  Thus in either case both normalized remaining
+counts are $o(1)$ at $\tau$, up to the already recorded $O(\beta)$ error.
+After $\tau$ each normalized count is nonincreasing, so the absolute
+difference is bounded by the sum of its two values at $\tau$ and hence by
+$C_3\beta+o(1)$.  Therefore
 \eqref{eq:pd-prefix-before-stop} extends to all $0\le r\le m$.
 
 For example, one may take
@@ -1165,8 +1206,9 @@ probability is at most $\pi_n$.  This proves
 
 \subsection{Independent residual fractions}
 
-Order the cycles size-biased by choosing a uniform root from the current
-residual vertex set, deleting its cycle, and repeating.  Let
+Order the cycles size-biased by choosing, at each stage, a new root
+independently and uniformly from the current residual vertex set, deleting its
+cycle, and repeating.  Let
 \[
  V_{n,j}=\frac{\widetilde L_{n,j}}
  {n-\widetilde L_{n,1}-\cdots-\widetilde L_{n,j-1}}
@@ -1267,6 +1309,20 @@ is below its assigned fraction of $\eta$ and
 $\Pp(\mathcal G_n^c)\le\eta$.  This order of choices is important: the inner
 cutoff is fixed before its outer cutoff, and the mesh is chosen only after all
 cutoff-dependent constants are known.
+
+For reference, the cutoff used at each deletion stage is summarized by
+\[
+\begin{array}{c|c|c|c|c}
+\text{stage}&\text{current regularity}&\text{root-law inner}
+&\text{root-law outer}&\text{post-deletion regularity}\\ \hline
+1&T_k&T_{k-1}&T_k&T_{k-1}\\
+r&T_{k-r+1}&T_{k-r}&T_{k-r+1}&T_{k-r}\\
+k&T_1&T_0&T_1&T_0
+\end{array}
+\]
+Thus every root-law inner cutoff was fixed before its corresponding outer
+cutoff, and deletion moves exactly one level inward in the already chosen
+hierarchy.
 
 On the event that
 \[
@@ -1389,9 +1445,30 @@ Thus, for every $\epsilon>0$,
  \le\epsilon^{-1}2^{-k}.
  \label{eq:pd-tail-mass}
 \]
-For a bounded Lipschitz functional on $\ell^1$, truncate after $k$ coordinates,
-use \eqref{eq:pd-finite-gem}, and bound the truncation error by the residual
-tail mass.  Equation \eqref{eq:pd-tail-mass}, followed by $k\to\infty$, proves
+Equation \eqref{eq:pd-tail-mass} records the corresponding probabilistic
+tail bound, while the expectation identity will give the sharper
+bounded-Lipschitz truncation estimate below.
+Let $X_n=(X_{n,1},X_{n,2},\ldots)$ and let $X$ denote the
+$\operatorname{GEM}(1)$ residual-allocation sequence.  Write $X_n^{(k)}$ and
+$X^{(k)}$ for truncation after the first $k$ coordinates, with all later
+coordinates set to zero.  If $F:\ell^1\to\mathbb R$ is bounded and Lipschitz,
+then
+\begin{align*}
+ |\Ee F(X_n)-\Ee F(X)|
+ &\le \operatorname{Lip}(F)
+       \bigl(\Ee R_{n,k}+\Ee R_k\bigr)\\
+ &\quad+
+ |\Ee F(X_n^{(k)})-\Ee F(X^{(k)})|,
+\end{align*}
+where $R_k=\sum_{j>k}X_j=\prod_{i=1}^k(1-U_i)$.  For fixed $k$, the last
+term tends to zero by \eqref{eq:pd-finite-gem} and the continuous mapping
+theorem, while
+\[
+        \Ee R_{n,k}\longrightarrow2^{-k}=\Ee R_k.
+\]
+Taking first $n\to\infty$ and then $k\to\infty$ proves convergence against
+every bounded Lipschitz functional.  By the bounded-Lipschitz criterion on the
+separable metric space $\ell^1$,
 \[
         (X_{n,1},X_{n,2},\ldots)
         \Rightarrow\operatorname{GEM}(1)
@@ -1444,10 +1521,31 @@ $\operatorname{GEM}(1)$ law, so $\widetilde P$ is uniform on $(0,1)$.  Hence
         =\Ee\widetilde P^{\,q-1}
         =\int_0^1u^{q-1}\dd u=1/q.
 \]
-Bounded convergence transfers the expectation limit.
+Weak convergence and bounded continuity of the power-sum functional transfer
+the expectation limit.
 \end{proof}
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
+
+\bibitem{Billingsley1999}
+P. Billingsley.
+\newblock \emph{Convergence of Probability Measures}, second edition.
+\newblock Wiley, New York, 1999.
+
+\bibitem{Dudley2002}
+R. M. Dudley.
+\newblock \emph{Real Analysis and Probability}, second edition.
+\newblock Cambridge University Press, Cambridge, 2002.
+
+\bibitem{Durrett2019}
+R. Durrett.
+\newblock \emph{Probability: Theory and Examples}, fifth edition.
+\newblock Cambridge University Press, Cambridge, 2019.
+
+\bibitem{Kallenberg2002}
+O. Kallenberg.
+\newblock \emph{Foundations of Modern Probability}, second edition.
+\newblock Springer-Verlag, New York, 2002.
 
 \bibitem{Pitman2006}
 J. Pitman.
