@@ -12,7 +12,7 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 STAGE = 'macroscopic-pd-audit-repair'
 BASELINE = 'f7eb751eb6d5a7afd21e2139f0d17176557120b4'
-REQUEST_PARENT = '57b8bd22b49ff44e7e4c176ba41f074682702937'
+REQUEST_PARENT = 'c2feddf0b851a6233d279fee00869822b9398408'
 PAYLOAD_SHA256 = '3ececa6ee8d054bc0066445c480a6308756c7540f584e85ef3059bd645815a65'
 PAYLOAD_FILES = [ROOT/f'.migration/macroscopic-pd-repair-payload-part-{j}.b64' for j in range(1, 7)]
 
