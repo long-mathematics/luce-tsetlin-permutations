@@ -16,6 +16,7 @@ Manuscript author: **Christopher D. Long**.
 | Boundary Laws for Luce Rankings | [PDF](output/pdf/boundary-laws.pdf) | [Source](papers/boundary-laws/boundary-laws.tex) | mechanical extraction; proof audit pending |
 | Sukhatme Fixed Points and the Terminal Poisson Process | [PDF](output/pdf/sukhatme-fixed-points.pdf) | [Source](papers/sukhatme-fixed-points/sukhatme-fixed-points.tex) | mechanical extraction; proof audit pending |
 | Endpoint-Regular Fixed-Point Universality | [PDF](output/pdf/endpoint-regular-universality.pdf) | [Source](papers/endpoint-regular-universality/endpoint-regular-universality.tex) | mechanical extraction; proof audit pending |
+| Global Endpoint Poisson Approximation | [PDF](output/pdf/global-endpoint-poisson.pdf) | [Source](papers/global-endpoint-poisson/global-endpoint-poisson.tex) | mechanical extraction; proof audit pending |
 | Microscopic Cycles and Sparse Entries for Regular Luce Profiles | [PDF](output/pdf/regular-profile-cycles.pdf) | [Source](papers/regular-profile-cycles/regular-profile-cycles.tex) | audited current manuscript |
 | Poisson--Dirichlet Universality for Luce Permutations | [PDF](output/pdf/poisson-dirichlet-luce.pdf) | [Source](papers/macroscopic-pd/poisson-dirichlet-luce.tex) | audited current manuscript |
 
@@ -137,6 +138,14 @@ For the singular decreasing-rate profile, this paper proves logarithmic fixed-po
 [PDF](output/pdf/endpoint-regular-universality.pdf) · [LaTeX](papers/endpoint-regular-universality/endpoint-regular-universality.tex)
 
 For uniformly endpoint-regularly varying terminal arrays, the paper proves a logarithmic fixed-point Poisson process, displacement and tangent-measure laws, a multiplicative endpoint kernel, and a microscopic endpoint permutation limit. Its proof uses endpoint-specific anisotropic saddle and local-limit analysis.
+
+**Status:** working mechanical extraction. Source coverage and dependency closure are checked; a separate proof audit is pending.
+
+### Global endpoint Poisson approximation
+
+[PDF](output/pdf/global-endpoint-poisson.pdf) · [LaTeX](papers/global-endpoint-poisson/global-endpoint-poisson.tex)
+
+This paper strengthens the endpoint fixed-point theory to a global total-variation Poisson approximation with exact mean. Its Stein--Chen proof constructs an approximate Palm coupling by terminal-rank transposition and controls the likelihood ratio, quantitative saddle error, and two-cycle correction.
 
 **Status:** working mechanical extraction. Source coverage and dependency closure are checked; a separate proof audit is pending.
 
