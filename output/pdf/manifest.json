@@ -74,6 +74,14 @@
       "pages": 53
     },
     {
+      "id": "endpoint-short-cycles",
+      "source": "papers/endpoint-short-cycles/endpoint-short-cycles.tex",
+      "source_sha256": "3267d5e2d8bbce2ce9b4491be52ed9c9f9677d1b2908e7ab6af6b1c675fb43d2",
+      "pdf": "output/pdf/endpoint-short-cycles.pdf",
+      "pdf_sha256": "d6497272e6ace59cf742f0d30ba30269a0f62306740dcd5c8138e9e5d70432dc",
+      "pages": 54
+    },
+    {
       "id": "regular-profile-cycles",
       "source": "papers/regular-profile-cycles/regular-profile-cycles.tex",
       "source_sha256": "df0c78bc08ae7a5e0e55d4f51ff7bb57cbca5bb2c95fb1c2cf95e58d613e0511",

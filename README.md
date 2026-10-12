@@ -17,6 +17,7 @@ Manuscript author: **Christopher D. Long**.
 | Sukhatme Fixed Points and the Terminal Poisson Process | [PDF](output/pdf/sukhatme-fixed-points.pdf) | [Source](papers/sukhatme-fixed-points/sukhatme-fixed-points.tex) | mechanical extraction; proof audit pending |
 | Endpoint-Regular Fixed-Point Universality | [PDF](output/pdf/endpoint-regular-universality.pdf) | [Source](papers/endpoint-regular-universality/endpoint-regular-universality.tex) | mechanical extraction; proof audit pending |
 | Global Endpoint Poisson Approximation | [PDF](output/pdf/global-endpoint-poisson.pdf) | [Source](papers/global-endpoint-poisson/global-endpoint-poisson.tex) | mechanical extraction; proof audit pending |
+| Endpoint Short Cycles | [PDF](output/pdf/endpoint-short-cycles.pdf) | [Source](papers/endpoint-short-cycles/endpoint-short-cycles.tex) | mechanical extraction; proof audit pending |
 | Microscopic Cycles and Sparse Entries for Regular Luce Profiles | [PDF](output/pdf/regular-profile-cycles.pdf) | [Source](papers/regular-profile-cycles/regular-profile-cycles.tex) | audited current manuscript |
 | Poisson--Dirichlet Universality for Luce Permutations | [PDF](output/pdf/poisson-dirichlet-luce.pdf) | [Source](papers/macroscopic-pd/poisson-dirichlet-luce.tex) | audited current manuscript |
 
@@ -146,6 +147,14 @@ For uniformly endpoint-regularly varying terminal arrays, the paper proves a log
 [PDF](output/pdf/global-endpoint-poisson.pdf) · [LaTeX](papers/global-endpoint-poisson/global-endpoint-poisson.tex)
 
 This paper strengthens the endpoint fixed-point theory to a global total-variation Poisson approximation with exact mean. Its Stein--Chen proof constructs an approximate Palm coupling by terminal-rank transposition and controls the likelihood ratio, quantitative saddle error, and two-cycle correction.
+
+**Status:** working mechanical extraction. Source coverage and dependency closure are checked; a separate proof audit is pending.
+
+### Endpoint short cycles
+
+[PDF](output/pdf/endpoint-short-cycles.pdf) · [LaTeX](papers/endpoint-short-cycles/endpoint-short-cycles.tex)
+
+This paper proves the joint law of every fixed collection of short cycle lengths in the endpoint-singular regime. Their expectations grow logarithmically with constants given by convolution traces of the endpoint kernel, and the normalized cycle counts converge jointly to one.
 
 **Status:** working mechanical extraction. Source coverage and dependency closure are checked; a separate proof audit is pending.
 

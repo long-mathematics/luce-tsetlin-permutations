@@ -86,6 +86,14 @@
       "dependencies": []
     },
     {
+      "id": "endpoint-short-cycles",
+      "title": "Endpoint Short Cycles",
+      "source": "papers/endpoint-short-cycles/endpoint-short-cycles.tex",
+      "pdf": "output/pdf/endpoint-short-cycles.pdf",
+      "status": "working",
+      "dependencies": []
+    },
+    {
       "id": "regular-profile-cycles",
       "title": "Microscopic Cycles and Sparse Entries for Regular Luce Profiles",
       "source": "papers/regular-profile-cycles/regular-profile-cycles.tex",

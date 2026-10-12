@@ -26,6 +26,8 @@ The endpoint-regular universality paper is now present as a working mechanical e
 
 The global endpoint Poisson-approximation paper is now present as a working mechanical extraction with completeness checks; its adversarial audit is tracked separately.
 
+The endpoint short-cycle paper is now present as a working mechanical extraction with completeness checks; its adversarial audit is tracked separately.
+
 Do not maintain two independently editable copies. Active thematic papers live under `papers/`; the frozen monolith remains the provenance source under `archive/6178a99/`.
 
 ## Initial integration record
