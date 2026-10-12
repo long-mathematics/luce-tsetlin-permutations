@@ -1,0 +1,66 @@
+name: One-time stale branch cleanup
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    name: Delete completed-work branches
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    if: github.repository == 'long-mathematics/luce-tsetlin-permutations'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 1
+      - name: Delete exact stale branch list
+        shell: bash
+        run: |
+          set -euo pipefail
+          branches=(
+            "audit/boundary-laws"
+            "audit/endpoint-regular-universality"
+            "audit/endpoint-short-cycles"
+            "audit/global-endpoint-poisson"
+            "audit/macroscopic-pd-gem"
+            "audit/regular-profile-proof"
+            "audit/sukhatme-fixed-points"
+            "docs/github-math-rendering"
+            "docs/monolith-decomposition-complete"
+            "docs/normalize-theorem-dependency-maps"
+            "docs/paper-descriptions"
+            "docs/readme-github-math"
+            "extract/macroscopic-pd-gem"
+            "migration/boundary-laws"
+            "migration/endpoint-regular-universality"
+            "migration/endpoint-short-cycles"
+            "migration/global-endpoint-poisson"
+            "migration/macroscopic-pd-audit-repair"
+            "migration/macroscopic-pd-extraction"
+            "migration/monolith-decomposition-status"
+            "migration/preserved-import"
+            "migration/regular-profile-extraction"
+            "migration/regular-profile-repair"
+            "migration/sukhatme-fixed-points"
+            "migration/total-cycle-integration"
+            "repair/macroscopic-pd-audit"
+            "setup/foundation"
+            "maintenance/stale-branch-cleanup"
+          )
+
+          for branch in "${branches[@]}"; do
+            if [[ "$branch" == "main" ]]; then
+              echo "Refusing to delete main" >&2
+              exit 1
+            fi
+            if git ls-remote --exit-code --heads origin "refs/heads/$branch" >/dev/null 2>&1; then
+              echo "Deleting $branch"
+              git push origin --delete "$branch"
+            else
+              echo "Already absent: $branch"
+            fi
+          done
