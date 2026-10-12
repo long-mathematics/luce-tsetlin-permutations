@@ -1,6 +1,5 @@
 import importlib.util
 from pathlib import Path
-import re
 import unittest
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('build', ROOT/'scripts/build.py')
@@ -63,18 +62,21 @@ class RepositoryTests(unittest.TestCase):
         status = (ROOT/'THEOREM_STATUS.md').read_text()
         deps = (ROOT/'DEPENDENCIES.md').read_text()
 
-        status_ids = re.findall(r'^\\| \\x60([^\\x60]+)\\x60 \\|', status, re.M)
-        self.assertEqual(status_ids[:len(ids)], ids)
+        status_rows = [line for line in status.splitlines() if line.startswith('| `')]
+        status_ids = [line.split('`')[1] for line in status_rows[:len(ids)]]
+        self.assertEqual(status_ids, ids)
 
         dep_section = deps.split('## Canonical document graph', 1)[1].split('## Module-level dependency register', 1)[0]
-        dep_ids = re.findall(r'^\\| \\x60([^\\x60]+)\\x60 \\|', dep_section, re.M)
+        dep_rows = [line for line in dep_section.splitlines() if line.startswith('| `')]
+        dep_ids = [line.split('`')[1] for line in dep_rows]
         self.assertEqual(dep_ids, ids)
 
         for d in docs:
-            dep_cell = ', '.join(f"\\x60{x}\\x60" for x in d.get('dependencies', [])) or 'None'
-            self.assertIn(f"| \\x60{d['id']}\\x60 | {dep_cell} |", dep_section)
-            self.assertIn(f"| \\x60{d['id']}\\x60 |", status)
-            self.assertIn(f"| \\x60{d['status']}\\x60 |", status)
+            dep_cell = ', '.join('`'+x+'`' for x in d.get('dependencies', [])) or 'None'
+            self.assertIn('| `'+d['id']+'` | '+dep_cell+' |', dep_section)
+            catalog_fragment = '| `'+d['id']+'` |'
+            self.assertIn(catalog_fragment, status)
+            self.assertIn('| `'+d['status']+'` |', status)
 
         self.assertEqual(status.count('audit passed, repairs pending'), 5)
 
