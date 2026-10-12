@@ -2,6 +2,10 @@
 
 The catalog records document-level input edges and tests reject cycles. References for historical context or later applications are not proof dependencies. The precise modules below determine the review boundary.
 
+## Boundary-laws extraction
+
+The standalone boundary paper has no proof dependency on another active manuscript. Its internal chain consists of the exponential-race identity, the vanishing-block construction, exact top-window likelihood comparison, finite-volume bottom-window convergence, and the Borel--Cantelli/infinite-product leakage argument. The extraction is byte-preserving and has not yet received a correctness audit.
+
 ## Regular-profile microscopic-cycle manuscript
 
 The standalone paper `papers/regular-profile-cycles/regular-profile-cycles.tex`

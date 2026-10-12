@@ -54,6 +54,14 @@
       ]
     },
     {
+      "id": "boundary-laws",
+      "title": "Boundary Laws for Luce Rankings",
+      "source": "papers/boundary-laws/boundary-laws.tex",
+      "pdf": "output/pdf/boundary-laws.pdf",
+      "status": "working",
+      "dependencies": []
+    },
+    {
       "id": "regular-profile-cycles",
       "title": "Microscopic Cycles and Sparse Entries for Regular Luce Profiles",
       "source": "papers/regular-profile-cycles/regular-profile-cycles.tex",

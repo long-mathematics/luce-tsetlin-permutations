@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "stage": "boundary-laws-extraction",
+  "baseline_commit": "e950728f28b1aa3933b092a68a6b78bae328ac97",
+  "archive_source": "archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex",
+  "archive_source_sha256": "c6d6a4607a2db9c8a5f69e2ec256c33619083fcc81ab467e9b939673fb3a5028",
+  "active_source": "papers/boundary-laws/boundary-laws.tex",
+  "active_source_sha256": "e02f3632fc0eb3a6951b448fc5c7545bf3729730825e59a2ba4ff617cde6a971",
+  "source_ranges": [
+    {
+      "name": "Exponential-race input",
+      "first_line": 224,
+      "last_line": 233,
+      "sentinel": "% BEGIN ARCHIVED BLOCK: exponential-race-input"
+    },
+    {
+      "name": "Vanishing-block obstruction",
+      "first_line": 539,
+      "last_line": 600,
+      "sentinel": "% BEGIN ARCHIVED BLOCK: vanishing-block-obstruction"
+    },
+    {
+      "name": "Top and bottom boundary laws",
+      "first_line": 611,
+      "last_line": 864,
+      "sentinel": "% BEGIN ARCHIVED BLOCK: top-bottom-boundary-laws"
+    }
+  ],
+  "theorem_environments": 7,
+  "labels": 7,
+  "reference_targets": 2,
+  "citation_keys": [],
+  "proof_status": "mechanical extraction; adversarial audit pending"
+}

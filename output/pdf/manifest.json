@@ -42,6 +42,14 @@
       "pages": 13
     },
     {
+      "id": "boundary-laws",
+      "source": "papers/boundary-laws/boundary-laws.tex",
+      "source_sha256": "e02f3632fc0eb3a6951b448fc5c7545bf3729730825e59a2ba4ff617cde6a971",
+      "pdf": "output/pdf/boundary-laws.pdf",
+      "pdf_sha256": "30472b330245caa74e65d4519969bec23c926a937f5f7be35185a643cb4d691d",
+      "pages": 6
+    },
+    {
       "id": "regular-profile-cycles",
       "source": "papers/regular-profile-cycles/regular-profile-cycles.tex",
       "source_sha256": "df0c78bc08ae7a5e0e55d4f51ff7bb57cbca5bb2c95fb1c2cf95e58d613e0511",
