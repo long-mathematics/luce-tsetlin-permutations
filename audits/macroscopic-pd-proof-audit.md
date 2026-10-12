@@ -16,9 +16,9 @@ This is a mathematical proof audit, not an extraction check. The extraction-pres
 
 I found **no fatal mathematical gap** in the extracted proof. The manuscript supports the stated theorem under the exact hypothesis
 
-\[
+$$
 \sup_n \frac{\max_i\theta_{n,i}}{\min_i\theta_{n,i}}<\infty.
-\]
+$$
 
 In particular, the proof supports:
 
@@ -78,9 +78,9 @@ The manuscript conditions on:
 
 It does **not** condition on which label receives which ordered time. Therefore the residual permutation is not determined. Given these data, assigning labels in `H_{n,a}` to ordered positions in `Q_{n,a}` has density proportional to
 
-\[
+$$
 \prod_{i\in H_{n,a}} e^{-\theta_{n,i}s_{a,\phi(i)}},
-\]
+$$
 
 because the factors `theta_{n,i}` are independent of the assignment and cancel from the conditional normalization. The normalizing sum is the permanent. Different slabs factor because the original exponential density is a product and the slab assignment partitions the labels.
 
@@ -106,12 +106,12 @@ This point is decisive: the finite-state spectral gap belongs to the determinist
 
 For one row, let `N_r` be the number of remaining targets in one category and `s_r` the total number of remaining targets. Hereditary flatness gives
 
-\[
+$$
 \mathbb E(Y_{r+1}\mid\mathscr F_r)
 \in
 \left[e^{-\beta}\frac{N_r}{s_r},
       e^{\beta}\frac{N_r}{s_r}\right].
-\]
+$$
 
 The stopped process `log(N_r/s_r)` then has:
 
@@ -120,9 +120,9 @@ The stopped process `log(N_r/s_r)` then has:
 
 Stopping when either remaining count falls below `m_b^{2/3}` yields total quadratic variation `o(1)`. Doob's `L^2` maximal inequality gives simultaneous control of every prefix. The accumulated `beta/s_r` drift produces a power `u^{1+O(beta)}`, and the elementary bound
 
-\[
+$$
 \sup_{0\le u\le1}|u^{1+a}-u|=O(|a|)
-\]
+$$
 
 removes the apparent logarithmic loss.
 
@@ -145,36 +145,36 @@ The rowwise estimate is not claimed on one event simultaneously for all counterf
 
 The row-prefix estimate controls the discrepancy
 
-\[
+$$
 E_{ab}=R_{ab}-R_aP_{ab}
-\]
+$$
 
 for rows below the outer cutoff. Outer rows are controlled only by injectivity and their small total mass. The deterministic orbit-flow identity gives
 
-\[
+$$
 q-qP=e,
-\]
+$$
 
 where `q_a=R_a/ell`. Writing `u=q/p-1` gives
 
-\[
+$$
 u-P^*u=e/p.
-\]
+$$
 
 The finite-state spectral gap therefore controls the global `L^2(p)` deviation. The inner-column bound then converts this global estimate into a pointwise estimate for a selected inner state. This is the required bridge from averaged orbit balance to the dependently selected closure row.
 
 The tail-row calculation is also correct. Weighted Cauchy--Schwarz gives
 
-\[
+$$
 \sum_b \frac{H_b^2}{m_{n,b}}
-\le C\,m_{n,D(U)},
-\]
+\le Cm_{n,D(U)},
+$$
 
 using the block Hilbert--Schmidt estimate. Since `m_{n,D(U)}/n` is `O(e^{-U}+epsilon_n^2)`, its contribution is of order
 
-\[
+$$
 \frac n\ell(e^{-U/2}+\epsilon_n).
-\]
+$$
 
 ### 5.2 Root-avoiding likelihood ratio
 
@@ -190,10 +190,10 @@ The auxiliary path can be forced to stop if only the forbidden root remains in t
 
 If forced termination occurs after `r` completed edges, then the path has used `m-1` closure-row targets. Applying the orbit-balance estimate at this random prefix and multiplying by `r/N` gives
 
-\[
+$$
 \left|\frac{m-1}{Np_C}-\frac rN\right|
 \le C\Delta_n+O(n^{-1}).
-\]
+$$
 
 Regularity gives `m/(Np_C)=1+O(delta)`, so `r/N` must be close to one. Therefore the auxiliary exploration cannot terminate before `(1-zeta)N` edges when the deterministic error is small. This closes the central scale-sensitive gap present in earlier versions.
 
@@ -201,9 +201,9 @@ Regularity gives `m/(Np_C)=1+O(delta)`, so `r/N` must be close to one. Therefore
 
 For `k=floor(xN)`, the number of closure opportunities is the number of visits to the closure source row. Two-scale balance gives `S(k)/m=x+o(1)` uniformly for `x` in a compact subinterval of `(0,1)`. The hazard product is squeezed between two harmonic products with exponents `e^{plus/minus beta}`. The harmonic-product lemma and `beta -> 0` then give
 
-\[
+$$
 \mathbb P(L/N\le x\mid\mathcal H)=x+o(1)
-\]
+$$
 
 uniformly over regular histories and interior `x`.
 
@@ -213,10 +213,10 @@ The selected closure row is not assumed deterministic. A uniform residual root l
 
 The deletion lemma is stated in the correct joint-event form:
 
-\[
+$$
 \mathbb P(\text{interior cycle and bad post-deletion history}\mid\mathcal H)
 \le\pi_n.
-\]
+$$
 
 It does not condition on the exact value of the random cycle length.
 
@@ -224,11 +224,11 @@ The simultaneous-prefix event from the orbit-balance lemma may be evaluated at t
 
 If `x=L/N`, then
 
-\[
+$$
 m_a^{R'}=(1-x)m_a^R+O(\Delta m_a^R),
 \qquad
 N_{ab}^{R'}=(1-x)N_{ab}^R+O(\Delta N_{ab}^R).
-\]
+$$
 
 The interior upper bound `x<=1-zeta` keeps the denominator away from zero. Division by the new residual fraction therefore preserves regularity at the smaller cutoff. Residual permanental factorization survives because the newly exposed cycle consists only of fixed matching edges.
 
@@ -266,34 +266,32 @@ The hierarchy is correct, but the notation `R_j`, `D_j`, `A_j`, and the forward 
 
 Set
 
-\[
+$$
 X_{n,j}=V_{n,j}\prod_{i<j}(1-V_{n,i}),
 \qquad
 R_{n,k}=\prod_{i=1}^k(1-V_{n,i}).
-\]
+$$
 
 Finite-dimensional convergence of the residual fractions gives convergence of `(X_{n,1},...,X_{n,k},R_{n,k})`. Since `R_{n,k}` is bounded,
 
-\[
+$$
 \mathbb E R_{n,k}\longrightarrow 2^{-k}.
-\]
+$$
 
 For a bounded Lipschitz functional `F` on `ell^1`, let `x^{(k)}` denote truncation after `k` coordinates. Then
 
-\[
+$$
 |F(x)-F(x^{(k)})|
-\le \operatorname{Lip}(F)\sum_{j>k}x_j.
-\]
+\le \mathrm{Lip}(F)\sum_{j>k}x_j.
+$$
 
 For the finite permutation sequence, the right side is `Lip(F) R_{n,k}`; for the limiting GEM sequence it is `Lip(F) R_k`. Thus
 
-\[
-\begin{aligned}
+$$
 |\mathbb EF(X_n)-\mathbb EF(X)|
-&\le \operatorname{Lip}(F)(\mathbb ER_{n,k}+\mathbb ER_k)\\
-&\quad +|\mathbb EF(X_n^{(k)})-\mathbb EF(X^{(k)})|.
-\end{aligned}
-\]
+\le \mathrm{Lip}(F)(\mathbb ER_{n,k}+\mathbb ER_k)
++|\mathbb EF(X_n^{(k)})-\mathbb EF(X^{(k)})|.
+$$
 
 For fixed `k`, the final term tends to zero; then `k` tends to infinity. This proves weak convergence in `ell^1`. The manuscript's shorter argument is valid, but displaying this inequality would make the topological step fully explicit.
 

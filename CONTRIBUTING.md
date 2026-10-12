@@ -8,6 +8,6 @@ Register papers in `papers.json`, record exact input labels in `DEPENDENCIES.md`
 
 Run `make test`, `make pdf`, `make check`, and `make verify`. Review changed PDF pages visually; review all pages of a new short manuscript. Commit LaTeX, the corresponding PDF, and hashes together. The snapshot builder is a convenience, not mathematical approval.
 
-README mathematics uses `$...$` and `$$...$$` with standard commands, no private macros. Display delimiters occupy their own lines. A line consisting only of `=` or hyphens is forbidden inside a display because Markdown can reinterpret it as a heading.
+Editable Markdown mathematics uses single-dollar delimiters for inline math and double-dollar delimiters for display math only. Every display block is separated from prose by blank lines, and each double-dollar delimiter occupies its own line. Do not use TeX environments, custom/private macros, `\\operatorname`, backslash-plus-punctuation escapes such as `\\,`, `\\!`, `\\{`, or `\\}`, or a bare Markdown-structural line such as `=` or `---` inside a display. Use letter commands such as `\\mathrm`, `\\lbrace`, and `\\rbrace` instead. The frozen archive is byte-preserved and exempt from rendering normalization.
 
 A successful finite test is not an asymptotic proof. A scoped AI-assisted audit is not independent refereeing. No Lean claims are permitted without executable formal sources and an actually passing formalization job.

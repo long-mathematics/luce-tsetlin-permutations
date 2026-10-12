@@ -72,7 +72,149 @@ def check_catalog() -> None:
         visit(node)
 
 
+def frozen_archive_paths() -> set[Path]:
+    manifest = ROOT/'archive/manifest.json'
+    if not manifest.exists():
+        return set()
+    return {safe_path(rec['path']) for rec in json.loads(manifest.read_text())['files']}
+
+
+def _strip_inline_code(line: str) -> str:
+    out = []
+    in_code = False
+    for ch in line:
+        if ch == chr(96):
+            in_code = not in_code
+            continue
+        if not in_code:
+            out.append(ch)
+    return ''.join(out)
+
+
+def _markdown_math_fragments(line: str) -> list[str]:
+    plain = _strip_inline_code(line)
+    fragments = []
+    start = None
+    i = 0
+    backslash = chr(92)
+    dollar = chr(36)
+    while i < len(plain):
+        if plain[i] != dollar:
+            i += 1
+            continue
+        if i + 1 < len(plain) and plain[i + 1] == dollar:
+            i += 2
+            continue
+        if i and plain[i - 1] == backslash:
+            i += 1
+            continue
+        if start is None:
+            start = i + 1
+        else:
+            fragments.append(plain[start:i])
+            start = None
+        i += 1
+    if start is not None:
+        raise ValueError('Unclosed inline math delimiter')
+    return fragments
+
+
+def check_markdown_math(text: str, label: str = '<markdown>') -> None:
+    # GitHub parses Markdown before MathJax. Keep editable Markdown to a
+    # conservative subset that cannot lose backslashes to Markdown escaping.
+    allowed_commands = {
+        'Delta', 'Gamma', 'Phi', 'Rightarrow',
+        'beta', 'bigl', 'bigr', 'epsilon', 'ell', 'frac', 'ge',
+        'in', 'infty', 'int', 'kappa', 'lambda', 'lbrace', 'le',
+        'left', 'log', 'longrightarrow', 'lVert', 'rVert', 'mathbb', 'mathcal', 'mathscr',
+        'max', 'mid', 'min', 'mu', 'phi', 'pi', 'prod', 'qquad',
+        'rbrace', 'right', 'sigma', 'sim', 'sqrt', 'sum', 'sup',
+        'text', 'theta', 'to', 'varepsilon', 'varphi', 'zeta', 'mathrm',
+    }
+    lines = text.splitlines()
+    in_code = False
+    display = False
+    fence = chr(96) * 3
+    backslash = chr(92)
+    dollar = chr(36)
+    display_token = dollar * 2
+
+    def inspect(expr: str, lineno: int) -> None:
+        i = 0
+        if any(ch in expr for ch in ('%', '#', '&')):
+            raise ValueError(f'Unsafe raw TeX punctuation in {label}:{lineno}')
+        while i < len(expr):
+            if expr[i] != backslash:
+                i += 1
+                continue
+            if i + 1 >= len(expr):
+                raise ValueError(f'Dangling backslash in {label}:{lineno}')
+            nxt = expr[i + 1]
+            if nxt == backslash:
+                raise ValueError(f'TeX line-break escape in {label}:{lineno}')
+            if not nxt.isalpha():
+                raise ValueError(f'Backslash-plus-punctuation in {label}:{lineno}')
+            j = i + 1
+            while j < len(expr) and expr[j].isalpha():
+                j += 1
+            command = expr[i + 1:j]
+            if command not in allowed_commands:
+                raise ValueError(f'Unreviewed TeX command in {label}:{lineno}: {command}')
+            i = j
+
+    for i, line in enumerate(lines):
+        lineno = i + 1
+        stripped = line.strip()
+
+        if stripped.startswith(fence):
+            if stripped == fence + 'math':
+                raise ValueError(f'Use double-dollar display math rather than fenced math in {label}:{lineno}')
+            in_code = not in_code
+            continue
+        if in_code:
+            continue
+
+        plain_line = _strip_inline_code(line)
+        plain = plain_line.strip()
+        for legacy in (backslash + '(', backslash + ')', backslash + '[', backslash + ']'):
+            if legacy in plain_line:
+                raise ValueError(f'Unsupported math delimiter in {label}:{lineno}')
+
+        if display_token in plain:
+            if plain != display_token:
+                raise ValueError(f'Display delimiter must occupy its own line in {label}:{lineno}')
+            if line != display_token:
+                raise ValueError(f'Display delimiter must be unindented in {label}:{lineno}')
+            if not display:
+                if i and lines[i - 1].strip():
+                    raise ValueError(f'Missing blank line before display in {label}:{lineno}')
+                display = True
+            else:
+                if i + 1 < len(lines) and lines[i + 1].strip():
+                    raise ValueError(f'Missing blank line after display in {label}:{lineno}')
+                display = False
+            continue
+
+        if display:
+            if stripped in {'=', '-', '---', '***', '___'} or (
+                len(stripped) > 1 and stripped[0] in '*+-' and stripped[1].isspace()
+            ):
+                raise ValueError(f'Markdown structure inside math display in {label}:{lineno}')
+            inspect(line, lineno)
+        else:
+            for expr in _markdown_math_fragments(line):
+                inspect(expr, lineno)
+
+    if display:
+        raise ValueError(f'Unclosed math display in {label}')
+
+
+def check_readme_math(text: str) -> None:
+    check_markdown_math(text, 'README.md')
+
+
 def check_markdown(allow_pending: bool = False) -> None:
+    # Link checking remains scoped to canonical navigation documents.
     for file in [ROOT/'README.md', ROOT/'THEOREM_STATUS.md', ROOT/'DEPENDENCIES.md', ROOT/'CONTRIBUTING.md', ROOT/'notes/migration-plan.md']:
         text = file.read_text()
         for target in re.findall(r'\]\(([^)]+)\)', text):
@@ -81,55 +223,14 @@ def check_markdown(allow_pending: bool = False) -> None:
             dest = (file.parent / target.split('#', 1)[0]).resolve()
             if not dest.exists() and not (allow_pending and dest in {safe_path(d['pdf']) for d in catalog()}):
                 raise ValueError(f'Broken link in {file.name}: {target}')
-    check_readme_math((ROOT/'README.md').read_text())
 
-
-def check_readme_math(text: str) -> None:
-    # Keep README math to a conservative GitHub Markdown/MathJax subset. Use only
-    # $...$ for inline math and $$...$$ for display math; avoid document-level
-    # definitions/environments, repository-private aliases, and commands
-    # rejected by GitHub's safe renderer (notably \operatorname).
-    forbidden_tokens = (
-        r'\(', r'\)', r'\[', r'\]',
-        r'\newcommand', r'\renewcommand', r'\providecommand',
-        r'\def', r'\gdef', r'\xdef', r'\let',
-        r'\DeclareMathOperator', r'\operatorname',
-        r'\begin{', r'\end{',
-        r'\input', r'\include', r'\require',
-        r'\href', r'\url', r'\htmlClass', r'\htmlId',
-        r'\htmlStyle', r'\class', r'\style', r'\cssId',
-    )
-    for token in forbidden_tokens:
-        if token in text:
-            raise ValueError('Unsupported README TeX command/delimiter: ' + token)
-    if re.search(r'\\(?:Ee|Pp|TV|Kol|one|Pois|dd|cL)\b', text):
-        raise ValueError('Private manuscript macro in README')
-    allowed_commands = {
-        'mathbb', 'sim', 'frac', 'to', 'infty', 'log', 'mathrm',
-        'sigma', 'sqrt', 'Rightarrow', 'left', 'right', 'le', 'kappa',
-        'Phi', 'varphi', 'sum', 'qquad', 'mathcal', 'int', 'mu', 'pi',
-        'theta', 'bigl', 'varepsilon', 'bigr', 'max', 'lambda', 'ell',
-        'longrightarrow',
-    }
-    commands = set(re.findall(r'\\([A-Za-z]+)', text))
-    unknown = sorted(commands - allowed_commands)
-    if unknown:
-        raise ValueError('Unreviewed README TeX command(s): ' + ', '.join(unknown))
-    display = False
-    for line in text.splitlines():
-        s = line.strip()
-        if s == '$':
-            raise ValueError('Single-dollar display delimiter')
-        if '$$' in s:
-            if s != '$$':
-                raise ValueError('Display delimiter must occupy its own line')
-            display = not display
+    # Rendering checks apply to every editable Markdown file. Exact files in
+    # archive/manifest.json remain byte-preserved provenance and are exempt.
+    frozen = frozen_archive_paths()
+    for file in sorted(ROOT.rglob('*.md')):
+        if file in frozen:
             continue
-        if display and (re.fullmatch(r'=+|-+', s) or re.match(r'^[+*-]\s+', s)):
-            raise ValueError('Markdown structure inside mathematical display')
-    if display:
-        raise ValueError('Unclosed README display')
-
+        check_markdown_math(file.read_text(), str(file.relative_to(ROOT)))
 
 def check_archive() -> None:
     path = ROOT/'archive/manifest.json'

@@ -30,10 +30,10 @@ register, dependency map, or frozen archive.
 **No fatal mathematical gap was found.** The proofs support the principal
 results under the exact sampled-profile hypothesis
 
-\[
- \theta_{n,i}=a_n\{f(i/n)+\varepsilon_{n,i}\},\qquad
+$$
+ \theta_{n,i}=a_n\lbrace f(i/n)+\varepsilon_{n,i}\rbrace ,\qquad
  \max_i|\varepsilon_{n,i}|\longrightarrow0,
-\]
+$$
 
 where `f` is continuous and bounded above and below by positive constants.
 The common factor `a_n` is immaterial after positive rescaling.
@@ -161,9 +161,9 @@ common factor `a_n`, the rates satisfy uniform positive upper and lower bounds.
 For every fixed number of removed labels and every compact time interval,
 Riemann summation plus `max_i|epsilon_{n,i}| -> 0` gives, uniformly,
 
-\[
+$$
  A_{n,P}^{(j)}(t)\longrightarrow A^{(j)}(t)
-\]
+$$
 
 for the derivatives needed in the proof, and similarly for the covariance
 entries. This yields compact saddle localization, uniform derivative lower
@@ -218,11 +218,11 @@ counts with exact targets `q_a-a`. The saddle solves the corresponding exact
 finite-`n` mean equation. The ordered integration chamber contains a fixed
 neighborhood of the separated saddle. The integrated saddle result yields
 
-\[
+$$
  n^{-ell}\prod_a
  \frac{\theta_{n,p_a}e^{-\theta_{n,p_a}t_{n,a}^*}}
  {B_{n,P}(t_{n,a}^*)}+o(n^{-ell}),
-\]
+$$
 
 and uniform profile convergence identifies each ratio with
 `rho(p_a/n,q_a/n)`.
@@ -314,10 +314,10 @@ finite subsets are continuity sets in the discrete topology.
 The substitutions `y=A(t)` prove both marginal identities. Jensen then makes
 `K` an `L^2` contraction. The Hilbert--Schmidt estimate
 
-\[
- \|K\|_{HS}^2\le M_f\int_0^\infty B(2t)/B(t)\,dt
+$$
+ \lVert K\rVert_{HS}^2\le M_f\int_0^\infty B(2t)/B(t)dt
  \le M_f/m_f
-\]
+$$
 
 is correct. Approximation by nonnegative step kernels plus Schatten ideal
 bounds gives the cyclic trace formula for every `r>=2`.
@@ -330,11 +330,11 @@ constant and the eigenvalue is one. A generalized eigenvector would make
 is algebraically simple. Compactness then places all remaining eigenvalues in
 a disk of radius `q<1`. Lidskii and Weyl give
 
-\[
- |\operatorname{Tr}(T^r)|
+$$
+ |\mathrm{Tr}(T^r)|
  \le q^{r-2}\sum_j|\zeta_j|^2
- \le q^{r-2}\|T\|_{HS}^2.
-\]
+ \le q^{r-2}\lVert T\rVert_{HS}^2.
+$$
 
 This yields `r lambda_r=1+O(q^r)`. The first-factorial-moment result gives
 `E C_r -> lambda_r` for each fixed `r`, justifying the iterated limit in the
