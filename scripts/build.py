@@ -126,7 +126,7 @@ def check_markdown_math(text: str, label: str = '<markdown>') -> None:
         'Delta', 'Gamma', 'Phi', 'Rightarrow',
         'beta', 'bigl', 'bigr', 'epsilon', 'ell', 'frac', 'ge',
         'in', 'infty', 'int', 'kappa', 'lambda', 'lbrace', 'le',
-        'left', 'log', 'longrightarrow', 'mathbb', 'mathcal', 'mathscr',
+        'left', 'log', 'longrightarrow', 'lVert', 'rVert', 'mathbb', 'mathcal', 'mathscr',
         'max', 'mid', 'min', 'mu', 'phi', 'pi', 'prod', 'qquad',
         'rbrace', 'right', 'sigma', 'sim', 'sqrt', 'sum', 'sup',
         'text', 'theta', 'to', 'varepsilon', 'varphi', 'zeta', 'mathrm',
