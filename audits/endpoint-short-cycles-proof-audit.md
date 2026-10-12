@@ -37,12 +37,12 @@ strip, and are nondecreasing on the full triangular array.
 For every fixed `R` and fixed nonnegative integers `m_1,...,m_R`, the audited
 argument proves
 
-```math
+$$
 E prod_{r=1}^R (C_r)_{m_r}
 ~ prod_{r=1}^R (alpha_{gamma,r} log n)^{m_r},
 qquad
 alpha_{gamma,r}=k_gamma^{*r}(0)/r.
-```
+$$
 
 It also proves, jointly for fixed `R`, convergence of the normalized fixed
 cycle counts to `(1,...,1)` in probability and in every fixed `L^p`.
@@ -115,9 +115,9 @@ The short-cycle argument uses the endpoint-regular framework exactly in the
 range for which it was proved.  All source and target terminal coordinates in
 the local estimate satisfy
 
-```math
+$$
 N <= p_j,q_j <= n/N,
-```
+$$
 
 with source-to-target ratios in a fixed compact multiplicative interval and
 with target ratios separated by `exp(eta)`.  The final summation uses
@@ -139,9 +139,9 @@ indices or cycle lengths.
 
 For the constraint `tau_n(p_j)=q_j`, the centered threshold is
 
-```math
+$$
 y_j(h_j)=log lambda_{n,q_j}+h_j,
-```
+$$
 
 and the specified centered Gumbel has density `varphi_{R_{n,j}}`, where
 `R_{n,j}=lambda_{n,p_j}/lambda_{n,q_j}`.  Uniform regular variation gives
@@ -149,9 +149,9 @@ and the specified centered Gumbel has density `varphi_{R_{n,j}}`, where
 
 The mean cumulative lower-priority count satisfies
 
-```math
+$$
 M_j(h)=q_j A_gamma exp(h/gamma)(1+o(1)),
-```
+$$
 
 uniformly on compact `h`-sets after finitely many sources are deleted.  Hence
 the exact equation `M_j(h_j^*)=q_j-j` has a unique solution,
@@ -173,9 +173,9 @@ adjacent to threshold `j` both have probability bounded below.  These blocks
 survive deletion of the fixed source set and every bounded exponential tilt.
 They imply the quadratic-form lower bound
 
-```math
+$$
 c D_q <= Sigma(h) <= C D_q.
-```
+$$
 
 The upper bound follows from the endpoint weighted-sum estimates and Cauchy--
 Schwarz.  The same disjoint blocks give the anisotropic Fourier damping away
@@ -195,9 +195,9 @@ probabilities.
 The proof separates right offenders, left offenders, and locally regular
 coordinates.  The single interval-coordinate tilt
 
-```math
+$$
 Theta=T alpha^- + T alpha^+ + lambda
-```
+$$
 
 is valid, and generalized Hölder separates its cumulant into three costs.  The
 actual-mean cumulative Chernoff estimates give exponential penalties for both
@@ -223,9 +223,9 @@ absorbs its missing `q_j^{-1/2}` local factor.
 
 For `j<=k`, the covariance entry has the nested-event formula
 
-```math
+$$
 Sigma_{jk}(h)=sum_b p_{b,j}(h_j)(1-p_{b,k}(h_k)).
-```
+$$
 
 Endpoint weighted sums give derivative bounds of orders `q_j` and `q_k`.
 Moving `h_j` on its `q_j^{-1/2}` scale therefore changes the normalized
@@ -235,9 +235,9 @@ so determinant and inverse stability follow.
 
 Taylor expansion of the mean on the saddle scale gives
 
-```math
+$$
 M(h)-z=D_n H_q u+o(D_q^{1/2}).
-```
+$$
 
 The local LLT and covariance stability identify the Gaussian integrand.  The
 Jacobian and covariance determinant cancel exactly, leaving
@@ -255,9 +255,9 @@ specified priorities lie below the `j`-th threshold, so the residual count is
 product of `varphi_{R_{n,j}}(h_j^*)/d_{n,j}`.  Using
 `R_{n,j}~(p_j/q_j)^gamma` and `exp(-h_j^*) -> K_gamma` yields
 
-```math
+$$
 q_j^{-1} k_gamma(log(q_j/p_j))
-```
+$$
 
 for every factor.  The sign in the logarithm and all normalizing constants are
 correct.
@@ -275,9 +275,9 @@ probability, while an ordinary deletion is exactly averaged by the recursion.
 For compatible point constraints, the conditional probability of deleting
 source `p_i` at the prescribed level `q_i` is at most
 
-```math
+$$
 C lambda_{n,p_i}/(q_i lambda_{n,q_i}),
-```
+$$
 
 because every alive set of size `q_i` has total rate at least the sum of the
 smallest `q_i` rates.  Pulling out these factors and summing the remaining
@@ -317,10 +317,10 @@ superexponential envelope should be made explicit in a later repair.
 Multiplying the forced-deletion factors around a directed cycle cancels every
 rate:
 
-```math
+$$
 prod_{a->b} lambda_{n,a}/(b lambda_{n,b})
 =1/prod_{a in cycle} a.
-```
+$$
 
 This proves the basic harmonic envelope.  Choosing the capped-drop edge as the
 distinguished constraint and using the survival tail gives a superexponential
@@ -347,9 +347,9 @@ square, producing `O(1/L_n)` after the remaining relative sums are bounded by
 the convolution majorant.  Letting the oscillation cutoff tend to infinity
 gives
 
-```math
+$$
 k_gamma^{*r}(0) T_n+o(T_n).
-```
+$$
 
 **Verdict:** pass.  The construction of the local-supremum majorant and the
 cell-error summation are correct but terse; both should be written out in a
