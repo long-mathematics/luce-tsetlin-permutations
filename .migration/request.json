@@ -1,5 +1,0 @@
-{
-  "stage": "integration",
-  "task": "endpoint-regular-universality-extraction",
-  "baseline_commit": "a3266be4da39fa44a9cf16aa05554b8be74a3a09"
-}

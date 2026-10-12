@@ -58,6 +58,14 @@
       "pages": 36
     },
     {
+      "id": "endpoint-regular-universality",
+      "source": "papers/endpoint-regular-universality/endpoint-regular-universality.tex",
+      "source_sha256": "d120b2e7d64df58ffdf4b986bcabb33e2f1276addcca741f38db6f62445d31c2",
+      "pdf": "output/pdf/endpoint-regular-universality.pdf",
+      "pdf_sha256": "556a7211603425d8c8930cf63d368906aae818bc5bed10715b56657317e91561",
+      "pages": 39
+    },
+    {
       "id": "regular-profile-cycles",
       "source": "papers/regular-profile-cycles/regular-profile-cycles.tex",
       "source_sha256": "df0c78bc08ae7a5e0e55d4f51ff7bb57cbca5bb2c95fb1c2cf95e58d613e0511",

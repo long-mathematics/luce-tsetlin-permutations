@@ -10,6 +10,10 @@ The standalone boundary paper has no proof dependency on another active manuscri
 
 The standalone Sukhatme paper has no active-paper dependency. Its internal chain consists of exponential/Gumbel identities, the fixed-dimensional tilted LLT, the death-process product bound, one- and multipoint terminal saddles, anisotropic localization, the separated joint estimate, and factorial-moment summation. The extraction is byte-preserving and unaudited.
 
+## Endpoint-Regular Fixed-Point Universality extraction
+
+The standalone endpoint-universality paper is self-contained: exponential/Gumbel and lattice-LLT inputs, the shared anisotropic Fourier/tilting toolkit, regularly varying endpoint sums, endpoint saddle/localization, factorial moments, tangent measure, kernel semigroup, and microscopic limit are internal. The extraction is byte-preserving and unaudited.
+
 ## Regular-profile microscopic-cycle manuscript
 
 The standalone paper `papers/regular-profile-cycles/regular-profile-cycles.tex`
