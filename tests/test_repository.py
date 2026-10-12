@@ -15,6 +15,7 @@ class RepositoryTests(unittest.TestCase):
         build.check_markdown()
     def test_bad_math_rejected(self):
         fence = chr(96) * 3
+        dd = chr(36) * 2
         bad = [
             r'\[x\]',
             '$\n',
@@ -33,6 +34,9 @@ class RepositoryTests(unittest.TestCase):
             'prose\n$$\nx=y\n$$\n',
             '\n$$\nx=y\n$$\nprose',
             '\n' + fence + 'math\nx=y\n' + fence + '\n',
+            '\n    ' + dd + '\nx=y\n    ' + dd + '\n',
+            '\n' + dd + '\nx=5%\n' + dd + '\n',
+            '\n' + dd + '\nx&y\n' + dd + '\n',
         ]
         for text in bad:
             with self.subTest(text=text), self.assertRaises(ValueError):
