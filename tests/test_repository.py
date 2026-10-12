@@ -1,5 +1,6 @@
 import importlib.util
 from pathlib import Path
+import re
 import unittest
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('build', ROOT/'scripts/build.py')
@@ -54,6 +55,27 @@ class RepositoryTests(unittest.TestCase):
         for audit in audits:
             self.assertTrue((ROOT/'audits'/audit).is_file())
         self.assertIn('No principal theorem-and-proof package now exists only', plan)
+        self.assertEqual(status.count('audit passed, repairs pending'), 5)
+
+    def test_normalized_theorem_and_dependency_maps_match_catalog(self):
+        docs = build.catalog()
+        ids = [d['id'] for d in docs]
+        status = (ROOT/'THEOREM_STATUS.md').read_text()
+        deps = (ROOT/'DEPENDENCIES.md').read_text()
+
+        status_ids = re.findall(r'^\\| \\x60([^\\x60]+)\\x60 \\|', status, re.M)
+        self.assertEqual(status_ids[:len(ids)], ids)
+
+        dep_section = deps.split('## Canonical document graph', 1)[1].split('## Module-level dependency register', 1)[0]
+        dep_ids = re.findall(r'^\\| \\x60([^\\x60]+)\\x60 \\|', dep_section, re.M)
+        self.assertEqual(dep_ids, ids)
+
+        for d in docs:
+            dep_cell = ', '.join(f"\\x60{x}\\x60" for x in d.get('dependencies', [])) or 'None'
+            self.assertIn(f"| \\x60{d['id']}\\x60 | {dep_cell} |", dep_section)
+            self.assertIn(f"| \\x60{d['id']}\\x60 |", status)
+            self.assertIn(f"| \\x60{d['status']}\\x60 |", status)
+
         self.assertEqual(status.count('audit passed, repairs pending'), 5)
 
     def test_historical_candidate_is_not_dependency(self):
