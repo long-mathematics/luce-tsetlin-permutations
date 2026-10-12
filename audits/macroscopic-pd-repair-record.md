@@ -14,9 +14,9 @@ This record maps each localized recommendation in Section 9 of the adversarial a
 
 **Resolved.** The manuscript now states explicitly that the ordered clock values inside each slab are *unlabeled*: the conditioning sigma-field does not record the label-to-order-statistic assignment and therefore does not determine the ranking within the slab. It writes the full assignment density
 
-\[
+$
 \prod_{i\in H_{n,a}}\theta_{n,i}e^{-\theta_{n,i}s_{a,\phi(i)}},
-\]
+$
 
 explains cancellation of the assignment-independent factor `prod_i theta_{n,i}`, identifies the permanent as the normalizing sum, and derives conditional independence across slabs from the product clock density and disjoint slab label sets.
 
@@ -50,13 +50,11 @@ Location: between the deterministic error recursion and event `eq:pd-interior-hi
 
 **Resolved.** The main theorem and the size-biased deletion subsection now specify that a new root is sampled independently and uniformly from the current residual set at every stage. The proof of Theorem `thm:macroscopic-pd` now displays the bounded-Lipschitz truncation estimate
 
-\[
-\begin{aligned}
+$
 |E F(X_n)-E F(X)|
-&\le \operatorname{Lip}(F)(E R_{n,k}+E R_k)\\
-&\quad+|E F(X_n^{(k)})-E F(X^{(k)})|,
-\end{aligned}
-\]
+\le \mathrm{Lip}(F)(E R_{n,k}+E R_k)
++|E F(X_n^{(k)})-E F(X^{(k)})|,
+$
 
 and takes first `n -> infinity` and then `k -> infinity`. It cites the bounded-Lipschitz criterion on the separable metric space `ell^1` rather than leaving the topology upgrade implicit.
 
