@@ -1,0 +1,33 @@
+name: One-time stale branch cleanup
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    name: Delete stale post-merge branch
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    if: github.repository == 'long-mathematics/luce-tsetlin-permutations'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 1
+      - name: Delete stale branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch="docs/github-markdown-math-hardening"
+          if [[ "$branch" == "main" ]]; then
+            echo "Refusing to delete main" >&2
+            exit 1
+          fi
+          if git ls-remote --exit-code --heads origin "refs/heads/$branch" >/dev/null 2>&1; then
+            git push origin --delete "$branch"
+          else
+            echo "Already absent: $branch"
+          fi
