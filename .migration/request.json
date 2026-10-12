@@ -1,0 +1,5 @@
+{
+  "stage": "integration",
+  "task": "monolith-decomposition-status",
+  "baseline_commit": "654a25c0ed0abfa267aee2970fd311544be39866"
+}
