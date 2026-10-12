@@ -163,14 +163,20 @@ def check_markdown_math(text: str, label: str = '<markdown>') -> None:
 
         if stripped.startswith(fence):
             if stripped == fence + 'math':
-                raise ValueError(f'Use $$ rather than fenced math in {label}:{lineno}')
+                raise ValueError(f'Use $ rather than fenced math in {label}:{lineno}')
             in_code = not in_code
             continue
         if in_code:
             continue
 
-        if '$$' in stripped:
-            if stripped != '$$':
+        plain_line = _strip_inline_code(line)
+        plain = plain_line.strip()
+        for legacy in (backslash + '(', backslash + ')', backslash + '[', backslash + ']'):
+            if legacy in plain_line:
+                raise ValueError(f'Unsupported math delimiter in {label}:{lineno}')
+
+        if '$' in plain:
+            if plain != '$':
                 raise ValueError(f'Display delimiter must occupy its own line in {label}:{lineno}')
             if not display:
                 if i and lines[i - 1].strip():
