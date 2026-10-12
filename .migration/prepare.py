@@ -5,7 +5,7 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_COMMIT = "7ac6679db3fcb0ef5f72081752624672a43f1269"
-REQUEST_PARENT = "a579cbca38e24db3998badc1e5b3f7d673b1266c"
+REQUEST_PARENT = "1db194659f9639453e58b7231501f4177bec2f35"
 
 subprocess.run(
     ["git", "fetch", "--no-tags", "--depth=1", "origin", SCRIPT_COMMIT],
@@ -32,8 +32,12 @@ exec(compile(source, str(ROOT / ".migration" / "boundary_extract.py"), "exec"), 
 
 test_path = ROOT / "tests" / "test_boundary_extraction.py"
 test_text = test_path.read_text(encoding="utf-8")
-test_old = r'r"\|P_k-Q_k\|_{\TV}=Q_k(\calD_k^c)"'
-test_new = r'r"\|P_k-Q_k\|_{\TV}"'
-if test_text.count(test_old) != 1:
-    raise ValueError("Generated boundary scope test anchor not found")
-test_path.write_text(test_text.replace(test_old, test_new, 1), encoding="utf-8")
+replacements = {
+    r'r"\|P_k-Q_k\|_{\TV}=Q_k(\calD_k^c)"': r'r"\|P_k-Q_k\|_{\TV}"',
+    'self.assertIn("proof audit pending", status)': 'self.assertIn("proof audit is pending", status)',
+}
+for old_text, new_text in replacements.items():
+    if test_text.count(old_text) != 1:
+        raise ValueError("Generated boundary test anchor not found: " + old_text)
+    test_text = test_text.replace(old_text, new_text, 1)
+test_path.write_text(test_text, encoding="utf-8")
