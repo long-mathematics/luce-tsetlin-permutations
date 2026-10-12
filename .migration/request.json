@@ -1,0 +1,5 @@
+{
+  "stage": "integration",
+  "task": "sukhatme-fixed-points-extraction",
+  "baseline_commit": "edf8983fbbb0515361022b303e54df045b54aaff"
+}
