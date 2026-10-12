@@ -4,23 +4,23 @@ The catalog records document-level input edges and tests reject cycles. Referenc
 
 ## Boundary-laws extraction
 
-The standalone boundary paper has no proof dependency on another active manuscript. Its internal chain consists of the exponential-race identity, the vanishing-block construction, exact top-window likelihood comparison, finite-volume bottom-window convergence, and the Borel--Cantelli/infinite-product leakage argument. The extraction is byte-preserving and has not yet received a correctness audit.
+The standalone boundary paper has no proof dependency on another active manuscript. Its internal chain consists of the exponential-race identity, vanishing-block construction, exact top-window likelihood comparison, finite-volume bottom-window convergence, and Borel--Cantelli/infinite-product leakage argument. The extraction is byte-preserving. The adversarial audit found no fatal gap and records six localized clarifications; those repairs remain deferred, so the paper stays a working mechanical extraction.
 
 ## Sukhatme fixed-point extraction
 
-The standalone Sukhatme paper has no active-paper dependency. Its internal chain consists of exponential/Gumbel identities, the fixed-dimensional tilted LLT, the death-process product bound, one- and multipoint terminal saddles, anisotropic localization, the separated joint estimate, and factorial-moment summation. The extraction is byte-preserving and unaudited.
+The standalone Sukhatme paper has no active-paper dependency. Its internal chain consists of exponential/Gumbel identities, the fixed-dimensional tilted LLT, death-process product bound, one- and multipoint terminal saddles, anisotropic localization, the separated joint estimate, and factorial-moment summation. The extraction is byte-preserving. The adversarial audit found no fatal gap and records six localized clarifications; repairs remain deferred.
 
 ## Endpoint-Regular Fixed-Point Universality extraction
 
-The standalone endpoint-universality paper is self-contained: exponential/Gumbel and lattice-LLT inputs, the shared anisotropic Fourier/tilting toolkit, regularly varying endpoint sums, endpoint saddle/localization, factorial moments, tangent measure, kernel semigroup, and microscopic limit are internal. The extraction is byte-preserving and unaudited.
+The standalone endpoint-universality paper is self-contained: exponential/Gumbel and lattice-LLT inputs, the shared anisotropic Fourier/tilting toolkit, regularly varying endpoint sums, endpoint saddle/localization, factorial moments, tangent measure, kernel semigroup, and microscopic limit are internal. The extraction is byte-preserving. The independent audit found no fatal gap and records six localized clarifications; repairs remain deferred.
 
 ## Global Endpoint Poisson Approximation extraction
 
-The standalone global endpoint paper includes the complete endpoint-regular framework and then the approximate-Palm Stein argument, exact swap likelihood ratio, quantitative one-dimensional saddle, swap--Palm comparison, and two-cycle summability. It has no active-paper dependency. The extraction is byte-preserving and unaudited.
+The standalone global endpoint paper includes the complete endpoint-regular framework and then the approximate-Palm Stein argument, exact swap likelihood ratio, quantitative one-dimensional saddle, swap--Palm comparison, and two-cycle summability. It has no active-paper dependency and is byte-preserving. The independent audit found no fatal gap and records six localized clarifications; repairs remain deferred.
 
 ## Endpoint Short Cycles extraction
 
-The standalone endpoint-short-cycle paper includes the endpoint-regular framework and the full source-to-target saddle, scheduled-deletion envelope, multiplicative trace, and factorial-moment machinery. It has no active-paper dependency. The extraction is byte-preserving and unaudited.
+The standalone endpoint-short-cycle paper includes the endpoint-regular framework and the full source-to-target saddle, scheduled-deletion envelope, multiplicative trace, and factorial-moment machinery. It has no active-paper dependency and is byte-preserving. The independent audit found no fatal gap and records six localized clarifications; repairs remain deferred.
 
 ## Regular-profile microscopic-cycle manuscript
 

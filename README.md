@@ -13,16 +13,15 @@ Manuscript author: **Christopher D. Long**.
 | A Sharp Berry--Esseen Theorem and First Edgeworth Expansion for Logarithmic Luce Order | [PDF](output/pdf/luce-edgeworth.pdf) | [Source](papers/sharp-order-edgeworth/luce-edgeworth.tex) | imported |
 | Functional Erdos--Turan and Total-Cycle Laws for Luce Permutations | [PDF](output/pdf/functional-luce-erdos-turan.pdf) | [Source](papers/functional-erdos-turan/functional-luce-erdos-turan.tex) | current-research |
 | Poisson Approximation and Lattice Edgeworth Expansions for Total Luce Cycles | [PDF](output/pdf/total-cycle-edgeworth.pdf) | [Source](papers/total-cycle-edgeworth/total-cycle-edgeworth.tex) | current-research |
-| Boundary Laws for Luce Rankings | [PDF](output/pdf/boundary-laws.pdf) | [Source](papers/boundary-laws/boundary-laws.tex) | mechanical extraction; proof audit pending |
-| Sukhatme Fixed Points and the Terminal Poisson Process | [PDF](output/pdf/sukhatme-fixed-points.pdf) | [Source](papers/sukhatme-fixed-points/sukhatme-fixed-points.tex) | mechanical extraction; proof audit pending |
-| Endpoint-Regular Fixed-Point Universality | [PDF](output/pdf/endpoint-regular-universality.pdf) | [Source](papers/endpoint-regular-universality/endpoint-regular-universality.tex) | mechanical extraction; proof audit pending |
-| Global Endpoint Poisson Approximation | [PDF](output/pdf/global-endpoint-poisson.pdf) | [Source](papers/global-endpoint-poisson/global-endpoint-poisson.tex) | mechanical extraction; proof audit pending |
-| Endpoint Short Cycles | [PDF](output/pdf/endpoint-short-cycles.pdf) | [Source](papers/endpoint-short-cycles/endpoint-short-cycles.tex) | mechanical extraction; proof audit pending |
+| Boundary Laws for Luce Rankings | [PDF](output/pdf/boundary-laws.pdf) | [Source](papers/boundary-laws/boundary-laws.tex) | mechanical extraction; audit passed; repairs pending |
+| Sukhatme Fixed Points and the Terminal Poisson Process | [PDF](output/pdf/sukhatme-fixed-points.pdf) | [Source](papers/sukhatme-fixed-points/sukhatme-fixed-points.tex) | mechanical extraction; audit passed; repairs pending |
+| Endpoint-Regular Fixed-Point Universality | [PDF](output/pdf/endpoint-regular-universality.pdf) | [Source](papers/endpoint-regular-universality/endpoint-regular-universality.tex) | mechanical extraction; audit passed; repairs pending |
+| Global Endpoint Poisson Approximation | [PDF](output/pdf/global-endpoint-poisson.pdf) | [Source](papers/global-endpoint-poisson/global-endpoint-poisson.tex) | mechanical extraction; audit passed; repairs pending |
+| Endpoint Short Cycles | [PDF](output/pdf/endpoint-short-cycles.pdf) | [Source](papers/endpoint-short-cycles/endpoint-short-cycles.tex) | mechanical extraction; audit passed; repairs pending |
 | Microscopic Cycles and Sparse Entries for Regular Luce Profiles | [PDF](output/pdf/regular-profile-cycles.pdf) | [Source](papers/regular-profile-cycles/regular-profile-cycles.tex) | audited current manuscript |
 | Poisson--Dirichlet Universality for Luce Permutations | [PDF](output/pdf/poisson-dirichlet-luce.pdf) | [Source](papers/macroscopic-pd/poisson-dirichlet-luce.tex) | audited current manuscript |
 
-The **139-page original research draft** is preserved as [PDF](archive/6178a99/output/pdf/luce-boundary-cycle-laws.pdf) and [LaTeX](archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex). It is not an active monolithic editing target. The regular positive-profile microscopic-cycle and sparse-entry theory is now an audited standalone manuscript. The initial extraction is documented by its [provenance map](papers/regular-profile-cycles/EXTRACTION_MAP.md) and [extraction record](audits/regular-profile-extraction.md); the later [proof audit](audits/regular-profile-proof-audit.md) found no fatal gap, and the six localized clarification sets are recorded in the [repair record](audits/regular-profile-repair-record.md). The standalone PD/GEM manuscript was mechanically extracted, checked for completeness, adversarially audited, and revised only by the six localized clarifications recorded in the [proof audit](audits/macroscopic-pd-proof-audit.md) and [repair record](audits/macroscopic-pd-repair-record.md). The [label map](papers/macroscopic-pd/EXTRACTION_MAP.md) and regression checks preserve the theorem scope and document the exact departure from the frozen token stream.
-
+The **139-page original research draft** is preserved as [PDF](archive/6178a99/output/pdf/luce-boundary-cycle-laws.pdf) and [LaTeX](archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex). It is an immutable provenance source, not an active monolithic editing target. Every principal theorem-and-proof package has now been assigned to a standalone paper. The regular-profile and PD/GEM papers completed extraction, adversarial audit, and localized repair and are audited current manuscripts. The five remaining thematic papers completed mechanical extraction and independent adversarial audit; every audit found no fatal gap, but each records six localized clarifications that remain deliberately deferred. See the [consolidated migration table](notes/migration-plan.md), theorem-specific audit files under [`audits/`](audits/), and old-label/new-label maps under the corresponding paper directories. No principal theorem remains only in the monolith.
 
 ## Paper summaries
 
@@ -124,7 +123,7 @@ The paper also gives the variance asymptotic, a continuity-corrected second-orde
 
 This paper isolates the finite top-window identities and infinite bottom-window leakage theory from the archived monolith. It proves that the exact top-window total-variation distance equals the collision probability of the corresponding product sample, gives the exact one-sided relative defect, and identifies the total mass lost by a limiting bottom-window law. A vanishing-block construction records why permuton convergence alone cannot control microscopic statistics.
 
-**Status:** working mechanical extraction. Source coverage and reference closure are checked; a separate proof audit is pending.
+**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/boundary-laws-proof-audit.md) and remain deferred.
 
 ### Sukhatme fixed points and the terminal Poisson process
 
@@ -132,7 +131,7 @@ This paper isolates the finite top-window identities and infinite bottom-window 
 
 For the singular decreasing-rate profile, this paper proves logarithmic fixed-point growth, a local terminal Poisson point process on logarithmic coordinates, and all fixed factorial-moment asymptotics. Its proof combines a death-process envelope with anisotropic saddle and local-limit analysis.
 
-**Status:** working mechanical extraction. Source coverage and dependency closure are checked; a separate proof audit is pending.
+**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/sukhatme-fixed-points-proof-audit.md) and remain deferred.
 
 ### Endpoint-regular fixed-point universality
 
@@ -140,7 +139,7 @@ For the singular decreasing-rate profile, this paper proves logarithmic fixed-po
 
 For uniformly endpoint-regularly varying terminal arrays, the paper proves a logarithmic fixed-point Poisson process, displacement and tangent-measure laws, a multiplicative endpoint kernel, and a microscopic endpoint permutation limit. Its proof uses endpoint-specific anisotropic saddle and local-limit analysis.
 
-**Status:** working mechanical extraction. Source coverage and dependency closure are checked; a separate proof audit is pending.
+**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/endpoint-regular-universality-proof-audit.md) and remain deferred.
 
 ### Global endpoint Poisson approximation
 
@@ -148,7 +147,7 @@ For uniformly endpoint-regularly varying terminal arrays, the paper proves a log
 
 This paper strengthens the endpoint fixed-point theory to a global total-variation Poisson approximation with exact mean. Its Stein--Chen proof constructs an approximate Palm coupling by terminal-rank transposition and controls the likelihood ratio, quantitative saddle error, and two-cycle correction.
 
-**Status:** working mechanical extraction. Source coverage and dependency closure are checked; a separate proof audit is pending.
+**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/global-endpoint-poisson-proof-audit.md) and remain deferred.
 
 ### Endpoint short cycles
 
@@ -156,7 +155,7 @@ This paper strengthens the endpoint fixed-point theory to a global total-variati
 
 This paper proves the joint law of every fixed collection of short cycle lengths in the endpoint-singular regime. Their expectations grow logarithmically with constants given by convolution traces of the endpoint kernel, and the normalized cycle counts converge jointly to one.
 
-**Status:** working mechanical extraction. Source coverage and dependency closure are checked; a separate proof audit is pending.
+**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/endpoint-short-cycles-proof-audit.md) and remain deferred.
 
 ### Microscopic cycles and sparse entries for regular Luce profiles
 
