@@ -66,6 +66,14 @@
       "pages": 39
     },
     {
+      "id": "global-endpoint-poisson",
+      "source": "papers/global-endpoint-poisson/global-endpoint-poisson.tex",
+      "source_sha256": "86a3a60d2f7b7dc63944e10c5aca2c86f0bb279ac489103778f45223bf65752f",
+      "pdf": "output/pdf/global-endpoint-poisson.pdf",
+      "pdf_sha256": "471e878289890ec42f4d775cf3867f342389125aee7f766f701c303c4218e6aa",
+      "pages": 53
+    },
+    {
       "id": "regular-profile-cycles",
       "source": "papers/regular-profile-cycles/regular-profile-cycles.tex",
       "source_sha256": "df0c78bc08ae7a5e0e55d4f51ff7bb57cbca5bb2c95fb1c2cf95e58d613e0511",

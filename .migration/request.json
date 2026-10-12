@@ -1,5 +1,0 @@
-{
-  "stage": "integration",
-  "task": "global-endpoint-poisson-extraction",
-  "baseline_commit": "12015e922048f0eea543427d396bdc1db18ea7fc"
-}
