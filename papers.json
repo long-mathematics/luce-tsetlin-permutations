@@ -62,6 +62,14 @@
       "dependencies": []
     },
     {
+      "id": "sukhatme-fixed-points",
+      "title": "Sukhatme Fixed Points and the Terminal Poisson Process",
+      "source": "papers/sukhatme-fixed-points/sukhatme-fixed-points.tex",
+      "pdf": "output/pdf/sukhatme-fixed-points.pdf",
+      "status": "working",
+      "dependencies": []
+    },
+    {
       "id": "regular-profile-cycles",
       "title": "Microscopic Cycles and Sparse Entries for Regular Luce Profiles",
       "source": "papers/regular-profile-cycles/regular-profile-cycles.tex",
