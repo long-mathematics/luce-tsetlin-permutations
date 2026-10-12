@@ -18,6 +18,10 @@ The standalone endpoint-universality paper is self-contained: exponential/Gumbel
 
 The standalone global endpoint paper includes the complete endpoint-regular framework and then the approximate-Palm Stein argument, exact swap likelihood ratio, quantitative one-dimensional saddle, swap--Palm comparison, and two-cycle summability. It has no active-paper dependency. The extraction is byte-preserving and unaudited.
 
+## Endpoint Short Cycles extraction
+
+The standalone endpoint-short-cycle paper includes the endpoint-regular framework and the full source-to-target saddle, scheduled-deletion envelope, multiplicative trace, and factorial-moment machinery. It has no active-paper dependency. The extraction is byte-preserving and unaudited.
+
 ## Regular-profile microscopic-cycle manuscript
 
 The standalone paper `papers/regular-profile-cycles/regular-profile-cycles.tex`

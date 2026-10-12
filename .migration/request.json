@@ -1,5 +1,0 @@
-{
-  "stage": "integration",
-  "task": "endpoint-short-cycles-extraction",
-  "baseline_commit": "83702a015ba84aa41fb9fe71d34300561b109224"
-}
