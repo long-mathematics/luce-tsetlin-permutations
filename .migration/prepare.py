@@ -5,7 +5,7 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_COMMIT = "7ac6679db3fcb0ef5f72081752624672a43f1269"
-REQUEST_PARENT = "7a87a60debc9737bda9a3c8e30878313663ad556"
+REQUEST_PARENT = "96a30c1cb4c9c9ba754aaba292d502a547d32edb"
 
 subprocess.run(
     ["git", "fetch", "--no-tags", "--depth=1", "origin", SCRIPT_COMMIT],
@@ -27,5 +27,10 @@ range_new = '("Vanishing-block obstruction", r"\\begin{proposition}[Vanishing-bl
 if source.count(range_old) != 1:
     raise ValueError("Pinned obstruction range not found")
 source = source.replace(range_old, range_new, 1)
+test_old = 'for token in [r"\\\\|P_k-Q_k\\\\|_{\\\\TV}=Q_k(\\\\calD_k^c)", r"d_\\\\infty^+(P_k,Q_k)"'
+test_new = 'for token in [r"\\\\|P_k-Q_k\\\\|_{\\\\TV}", r"d_\\\\infty^+(P_k,Q_k)"'
+if source.count(test_old) != 1:
+    raise ValueError("Pinned scope test anchor not found")
+source = source.replace(test_old, test_new, 1)
 namespace = {"__name__": "__main__", "__file__": str(ROOT / ".migration" / "prepare.py")}
 exec(compile(source, str(ROOT / ".migration" / "boundary_extract.py"), "exec"), namespace)
