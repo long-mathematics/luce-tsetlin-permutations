@@ -33,8 +33,8 @@ For arbitrary triangular arrays of positive rates with a fixed largest-to-smalle
 
 $$
 \mathbb E C_{n,r}\sim \frac1r
-
 $$
+
 
 uniformly whenever the cycle length tends to infinity but remains $o(n)$. More generally, if $a_n\to\infty$ and $a_n=o(n)$, the point process of cycle lengths divided by $a_n$ converges vaguely to the scale-invariant Poisson process with intensity $dx/x$.
 
@@ -52,8 +52,8 @@ $$
 \frac{\log\mathrm{ord}(\sigma_n)-\frac12(\log n)^2}
 {\sqrt{\frac13(\log n)^3}}
 \Rightarrow N(0,1).
-
 $$
+
 
 The additive cycle-product statistic is handled by the marked switching theory, while an exact rate-oriented three-clock identity controls the arithmetic difference between the product and least common multiple of the cycle lengths through a uniform two-cycle factorial-moment estimate.
 
@@ -70,8 +70,8 @@ d_{\mathrm K}\left(
 \frac{\log O_n-m_n}{\sqrt{L^3/3}},N(0,1)
 \right)
 \le \frac{C_\kappa}{\sqrt L},
-
 $$
+
 
 together with the first Edgeworth correction
 
@@ -81,8 +81,8 @@ $$
 \right\rbrace
 = \Phi(x)-\frac{\sqrt3}{8}(x^2-1)\varphi(x)L^{-1/2}
 +o_\kappa(L^{-1/2}).
-
 $$
+
 
 The proof combines polynomial endpoint control, prime-power linearization, compound-Poisson approximation, an extended Fourier window, and bounds for the nonlinear arithmetic remainder.
 
@@ -97,9 +97,9 @@ For arbitrary comparable-rate triangular arrays, define the cycle-count and trun
 $$
 K_n(t)=\sum_{r\le n^t}C_{n,r},
 \qquad
-\mathcal O_n(t)=\log\mathrm{lcm}\lbracer\le n^t:C_{n,r}>0\rbrace.
-
+\mathcal O_n(t)=\log\mathrm{lcm}\lbrace r\le n^t:C_{n,r}>0\rbrace.
 $$
+
 
 This paper proves their joint functional convergence to the common Brownian field
 
@@ -111,8 +111,8 @@ $$
 \right)
 \Rightarrow
 \left(W(t),\sqrt3\int_0^t udW(u)\right).
-
 $$
+
 
 In particular it gives the total-cycle CLT and the joint endpoint Gaussian law, whose cycle-count/order correlation is $\sqrt3/2$.
 
@@ -129,8 +129,8 @@ Let $K_n$ be the total number of cycles and $\mu_n=\mathbb E K_n$. For comparabl
 $$
 d_{\mathrm{TV}}\left(\mathcal L(K_n),\mathrm{Pois}(\mu_n)\right)
 = O_\kappa\left(\frac{(\log\log n)^2}{\log n}\right),
-
 $$
+
 
 which yields the sharp Berry--Esseen order $(\log n)^{-1/2}$. Its first lattice Edgeworth expansion determines the exact leading Kolmogorov constant $2/(3\sqrt{2\pi})$.
 
@@ -188,15 +188,15 @@ $$
 \theta_{n,i}=a_n\bigl(f(i/n)+\varepsilon_{n,i}\bigr),
 \qquad
 \max_i|\varepsilon_{n,i}|\to0,
-
 $$
+
 
 this paper proves joint independent Poisson limits for every fixed vector of cycle counts. Their means are cyclic traces of the microscopic Luce kernel, and those limiting means satisfy
 
 $$
 \lambda_r=\frac1r+O\left(\frac{q^r}{r}\right)
-
 $$
+
 
 for some $q<1$ depending on the limiting profile.
 
@@ -221,16 +221,16 @@ For positive rates with a fixed largest-to-smallest ratio, write $K_n$ for the t
 $$
 \mathrm{d}_{\mathrm{TV}}(\mathcal L(K_n),\mathrm{Pois}(\mu_n))
 = O_\kappa((\log L)^2/L),
-
 $$
+
 
 and the exact leading normal-approximation constant
 
 $$
 \sqrt L\mathrm{d}_{\mathrm K}((K_n-\mu_n)/\sqrt L,N(0,1))
 \longrightarrow \frac{2}{3\sqrt{2\pi}}.
-
 $$
+
 
 It also proves first and second lattice Edgeworth expansions and signed Poisson–Charlier approximations at each fixed order. The second expansion retains the exact variance-minus-mean correction; it does not identify a limiting profile constant. Exact mean, lattice phase, and fixed-order quantifiers are essential. See [theorem status](THEOREM_STATUS.md) and [dependencies](DEPENDENCIES.md).
 
