@@ -141,6 +141,8 @@ def check_markdown_math(text: str, label: str = '<markdown>') -> None:
 
     def inspect(expr: str, lineno: int) -> None:
         i = 0
+        if any(ch in expr for ch in ('%', '#', '&')):
+            raise ValueError(f'Unsafe raw TeX punctuation in {label}:{lineno}')
         while i < len(expr):
             if expr[i] != backslash:
                 i += 1
@@ -181,6 +183,8 @@ def check_markdown_math(text: str, label: str = '<markdown>') -> None:
         if display_token in plain:
             if plain != display_token:
                 raise ValueError(f'Display delimiter must occupy its own line in {label}:{lineno}')
+            if line != display_token:
+                raise ValueError(f'Display delimiter must be unindented in {label}:{lineno}')
             if not display:
                 if i and lines[i - 1].strip():
                     raise ValueError(f'Missing blank line before display in {label}:{lineno}')
