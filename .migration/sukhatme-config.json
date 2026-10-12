@@ -10,7 +10,7 @@
   "test": "tests/test_sukhatme_extraction.py",
   "catalog_before": "regular-profile-cycles",
   "dependencies": [],
-  "abstract": "For the singular Luce profile with rates n,n-1,...,1, this paper proves that the expected number of fixed points is asymptotic to e^{-1} log n, establishes a local Poisson point process for fixed points on logarithmic terminal coordinates, and proves all fixed factorial-moment asymptotics. The proof develops an anisotropic terminal saddle, tilted lattice local estimates, product-scale localization, and a death-process domination for non-separated configurations.",
+  "abstract": "For the singular Luce profile with rates \\(n,n-1,\\ldots,1\\), this paper proves that the expected number of fixed points is asymptotic to \\(e^{-1}\\log n\\), establishes a local Poisson point process for fixed points on logarithmic terminal coordinates, and proves all fixed factorial-moment asymptotics. The proof develops an anisotropic terminal saddle, tilted lattice local estimates, product-scale localization, and a death-process domination for non-separated configurations.",
   "blocks": [
     {"name":"Exponential-race input","start":"\\subsection{The exponential race}","end":"\\subsection{Gumbel priorities}","begin_marker":"% BEGIN ARCHIVED BLOCK: exponential-race-input","end_marker":"% END ARCHIVED BLOCK: exponential-race-input","first_line":224,"last_line":233,"wrapper":"Exponential-race input"},
     {"name":"Gumbel threshold input","start":"\\subsection{Gumbel priorities}","end":"\\begin{remark}[The derivative cancellation]","begin_marker":"% BEGIN ARCHIVED BLOCK: gumbel-threshold-input","end_marker":"% END ARCHIVED BLOCK: gumbel-threshold-input","first_line":234,"last_line":300},
