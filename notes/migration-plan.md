@@ -20,7 +20,7 @@ The audit examined the clock-slab conditioning, relative-prefix estimate, rooted
 
 The regular-profile microscopic-cycle/sparse-entry paper has now completed mechanical extraction, adversarial proof audit, and localized clarification repair. Its active source is an audited current manuscript; the frozen monolith remains unchanged.
 
-The remaining planned thematic destinations are boundary laws; Sukhatme fixed points; endpoint universality; global endpoint fixed-point Poisson approximation; and singular-profile short cycles. These are proposed boundaries, not a promise that every extraction already fits a particular page count. Do not change hypotheses or upgrade proof status during mechanical extraction.
+The boundary-laws paper is now present as a working mechanical extraction with completeness checks; its adversarial audit is pending. The remaining planned thematic destinations are Sukhatme fixed points; endpoint universality; global endpoint fixed-point Poisson approximation; and singular-profile short cycles. These are proposed boundaries, not a promise that every extraction already fits a particular page count. Do not change hypotheses or upgrade proof status during mechanical extraction.
 
 Do not maintain two independently editable copies. Active thematic papers live under `papers/`; the frozen monolith remains the provenance source under `archive/6178a99/`.
 

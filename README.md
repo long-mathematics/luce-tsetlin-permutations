@@ -13,6 +13,7 @@ Manuscript author: **Christopher D. Long**.
 | A Sharp Berry--Esseen Theorem and First Edgeworth Expansion for Logarithmic Luce Order | [PDF](output/pdf/luce-edgeworth.pdf) | [Source](papers/sharp-order-edgeworth/luce-edgeworth.tex) | imported |
 | Functional Erdos--Turan and Total-Cycle Laws for Luce Permutations | [PDF](output/pdf/functional-luce-erdos-turan.pdf) | [Source](papers/functional-erdos-turan/functional-luce-erdos-turan.tex) | current-research |
 | Poisson Approximation and Lattice Edgeworth Expansions for Total Luce Cycles | [PDF](output/pdf/total-cycle-edgeworth.pdf) | [Source](papers/total-cycle-edgeworth/total-cycle-edgeworth.tex) | current-research |
+| Boundary Laws for Luce Rankings | [PDF](output/pdf/boundary-laws.pdf) | [Source](papers/boundary-laws/boundary-laws.tex) | mechanical extraction; proof audit pending |
 | Microscopic Cycles and Sparse Entries for Regular Luce Profiles | [PDF](output/pdf/regular-profile-cycles.pdf) | [Source](papers/regular-profile-cycles/regular-profile-cycles.tex) | audited current manuscript |
 | Poisson--Dirichlet Universality for Luce Permutations | [PDF](output/pdf/poisson-dirichlet-luce.pdf) | [Source](papers/macroscopic-pd/poisson-dirichlet-luce.tex) | audited current manuscript |
 
@@ -112,6 +113,14 @@ which yields the sharp Berry--Esseen order $(\log n)^{-1/2}$. Its first lattice 
 The paper also gives the variance asymptotic, a continuity-corrected second-order lattice expansion retaining the exact coefficient $\mathrm{Var}K_n-\mu_n$, and signed Poisson--Charlier approximations at every fixed order. The proof uses a passive-mark Poisson core from the switching theory and discrete Poisson smoothing; it does not use the nonlinear arithmetic analysis required for logarithmic permutation order.
 
 **Status:** current research manuscript. Exact-mean centering and the lattice phase are essential; profile-dependent limiting mean and higher-cumulant constants remain separate open questions.
+
+### Boundary laws for Luce rankings
+
+[PDF](output/pdf/boundary-laws.pdf) · [LaTeX](papers/boundary-laws/boundary-laws.tex)
+
+This paper isolates the finite top-window identities and infinite bottom-window leakage theory from the archived monolith. It proves that the exact top-window total-variation distance equals the collision probability of the corresponding product sample, gives the exact one-sided relative defect, and identifies the total mass lost by a limiting bottom-window law. A vanishing-block construction records why permuton convergence alone cannot control microscopic statistics.
+
+**Status:** working mechanical extraction. Source coverage and reference closure are checked; a separate proof audit is pending.
 
 ### Microscopic cycles and sparse entries for regular Luce profiles
 
