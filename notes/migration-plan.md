@@ -22,6 +22,8 @@ The regular-profile microscopic-cycle/sparse-entry paper has now completed mecha
 
 The boundary-laws paper and the Sukhatme fixed-point paper are now present as working mechanical extractions with completeness checks; their adversarial audits are tracked separately. The remaining planned thematic destinations are endpoint universality; global endpoint fixed-point Poisson approximation; and singular-profile short cycles. These are proposed boundaries, not a promise that every extraction already fits a particular page count. Do not change hypotheses or upgrade proof status during mechanical extraction.
 
+The endpoint-regular universality paper is now present as a working mechanical extraction with completeness checks; its adversarial audit is tracked separately.
+
 Do not maintain two independently editable copies. Active thematic papers live under `papers/`; the frozen monolith remains the provenance source under `archive/6178a99/`.
 
 ## Initial integration record

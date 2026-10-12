@@ -15,6 +15,7 @@ Manuscript author: **Christopher D. Long**.
 | Poisson Approximation and Lattice Edgeworth Expansions for Total Luce Cycles | [PDF](output/pdf/total-cycle-edgeworth.pdf) | [Source](papers/total-cycle-edgeworth/total-cycle-edgeworth.tex) | current-research |
 | Boundary Laws for Luce Rankings | [PDF](output/pdf/boundary-laws.pdf) | [Source](papers/boundary-laws/boundary-laws.tex) | mechanical extraction; proof audit pending |
 | Sukhatme Fixed Points and the Terminal Poisson Process | [PDF](output/pdf/sukhatme-fixed-points.pdf) | [Source](papers/sukhatme-fixed-points/sukhatme-fixed-points.tex) | mechanical extraction; proof audit pending |
+| Endpoint-Regular Fixed-Point Universality | [PDF](output/pdf/endpoint-regular-universality.pdf) | [Source](papers/endpoint-regular-universality/endpoint-regular-universality.tex) | mechanical extraction; proof audit pending |
 | Microscopic Cycles and Sparse Entries for Regular Luce Profiles | [PDF](output/pdf/regular-profile-cycles.pdf) | [Source](papers/regular-profile-cycles/regular-profile-cycles.tex) | audited current manuscript |
 | Poisson--Dirichlet Universality for Luce Permutations | [PDF](output/pdf/poisson-dirichlet-luce.pdf) | [Source](papers/macroscopic-pd/poisson-dirichlet-luce.tex) | audited current manuscript |
 
@@ -128,6 +129,14 @@ This paper isolates the finite top-window identities and infinite bottom-window 
 [PDF](output/pdf/sukhatme-fixed-points.pdf) · [LaTeX](papers/sukhatme-fixed-points/sukhatme-fixed-points.tex)
 
 For the singular decreasing-rate profile, this paper proves logarithmic fixed-point growth, a local terminal Poisson point process on logarithmic coordinates, and all fixed factorial-moment asymptotics. Its proof combines a death-process envelope with anisotropic saddle and local-limit analysis.
+
+**Status:** working mechanical extraction. Source coverage and dependency closure are checked; a separate proof audit is pending.
+
+### Endpoint-regular fixed-point universality
+
+[PDF](output/pdf/endpoint-regular-universality.pdf) · [LaTeX](papers/endpoint-regular-universality/endpoint-regular-universality.tex)
+
+For uniformly endpoint-regularly varying terminal arrays, the paper proves a logarithmic fixed-point Poisson process, displacement and tangent-measure laws, a multiplicative endpoint kernel, and a microscopic endpoint permutation limit. Its proof uses endpoint-specific anisotropic saddle and local-limit analysis.
 
 **Status:** working mechanical extraction. Source coverage and dependency closure are checked; a separate proof audit is pending.
 

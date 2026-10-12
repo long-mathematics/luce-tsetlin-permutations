@@ -70,6 +70,14 @@
       "dependencies": []
     },
     {
+      "id": "endpoint-regular-universality",
+      "title": "Endpoint-Regular Fixed-Point Universality",
+      "source": "papers/endpoint-regular-universality/endpoint-regular-universality.tex",
+      "pdf": "output/pdf/endpoint-regular-universality.pdf",
+      "status": "working",
+      "dependencies": []
+    },
+    {
       "id": "regular-profile-cycles",
       "title": "Microscopic Cycles and Sparse Entries for Regular Luce Profiles",
       "source": "papers/regular-profile-cycles/regular-profile-cycles.tex",
