@@ -56,6 +56,30 @@ class RepositoryTests(unittest.TestCase):
         self.assertIn('No principal theorem-and-proof package now exists only', plan)
         self.assertEqual(status.count('audit passed, repairs pending'), 5)
 
+    def test_normalized_theorem_and_dependency_maps_match_catalog(self):
+        docs = build.catalog()
+        ids = [d['id'] for d in docs]
+        status = (ROOT/'THEOREM_STATUS.md').read_text()
+        deps = (ROOT/'DEPENDENCIES.md').read_text()
+
+        status_rows = [line for line in status.splitlines() if line.startswith('| `')]
+        status_ids = [line.split('`')[1] for line in status_rows[:len(ids)]]
+        self.assertEqual(status_ids, ids)
+
+        dep_section = deps.split('## Canonical document graph', 1)[1].split('## Module-level dependency register', 1)[0]
+        dep_rows = [line for line in dep_section.splitlines() if line.startswith('| `')]
+        dep_ids = [line.split('`')[1] for line in dep_rows]
+        self.assertEqual(dep_ids, ids)
+
+        for d in docs:
+            dep_cell = ', '.join('`'+x+'`' for x in d.get('dependencies', [])) or 'None'
+            self.assertIn('| `'+d['id']+'` | '+dep_cell+' |', dep_section)
+            catalog_fragment = '| `'+d['id']+'` |'
+            self.assertIn(catalog_fragment, status)
+            self.assertIn('| `'+d['status']+'` |', status)
+
+        self.assertEqual(status.count('audit passed, repairs pending'), 5)
+
     def test_historical_candidate_is_not_dependency(self):
         for d in build.catalog():
             self.assertNotIn('resolution-candidate', d['source'])

@@ -1,96 +1,82 @@
 # Theorem status
 
-Status date: 12 October 2026. This register distinguishes mathematical assertions, scoped proof reviews, mechanical extraction, and open questions. It is not an independent referee report or a formal proof certificate.
+Status date: 12 October 2026.
+
+This is the canonical theorem/review map for the active Luce/Tsetlin manuscript series. It separates **catalog status** (the machine-readable state in `papers.json`) from **mathematical review state**. Neither an internal audit nor CI is independent external refereeing or formal verification.
 
 ## Status vocabulary
 
-**Imported** means byte-preserved source provenance, not new mathematical review. **Current research manuscript** means the integrated proof and named dependencies are documented. **Audited current manuscript** means an internal adversarial audit found no fatal gap, every recommended localized repair was applied, and the exact review boundary is recorded; it is not formal verification or independent external refereeing. **Working mechanical extraction** means the archived theorem and proof have been moved into a standalone source with extraction coverage checks. A paper may additionally have an audit-passed/repairs-pending status; it is not promoted to audited-current status until those repairs are applied and checked. **Working** means an exploratory candidate. **Reviewed dependency** means only the named module was covered by a scoped audit. **Historical rejected candidate** means immutable provenance, excluded from dependencies. **Open** means no proof is promoted here.
+The catalog uses exactly three active-document states:
 
-## Result-level status
+- **`imported`**: provenance-preserved active source; no new full-paper review is implied.
+- **`current-research`**: an active integrated research manuscript whose proof dependencies and review boundary are documented.
+- **`working`**: an active manuscript that has not yet been promoted to current-research status.
 
-| Result | Current location and scope |
-| --- | --- |
-| Comparable-rate mesoscopic cycles | Imported switching manuscript, now with an explicit truncation-uniform one-/two-root interface. The previously scoped endpoint audit applies to the named modules; no new full-series audit is asserted. |
-| Scalar logarithmic-order CLT | Imported scalar paper, source unchanged by integration. |
-| Sharp logarithmic-order Berry–Esseen/Edgeworth | Imported quantitative-order paper retains its result assertions. This integration narrows the wording of its endpoint interface to the source's mean conditional/annealed statement; it does not re-audit the nonlinear arithmetic proof. |
-| Total-cycle CLT and joint functional count/order law | Current functional paper incorporates the scoped audit's explicit total-count, mean-centering, bounded-weight, tightness, and path-domain clarifications. |
-| Exact-mean total-cycle Poisson approximation and sharp Berry–Esseen | Current quantitative total-cycle paper; the independent copied omitted count and mean-matched smoothing proof are explicit. Only the named switching modules, not the log-order Edgeworth theorem, are inputs. |
-| First lattice Edgeworth expansion and exact leading Kolmogorov constant | Current total-cycle paper, with the right-continuous integer phase. |
-| Variance asymptotic, second signed/lattice expansion, fixed-order Poisson–Charlier hierarchy | Current total-cycle paper, using fixed-order factorial domination and explicit moment transfer. Expansion order is fixed; no analytic residue convergence is inferred. |
-| Boundary laws | **Working mechanical extraction; audit passed, repairs pending** in `papers/boundary-laws/`. The adversarial audit found no fatal gap in the vanishing-block obstruction, exact top-window identities, bottom-window convergence, terminal leakage, or log-log phase diagram. Six localized clarifications are recorded in `audits/boundary-laws-proof-audit.md`; none is applied here. |
-| Sukhatme fixed points and terminal Poisson process | **Working mechanical extraction; audit passed, repairs pending** in `papers/sukhatme-fixed-points/`. The adversarial audit found no fatal gap in the death-process envelope, one- and multipoint terminal saddles, anisotropic localization, local terminal Poisson process, or fixed factorial moments. Six localized clarifications are recorded and deferred. |
-| Endpoint-Regular Fixed-Point Universality | **Working mechanical extraction; audit passed, repairs pending** in `papers/endpoint-regular-universality/`. The endpoint fixed-point Poisson process, factorial moments, displacement and tangent laws, multiplicative kernel, and microscopic endpoint permutation all passed the independent audit within their archived scope. Six localized clarifications are recorded and deferred. |
-| Global Endpoint Poisson Approximation | **Working mechanical extraction; audit passed, repairs pending** in `papers/global-endpoint-poisson/`. The independent audit found no fatal gap in the endpoint framework, approximate-Palm Stein argument, rank transposition, quantitative saddle, swap--Palm comparison, two-cycle correction, explicit total-variation rate, or normal corollary. Six localized clarifications are recorded and deferred. |
-| Endpoint Short Cycles | **Working mechanical extraction; audit passed, repairs pending** in `papers/endpoint-short-cycles/`. The independent audit found no fatal gap in the source-to-target saddle, anisotropic LLT, global cycle envelope, logarithmic traces, negligible-configuration bounds, mixed factorial moments, or fixed-`L^p` law of large numbers. Six localized clarifications are recorded and deferred. |
-| Regular positive-profile microscopic cycles and sparse entries | **Audited current manuscript** in `papers/regular-profile-cycles/`. The exact sampled-profile hypothesis, fixed-vector independent Poisson limits, trace means, long-trace asymptotic, diagonal-band laws, sparse-entry theorem, thin-graph laws, deterministic-overlap conclusion, and transverse-curve corollary are unchanged. The adversarial audit found no fatal gap in the local saddle/LLT argument, endpoint and collision domination, improper integrability, factorial-moment summation, total-variation upgrade, spectral trace argument, or sparse-entry applications. Six localized clarification sets were applied; no arbitrary-comparable-array, growing-cycle, endpoint-singular, or quantitative-TV strengthening is claimed. |
-| Macroscopic PD/GEM theorem | **Audited current manuscript** in `papers/macroscopic-pd/`. The exact comparability hypothesis, PD(1) and GEM(1) conclusions, independently resampled uniform-root construction, uniform-root conclusion, and `ell^1` topologies are unchanged. The adversarial audit found no fatal gap in conditioning, adaptive exposure, rooted closure, deletion stability, regeneration, GEM induction, residual-mass control, or the `ell^1` passage. Six localized clarification repairs were applied; no quantitative, quenched, endpoint-singular, mesoscopic, or total-cycle strengthening is claimed. |
-| Remaining monolith-only material | No principal theorem-and-proof package remains only in the frozen monolith. The remaining monolith-only text is introductory, transitional, concluding, or conjectural exposition; see `notes/migration-plan.md`. |
+The human review state is more precise:
 
-The original total-cycle/Conjecture 13.2 candidate remains a **Historical rejected candidate**. The newer Campbell–Stein proof does not reinstate its proposed profile expectation expansion.
+- **Scoped review only**: named modules or interfaces have been checked, but no full-paper audit is claimed.
+- **Current research / integrated review**: the active proof and named dependency interfaces are documented, but no end-to-end adversarial audit is claimed.
+- **Audit passed, repairs pending**: an adversarial audit found no fatal gap, but its localized clarifications have deliberately not yet been applied; the catalog therefore remains `working`.
+- **Audited current manuscript**: an adversarial audit found no fatal gap, all approved localized repairs were applied, and regression checks preserve theorem scope.
+- **Historical rejected candidate**: preserved provenance that is explicitly excluded from active dependency chains.
+- **Open**: a conjecture or research target not promoted as a theorem.
 
-## Boundary-laws extraction boundary
+## Canonical manuscript-level map
 
-The selected blocks are byte-preserved, all internal references close, and no active paper is a proof dependency. The adversarial audit checked the exact finite identities, infinite-product limit, terminal leakage, phase diagram, and all endpoint cases and found no fatal gap. Six localized clarification repairs are specified in `audits/boundary-laws-proof-audit.md` and remain deliberately unapplied.
+The rows below are in the same order as `papers.json`. Every active manuscript appears exactly once.
 
-## Sukhatme extraction boundary
+| ID | Manuscript | Catalog status | Review state | Principal theorem package and scope |
+| --- | --- | --- | --- | --- |
+| `mesoscopic-switching` | Mesoscopic cycles of comparable-rate Luce permutations | `imported` | Scoped review only | For arbitrary comparable-rate triangular arrays, mesoscopic first moments are asymptotic to 1/r uniformly for r→∞ with r=o(n), and rescaled mesoscopic cycle lengths converge to the scale-invariant Poisson process. The marked switch, selected-factor estimates, and finite-endpoint interface are the reviewed modules used downstream. |
+| `erdos-turan-order` | An Erdős--Turán Law for Comparable-Rate Luce Permutations | `imported` | Imported; no full-paper audit | The classical logarithmic-order CLT holds for arbitrary comparable-rate triangular arrays. The source is unchanged by later integration; downstream use is restricted to the named arithmetic/product--LCM modules recorded in `DEPENDENCIES.md`. |
+| `sharp-order-edgeworth` | A Sharp Berry--Esseen Theorem and First Edgeworth Expansion for Logarithmic Luce Order | `imported` | Imported; nonlinear arithmetic not re-audited | Retains the sharp order Berry--Esseen and first Edgeworth assertions under comparable rates. Later work reuses named switching, intensity, and factorial-domination modules only; it does not certify the full nonlinear prime-power/arithmetic remainder argument. |
+| `functional-erdos-turan` | Functional Erdős--Turán and Total-Cycle Laws for Luce Permutations | `current-research` | Current research / integrated review | Gives the bivariate functional count/order limit, total-cycle CLT, bounded logarithmic-scale Gaussian field, and joint endpoint law. The count-only branch and arithmetic order branch have distinct dependency boundaries. |
+| `total-cycle-edgeworth` | Poisson Approximation and Lattice Edgeworth Expansions for Total Luce Cycles | `current-research` | Current research / integrated review | Gives exact-mean Poisson approximation, sharp normal approximation, first and second lattice Edgeworth expansions, variance control, and the fixed-order signed Poisson--Charlier hierarchy. Expansion order is fixed; no analytic mod-Poisson residue or limiting profile mean constant is inferred. |
+| `boundary-laws` | Boundary Laws for Luce Rankings | `working` | **Working mechanical extraction; audit passed, repairs pending** | The vanishing-block obstruction, exact top-window total variation and relative defect, birthday transfer, finite bottom-window convergence, terminal leakage, and log-log phase diagram all passed adversarial audit within the archived scope. Six localized clarifications remain deferred. |
+| `sukhatme-fixed-points` | Sukhatme Fixed Points and the Terminal Poisson Process | `working` | **Working mechanical extraction; audit passed, repairs pending** | The death-process envelope, one- and multipoint terminal saddles, anisotropic local-limit/localization package, local terminal Poisson process, mean asymptotic, and fixed factorial moments passed adversarial audit. Six localized clarifications remain deferred. |
+| `endpoint-regular-universality` | Endpoint-Regular Fixed-Point Universality | `working` | **Working mechanical extraction; audit passed, repairs pending** | Endpoint fixed-point Poisson universality, factorial moments, displacement law, tangent measure, multiplicative endpoint kernel, diagonal traces, and microscopic endpoint-permutation limit passed adversarial audit. Six localized clarifications remain deferred. |
+| `global-endpoint-poisson` | Global Endpoint Poisson Approximation | `working` | **Working mechanical extraction; audit passed, repairs pending** | The endpoint framework, approximate-Palm Stein bound, exact rank-transposition likelihood ratio, quantitative saddle, swap--Palm comparison, two-cycle correction, explicit total-variation rate, and exact-mean normal corollary passed adversarial audit. Six localized clarifications remain deferred. |
+| `endpoint-short-cycles` | Endpoint Short Cycles | `working` | **Working mechanical extraction; audit passed, repairs pending** | The source-to-target endpoint saddle, anisotropic LLT/localization, global cycle envelope, logarithmic trace, negligible-configuration bounds, mixed factorial moments, and fixed-Lp law of large numbers passed adversarial audit. Six localized clarifications remain deferred. |
+| `regular-profile-cycles` | Microscopic Cycles and Sparse Entries for Regular Luce Profiles | `current-research` | **Audited current manuscript** | Under the exact sampled positive continuous-profile hypothesis, fixed cycle vectors converge to independent Poisson laws with cyclic-trace means; the means approach 1/r exponentially. The same paper gives diagonal-band, sparse-entry, thin-graph, deterministic-overlap, and transverse-curve laws. Six audit-approved clarifications were applied and regression-checked. |
+| `macroscopic-pd` | Poisson--Dirichlet Universality for Luce Permutations | `current-research` | **Audited current manuscript** | Under a fixed largest-to-smallest rate ratio, normalized ranked cycles converge to PD(1) in ell-one, the independent residual-root deletion sequence converges to GEM(1) in ell-one, and a uniform-root cycle has a Uniform(0,1) limit. Six audit-approved clarifications were applied and regression-checked. |
 
-The exponential/Gumbel input, analytic LLT input, death-process envelope, anisotropic terminal saddle package, local Poisson process, and factorial-moment theorem are byte-preserved and dependency-closed. The independent audit found no fatal gap and records six localized clarifications. The manuscript remains a working extraction until those repairs are applied in a separate focused PR.
+## Precision and non-claims
 
-## Endpoint-Regular Fixed-Point Universality extraction boundary
+For the quantitative total-cycle results, exact-mean centering is essential at the stated precision. The available general estimate is `E K_n = log n + O(log log n)`; this does not justify replacing the exact mean inside the sharp lattice formulas. The second-order expansion retains the exact variance-minus-mean coefficient, controlled by `O((log log n)^2)`; no limiting coefficient is asserted. Signed approximants are not asserted positive, and the right-continuous lattice phase equals +1/2 at integers.
 
-The selected mathematical blocks are byte-preserved and dependency-closed. The adversarial audit checked endpoint regular variation, anisotropic localization, fixed-point factorial moments, displacement and tangent laws, the multiplicative semigroup, and the microscopic endpoint permutation, and found no fatal gap. Six localized clarifications are recorded and deferred.
+The two audited-current extracted papers do not acquire any unreviewed strengthening. The regular-profile paper is not extended to arbitrary comparable arrays, growing cycle lengths, endpoint-singular profiles, or a quantitative total-variation rate. The PD/GEM paper does not assert a quantitative rate, arbitrary-history quenched uniformity, or endpoint-singular macroscopic universality.
 
-## Global Endpoint Poisson Approximation extraction boundary
+The five audit-passed working extractions remain below audited-current status until their recorded clarifications are applied in focused repair PRs and checked against the frozen-source theorem scope.
 
-The selected mathematical blocks are byte-preserved and dependency-closed. The adversarial audit checked the Stein normalization, endpoint package, swap likelihood ratio and Palm comparison, two-cycle correction, weighted summation, and final total-variation/normal limits, and found no fatal gap. Six localized clarifications are recorded and deferred.
+## Historical material
 
-## Endpoint Short Cycles extraction boundary
+The original total-cycle / Conjecture 13.2 resolution candidate is a **Historical rejected candidate**. The later Campbell--Stein proof does not reinstate its proposed profile expectation expansion.
 
-The selected mathematical blocks are byte-preserved and dependency-closed. The adversarial audit checked endpoint regularity, source-to-target local limits, mixed localization, forced-deletion envelopes, logarithmic traces, negligible configurations, mixed factorial moments, and fixed-`L^p` convergence, and found no fatal gap. Six localized clarifications are recorded and deferred.
-
-## Regular-profile audit and repair boundary
-
-The standalone regular-profile paper was initially byte-preserving across the
-exponential/Gumbel input, the analytic Bernoulli and lattice-LLT input, and the
-complete regular positive-profile section. The adversarial audit then checked
-the multivariate local limit and integrated saddle, uniform profile
-perturbations, gap/endpoint/collision envelopes, improper trace passage,
-fixed and mixed factorial moments, discrete total variation, compact spectral
-trace argument, diagonal bands, sparse entries, thin graphs, deterministic
-overlaps, and the transverse-curve application. It found no fatal gap.
-
-The active source now differs from the archive only through six marked
-clarification sets: uniform profile-approximation bookkeeping, the
-integrated-saddle checklist, two summability/limit-order clarifications, the
-cycle combinatorial normalization, standard convergence references, and the
-spectral/repeated-edge bookkeeping. These edits do not change a principal
-hypothesis, conclusion, limiting constant, or convergence mode. All
-model-specific lemmas remain internal and the catalog records no active-paper
-dependency. The review is internal, not formal verification or independent
-peer review.
-
-## Macroscopic audit and repair boundary
-
-The PD/GEM paper does not import the later total-cycle results. All model-specific lemmas used by the macroscopic proof remain internal. The adversarial audit covers reduced slab conditioning, residual permanental factorization, predictable adaptive exposure, the relative-prefix theorem, scale-sensitive rooted closure, exclusion of premature auxiliary termination, deletion stability on a joint event, the noncircular GEM hierarchy, and the bounded-Lipschitz `ell^1` restoration. The six applied repairs make those points explicit and add textbook references for the standard external inputs. The review does not establish a convergence rate, arbitrary-history quenched uniformity, endpoint-singular universality, formal verification, novelty certification, or independent peer review.
-
-## Proven precision boundaries
-
-The quantitative count theorems use the exact mean. The available general estimate is mean = log n + O(log log n); this does not give the same sharp bound with center log n. The second-order expansion retains the exact variance-minus-mean coefficient, bounded by O((log log n)^2), not a conjectured limiting constant. Signed approximants are not asserted positive. The first lattice phase at an integer is +1/2.
+No principal theorem-and-proof package remains only in the frozen 139-page monolith. The monolith-only remainder is introductory, transitional, concluding, or conjectural exposition, as recorded in `notes/migration-plan.md`.
 
 ## Open questions
 
-The sampled-profile mean constant, a uniformly bounded mean shift for arbitrary comparable arrays, convergence of higher factorial cumulants, and a locally uniform complex Luce mod-Poisson residue remain open in this repository. See [profile-limit note](notes/working/profile-mod-poisson.md).
+The sampled-profile total-cycle mean constant, a uniformly bounded mean shift for arbitrary comparable arrays, convergence of higher factorial cumulants, and a locally uniform complex Luce mod-Poisson residue remain open. See [the profile-limit note](notes/working/profile-mod-poisson.md).
 
 ## Review records
 
-The five final thematic extractions have paired extraction and audit records:
+The five audit-passed working extractions have paired extraction, provenance, and proof-audit records:
 
-- [Boundary extraction](audits/boundary-laws-extraction.md), [boundary proof audit](audits/boundary-laws-proof-audit.md), and [boundary provenance map](papers/boundary-laws/EXTRACTION_MAP.md);
-- [Sukhatme extraction](audits/sukhatme-fixed-points-extraction.md), [Sukhatme proof audit](audits/sukhatme-fixed-points-proof-audit.md), and [Sukhatme provenance map](papers/sukhatme-fixed-points/EXTRACTION_MAP.md);
-- [Endpoint-regular extraction](audits/endpoint-regular-universality-extraction.md), [endpoint-regular proof audit](audits/endpoint-regular-universality-proof-audit.md), and [endpoint-regular provenance map](papers/endpoint-regular-universality/EXTRACTION_MAP.md);
-- [Global endpoint extraction](audits/global-endpoint-poisson-extraction.md), [global endpoint proof audit](audits/global-endpoint-poisson-proof-audit.md), and [global endpoint provenance map](papers/global-endpoint-poisson/EXTRACTION_MAP.md);
-- [Endpoint short-cycle extraction](audits/endpoint-short-cycles-extraction.md), [endpoint short-cycle proof audit](audits/endpoint-short-cycles-proof-audit.md), and [endpoint short-cycle provenance map](papers/endpoint-short-cycles/EXTRACTION_MAP.md).
+| ID | Extraction record | Proof audit | Provenance map |
+| --- | --- | --- | --- |
+| `boundary-laws` | [record](audits/boundary-laws-extraction.md) | [audit](audits/boundary-laws-proof-audit.md) | [map](papers/boundary-laws/EXTRACTION_MAP.md) |
+| `sukhatme-fixed-points` | [record](audits/sukhatme-fixed-points-extraction.md) | [audit](audits/sukhatme-fixed-points-proof-audit.md) | [map](papers/sukhatme-fixed-points/EXTRACTION_MAP.md) |
+| `endpoint-regular-universality` | [record](audits/endpoint-regular-universality-extraction.md) | [audit](audits/endpoint-regular-universality-proof-audit.md) | [map](papers/endpoint-regular-universality/EXTRACTION_MAP.md) |
+| `global-endpoint-poisson` | [record](audits/global-endpoint-poisson-extraction.md) | [audit](audits/global-endpoint-poisson-proof-audit.md) | [map](papers/global-endpoint-poisson/EXTRACTION_MAP.md) |
+| `endpoint-short-cycles` | [record](audits/endpoint-short-cycles-extraction.md) | [audit](audits/endpoint-short-cycles-proof-audit.md) | [map](papers/endpoint-short-cycles/EXTRACTION_MAP.md) |
 
-Earlier records include the [regular-profile extraction](audits/regular-profile-extraction.md), [proof audit](audits/regular-profile-proof-audit.md), and [repair record](audits/regular-profile-repair-record.md); the [PD/GEM extraction](audits/macroscopic-pd-extraction.md), [proof audit](audits/macroscopic-pd-proof-audit.md), and [repair record](audits/macroscopic-pd-repair-record.md); the [total-cycle integration audit](audits/total-cycle-integration.md); the [dependency register](DEPENDENCIES.md); and the [preserved total-cycle proof notes](archive/total-cycle-source-notes/README.md). Original finite result records are provenance; current checks are rerun in CI.
+The audited-current extracted papers have full extraction/audit/repair chains:
 
-Formalization status: **not started in this repository**. Finite exact identities, numerical checks, and token-preserving extraction tests do not constitute Lean verification or proofs of asymptotic estimates. No independent novelty certification or peer review is claimed.
+| ID | Extraction | Audit | Repair |
+| --- | --- | --- | --- |
+| `regular-profile-cycles` | [record](audits/regular-profile-extraction.md) | [audit](audits/regular-profile-proof-audit.md) | [repair](audits/regular-profile-repair-record.md) |
+| `macroscopic-pd` | [record](audits/macroscopic-pd-extraction.md) | [audit](audits/macroscopic-pd-proof-audit.md) | [repair](audits/macroscopic-pd-repair-record.md) |
+
+The total-cycle integration boundary is recorded in [the integration audit](audits/total-cycle-integration.md), and the preserved source proof notes remain under [`archive/total-cycle-source-notes/`](archive/total-cycle-source-notes/README.md).
+
+Formalization status: **not started in this repository**. CI, deterministic builds, finite exact checks, numerical consistency checks, extraction regression tests, and internal adversarial audits are not Lean verification, novelty certification, or independent peer review.

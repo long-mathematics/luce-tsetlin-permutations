@@ -84,13 +84,13 @@ class RegularProfileExtractionTests(unittest.TestCase):
         self.assertEqual(doc["status"], "current-research")
         self.assertEqual(doc.get("dependencies", []), [])
         status = (ROOT / "THEOREM_STATUS.md").read_text()
-        self.assertIn("Regular positive-profile microscopic cycles and sparse entries", status)
+        self.assertIn("Microscopic Cycles and Sparse Entries for Regular Luce Profiles", status)
         self.assertIn("**Audited current manuscript**", status)
         self.assertIn("regular-profile-repair-record.md", status)
 
     def test_scope_denials_are_recorded(self):
         status = (ROOT / "THEOREM_STATUS.md").read_text()
-        for token in ("arbitrary-comparable-array", "growing-cycle", "endpoint-singular", "quantitative-TV"):
+        for token in ("arbitrary comparable arrays", "growing cycle lengths", "endpoint-singular profiles", "quantitative total-variation rate"):
             self.assertIn(token, status)
 
 if __name__ == "__main__":
