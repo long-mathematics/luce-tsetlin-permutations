@@ -27,5 +27,5 @@ class BoundaryExtractionTests(unittest.TestCase):
     def test_scope_and_working_status(self):
         for token in [r"\|P_k-Q_k\|_{\TV}", r"d_\infty^+(P_k,Q_k)", r"\sum_{a_1,\ldots,a_k}^{*}\mu_k(a_1,\ldots,a_k)", r"\Pp(N_0\ge k)", r"\theta_i=\beta\log i+\alpha\log\log i+O(1)"]: self.assertIn(token, self.active)
         catalog = json.loads((ROOT / "papers.json").read_text())["documents"]; doc = next(d for d in catalog if d["id"] == "boundary-laws"); self.assertEqual(doc["status"], "working"); self.assertEqual(doc.get("dependencies", []), [])
-        status = (ROOT / "THEOREM_STATUS.md").read_text(); self.assertIn("Boundary laws", status); self.assertIn("Working mechanical extraction", status); self.assertIn("proof audit is pending", status)
+        status = (ROOT / "THEOREM_STATUS.md").read_text(); self.assertIn("Boundary laws", status); self.assertIn("Working mechanical extraction", status); self.assertIn("audit passed, repairs pending", status)
 if __name__ == "__main__": unittest.main()

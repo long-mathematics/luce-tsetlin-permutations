@@ -32,6 +32,30 @@ class RepositoryTests(unittest.TestCase):
                 build.check_readme_math(text)
     def test_good_math(self):
         build.check_readme_math('$$\nx\n= y\n$$\n')
+    def test_monolith_decomposition_status(self):
+        plan = (ROOT/'notes/migration-plan.md').read_text()
+        status = (ROOT/'THEOREM_STATUS.md').read_text()
+        papers = [
+            'Boundary Laws for Luce Rankings',
+            'Sukhatme Fixed Points and the Terminal Poisson Process',
+            'Endpoint-Regular Fixed-Point Universality',
+            'Global Endpoint Poisson Approximation',
+            'Endpoint Short Cycles',
+        ]
+        audits = [
+            'boundary-laws-proof-audit.md',
+            'sukhatme-fixed-points-proof-audit.md',
+            'endpoint-regular-universality-proof-audit.md',
+            'global-endpoint-poisson-proof-audit.md',
+            'endpoint-short-cycles-proof-audit.md',
+        ]
+        for paper in papers:
+            self.assertIn('| '+paper+' | Yes |', plan)
+        for audit in audits:
+            self.assertTrue((ROOT/'audits'/audit).is_file())
+        self.assertIn('No principal theorem-and-proof package now exists only', plan)
+        self.assertEqual(status.count('audit passed, repairs pending'), 5)
+
     def test_historical_candidate_is_not_dependency(self):
         for d in build.catalog():
             self.assertNotIn('resolution-candidate', d['source'])

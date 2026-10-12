@@ -1,35 +1,47 @@
 # Staged migration
 
+Status date: 12 October 2026.
+
 ## Initial reviewed stages
 
-1. Foundation: catalog, status/dependency maps, build checks, CI, and preservation conventions.
-2. Preservation import: pin upstream commit `6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0`; preserve the original five Luce source/PDF pairs and historical audits byte-for-byte. Create active copies of the switching, scalar order, quantitative order, and functional manuscripts without changing their source bytes. The monolith stays archived.
-3. Total-cycle integration: make the quantitative truncation interface explicit, incorporate the functional audit clarifications, and integrate the new total-cycle Poisson/Berry–Esseen/lattice Edgeworth argument. Preserve the uploaded proof notes and test programs with hashes. Any new mathematical limitation discovered during integration must be reported rather than hidden.
-4. Macroscopic PD/GEM extraction and audit: mechanically extract the archived macroscopic-cycle section and every model-specific lemma used by it; preserve the exact hypothesis, PD(1)/GEM(1) conclusions, uniform-root conclusion, `ell^1` topologies, labels, and proof content; then audit the extracted argument in a separate stage. The audit found no fatal gap, and the six localized clarification repairs have been applied without changing the principal theorem.
-5. Regular positive-profile extraction and audit: mechanically extract the complete microscopic-cycle, long-trace, diagonal-band, sparse-entry, thin-graph, and overlap theory together with its indispensable preliminary and endpoint/collision bounds; audit the extracted proof separately; then apply only the six localized clarification sets approved by that audit. The audit found no fatal gap and the repairs preserve theorem scope.
+1. **Foundation.** Establish the manuscript catalog, theorem-status and dependency maps, deterministic builds, CI, preservation rules, and audit conventions.
+2. **Preservation import.** Pin upstream commit `6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0`; preserve the original Luce sources, PDFs, and historical audits byte-for-byte; create active focused copies without changing the frozen archive.
+3. **Total-cycle integration.** Make the quantitative switching interface explicit, incorporate the functional audit clarifications, and integrate the total-cycle Poisson, Berry--Esseen, and lattice-Edgeworth work while preserving the source proof notes and finite checks.
+4. **Macroscopic PD/GEM extraction, audit, and repair.** Mechanically extract the macroscopic theorem package, audit it independently, and apply only the six localized clarifications approved by that audit.
+5. **Regular positive-profile extraction, audit, and repair.** Mechanically extract the microscopic-cycle, trace, sparse-entry, and overlap package, audit it independently, and apply only the six localized clarifications approved by that audit.
+6. **Remaining five-paper decomposition.** Extract and independently audit Boundary Laws, Sukhatme Fixed Points, Endpoint-Regular Fixed-Point Universality, Global Endpoint Poisson Approximation, and Endpoint Short Cycles. In accordance with the requested workflow, record but do not apply the audit repairs in this stage.
 
-The original repository has now been reconciled by a separate documentation-only PR and points here as the canonical editing location for the migrated Luce series.
+The original `nonuniform-random-permutations` repository points here as the canonical editing location for the Luce/Tsetlin manuscript series.
 
-## Current PD/GEM stage
+## Consolidated monolith-decomposition status
 
-The standalone source, deterministic PDF, old-label/new-label map, extraction record, adversarial proof audit, and repair record are now present. The archived source and PDF remain unchanged. The initial extraction was token-preserving; the active source now differs from the archive only through the six localized, documented clarification repairs.
+| Paper | Extracted? | Completeness checked? | Audit verdict | Repairs required? | Promotion status | Active-paper dependencies | Remaining monolith-only theorem material? |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Boundary Laws for Luce Rankings | Yes | Yes; selected blocks are byte-preserved, labels/references close, deterministic PDF and regression checks pass | Passed; no fatal gap | Yes; six localized clarifications recorded and deferred | Working mechanical extraction; audit passed, repairs pending | None | None |
+| Sukhatme Fixed Points and the Terminal Poisson Process | Yes | Yes; complete saddle, localization, point-process, and factorial-moment package preserved | Passed; no fatal gap | Yes; six localized clarifications recorded and deferred | Working mechanical extraction; audit passed, repairs pending | None | None |
+| Endpoint-Regular Fixed-Point Universality | Yes | Yes; endpoint framework, fixed-point laws, tangent kernel, and microscopic limit preserved | Passed; no fatal gap | Yes; six localized clarifications recorded and deferred | Working mechanical extraction; audit passed, repairs pending | None | None |
+| Global Endpoint Poisson Approximation | Yes | Yes; endpoint framework, Palm/Stein coupling, swap law, quantitative saddle, and two-cycle package preserved | Passed; no fatal gap | Yes; six localized clarifications recorded and deferred | Working mechanical extraction; audit passed, repairs pending | None | None |
+| Endpoint Short Cycles | Yes | Yes; point-constraint saddle, global envelope, trace, and factorial-moment package preserved | Passed; no fatal gap | Yes; six localized clarifications recorded and deferred | Working mechanical extraction; audit passed, repairs pending | None | None |
+| Microscopic Cycles and Sparse Entries for Regular Luce Profiles | Yes | Yes | Passed; no fatal gap | Six localized clarifications were applied and regression-checked | Audited current manuscript | None | None |
+| Poisson--Dirichlet Universality for Luce Permutations | Yes | Yes | Passed; no fatal gap | Six localized clarifications were applied and regression-checked | Audited current manuscript | None | None |
 
-The audit examined the clock-slab conditioning, relative-prefix estimate, rooted smoothing, compatible residual histories, deletion stability, GEM induction, residual-mass control, and `ell^1` tail restoration, and found no fatal gap. Regression checks now enforce theorem-scope preservation, label/reference closure, the six repair markers, and archive immutability. The result is an audited current manuscript, subject to the explicit internal-review boundary in `THEOREM_STATUS.md`.
+The five papers processed in the final decomposition stage deliberately remain below audited-current status because this orchestration prompt prohibited applying repairs. Their audit reports are the specifications for later focused repair PRs.
 
-## Subsequent decomposition of the 139-page draft
+## Remaining material in the frozen monolith
 
-The regular-profile microscopic-cycle/sparse-entry paper has now completed mechanical extraction, adversarial proof audit, and localized clarification repair. Its active source is an audited current manuscript; the frozen monolith remains unchanged.
+No principal theorem-and-proof package now exists only in the 139-page source. The material intentionally retained only in the frozen monolith consists of:
 
-The boundary-laws paper and the Sukhatme fixed-point paper are now present as working mechanical extractions with completeness checks; their adversarial audits are tracked separately. The remaining planned thematic destinations are endpoint universality; global endpoint fixed-point Poisson approximation; and singular-profile short cycles. These are proposed boundaries, not a promise that every extraction already fits a particular page count. Do not change hypotheses or upgrade proof status during mechanical extraction.
+- the original introduction, scope discussion, and conventions;
+- the concluding theorem map and proof-mechanism overview;
+- the historical open-problem and additional-conjecture sections;
+- transitional or duplicated exposition connecting theorem packages that now live in separate papers.
 
-The endpoint-regular universality paper is now present as a working mechanical extraction with completeness checks; its adversarial audit is tracked separately.
+These sections may later be distilled into repository documentation or updated open-problem notes, but they are not additional extraction targets. The frozen monolith remains the immutable provenance source under `archive/6178a99/`; active thematic papers live under `papers/` and must not be maintained in duplicate.
 
-The global endpoint Poisson-approximation paper is now present as a working mechanical extraction with completeness checks; its adversarial audit is tracked separately.
+## Next controlled stage
 
-The endpoint short-cycle paper is now present as a working mechanical extraction with completeness checks; its adversarial audit is tracked separately.
+Any further mathematical editing of the five newly extracted papers should occur one paper at a time through a focused repair PR that implements exactly the localized clarifications in its audit report. Such repair PRs must preserve the archived theorem scope and must not introduce an unreviewed strengthening.
 
-Do not maintain two independently editable copies. Active thematic papers live under `papers/`; the frozen monolith remains the provenance source under `archive/6178a99/`.
+## Integration record
 
-## Initial integration record
-
-The foundation and preservation-import stages passed their separate PR checks. The total-cycle integration consolidated the two quantitative proof notes, updated the functional source and truncation interface, and registered three finite consistency programs. It did not certify the monolith. The macroscopic extraction began that split; its separate audit and localized repair stage are now recorded without altering the frozen archive.
+The foundation, preservation import, total-cycle integration, PD/GEM extraction, and regular-profile extraction passed their separate validation workflows. Each of the five final thematic extractions has a standalone source, deterministic PDF, provenance map, extraction record, permanent archive-preservation test, and independent audit report. All audits found no fatal gap. No frozen archive byte was changed during the decomposition.
