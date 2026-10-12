@@ -1,0 +1,5 @@
+{
+  "stage": "integration",
+  "task": "boundary-laws-extraction",
+  "baseline_commit": "e950728f28b1aa3933b092a68a6b78bae328ac97"
+}
