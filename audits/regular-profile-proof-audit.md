@@ -315,7 +315,7 @@ The substitutions `y=A(t)` prove both marginal identities. Jensen then makes
 `K` an `L^2` contraction. The Hilbert--Schmidt estimate
 
 $$
- \|K\|_{HS}^2\le M_f\int_0^\infty B(2t)/B(t)dt
+ \lVert K\rVert_{HS}^2\le M_f\int_0^\infty B(2t)/B(t)dt
  \le M_f/m_f
 $$
 
@@ -333,7 +333,7 @@ a disk of radius `q<1`. Lidskii and Weyl give
 $$
  |\mathrm{Tr}(T^r)|
  \le q^{r-2}\sum_j|\zeta_j|^2
- \le q^{r-2}\|T\|_{HS}^2.
+ \le q^{r-2}\lVert T\rVert_{HS}^2.
 $$
 
 This yields `r lambda_r=1+O(q^r)`. The first-factorial-moment result gives
