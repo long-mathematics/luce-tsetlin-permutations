@@ -2,13 +2,15 @@
 """Finalize documentation after the five-paper monolith decomposition."""
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 from pathlib import Path
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-PARENT = "654a25c0ed0abfa267aee2970fd311544be39866"
+BASELINE = "654a25c0ed0abfa267aee2970fd311544be39866"
+REQUEST_PARENT = "520fbfc5e3894afd3fd6e5eadb9ac9e0d59793b0"
 
 
 def replace_once(text: str, old: str, new: str, label: str) -> str:
@@ -16,6 +18,16 @@ def replace_once(text: str, old: str, new: str, label: str) -> str:
     if count != 1:
         raise ValueError(f"{label}: expected one occurrence, found {count}")
     return text.replace(old, new, 1)
+
+
+def replace_in_section(
+    text: str, heading: str, next_heading: str, old: str, new: str, label: str
+) -> str:
+    start = text.index(heading)
+    end = text.index(next_heading, start + len(heading))
+    section = text[start:end]
+    section = replace_once(section, old, new, label)
+    return text[:start] + section + text[end:]
 
 
 def replace_section(text: str, heading: str, next_heading: str, body: str) -> str:
@@ -29,7 +41,7 @@ request = json.loads(request_path.read_text(encoding="utf-8"))
 expected_request = {
     "stage": "integration",
     "task": "monolith-decomposition-status",
-    "baseline_commit": PARENT,
+    "baseline_commit": BASELINE,
 }
 if request != expected_request:
     raise ValueError("Unexpected decomposition-status request")
@@ -38,10 +50,10 @@ if not os.environ.get("GITHUB_REF_NAME", "").startswith("migration/"):
 headers = subprocess.check_output(
     ["git", "cat-file", "-p", "HEAD"], cwd=ROOT, text=True
 ).split("\n\n", 1)[0].splitlines()
-if "parent " + PARENT not in headers:
-    raise ValueError("Status request must directly follow the pinned main commit")
+if "parent " + REQUEST_PARENT not in headers:
+    raise ValueError("Status repair must directly follow the pinned request")
 
-# README status reconciliation.
+# README reconciliation.
 readme_path = ROOT / "README.md"
 readme = readme_path.read_text(encoding="utf-8")
 rows = {
@@ -52,38 +64,63 @@ rows = {
     "Endpoint Short Cycles": ("output/pdf/endpoint-short-cycles.pdf", "papers/endpoint-short-cycles/endpoint-short-cycles.tex"),
 }
 for title, (pdf, source) in rows.items():
-    old = f"| {title} | [PDF]({pdf}) | [Source]({source}) | mechanical extraction; proof audit pending |"
-    new = f"| {title} | [PDF]({pdf}) | [Source]({source}) | mechanical extraction; audit passed; repairs pending |"
-    readme = replace_once(readme, old, new, f"README row {title}")
-
-monolith_start = readme.index("The **139-page original research draft**")
-monolith_end = readme.index("\n\n## Paper summaries", monolith_start)
-monolith_text = """The **139-page original research draft** is preserved as [PDF](archive/6178a99/output/pdf/luce-boundary-cycle-laws.pdf) and [LaTeX](archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex). It is an immutable provenance source, not an active monolithic editing target. Every principal theorem-and-proof package has now been assigned to a standalone paper. The regular-profile and PD/GEM papers completed extraction, adversarial audit, and localized repair and are audited current manuscripts. The five remaining thematic papers completed mechanical extraction and independent adversarial audit; every audit found no fatal gap, but each records six localized clarifications that remain deliberately deferred. See the [consolidated migration table](notes/migration-plan.md), theorem-specific audit files under [`audits/`](audits/), and old-label/new-label maps under the corresponding paper directories. No principal theorem remains only in the monolith."""
-readme = readme[:monolith_start] + monolith_text + readme[monolith_end:]
-
-status_replacements = {
-    "**Status:** working mechanical extraction. Source coverage and reference closure are checked; a separate proof audit is pending.": "**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/boundary-laws-proof-audit.md) and remain deferred.",
-    "**Status:** working mechanical extraction. Source coverage and dependency closure are checked; a separate proof audit is pending.": None,
-}
-readme = replace_once(
-    readme,
-    "**Status:** working mechanical extraction. Source coverage and reference closure are checked; a separate proof audit is pending.",
-    "**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/boundary-laws-proof-audit.md) and remain deferred.",
-    "boundary summary status",
-)
-# The remaining four paragraphs share the old wording, so replace them in order.
-for audit_file, label in [
-    ("sukhatme-fixed-points-proof-audit.md", "Sukhatme"),
-    ("endpoint-regular-universality-proof-audit.md", "endpoint regular"),
-    ("global-endpoint-poisson-proof-audit.md", "global endpoint"),
-    ("endpoint-short-cycles-proof-audit.md", "endpoint short cycles"),
-]:
     readme = replace_once(
         readme,
-        "**Status:** working mechanical extraction. Source coverage and dependency closure are checked; a separate proof audit is pending.",
-        f"**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/{audit_file}) and remain deferred.",
-        f"{label} summary status",
+        f"| {title} | [PDF]({pdf}) | [Source]({source}) | mechanical extraction; proof audit pending |",
+        f"| {title} | [PDF]({pdf}) | [Source]({source}) | mechanical extraction; audit passed; repairs pending |",
+        f"README row {title}",
     )
+
+start = readme.index("The **139-page original research draft**")
+end = readme.index("\n\n## Paper summaries", start)
+readme = readme[:start] + (
+    "The **139-page original research draft** is preserved as "
+    "[PDF](archive/6178a99/output/pdf/luce-boundary-cycle-laws.pdf) and "
+    "[LaTeX](archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex). "
+    "It is an immutable provenance source, not an active monolithic editing target. "
+    "Every principal theorem-and-proof package has now been assigned to a standalone paper. "
+    "The regular-profile and PD/GEM papers completed extraction, adversarial audit, and localized repair and are audited current manuscripts. "
+    "The five remaining thematic papers completed mechanical extraction and independent adversarial audit; every audit found no fatal gap, but each records six localized clarifications that remain deliberately deferred. "
+    "See the [consolidated migration table](notes/migration-plan.md), theorem-specific audit files under [`audits/`](audits/), and old-label/new-label maps under the corresponding paper directories. "
+    "No principal theorem remains only in the monolith."
+) + readme[end:]
+
+old_boundary = "**Status:** working mechanical extraction. Source coverage and reference closure are checked; a separate proof audit is pending."
+old_dependency = "**Status:** working mechanical extraction. Source coverage and dependency closure are checked; a separate proof audit is pending."
+summary_updates = [
+    (
+        "### Boundary laws for Luce rankings",
+        "### Sukhatme fixed points and the terminal Poisson process",
+        old_boundary,
+        "**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/boundary-laws-proof-audit.md) and remain deferred.",
+    ),
+    (
+        "### Sukhatme fixed points and the terminal Poisson process",
+        "### Endpoint-regular fixed-point universality",
+        old_dependency,
+        "**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/sukhatme-fixed-points-proof-audit.md) and remain deferred.",
+    ),
+    (
+        "### Endpoint-regular fixed-point universality",
+        "### Global endpoint Poisson approximation",
+        old_dependency,
+        "**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/endpoint-regular-universality-proof-audit.md) and remain deferred.",
+    ),
+    (
+        "### Global endpoint Poisson approximation",
+        "### Endpoint short cycles",
+        old_dependency,
+        "**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/global-endpoint-poisson-proof-audit.md) and remain deferred.",
+    ),
+    (
+        "### Endpoint short cycles",
+        "### Microscopic cycles and sparse entries for regular Luce profiles",
+        old_dependency,
+        "**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/endpoint-short-cycles-proof-audit.md) and remain deferred.",
+    ),
+]
+for heading, next_heading, old, new in summary_updates:
+    readme = replace_in_section(readme, heading, next_heading, old, new, heading)
 readme_path.write_text(readme, encoding="utf-8")
 
 # Theorem-status reconciliation.
@@ -104,47 +141,46 @@ row_map = {
     "| Endpoint Short Cycles |": "| Endpoint Short Cycles | **Working mechanical extraction; audit passed, repairs pending** in `papers/endpoint-short-cycles/`. The independent audit found no fatal gap in the source-to-target saddle, anisotropic LLT, global cycle envelope, logarithmic traces, negligible-configuration bounds, mixed factorial moments, or fixed-`L^p` law of large numbers. Six localized clarifications are recorded and deferred. |",
     "| Singular endpoint results in the 139-page draft |": "| Remaining monolith-only material | No principal theorem-and-proof package remains only in the frozen monolith. The remaining monolith-only text is introductory, transitional, concluding, or conjectural exposition; see `notes/migration-plan.md`. |",
 }
-status_lines = status.splitlines()
-seen = set()
-for i, line in enumerate(status_lines):
+lines = status.splitlines()
+seen: set[str] = set()
+for i, line in enumerate(lines):
     for prefix, replacement in row_map.items():
         if line.startswith(prefix):
-            status_lines[i] = replacement
+            lines[i] = replacement
             seen.add(prefix)
 if seen != set(row_map):
-    raise ValueError("Missing theorem-status table row(s): " + repr(set(row_map) - seen))
-status = "\n".join(status_lines) + ("\n" if status.endswith("\n") else "")
+    raise ValueError("Missing theorem-status row(s): " + repr(set(row_map) - seen))
+status = "\n".join(lines) + "\n"
 
-status = replace_section(
-    status,
-    "## Boundary-laws extraction boundary",
-    "## Sukhatme extraction boundary",
-    "The selected blocks are byte-preserved, all internal references close, and no active paper is a proof dependency. The adversarial audit checked the exact finite identities, infinite-product limit, terminal leakage, phase diagram, and all endpoint cases and found no fatal gap. Six localized clarification repairs are specified in `audits/boundary-laws-proof-audit.md` and remain deliberately unapplied.",
-)
-status = replace_section(
-    status,
-    "## Sukhatme extraction boundary",
-    "## Endpoint-Regular Fixed-Point Universality extraction boundary",
-    "The exponential/Gumbel input, analytic LLT input, death-process envelope, anisotropic terminal saddle package, local Poisson process, and factorial-moment theorem are byte-preserved and dependency-closed. The independent audit found no fatal gap and records six localized clarifications. The manuscript remains a working extraction until those repairs are applied in a separate focused PR.",
-)
-status = replace_section(
-    status,
-    "## Endpoint-Regular Fixed-Point Universality extraction boundary",
-    "## Global Endpoint Poisson Approximation extraction boundary",
-    "The selected mathematical blocks are byte-preserved and dependency-closed. The adversarial audit checked endpoint regular variation, anisotropic localization, fixed-point factorial moments, displacement and tangent laws, the multiplicative semigroup, and the microscopic endpoint permutation, and found no fatal gap. Six localized clarifications are recorded and deferred.",
-)
-status = replace_section(
-    status,
-    "## Global Endpoint Poisson Approximation extraction boundary",
-    "## Endpoint Short Cycles extraction boundary",
-    "The selected mathematical blocks are byte-preserved and dependency-closed. The adversarial audit checked the Stein normalization, endpoint package, swap likelihood ratio and Palm comparison, two-cycle correction, weighted summation, and final total-variation/normal limits, and found no fatal gap. Six localized clarifications are recorded and deferred.",
-)
-status = replace_section(
-    status,
-    "## Endpoint Short Cycles extraction boundary",
-    "## Regular-profile audit and repair boundary",
-    "The selected mathematical blocks are byte-preserved and dependency-closed. The adversarial audit checked endpoint regularity, source-to-target local limits, mixed localization, forced-deletion envelopes, logarithmic traces, negligible configurations, mixed factorial moments, and fixed-`L^p` convergence, and found no fatal gap. Six localized clarifications are recorded and deferred.",
-)
+boundary_sections = [
+    (
+        "## Boundary-laws extraction boundary",
+        "## Sukhatme extraction boundary",
+        "The selected blocks are byte-preserved, all internal references close, and no active paper is a proof dependency. The adversarial audit checked the exact finite identities, infinite-product limit, terminal leakage, phase diagram, and all endpoint cases and found no fatal gap. Six localized clarification repairs are specified in `audits/boundary-laws-proof-audit.md` and remain deliberately unapplied.",
+    ),
+    (
+        "## Sukhatme extraction boundary",
+        "## Endpoint-Regular Fixed-Point Universality extraction boundary",
+        "The exponential/Gumbel input, analytic LLT input, death-process envelope, anisotropic terminal saddle package, local Poisson process, and factorial-moment theorem are byte-preserved and dependency-closed. The independent audit found no fatal gap and records six localized clarifications. The manuscript remains a working extraction until those repairs are applied in a separate focused PR.",
+    ),
+    (
+        "## Endpoint-Regular Fixed-Point Universality extraction boundary",
+        "## Global Endpoint Poisson Approximation extraction boundary",
+        "The selected mathematical blocks are byte-preserved and dependency-closed. The adversarial audit checked endpoint regular variation, anisotropic localization, fixed-point factorial moments, displacement and tangent laws, the multiplicative semigroup, and the microscopic endpoint permutation, and found no fatal gap. Six localized clarifications are recorded and deferred.",
+    ),
+    (
+        "## Global Endpoint Poisson Approximation extraction boundary",
+        "## Endpoint Short Cycles extraction boundary",
+        "The selected mathematical blocks are byte-preserved and dependency-closed. The adversarial audit checked the Stein normalization, endpoint package, swap likelihood ratio and Palm comparison, two-cycle correction, weighted summation, and final total-variation/normal limits, and found no fatal gap. Six localized clarifications are recorded and deferred.",
+    ),
+    (
+        "## Endpoint Short Cycles extraction boundary",
+        "## Regular-profile audit and repair boundary",
+        "The selected mathematical blocks are byte-preserved and dependency-closed. The adversarial audit checked endpoint regularity, source-to-target local limits, mixed localization, forced-deletion envelopes, logarithmic traces, negligible configurations, mixed factorial moments, and fixed-`L^p` convergence, and found no fatal gap. Six localized clarifications are recorded and deferred.",
+    ),
+]
+for heading, next_heading, body in boundary_sections:
+    status = replace_section(status, heading, next_heading, body)
 review_start = status.index("## Review records")
 formal_start = status.index("Formalization status:", review_start)
 review_text = """## Review records
@@ -167,31 +203,11 @@ status_path.write_text(status, encoding="utf-8")
 deps_path = ROOT / "DEPENDENCIES.md"
 deps = deps_path.read_text(encoding="utf-8")
 sections = [
-    (
-        "## Boundary-laws extraction",
-        "## Sukhatme fixed-point extraction",
-        "The standalone boundary paper has no proof dependency on another active manuscript. Its internal chain consists of the exponential-race identity, vanishing-block construction, exact top-window likelihood comparison, finite-volume bottom-window convergence, and Borel--Cantelli/infinite-product leakage argument. The extraction is byte-preserving. The adversarial audit found no fatal gap and records six localized clarifications; those repairs remain deferred, so the paper stays a working mechanical extraction.",
-    ),
-    (
-        "## Sukhatme fixed-point extraction",
-        "## Endpoint-Regular Fixed-Point Universality extraction",
-        "The standalone Sukhatme paper has no active-paper dependency. Its internal chain consists of exponential/Gumbel identities, the fixed-dimensional tilted LLT, death-process product bound, one- and multipoint terminal saddles, anisotropic localization, the separated joint estimate, and factorial-moment summation. The extraction is byte-preserving. The adversarial audit found no fatal gap and records six localized clarifications; repairs remain deferred.",
-    ),
-    (
-        "## Endpoint-Regular Fixed-Point Universality extraction",
-        "## Global Endpoint Poisson Approximation extraction",
-        "The standalone endpoint-universality paper is self-contained: exponential/Gumbel and lattice-LLT inputs, the shared anisotropic Fourier/tilting toolkit, regularly varying endpoint sums, endpoint saddle/localization, factorial moments, tangent measure, kernel semigroup, and microscopic limit are internal. The extraction is byte-preserving. The independent audit found no fatal gap and records six localized clarifications; repairs remain deferred.",
-    ),
-    (
-        "## Global Endpoint Poisson Approximation extraction",
-        "## Endpoint Short Cycles extraction",
-        "The standalone global endpoint paper includes the complete endpoint-regular framework and then the approximate-Palm Stein argument, exact swap likelihood ratio, quantitative one-dimensional saddle, swap--Palm comparison, and two-cycle summability. It has no active-paper dependency and is byte-preserving. The independent audit found no fatal gap and records six localized clarifications; repairs remain deferred.",
-    ),
-    (
-        "## Endpoint Short Cycles extraction",
-        "## Regular-profile microscopic-cycle manuscript",
-        "The standalone endpoint-short-cycle paper includes the endpoint-regular framework and the full source-to-target saddle, scheduled-deletion envelope, multiplicative trace, and factorial-moment machinery. It has no active-paper dependency and is byte-preserving. The independent audit found no fatal gap and records six localized clarifications; repairs remain deferred.",
-    ),
+    ("## Boundary-laws extraction", "## Sukhatme fixed-point extraction", "The standalone boundary paper has no proof dependency on another active manuscript. Its internal chain consists of the exponential-race identity, vanishing-block construction, exact top-window likelihood comparison, finite-volume bottom-window convergence, and Borel--Cantelli/infinite-product leakage argument. The extraction is byte-preserving. The adversarial audit found no fatal gap and records six localized clarifications; those repairs remain deferred, so the paper stays a working mechanical extraction."),
+    ("## Sukhatme fixed-point extraction", "## Endpoint-Regular Fixed-Point Universality extraction", "The standalone Sukhatme paper has no active-paper dependency. Its internal chain consists of exponential/Gumbel identities, the fixed-dimensional tilted LLT, death-process product bound, one- and multipoint terminal saddles, anisotropic localization, the separated joint estimate, and factorial-moment summation. The extraction is byte-preserving. The adversarial audit found no fatal gap and records six localized clarifications; repairs remain deferred."),
+    ("## Endpoint-Regular Fixed-Point Universality extraction", "## Global Endpoint Poisson Approximation extraction", "The standalone endpoint-universality paper is self-contained: exponential/Gumbel and lattice-LLT inputs, the shared anisotropic Fourier/tilting toolkit, regularly varying endpoint sums, endpoint saddle/localization, factorial moments, tangent measure, kernel semigroup, and microscopic limit are internal. The extraction is byte-preserving. The independent audit found no fatal gap and records six localized clarifications; repairs remain deferred."),
+    ("## Global Endpoint Poisson Approximation extraction", "## Endpoint Short Cycles extraction", "The standalone global endpoint paper includes the complete endpoint-regular framework and then the approximate-Palm Stein argument, exact swap likelihood ratio, quantitative one-dimensional saddle, swap--Palm comparison, and two-cycle summability. It has no active-paper dependency and is byte-preserving. The independent audit found no fatal gap and records six localized clarifications; repairs remain deferred."),
+    ("## Endpoint Short Cycles extraction", "## Regular-profile microscopic-cycle manuscript", "The standalone endpoint-short-cycle paper includes the endpoint-regular framework and the full source-to-target saddle, scheduled-deletion envelope, multiplicative trace, and factorial-moment machinery. It has no active-paper dependency and is byte-preserving. The independent audit found no fatal gap and records six localized clarifications; repairs remain deferred."),
 ]
 for heading, next_heading, body in sections:
     deps = replace_section(deps, heading, next_heading, body)
@@ -280,20 +296,19 @@ method = """    def test_monolith_decomposition_status(self):
 test = replace_once(test, anchor, method + anchor, "repository test insertion")
 test_path.write_text(test, encoding="utf-8")
 
-# Preserve the frozen archive exactly.
+# Verify the frozen archive.
 manifest = json.loads((ROOT / "archive/manifest.json").read_text(encoding="utf-8"))["files"]
 for rec in manifest:
     path = ROOT / rec["path"]
-    if not path.is_file():
-        raise ValueError("Missing frozen archive file: " + rec["path"])
-    import hashlib
-    if hashlib.sha256(path.read_bytes()).hexdigest() != rec["sha256"]:
+    if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != rec["sha256"]:
         raise ValueError("Frozen archive changed: " + rec["path"])
 
-# Restore the canonical migration helper and remove the one-time request.
-baseline_prepare = subprocess.check_output(
-    ["git", "show", f"{PARENT}:.migration/prepare.py"], cwd=ROOT
-)
-(ROOT / ".migration/prepare.py").write_bytes(baseline_prepare)
+# Restore the canonical helper from main and remove the one-time request.
+subprocess.run(["git", "fetch", "--no-tags", "--depth=1", "origin", "main"], cwd=ROOT, check=True)
+head = subprocess.check_output(["git", "rev-parse", "FETCH_HEAD"], cwd=ROOT, text=True).strip()
+if head != BASELINE:
+    raise ValueError("Unexpected main head while restoring migration helper: " + head)
+canonical_prepare = subprocess.check_output(["git", "show", "FETCH_HEAD:.migration/prepare.py"], cwd=ROOT)
+(ROOT / ".migration/prepare.py").write_bytes(canonical_prepare)
 request_path.unlink()
 print("Reconciled all five extraction/audit statuses; frozen archive unchanged.")
