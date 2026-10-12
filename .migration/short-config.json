@@ -1,0 +1,111 @@
+{
+  "id": "endpoint-short-cycles",
+  "title": "Endpoint Short Cycles",
+  "source": "papers/endpoint-short-cycles/endpoint-short-cycles.tex",
+  "pdf": "output/pdf/endpoint-short-cycles.pdf",
+  "map": "papers/endpoint-short-cycles/EXTRACTION_MAP.md",
+  "map_title": "Endpoint Short Cycles extraction map",
+  "record": "notes/endpoint-short-cycles-extraction-record.json",
+  "extraction_audit": "audits/endpoint-short-cycles-extraction.md",
+  "test": "tests/test_endpoint_short_cycles_extraction.py",
+  "catalog_before": "regular-profile-cycles",
+  "dependencies": [],
+  "abstract": "For uniformly endpoint-regularly varying Luce arrays, this paper identifies the logarithmically diverging mean of every fixed cycle length and proves joint fixed-order factorial-moment asymptotics. The coefficients are diagonal convolution traces of the multiplicative endpoint kernel. The proof combines source-to-target endpoint saddle estimates, a global scheduled-deletion cycle envelope, continuum and discrete logarithmic trace limits, and factorial-moment summation.",
+  "blocks": [
+    {
+      "name": "Exponential-race input",
+      "start": "\\subsection{The exponential race}",
+      "end": "\\subsection{Gumbel priorities}",
+      "begin_marker": "% BEGIN ARCHIVED BLOCK: exponential-race-input",
+      "end_marker": "% END ARCHIVED BLOCK: exponential-race-input",
+      "first_line": 224,
+      "last_line": 233,
+      "wrapper": "Exponential and Gumbel input"
+    },
+    {
+      "name": "Gumbel threshold input",
+      "start": "\\subsection{Gumbel priorities}",
+      "end": "\\begin{remark}[The derivative cancellation]",
+      "begin_marker": "% BEGIN ARCHIVED BLOCK: gumbel-threshold-input",
+      "end_marker": "% END ARCHIVED BLOCK: gumbel-threshold-input",
+      "first_line": 234,
+      "last_line": 300
+    },
+    {
+      "name": "Analytic input",
+      "start": "\\subsection{Analytic input}",
+      "end": "\\subsection{A permuton-level obstruction}",
+      "begin_marker": "% BEGIN ARCHIVED BLOCK: analytic-input",
+      "end_marker": "% END ARCHIVED BLOCK: analytic-input",
+      "first_line": 353,
+      "last_line": 531
+    },
+    {
+      "name": "Shared anisotropic local-limit toolkit",
+      "start": "\\begin{lemma}[Coordinatewise Fourier concentration]",
+      "end": "\\begin{lemma}[Anisotropic terminal local CLT]",
+      "begin_marker": "% BEGIN ARCHIVED BLOCK: shared-anisotropic-toolkit",
+      "end_marker": "% END ARCHIVED BLOCK: shared-anisotropic-toolkit",
+      "first_line": 3957,
+      "last_line": 4839,
+      "wrapper": "Shared anisotropic local-limit toolkit"
+    },
+    {
+      "name": "Endpoint-regular universality theory",
+      "start": "\\section{Endpoint-regular fixed-point universality}",
+      "end": "\\section{Global endpoint Poisson approximation}",
+      "begin_marker": "% BEGIN ARCHIVED BLOCK: endpoint-regular-universality",
+      "end_marker": "% END ARCHIVED BLOCK: endpoint-regular-universality",
+      "first_line": 5639,
+      "last_line": 7365
+    },
+    {
+      "name": "Endpoint short-cycle theory",
+      "start": "\\section{Endpoint short cycles}",
+      "end": "\\section{Conclusions and theorem map}",
+      "begin_marker": "% BEGIN ARCHIVED BLOCK: endpoint-short-cycles",
+      "end_marker": "% END ARCHIVED BLOCK: endpoint-short-cycles",
+      "first_line": 8450,
+      "last_line": 9664
+    }
+  ],
+  "scope_tokens": [
+    "\\begin{theorem}[Endpoint short-cycle law]",
+    "\\begin{proposition}[Separated endpoint entry estimate]",
+    "\\begin{corollary}[Cycle envelope]",
+    "\\begin{lemma}[Continuum multiplicative trace]"
+  ],
+  "extraction_note": "# Mechanical extraction record: Endpoint Short Cycles\n\nDate: 12 October 2026.\n\nThis record covers only the mechanical extraction of the complete Endpoint Short Cycles theorem package from the frozen 139-page manuscript. It is not a correctness audit, novelty review, or formal verification.\n\nAll {THEOREMS} theorem-like environments, {LABELS} labels, and {REFS} internal reference targets are present and closed. Every selected mathematical block is byte-preserved, the frozen archive is unchanged, and no active manuscript is a proof dependency.\n\nA separate adversarial audit is required before any status promotion.\n",
+  "readme": [
+    {
+      "anchor": "| Microscopic Cycles and Sparse Entries for Regular Luce Profiles |",
+      "replacement": "| Endpoint Short Cycles | [PDF](output/pdf/endpoint-short-cycles.pdf) | [Source](papers/endpoint-short-cycles/endpoint-short-cycles.tex) | mechanical extraction; proof audit pending |\n| Microscopic Cycles and Sparse Entries for Regular Luce Profiles |"
+    },
+    {
+      "anchor": "### Microscopic cycles and sparse entries for regular Luce profiles",
+      "replacement": "### Endpoint short cycles\n\n[PDF](output/pdf/endpoint-short-cycles.pdf) · [LaTeX](papers/endpoint-short-cycles/endpoint-short-cycles.tex)\n\nThis paper proves the joint law of every fixed collection of short cycle lengths in the endpoint-singular regime. Their expectations grow logarithmically with constants given by convolution traces of the endpoint kernel, and the normalized cycle counts converge jointly to one.\n\n**Status:** working mechanical extraction. Source coverage and dependency closure are checked; a separate proof audit is pending.\n\n### Microscopic cycles and sparse entries for regular Luce profiles"
+    }
+  ],
+  "status": [
+    {
+      "anchor": "| Regular positive-profile microscopic cycles and sparse entries |",
+      "replacement": "| Endpoint Short Cycles | **Working mechanical extraction** in `papers/endpoint-short-cycles/`. The endpoint framework, general source-to-target entry estimate, global cycle envelope, logarithmic trace, and endpoint short-cycle factorial-moment theorem are preserved from the archive. Dependency closure passes; a dedicated proof audit is pending. |\n| Regular positive-profile microscopic cycles and sparse entries |"
+    },
+    {
+      "anchor": "## Regular-profile audit and repair boundary",
+      "replacement": "## Endpoint Short Cycles extraction boundary\n\nThe standalone manuscript is a working mechanical extraction. Its selected mathematical blocks are byte-preserved and dependency-closed. No correctness review is asserted at this stage.\n\n## Regular-profile audit and repair boundary"
+    }
+  ],
+  "dependencies_doc": [
+    {
+      "anchor": "## Regular-profile microscopic-cycle manuscript",
+      "replacement": "## Endpoint Short Cycles extraction\n\nThe standalone endpoint-short-cycle paper includes the endpoint-regular framework and the full source-to-target saddle, scheduled-deletion envelope, multiplicative trace, and factorial-moment machinery. It has no active-paper dependency. The extraction is byte-preserving and unaudited.\n\n## Regular-profile microscopic-cycle manuscript"
+    }
+  ],
+  "migration": [
+    {
+      "anchor": "Do not maintain two independently editable copies.",
+      "replacement": "The endpoint short-cycle paper is now present as a working mechanical extraction with completeness checks; its adversarial audit is tracked separately.\n\nDo not maintain two independently editable copies."
+    }
+  ]
+}
