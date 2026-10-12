@@ -1,4 +1,4 @@
-name: One-time stale branch cleanup
+name: Remove one-time cleanup workflow
 
 on:
   push:
@@ -8,26 +8,20 @@ permissions:
   contents: write
 
 jobs:
-  cleanup:
-    name: Delete stale post-merge branch
+  remove:
+    name: Remove temporary workflow
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     if: github.repository == 'long-mathematics/luce-tsetlin-permutations'
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with:
-          fetch-depth: 1
-      - name: Delete stale branch
+      - name: Remove this one-time workflow from main
         shell: bash
         run: |
           set -euo pipefail
-          branch="docs/github-markdown-math-hardening"
-          if [[ "$branch" == "main" ]]; then
-            echo "Refusing to delete main" >&2
-            exit 1
-          fi
-          if git ls-remote --exit-code --heads origin "refs/heads/$branch" >/dev/null 2>&1; then
-            git push origin --delete "$branch"
-          else
-            echo "Already absent: $branch"
-          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm .github/workflows/cleanup-stale-branch.yml
+          git add .github/workflows/cleanup-stale-branch.yml
+          git commit -m "Remove one-time stale branch cleanup workflow"
+          git push origin HEAD:main
