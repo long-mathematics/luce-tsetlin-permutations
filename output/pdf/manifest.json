@@ -50,6 +50,14 @@
       "pages": 6
     },
     {
+      "id": "sukhatme-fixed-points",
+      "source": "papers/sukhatme-fixed-points/sukhatme-fixed-points.tex",
+      "source_sha256": "889a9b143609de2c0aef075bbb0654832d13f5dffdfded3679eca8065d50732f",
+      "pdf": "output/pdf/sukhatme-fixed-points.pdf",
+      "pdf_sha256": "5033e06faa439d179dc9b7a4611aabe7867b0bf9b0887db22072b72f7964e039",
+      "pages": 36
+    },
+    {
       "id": "regular-profile-cycles",
       "source": "papers/regular-profile-cycles/regular-profile-cycles.tex",
       "source_sha256": "df0c78bc08ae7a5e0e55d4f51ff7bb57cbca5bb2c95fb1c2cf95e58d613e0511",

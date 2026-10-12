@@ -6,6 +6,10 @@ The catalog records document-level input edges and tests reject cycles. Referenc
 
 The standalone boundary paper has no proof dependency on another active manuscript. Its internal chain consists of the exponential-race identity, the vanishing-block construction, exact top-window likelihood comparison, finite-volume bottom-window convergence, and the Borel--Cantelli/infinite-product leakage argument. The extraction is byte-preserving and has not yet received a correctness audit.
 
+## Sukhatme fixed-point extraction
+
+The standalone Sukhatme paper has no active-paper dependency. Its internal chain consists of exponential/Gumbel identities, the fixed-dimensional tilted LLT, the death-process product bound, one- and multipoint terminal saddles, anisotropic localization, the separated joint estimate, and factorial-moment summation. The extraction is byte-preserving and unaudited.
+
 ## Regular-profile microscopic-cycle manuscript
 
 The standalone paper `papers/regular-profile-cycles/regular-profile-cycles.tex`

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "stage": "sukhatme-fixed-points-extraction",
+  "archive_source": "archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex",
+  "archive_source_sha256": "c6d6a4607a2db9c8a5f69e2ec256c33619083fcc81ab467e9b939673fb3a5028",
+  "active_source": "papers/sukhatme-fixed-points/sukhatme-fixed-points.tex",
+  "active_source_sha256": "889a9b143609de2c0aef075bbb0654832d13f5dffdfded3679eca8065d50732f",
+  "source_ranges": [
+    {
+      "name": "Exponential-race input",
+      "first_line": 224,
+      "last_line": 233,
+      "sentinel": "% BEGIN ARCHIVED BLOCK: exponential-race-input"
+    },
+    {
+      "name": "Gumbel threshold input",
+      "first_line": 234,
+      "last_line": 300,
+      "sentinel": "% BEGIN ARCHIVED BLOCK: gumbel-threshold-input"
+    },
+    {
+      "name": "Analytic input",
+      "first_line": 353,
+      "last_line": 531,
+      "sentinel": "% BEGIN ARCHIVED BLOCK: analytic-input"
+    },
+    {
+      "name": "Sukhatme fixed-point theory",
+      "first_line": 3566,
+      "last_line": 5635,
+      "sentinel": "% BEGIN ARCHIVED BLOCK: sukhatme-fixed-point-theory"
+    }
+  ],
+  "theorem_environments": 28,
+  "labels": 29,
+  "reference_targets": 23,
+  "citation_keys": [
+    "Petrov1975",
+    "Sukhatme1937",
+    "Renyi1953"
+  ],
+  "proof_status": "mechanical extraction; adversarial audit pending"
+}

@@ -18,6 +18,7 @@ Status date: 11 October 2026. This register distinguishes mathematical assertion
 | First lattice Edgeworth expansion and exact leading Kolmogorov constant | Current total-cycle paper, with the right-continuous integer phase. |
 | Variance asymptotic, second signed/lattice expansion, fixed-order Poisson–Charlier hierarchy | Current total-cycle paper, using fixed-order factorial domination and explicit moment transfer. Expansion order is fixed; no analytic residue convergence is inferred. |
 | Boundary laws | **Working mechanical extraction** in `papers/boundary-laws/`. The vanishing-block obstruction, exact top-window total-variation identity, exact one-sided relative defect, birthday transfer, finite bottom-window convergence, terminal leakage theorem, and log-log phase diagram are preserved from the archive. Source coverage and closure pass; a dedicated proof audit is pending. |
+| Sukhatme fixed points and terminal Poisson process | **Working mechanical extraction** in `papers/sukhatme-fixed-points/`. The fixed-point mean, separated joint estimate, local logarithmic terminal Poisson process, and fixed factorial-moment asymptotics are preserved from the archive. Dependency closure passes; a dedicated proof audit is pending. |
 | Regular positive-profile microscopic cycles and sparse entries | **Audited current manuscript** in `papers/regular-profile-cycles/`. The exact sampled-profile hypothesis, fixed-vector independent Poisson limits, trace means, long-trace asymptotic, diagonal-band laws, sparse-entry theorem, thin-graph laws, deterministic-overlap conclusion, and transverse-curve corollary are unchanged. The adversarial audit found no fatal gap in the local saddle/LLT argument, endpoint and collision domination, improper integrability, factorial-moment summation, total-variation upgrade, spectral trace argument, or sparse-entry applications. Six localized clarification sets were applied; no arbitrary-comparable-array, growing-cycle, endpoint-singular, or quantitative-TV strengthening is claimed. |
 | Macroscopic PD/GEM theorem | **Audited current manuscript** in `papers/macroscopic-pd/`. The exact comparability hypothesis, PD(1) and GEM(1) conclusions, independently resampled uniform-root construction, uniform-root conclusion, and `ell^1` topologies are unchanged. The adversarial audit found no fatal gap in conditioning, adaptive exposure, rooted closure, deletion stability, regeneration, GEM induction, residual-mass control, or the `ell^1` passage. Six localized clarification repairs were applied; no quantitative, quenched, endpoint-singular, mesoscopic, or total-cycle strengthening is claimed. |
 | Singular endpoint results in the 139-page draft | Frozen archive. Dedicated thematic extraction and proof audits are still required. |
@@ -27,6 +28,10 @@ The original total-cycle/Conjecture 13.2 candidate remains a **Historical reject
 ## Boundary-laws extraction boundary
 
 The boundary paper is a working mechanical extraction. The selected mathematical blocks are byte-preserved, all internal references close, and no active paper is a proof dependency. The extraction does not audit the exact finite identities, the infinite-product limit, terminal leakage, or the log-log phase diagram.
+
+## Sukhatme extraction boundary
+
+The Sukhatme manuscript is a working mechanical extraction. The exponential/Gumbel input, analytic LLT input, death-process envelope, anisotropic terminal saddle package, local Poisson process, and factorial-moment theorem are byte-preserved. No correctness review is asserted at this stage.
 
 ## Regular-profile audit and repair boundary
 

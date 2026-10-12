@@ -14,6 +14,7 @@ Manuscript author: **Christopher D. Long**.
 | Functional Erdos--Turan and Total-Cycle Laws for Luce Permutations | [PDF](output/pdf/functional-luce-erdos-turan.pdf) | [Source](papers/functional-erdos-turan/functional-luce-erdos-turan.tex) | current-research |
 | Poisson Approximation and Lattice Edgeworth Expansions for Total Luce Cycles | [PDF](output/pdf/total-cycle-edgeworth.pdf) | [Source](papers/total-cycle-edgeworth/total-cycle-edgeworth.tex) | current-research |
 | Boundary Laws for Luce Rankings | [PDF](output/pdf/boundary-laws.pdf) | [Source](papers/boundary-laws/boundary-laws.tex) | mechanical extraction; proof audit pending |
+| Sukhatme Fixed Points and the Terminal Poisson Process | [PDF](output/pdf/sukhatme-fixed-points.pdf) | [Source](papers/sukhatme-fixed-points/sukhatme-fixed-points.tex) | mechanical extraction; proof audit pending |
 | Microscopic Cycles and Sparse Entries for Regular Luce Profiles | [PDF](output/pdf/regular-profile-cycles.pdf) | [Source](papers/regular-profile-cycles/regular-profile-cycles.tex) | audited current manuscript |
 | Poisson--Dirichlet Universality for Luce Permutations | [PDF](output/pdf/poisson-dirichlet-luce.pdf) | [Source](papers/macroscopic-pd/poisson-dirichlet-luce.tex) | audited current manuscript |
 
@@ -121,6 +122,14 @@ The paper also gives the variance asymptotic, a continuity-corrected second-orde
 This paper isolates the finite top-window identities and infinite bottom-window leakage theory from the archived monolith. It proves that the exact top-window total-variation distance equals the collision probability of the corresponding product sample, gives the exact one-sided relative defect, and identifies the total mass lost by a limiting bottom-window law. A vanishing-block construction records why permuton convergence alone cannot control microscopic statistics.
 
 **Status:** working mechanical extraction. Source coverage and reference closure are checked; a separate proof audit is pending.
+
+### Sukhatme fixed points and the terminal Poisson process
+
+[PDF](output/pdf/sukhatme-fixed-points.pdf) · [LaTeX](papers/sukhatme-fixed-points/sukhatme-fixed-points.tex)
+
+For the singular decreasing-rate profile, this paper proves logarithmic fixed-point growth, a local terminal Poisson point process on logarithmic coordinates, and all fixed factorial-moment asymptotics. Its proof combines a death-process envelope with anisotropic saddle and local-limit analysis.
+
+**Status:** working mechanical extraction. Source coverage and dependency closure are checked; a separate proof audit is pending.
 
 ### Microscopic cycles and sparse entries for regular Luce profiles
 
