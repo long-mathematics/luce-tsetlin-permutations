@@ -14,6 +14,7 @@ class RepositoryTests(unittest.TestCase):
     def test_links_and_readme(self):
         build.check_markdown()
     def test_bad_math_rejected(self):
+        fence = chr(96) * 3
         bad = [
             r'\[x\]',
             '$\n',
@@ -26,12 +27,20 @@ class RepositoryTests(unittest.TestCase):
             r'$$\n\begin{aligned}x&=y\end{aligned}\n$$\n',
             r'$\href{https://example.com}{x}$',
             r'$\foo{x}$',
+            '$$\na \\, b\n$$\n',
+            '$$\na \\! b\n$$\n',
+            '$$\n\\{a\\}\n$$\n',
+            'prose\n$$\nx=y\n$$\n',
+            '\n$$\nx=y\n$$\nprose',
+            '\n' + fence + 'math\nx=y\n' + fence + '\n',
         ]
         for text in bad:
             with self.subTest(text=text), self.assertRaises(ValueError):
-                build.check_readme_math(text)
+                build.check_markdown_math(text, 'test.md')
+
     def test_good_math(self):
-        build.check_readme_math('$$\nx\n= y\n$$\n')
+        good = '\n$$\nx\n= y\n$$\n\nand $\\mathrm{Var}(X)\\le1$.\n'
+        build.check_markdown_math(good, 'test.md')
     def test_monolith_decomposition_status(self):
         plan = (ROOT/'notes/migration-plan.md').read_text()
         status = (ROOT/'THEOREM_STATUS.md').read_text()
