@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "stage": "endpoint-regular-universality-extraction",
+  "archive_source": "archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex",
+  "archive_source_sha256": "c6d6a4607a2db9c8a5f69e2ec256c33619083fcc81ab467e9b939673fb3a5028",
+  "active_source": "papers/endpoint-regular-universality/endpoint-regular-universality.tex",
+  "active_source_sha256": "d120b2e7d64df58ffdf4b986bcabb33e2f1276addcca741f38db6f62445d31c2",
+  "source_ranges": [
+    {
+      "name": "Exponential-race input",
+      "first_line": 224,
+      "last_line": 233,
+      "sentinel": "% BEGIN ARCHIVED BLOCK: exponential-race-input"
+    },
+    {
+      "name": "Gumbel threshold input",
+      "first_line": 234,
+      "last_line": 300,
+      "sentinel": "% BEGIN ARCHIVED BLOCK: gumbel-threshold-input"
+    },
+    {
+      "name": "Analytic input",
+      "first_line": 353,
+      "last_line": 531,
+      "sentinel": "% BEGIN ARCHIVED BLOCK: analytic-input"
+    },
+    {
+      "name": "Shared anisotropic local-limit toolkit",
+      "first_line": 3957,
+      "last_line": 4839,
+      "sentinel": "% BEGIN ARCHIVED BLOCK: shared-anisotropic-toolkit"
+    },
+    {
+      "name": "Endpoint-regular universality theory",
+      "first_line": 5639,
+      "last_line": 7365,
+      "sentinel": "% BEGIN ARCHIVED BLOCK: endpoint-regular-universality"
+    }
+  ],
+  "theorem_environments": 32,
+  "labels": 93,
+  "reference_targets": 62,
+  "citation_keys": [
+    "Petrov1975",
+    "BGT1987"
+  ],
+  "proof_status": "mechanical extraction; adversarial audit pending"
+}
