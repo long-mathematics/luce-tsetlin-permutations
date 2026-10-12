@@ -78,6 +78,14 @@
       "dependencies": []
     },
     {
+      "id": "global-endpoint-poisson",
+      "title": "Global Endpoint Poisson Approximation",
+      "source": "papers/global-endpoint-poisson/global-endpoint-poisson.tex",
+      "pdf": "output/pdf/global-endpoint-poisson.pdf",
+      "status": "working",
+      "dependencies": []
+    },
+    {
       "id": "regular-profile-cycles",
       "title": "Microscopic Cycles and Sparse Entries for Regular Luce Profiles",
       "source": "papers/regular-profile-cycles/regular-profile-cycles.tex",

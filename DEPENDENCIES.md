@@ -14,6 +14,10 @@ The standalone Sukhatme paper has no active-paper dependency. Its internal chain
 
 The standalone endpoint-universality paper is self-contained: exponential/Gumbel and lattice-LLT inputs, the shared anisotropic Fourier/tilting toolkit, regularly varying endpoint sums, endpoint saddle/localization, factorial moments, tangent measure, kernel semigroup, and microscopic limit are internal. The extraction is byte-preserving and unaudited.
 
+## Global Endpoint Poisson Approximation extraction
+
+The standalone global endpoint paper includes the complete endpoint-regular framework and then the approximate-Palm Stein argument, exact swap likelihood ratio, quantitative one-dimensional saddle, swap--Palm comparison, and two-cycle summability. It has no active-paper dependency. The extraction is byte-preserving and unaudited.
+
 ## Regular-profile microscopic-cycle manuscript
 
 The standalone paper `papers/regular-profile-cycles/regular-profile-cycles.tex`
