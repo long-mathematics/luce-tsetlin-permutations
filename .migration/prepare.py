@@ -5,7 +5,7 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_COMMIT = "7ac6679db3fcb0ef5f72081752624672a43f1269"
-REQUEST_PARENT = "4d78a58030af7179410d0c6d80b38823a9bdc52e"
+REQUEST_PARENT = "7a87a60debc9737bda9a3c8e30878313663ad556"
 
 subprocess.run(
     ["git", "fetch", "--no-tags", "--depth=1", "origin", SCRIPT_COMMIT],
@@ -22,5 +22,10 @@ new = f'if "parent {REQUEST_PARENT}" not in headers:\n    raise ValueError("Unex
 if source.count(old) != 1:
     raise ValueError("Pinned extraction parent check not found")
 source = source.replace(old, new, 1)
+range_old = '("Vanishing-block obstruction", r"\\begin{proposition}[Vanishing-block implantation]\\label{prop:implantation}", r"\\begin{remark}\\label{rem:implantation-consequences}", "% BEGIN ARCHIVED BLOCK: vanishing-block-obstruction", "% END ARCHIVED BLOCK: vanishing-block-obstruction", 539, 598)'
+range_new = '("Vanishing-block obstruction", r"\\begin{proposition}[Vanishing-block implantation]\\label{prop:implantation}", r"\\begin{remark}\\label{rem:implantation-consequences}", "% BEGIN ARCHIVED BLOCK: vanishing-block-obstruction", "% END ARCHIVED BLOCK: vanishing-block-obstruction", 539, 600)'
+if source.count(range_old) != 1:
+    raise ValueError("Pinned obstruction range not found")
+source = source.replace(range_old, range_new, 1)
 namespace = {"__name__": "__main__", "__file__": str(ROOT / ".migration" / "prepare.py")}
 exec(compile(source, str(ROOT / ".migration" / "boundary_extract.py"), "exec"), namespace)
