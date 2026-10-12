@@ -7,7 +7,7 @@ impl = ROOT / ".migration/status_impl.py"
 source = impl.read_text(encoding="utf-8")
 source = source.replace(
     'REQUEST_PARENT = "520fbfc5e3894afd3fd6e5eadb9ac9e0d59793b0"',
-    'REQUEST_PARENT = "c2e27cf5ea50c647744fd346bb77fae286a909db"',
+    'REQUEST_PARENT = "169210c6d8d85aab7afaabec0387dd8200b8e134"',
     1,
 )
 marker = "# Verify the frozen archive.\n"
@@ -21,3 +21,10 @@ namespace = {
 }
 exec(compile(source, str(impl), "exec"), namespace)
 impl.unlink()
+# The shared workflow owns removal of this marker after preparation.  The
+# reconciler removes its working copy, so recreate it for the workflow's
+# unconditional `rm` step; it is not included in the final commit.
+(ROOT / ".migration/request.json").write_text(
+    '{\n  "stage": "integration",\n  "task": "monolith-decomposition-status",\n  "baseline_commit": "654a25c0ed0abfa267aee2970fd311544be39866"\n}\n',
+    encoding="utf-8",
+)
