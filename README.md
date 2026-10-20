@@ -13,6 +13,7 @@ Manuscript author: **Christopher D. Long**.
 | A Sharp Berry--Esseen Theorem and First Edgeworth Expansion for Logarithmic Luce Order | [PDF](output/pdf/luce-edgeworth.pdf) | [Source](papers/sharp-order-edgeworth/luce-edgeworth.tex) | imported |
 | Functional Erdos--Turan and Total-Cycle Laws for Luce Permutations | [PDF](output/pdf/functional-luce-erdos-turan.pdf) | [Source](papers/functional-erdos-turan/functional-luce-erdos-turan.tex) | current-research |
 | Poisson Approximation and Lattice Edgeworth Expansions for Total Luce Cycles | [PDF](output/pdf/total-cycle-edgeworth.pdf) | [Source](papers/total-cycle-edgeworth/total-cycle-edgeworth.tex) | current-research |
+| An Exact Uniform Component and Analytic Mod-Poisson Convergence for Luce Permutations | [PDF](output/pdf/luce-mod-poisson.pdf) | [Source](papers/mod-poisson/luce_mod_poisson.tex) | current-research; internally audited |
 | Boundary Laws for Luce Rankings | [PDF](output/pdf/boundary-laws.pdf) | [Source](papers/boundary-laws/boundary-laws.tex) | mechanical extraction; audit passed; repairs pending |
 | Sukhatme Fixed Points and the Terminal Poisson Process | [PDF](output/pdf/sukhatme-fixed-points.pdf) | [Source](papers/sukhatme-fixed-points/sukhatme-fixed-points.tex) | mechanical extraction; audit passed; repairs pending |
 | Endpoint-Regular Fixed-Point Universality | [PDF](output/pdf/endpoint-regular-universality.pdf) | [Source](papers/endpoint-regular-universality/endpoint-regular-universality.tex) | mechanical extraction; audit passed; repairs pending |
@@ -137,6 +138,21 @@ which yields the sharp Berry--Esseen order $(\log n)^{-1/2}$. Its first lattice 
 The paper also gives the variance asymptotic, a continuity-corrected second-order lattice expansion retaining the exact coefficient $\mathrm{Var}K_n-\mu_n$, and signed Poisson--Charlier approximations at every fixed order. The proof uses a passive-mark Poisson core from the switching theory and discrete Poisson smoothing; it does not use the nonlinear arithmetic analysis required for logarithmic permutation order.
 
 **Status:** current research manuscript. Exact-mean centering and the lattice phase are essential; profile-dependent limiting mean and higher-cumulant constants remain separate open questions.
+
+### Analytic mod-Poisson convergence for Luce permutations
+
+[PDF](output/pdf/luce-mod-poisson.pdf) · [LaTeX](papers/mod-poisson/luce_mod_poisson.tex)
+
+For arbitrary comparable-rate triangular arrays, the paper proves a uniform complex normal-family bound for the normalized total-cycle generating function. For positive continuous rate profiles, it proves locally uniform analytic mod-Poisson convergence:
+
+$
+n^{1-z}\mathbb{E} z^{K_n}\longrightarrow
+\frac{e^{A_f(z-1)}}{\Gamma(z)}.
+$
+
+The profile correction is the Fredholm determinant constant; after centering by the exact mean, the analytic residue is universal. The proof uses an exact uniform-clock component, a summable real-fugacity switching estimate, and the residual marked-cycle Poisson limit. Its model-specific asymptotic inputs are the regular-profile local-entry/envelope theorem and the macroscopic uniform-root law; the marked switching identity is cited from the mesoscopic manuscript. It does not assume the earlier higher-factorial-cumulant result.
+
+**Status:** internally audited current-research manuscript, not independently refereed. See the [proof and dependency audit](audits/mod-poisson-proof-audit.md).
 
 ### Boundary laws for Luce rankings
 
