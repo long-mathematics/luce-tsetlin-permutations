@@ -24,6 +24,7 @@ The rows are in exactly the `papers.json` order.
 | `mod-poisson` | `mesoscopic-switching`, `regular-profile-cycles`, `macroscopic-pd` |
 | `independence-peeling` | `mesoscopic-switching`, `regular-profile-cycles`, `macroscopic-pd`, `sharp-order-edgeworth` |
 | `boundary-laws` | None |
+| `bottom-window-universality` | None |
 | `sukhatme-fixed-points` | None |
 | `endpoint-regular-universality` | None |
 | `global-endpoint-poisson` | None |
@@ -104,6 +105,12 @@ The PD(1) cutoff appendix uses only the standard size-biased representation and 
 No active-paper dependency. The standalone extraction includes the exponential-race identity, vanishing-block implantation, exact top-window likelihood comparison, finite-volume bottom-window convergence, infinite-product criterion, Borel--Cantelli leakage argument, and phase diagram.
 
 Its adversarial audit found no fatal gap and records six localized clarifications. Until those are applied, the paper remains `working`.
+
+### `bottom-window-universality`
+
+No active-paper dependency. The paper supplies the Poisson-spacings coupling, regularly varying endpoint and interior tail bounds, almost-sure c-zero and ell-p convergence, continuity of fixed-window ranking, quenched and annealed total-variation passage, last-label integral and tail analysis, exact-grid comparison, and the logarithmic critical-scale argument.
+
+Its external inputs are the Borga--Chatterjee--Diaconis permuton-sampling representation, Rényi's uniform order-statistic representation, regular-variation uniform convergence and Potter bounds, standard Poisson marking/mapping and iid extreme-value results, and the stable-jump Poisson--Dirichlet identification. Pitman--Tran's last-pick/rank-permutation results are cited for their substantive overlap, including the linear last-label constant; the Arendarczyk--Dębicki Weibull-product lemma supplies the scalar-tail precedent in the critical example. The standalone proofs do not import the boundary extraction or any cycle-limit manuscript. Its Poisson--Dirichlet corollary describes clock shares rather than cycle lengths.
 
 ### `sukhatme-fixed-points`
 
