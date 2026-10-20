@@ -1,2 +1,3 @@
 Ready: audited payload SHA-256 0901d8db29b0016034992872f9937678ab0c51be24a88bf8cd56cc67b6abec1b
 Baseline: 38f195dc5b30812ebbf084764016e857a68b9a1c
+Use full checkout history to validate baseline ancestry.
