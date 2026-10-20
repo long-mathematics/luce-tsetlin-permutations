@@ -145,10 +145,10 @@ The paper also gives the variance asymptotic, a continuity-corrected second-orde
 
 For arbitrary comparable-rate triangular arrays, the paper proves a uniform complex normal-family bound for the normalized total-cycle generating function. For positive continuous rate profiles, it proves locally uniform analytic mod-Poisson convergence:
 
-$
+$$
 n^{1-z}\mathbb{E} z^{K_n}\longrightarrow
 \frac{e^{A_f(z-1)}}{\Gamma(z)}.
-$
+$$
 
 The profile correction is the Fredholm determinant constant; after centering by the exact mean, the analytic residue is universal. The proof uses an exact uniform-clock component, a summable real-fugacity switching estimate, and the residual marked-cycle Poisson limit. Its model-specific asymptotic inputs are the regular-profile local-entry/envelope theorem and the macroscopic uniform-root law; the marked switching identity is cited from the mesoscopic manuscript. It does not assume the earlier higher-factorial-cumulant result.
 
