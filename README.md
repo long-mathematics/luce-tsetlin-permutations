@@ -230,26 +230,6 @@ The proof is independent of the mesoscopic and total-cycle theorems. Its main in
 
 **Status:** audited current manuscript. The standalone extraction and all localized post-audit clarifications are recorded in the repository provenance and repair files.
 
-## Total-cycle results
-
-For positive rates with a fixed largest-to-smallest ratio, write $K_n$ for the total cycle count, $\mu_n=\mathbb E K_n$, and $L=\log n$. The functional manuscript gives the count CLT and its joint functional law with logarithmic permutation order. The new quantitative manuscript gives
-
-$$
-\mathrm{d}_{\mathrm{TV}}(\mathcal L(K_n),\mathrm{Pois}(\mu_n))
-= O_\kappa((\log L)^2/L),
-$$
-
-
-and the exact leading normal-approximation constant
-
-$$
-\sqrt L\mathrm{d}_{\mathrm K}((K_n-\mu_n)/\sqrt L,N(0,1))
-\longrightarrow \frac{2}{3\sqrt{2\pi}}.
-$$
-
-
-It also proves first and second lattice Edgeworth expansions and signed Poisson–Charlier approximations at each fixed order. The second expansion retains the exact variance-minus-mean correction; it does not identify a limiting profile constant. Exact mean, lattice phase, and fixed-order quantifiers are essential. See [theorem status](THEOREM_STATUS.md) and [dependencies](DEPENDENCIES.md).
-
 ## Preservation and review
 
 The initial import pins the original collection at commit `6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0`. Original sources, PDFs, licenses, and historical audits are immutable hash-checked archival records. The invalid historical total-cycle candidate remains separate from the later functional and quantitative proofs.
