@@ -4,6 +4,21 @@ Limit laws and cycle statistics for Luce/Tsetlin permutations, including Poisson
 
 Manuscript author: **Christopher D. Long**.
 
+## Questions raised in the Diaconis collaborations
+
+[Chatterjee–Diaconis–Kim, *Enumerative Theory for the Tsetlin Library* (2024)](https://doi.org/10.1016/j.jalgebra.2023.08.009) asks about fixed points, cycles, the longest cycle, and permutation order. [Borga–Chatterjee–Diaconis, *Permuton and Local Limits for the Luce Model* (2026), §5.2](https://arxiv.org/html/2509.07729v3#S5.SS2) explicitly conjectures a Poisson fixed-point limit and raises further cycle-count questions. The following manuscripts give asymptotic answers **under the stated rate hypotheses**, not for arbitrary positive-weight arrays.
+
+| Question or conjecture | Manuscript(s) addressing it | Scope of the answer |
+| --- | --- | --- |
+| Poisson limit for fixed points (CDK; BCD §5.2) | [Microscopic Cycles and Sparse Entries](output/pdf/regular-profile-cycles.pdf) | Poisson limit with explicit diagonal-kernel mean for positive continuous profiles. |
+| Joint distribution of fixed-length cycles (BCD §5.2) | [Microscopic Cycles and Sparse Entries](output/pdf/regular-profile-cycles.pdf) | Independent Poisson limits for each fixed finite vector of cycle counts under regular profiles. |
+| Divergent fixed-point counts for Sukhatme weights (BCD §5.2) | [Sukhatme Fixed Points](output/pdf/sukhatme-fixed-points.pdf); [Global Endpoint Poisson Approximation](output/pdf/global-endpoint-poisson.pdf) | Logarithmically growing mean, terminal Poisson process, and exact-mean Poisson approximation; not a fixed-parameter Poisson limit after rescaling. |
+| Longest and macroscopic cycles (CDK) | [Poisson–Dirichlet Universality](output/pdf/poisson-dirichlet-luce.pdf) | Ranked normalized cycle lengths converge to PD(1), and size-biased lengths to GEM(1), for uniformly comparable rates. |
+| Total number of cycles (CDK; BCD §5.2) | [Analytic Mod-Poisson Convergence](output/pdf/luce-mod-poisson.pdf); [Total-Cycle Poisson and Edgeworth Approximations](output/pdf/total-cycle-edgeworth.pdf) | Analytic mod-Poisson limit for regular profiles; quantitative exact-mean Poisson and lattice normal approximations for comparable rates. |
+| Permutation order (CDK) | [Erdős–Turán Law](output/pdf/luce-erdos-turan.pdf); [Sharp Order Edgeworth Expansion](output/pdf/luce-edgeworth.pdf) | Erdős–Turán central limit law and quantitative refinements for comparable rates. |
+
+These are asymptotic results for specified classes of Luce arrays. CDK also asks about longest increasing subsequences; the cataloged manuscripts above do not claim a general solution to that question.
+
 ## Current manuscripts
 
 | Manuscript | PDF | LaTeX | Status |
