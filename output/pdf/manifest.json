@@ -66,6 +66,14 @@
       "pages": 6
     },
     {
+      "id": "bottom-window-universality",
+      "source": "papers/bottom-window-universality/bottom_window_luce.tex",
+      "source_sha256": "2f17ac13775871b45ce9f03720e9bc490d5b85595e135ccb2d233cccfec15aa1",
+      "pdf": "output/pdf/bottom_window_luce.pdf",
+      "pdf_sha256": "59a0d0ce01b0b596853a774df8a4248382a09e443688384896b51e2a8471b0ba",
+      "pages": 21
+    },
+    {
       "id": "sukhatme-fixed-points",
       "source": "papers/sukhatme-fixed-points/sukhatme-fixed-points.tex",
       "source_sha256": "889a9b143609de2c0aef075bbb0654832d13f5dffdfded3679eca8065d50732f",

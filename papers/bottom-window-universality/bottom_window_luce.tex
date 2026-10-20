@@ -1,0 +1,1515 @@
+\documentclass[11pt]{article}
+
+% Keep the PDF snapshot independent of the checkout directory.
+\ifdefined\pdftrailerid\pdftrailerid{}\fi
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage[
+  hidelinks,
+  pdftitle={Bottom-Window Universality for Permuton-Sampled Luce Permutations},
+  pdfauthor={Christopher D. Long},
+  pdfsubject={Luce permutations, permutons, regular variation, and bottom-window limits},
+  pdfkeywords={Luce model, Tsetlin library, permuton, regular variation, Poisson point process, Poisson-Dirichlet}
+]{hyperref}
+
+\numberwithin{equation}{section}
+\allowdisplaybreaks
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\Ee}{\mathbb E}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Exp}{\operatorname{Exp}}
+\newcommand{\Perm}{\operatorname{Perm}}
+\newcommand{\Luce}{\operatorname{Luce}}
+\newcommand{\essinf}{\operatorname*{ess\,inf}}
+\newcommand{\PPP}{\operatorname{PPP}}
+\newcommand{\PD}{\operatorname{PD}}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\dd}{\,\mathrm d}
+
+\title{Bottom-Window Universality for Permuton-Sampled Luce Permutations}
+\author{Christopher D. Long\\\texttt{galizur@gmail.com}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study bottom windows of permutations sampled from Luce permutons whose profiles are regularly varying at an isolated vanishing endpoint.  If
+\[
+  \frac{f(tx)}{f(x)}\longrightarrow t^\gamma
+  \qquad (x\downarrow0),
+  \qquad \gamma>0,
+\]
+then, under a common exponential-clock coupling, the normalized clocks converge almost surely in $c_0$ to
+\[
+  \left(\frac{\xi_i}{S_i^\gamma}\right)_{i\geq1},
+\]
+where $S_i$ are the arrival times of a rate-one Poisson process and the $\xi_i$ are independent standard exponentials.  For $1\leq p<\infty$, convergence also holds in $\ell^p$ when $p\gamma>1$, the sharp range for summability of the limit.  Every fixed bottom window therefore eventually agrees with the limiting reverse Luce race, quenched in the Poisson environment.  The coupling allows arbitrary slowly varying factors and does not require a monotone profile.
+
+For power profiles, the limiting rank law and last-label distribution agree with earlier results of Pitman and Tran.  We give a direct Poisson-environment derivation of the last-label law and obtain its stretched-exponential tail.  For exact deterministic profile weights, with pointwise isolation of the endpoint, the limiting rates are $(i^\gamma)_{i\geq1}$.  The probabilities that label $1$ is not last are asymptotic to $(\log2)/\gamma$ in the sampled model and $2^{-\gamma}$ in the exact model as $\gamma\to\infty$.  At index zero the fixed bottom labels escape to infinity.  For the logarithmic critical profile $f_\alpha(x)=(\log(e/x))^{-\alpha}$, a Weibull-product tail gives a Poisson--Gumbel clock limit, and every fixed bottom label lies at $n^{1/(\alpha+1)+o_{\Pp}(1)}$.
+\end{abstract}
+
+\medskip
+\noindent\textbf{2020 Mathematics Subject Classification.}
+Primary 60C05, 60G55; Secondary 05A05, 60F17, 60G70.
+
+\smallskip
+\noindent\textbf{Keywords.}
+Luce model, Tsetlin library, permuton, bottom window, exponential race, regular variation, Poisson point process, Poisson--Dirichlet distribution.
+
+\section{Introduction}
+
+The Luce model assigns a probability distribution to permutations by sequential size-biased sampling without replacement; it goes back to Luce's choice-theoretic work \cite{Luce}.  This law is also the stationary distribution of the Tsetlin library and appears in ranking models and related random-order constructions.  Permutons, introduced in \cite{HKMRS}, encode global limits of permutation sequences.  Chatterjee, Diaconis, and Kim \cite{CDK} determined the asymptotic laws of the top and bottom $k$ cards for broad deterministic weight sequences.  Borga, Chatterjee, and Diaconis \cite{BCD} subsequently identified permuton and local limits for Luce permutations and, in their Section~2.4, compared an exact Luce permutation with an independent permutation sampled from its limiting permuton.
+
+The comparison is especially delicate at a vanishing endpoint.  Conditional on the ordered horizontal coordinates of the permuton sample, the sampled permutation is itself Luce distributed, but with random weights.  If $U_{1:n}<\cdots<U_{n:n}$ are the order statistics of $n$ independent uniforms, the conditional weights are
+\[
+  f(U_{1:n}),\ldots,f(U_{n:n});
+\]
+see \cite[Proposition~2.2]{BCD}.  For the linear profile $f(x)=x$, the R\'enyi representation gives
+\[
+  (U_{1:n},\ldots,U_{n:n})
+  \stackrel{d}{=}
+  \frac{1}{S_{n+1}}(S_1,\ldots,S_n),
+\]
+where $S_i=E_1+\cdots+E_i$ and the $E_i$ are independent standard exponentials.  Since a common scaling of all Luce weights is irrelevant, the finite model is governed exactly by the random rates $S_1,\ldots,S_n$.  Thus the deterministic endpoint lattice $1,2,3,\ldots$ is replaced by the Poisson tangent lattice $S_1,S_2,S_3,\ldots$.
+
+For the pure power profile $f(x)=x^\gamma$, Pitman and Tran \cite[Theorem~25]{PitmanTran} obtained this limiting rank permutation for size-biased permutations of i.i.d.\ weights, with lower-tail exponent $a=1/\gamma$.  The ranks among increasing weights coincide here with the horizontal labels.  Their Proposition~26 gives the complete last-label law, and Proposition~27 and the following paragraph give the linear-profile integral, reported there as approximately $0.555229$.
+
+Our main theorem is an almost sure functional coupling for general regularly varying profiles satisfying the endpoint isolation condition below.  It allows arbitrary slowly varying factors and does not assume monotonicity.  After the natural clock normalization, the entire clock sequence converges almost surely in $c_0$, and in every $\ell^p$, $1\leq p<\infty$, for which $p\gamma>1$.  Fixed bottom-window convergence is then a continuity statement for the ranking map: for almost every Poisson environment, the first $k$ bottom labels eventually agree under a common exponential-clock coupling.
+
+We give a direct Poisson-environment proof of the last-label law and derive its stretched-exponential tail.  Forgetting labels, the clock values form a Poisson point process with intensity proportional to $z^{-1-1/\gamma}\dd z$.  For $\gamma>1$, their normalized ranked values have the Poisson--Dirichlet law $\PD(1/\gamma,0)$ \cite{PitmanYor}.  For exact deterministic profile weights with pointwise isolation of the endpoint, the limiting rates are $i^\gamma$.  Thus the comparison of endpoint environments is
+\[
+  i^\gamma \quad\hbox{versus}\quad S_i^\gamma:
+\]
+multiplicative constants and slowly varying factors disappear under clock normalization, while the endpoint exponent remains.  Section~\ref{sec:exact} states the additional grid regularity under which this is a comparison with samples from the exact model's own limiting permuton.
+
+The last-label laws also give a quantitative distinction between the models.  As $\gamma\to\infty$, the probabilities that label $1$ is not last are asymptotic to $(\log2)/\gamma$ for permuton sampling and $2^{-\gamma}$ for exact weights.  At index zero, every fixed bottom label escapes to infinity.  For the canonical logarithmic profile $f_\alpha(x)=(\log(e/x))^{-\alpha}$, we derive the extreme-clock limit and locate each fixed bottom label at $n^{1/(\alpha+1)+o_{\Pp}(1)}$.
+
+The paper is organized as follows.  Section~\ref{sec:setup} fixes conventions and recalls the conditional random-weight representation.  Section~\ref{sec:functional} proves the $c_0$ and $\ell^p$ coupling theorem.  Section~\ref{sec:bottom} deduces bottom-window convergence and explicit finite-dimensional laws.  Section~\ref{sec:lastlabel} derives a Poisson-environment form of the last-label law and its tail asymptotic.  Section~\ref{sec:ppp} identifies the limiting point process and the Poisson--Dirichlet regime.  Section~\ref{sec:exact} treats exact deterministic profiles and the large-exponent comparison.  Section~\ref{sec:linear} compares the linear-profile probabilities and explains the orientation issue in \cite[Section~2.4]{BCD}.  Section~\ref{sec:critical} proves the loss of tightness at index zero, the extreme-clock scaling, and logarithmic label localization for a canonical critical profile.  Section~\ref{sec:conjectures} records further directions.
+
+\section{Luce races, permuton samples, and conventions}
+\label{sec:setup}
+
+Throughout, $\N=\{1,2,\ldots\}$ and $\Exp(\lambda)$ denotes the exponential distribution with rate $\lambda$.  Given positive rates $w_1,\ldots,w_n$, let
+\[
+  T_i=\frac{\xi_i}{w_i},
+  \qquad \xi_i\stackrel{\mathrm{iid}}{\sim}\Exp(1).
+\]
+Then $T_i\sim\Exp(w_i)$ independently.  The Luce permutation $\sigma_n$ is defined by
+\[
+  T_{\sigma_n^{-1}(1)}<T_{\sigma_n^{-1}(2)}<\cdots<T_{\sigma_n^{-1}(n)}.
+\]
+Thus $\sigma_n(i)$ is the draw position of label $i$, and $\sigma_n^{-1}(j)$ is the label drawn at time $j$.  This is the convention used in \cite{BCD}.
+
+The labels seen from the bottom are
+\begin{equation}
+  B_{n,r}:=\sigma_n^{-1}(n-r+1),
+  \qquad 1\leq r\leq n.
+  \label{eq:bottom-definition}
+\end{equation}
+Equivalently, $B_{n,1},B_{n,2},\ldots$ are the labels obtained by arranging the clocks $T_i$ in decreasing order.
+
+Let $f:(0,1]\to(0,\infty)$ be measurable and finite, and extend it arbitrarily to a positive finite value at $0$.  The Luce permuton $\mu_f$ associated with $f$ was introduced and analyzed in \cite{BCD}; the value assigned at $0$ is immaterial.  We only need the following sampling representation.
+
+\begin{proposition}[Borga--Chatterjee--Diaconis]
+\label{prop:bcd-representation}
+Let $\pi_n=\Perm(\mu_f,n)$, and let
+\[
+  U_{1:n}<\cdots<U_{n:n}
+\]
+be the order statistics of $n$ independent uniform random variables on $(0,1)$.  Conditional on these order statistics,
+\[
+  \pi_n\sim \Luce\bigl(f(U_{1:n}),\ldots,f(U_{n:n})\bigr).
+\]
+In particular, one may realize the corresponding clocks as
+\begin{equation}
+  T_{n,i}=\frac{\xi_i}{f(U_{i:n})},
+  \qquad 1\leq i\leq n,
+  \label{eq:conditional-clocks}
+\end{equation}
+with the $\xi_i$ independent standard exponentials.
+\end{proposition}
+
+This is \cite[Proposition~2.2]{BCD}, expressed in exponential-race notation.  We will use R\'enyi's order-statistic representation \cite{Renyi}:
+\begin{equation}
+  (U_{1:n},\ldots,U_{n:n})
+  \stackrel{d}{=}
+  \left(\frac{S_1}{S_{n+1}},\ldots,\frac{S_n}{S_{n+1}}\right),
+  \qquad S_i:=E_1+\cdots+E_i,
+  \label{eq:renyi}
+\end{equation}
+where $E_1,E_2,\ldots$ are independent $\Exp(1)$ variables.
+
+We impose two endpoint hypotheses.  First, $f$ is regularly varying at zero with positive index $\gamma$:
+\begin{equation}
+  \frac{f(tx)}{f(x)}\longrightarrow t^\gamma
+  \qquad (x\downarrow0)
+  \quad\text{for every }t>0.
+  \label{eq:rv}
+\end{equation}
+Second, zero is the only place where rates can approach zero:
+\begin{equation}
+  m_\delta:=\essinf_{x\in[\delta,1]} f(x)>0
+  \qquad\text{for every }\delta\in(0,1).
+  \label{eq:isolated}
+\end{equation}
+The essential infimum is the natural formulation for a permuton, since changing $f$ on a null set does not change the sampled model.  Condition \eqref{eq:isolated} is automatic when $f$ is continuous and positive on $(0,1]$.
+
+We use the standard spaces $c_0$ and $\ell^p$ of real sequences.  A finite sequence is always padded by zeros when viewed as an element of one of these spaces.
+
+\section{The functional endpoint limit}
+\label{sec:functional}
+
+Let $(E_i)_{i\geq1}$ and $(\xi_i)_{i\geq1}$ be independent sequences of independent standard exponentials, and set $S_i=E_1+\cdots+E_i$.  Under the coupling \eqref{eq:renyi}, define
+\begin{equation}
+  Y_{n,i}:=
+  \begin{cases}
+  \displaystyle
+  \frac{f(1/n)\,\xi_i}{f(S_i/S_{n+1})},&1\leq i\leq n,\\[1.2ex]
+  0,&i>n,
+  \end{cases}
+  \qquad
+  Y_i:=\frac{\xi_i}{S_i^\gamma}.
+  \label{eq:Y-definitions}
+\end{equation}
+Multiplying all clocks by $f(1/n)$ does not alter their ranking.
+
+\begin{theorem}[Functional Poisson-tangent limit]
+\label{thm:functional}
+Assume \eqref{eq:rv} and \eqref{eq:isolated} with $\gamma>0$.  Under the coupling above,
+\begin{equation}
+  \|Y_n-Y\|_\infty\longrightarrow0
+  \qquad\text{almost surely}.
+  \label{eq:c0-convergence}
+\end{equation}
+More generally, if $1\leq p<\infty$ and $p\gamma>1$, then
+\begin{equation}
+  \|Y_n-Y\|_p\longrightarrow0
+  \qquad\text{almost surely}.
+  \label{eq:lp-convergence}
+\end{equation}
+The range is sharp:
+\begin{equation}
+  Y\in\ell^p\ \text{almost surely}
+  \quad\Longleftrightarrow\quad
+  p\gamma>1.
+  \label{eq:lp-sharp}
+\end{equation}
+All assertions are quenched in the Poisson environment: for almost every realization of $(S_i)_{i\geq1}$, they hold with conditional probability one over $(\xi_i)_{i\geq1}$.
+\end{theorem}
+
+\begin{proof}
+Put
+\[
+  a_n:=f(1/n),
+  \qquad
+  R_{n,i}:=\frac{f(S_i/S_{n+1})}{a_n}.
+\]
+For each fixed $i$,
+\[
+  \frac{S_i}{S_{n+1}}
+  =\frac1n\frac{nS_i}{S_{n+1}},
+  \qquad
+  \frac{nS_i}{S_{n+1}}\longrightarrow S_i
+  \quad\text{almost surely}.
+\]
+The uniform convergence theorem for regularly varying functions therefore gives
+\begin{equation}
+  R_{n,i}\longrightarrow S_i^\gamma
+  \qquad\text{almost surely for every fixed }i;
+  \label{eq:fixed-coordinate-rates}
+\end{equation}
+see, for example, \cite[Theorem~1.2.1]{BGT}.  Hence $Y_{n,i}\to Y_i$ for every fixed $i$.
+
+We next prove uniform control of labels escaping to infinity.  Choose $\beta\in(0,\gamma)$.  Potter's bound at zero \cite[Theorem~1.5.6]{BGT} gives constants $c>0$ and $\delta\in(0,1)$ such that, for all sufficiently large $n$,
+\begin{equation}
+  \frac{f(t/n)}{f(1/n)}\geq c t^\beta,
+  \qquad 1\leq t\leq \delta n.
+  \label{eq:potter-lower}
+\end{equation}
+By the strong law, almost surely,
+\begin{equation}
+  S_i\geq \frac{i}{2}\quad\text{for all sufficiently large }i,
+  \qquad
+  S_{n+1}\leq2n\quad\text{for all sufficiently large }n.
+  \label{eq:slln-S}
+\end{equation}
+Consequently, if $i$ and $n$ are large and $S_i/S_{n+1}\leq\delta$, then
+\[
+  \frac{nS_i}{S_{n+1}}\geq\frac{i}{4},
+\]
+and \eqref{eq:potter-lower} yields
+\begin{equation}
+  R_{n,i}\geq c' i^\beta.
+  \label{eq:endpoint-rate-lower}
+\end{equation}
+
+On the complementary region $S_i/S_{n+1}>\delta$, condition \eqref{eq:isolated} gives, after reducing $m_\delta$ if necessary,
+\begin{equation}
+  R_{n,i}\geq \frac{m_\delta}{a_n}
+  \label{eq:interior-rate-lower}
+\end{equation}
+almost surely for every sampled order statistic.  Indeed, an order statistic has a continuous law, and there are only countably many pairs $(n,i)$, so the sample avoids every exceptional null set simultaneously.
+
+Combining \eqref{eq:endpoint-rate-lower} and \eqref{eq:interior-rate-lower}, for all sufficiently large $M$ and $n$,
+\begin{equation}
+  \max_{M<i\leq n}Y_{n,i}
+  \leq
+  C\sup_{i>M}\frac{\xi_i}{i^\beta}
+  +\frac{a_n}{m_\delta}\max_{i\leq n}\xi_i.
+  \label{eq:c0-tail-bound}
+\end{equation}
+For every $\varepsilon>0$,
+\[
+  \sum_{i\geq1}\Pp(\xi_i>\varepsilon i^\beta)
+  =\sum_{i\geq1}e^{-\varepsilon i^\beta}<\infty,
+\]
+so Borel--Cantelli gives
+\begin{equation}
+  \sup_{i>M}\frac{\xi_i}{i^\beta}\longrightarrow0
+  \qquad\text{almost surely}.
+  \label{eq:xi-tail-sup}
+\end{equation}
+Also $\max_{i\leq n}\xi_i=O(\log n)$ almost surely.  Since $a_n=f(1/n)=n^{-\gamma+o(1)}$, we have
+\begin{equation}
+  a_n\max_{i\leq n}\xi_i\longrightarrow0
+  \qquad\text{almost surely}.
+  \label{eq:interior-max-vanishes}
+\end{equation}
+Thus
+\begin{equation}
+  \lim_{M\to\infty}\limsup_{n\to\infty}
+  \max_{M<i\leq n}Y_{n,i}=0
+  \qquad\text{almost surely}.
+  \label{eq:no-escape-c0}
+\end{equation}
+Since $S_i\sim i$ and the same Borel--Cantelli argument applies to $\xi_i/i^\beta$, we also have
+\begin{equation}
+  \sup_{i>M}Y_i\longrightarrow0
+  \qquad\text{almost surely}.
+  \label{eq:limit-c0-tail}
+\end{equation}
+Fixed-coordinate convergence together with \eqref{eq:no-escape-c0} and \eqref{eq:limit-c0-tail} proves \eqref{eq:c0-convergence}.
+
+Now let $p\gamma>1$, and choose $\beta$ so that
+\[
+  \frac1p<\beta<\gamma.
+\]
+The endpoint part of the $p$-th power tail is bounded by
+\begin{equation}
+  C^p\sum_{i>M}\frac{\xi_i^p}{i^{p\beta}},
+  \label{eq:lp-endpoint-tail}
+\end{equation}
+which tends to zero almost surely as $M\to\infty$, because its expectation is finite.  The interior part satisfies
+\begin{equation}
+  \sum_{\substack{i\leq n:\,S_i/S_{n+1}>\delta}}Y_{n,i}^p
+  \leq
+  \left(\frac{a_n}{m_\delta}\right)^p\sum_{i=1}^n\xi_i^p.
+  \label{eq:lp-interior-tail}
+\end{equation}
+The strong law gives $\sum_{i=1}^n\xi_i^p=O(n)$ almost surely, while regular variation and $p\gamma>1$ give $na_n^p\to0$.  Hence the right-hand side of \eqref{eq:lp-interior-tail} tends to zero.  The same summable bound applies to the tail of $Y$, and finite-coordinate convergence now proves \eqref{eq:lp-convergence}.
+
+Finally, suppose $p\gamma\leq1$.  Almost surely $S_i\leq2i$ for all sufficiently large $i$.  The set
+\[
+  I:=\{i:\xi_i\geq1\}
+\]
+has positive asymptotic density by the strong law.  Therefore
+\[
+  \sum_{i\geq1}Y_i^p
+  \geq 2^{-p\gamma}\sum_{\substack{i\in I\\ i\text{ large}}}i^{-p\gamma}
+  =\infty
+  \qquad\text{almost surely}.
+\]
+This proves \eqref{eq:lp-sharp}.  All events used above have probability one in the $S$-environment and, conditionally on such an environment, probability one in the independent $\xi$-marks.  The quenched assertion follows by Fubini's theorem.
+\end{proof}
+
+\begin{remark}
+The slowly varying factor in $f$ plays no role in the limit.  It is removed by the normalization $f(1/n)$, while the endpoint geometry survives through the exponent $\gamma$ and the Poisson arrival times $S_i$.
+\end{remark}
+
+\section{The limiting bottom permutation}
+\label{sec:bottom}
+
+Arrange the coordinates of $Y_n$ in decreasing order and let
+\[
+  B_{n,1},B_{n,2},\ldots,B_{n,n}
+\]
+be their labels.  By construction, this is the bottom-to-top order \eqref{eq:bottom-definition} of $\pi_n=\Perm(\mu_f,n)$.  Likewise, arrange
+\[
+  Y_i=\frac{\xi_i}{S_i^\gamma},\qquad i\geq1,
+\]
+in decreasing order and denote the resulting labels by
+\[
+  B_1,B_2,\ldots.
+\]
+
+\begin{theorem}[Quenched bottom-window universality]
+\label{thm:bottom-window}
+Under the hypotheses of Theorem~\ref{thm:functional}, the sequence $(B_r)_{r\geq1}$ is almost surely a permutation of $\N$.  For every fixed $k$,
+\begin{equation}
+  (B_{n,1},\ldots,B_{n,k})
+  \longrightarrow
+  (B_1,\ldots,B_k)
+  \qquad\text{almost surely}.
+  \label{eq:bottom-window-as}
+\end{equation}
+In fact, under the coupling, the two $k$-tuples are eventually equal.  If each finite bottom permutation is extended to a permutation of $\N$ by fixing every label larger than $n$, then these extended permutations converge coordinatewise almost surely to $(B_r)_{r\geq1}$.  For almost every realization of $(S_i)$ this eventual equality holds with conditional probability one over $(\xi_i)$.
+\end{theorem}
+
+\begin{proof}
+Conditionally on $(S_i)$, the variables $Y_i$ are independent exponentials with respective rates $S_i^\gamma$, so they are pairwise distinct almost surely.  Theorem~\ref{thm:functional} gives $Y\in c_0$ and $Y_i>0$ for every $i$.  Hence the $k$ largest coordinates are attained, and the gap between the $k$-th and $(k+1)$-st largest coordinates is strictly positive.  The map from a $c_0$ sequence to the ordered labels of its $k$ largest coordinates is continuous at every such sequence.  The almost-sure $c_0$ convergence therefore implies eventual equality of the first $k$ labels.
+
+Moreover, each fixed coordinate $Y_i>0$ has only finitely many coordinates above it because $Y_j\to0$.  Thus every label has finite rank, and $(B_r)_{r\geq1}$ is a permutation of $\N$.
+\end{proof}
+
+\begin{corollary}[A vanishing right endpoint]
+\label{cor:right-endpoint}
+Suppose instead that $\widetilde f(x):=f(1-x)$ satisfies
+\eqref{eq:rv} and \eqref{eq:isolated} at zero with index $\gamma>0$.
+If $B_{n,r}$ are the bottom labels for $\Perm(\mu_f,n)$, then, for every
+fixed $k$,
+\begin{equation}
+  (n+1-B_{n,1},\ldots,n+1-B_{n,k})
+  \xrightarrow{d}(B_1,\ldots,B_k),
+  \label{eq:right-endpoint-reflection}
+\end{equation}
+where the limit is the Poisson-tangent race with rates
+$(S_i^\gamma)_{i\geq1}$.  The convergence admits the same almost-sure,
+eventual-equality coupling as in Theorem~\ref{thm:bottom-window}.
+\end{corollary}
+
+\begin{proof}
+The reflected order statistics
+\[
+  1-U_{n:n}<1-U_{n-1:n}<\cdots<1-U_{1:n}
+\]
+have the same joint law as $U_{1:n}<\cdots<U_{n:n}$.  Relabeling
+$i\leftrightarrow n+1-i$ therefore reduces the claim to
+Theorem~\ref{thm:bottom-window} applied to $\widetilde f$.
+\end{proof}
+
+The limiting bottom permutation is therefore the reverse infinite Luce race with random rates
+\begin{equation}
+  S_1^\gamma,S_2^\gamma,S_3^\gamma,\ldots.
+  \label{eq:random-rate-environment}
+\end{equation}
+The following integral formula is the direct infinite analogue of the bottom-card formula in \cite[Theorem~4.2]{CDK}.
+
+\begin{corollary}[Finite-dimensional bottom laws]
+\label{cor:fdd}
+Let $a_1,\ldots,a_k$ be distinct positive integers.  Conditional on $(S_i)$,
+\begin{align}
+ &\Pp(B_1=a_1,\ldots,B_k=a_k\mid(S_i))
+ \notag\\
+ &\quad=
+ \int_{x_1>\cdots>x_k>0}
+ \prod_{j=1}^k
+ \left(S_{a_j}^\gamma e^{-S_{a_j}^\gamma x_j}\right)
+ \prod_{i\notin\{a_1,\ldots,a_k\}}
+ \left(1-e^{-S_i^\gamma x_k}\right)
+ \dd x_1\cdots\dd x_k.
+ \label{eq:quenched-fdd}
+\end{align}
+Consequently, the annealed probability is the expectation of the right-hand side of \eqref{eq:quenched-fdd}.
+\end{corollary}
+
+\begin{proof}
+Condition on $(S_i)$.  The event in question is
+\[
+  Y_{a_1}>\cdots>Y_{a_k}>Y_i
+  \qquad(i\notin\{a_1,\ldots,a_k\}).
+\]
+Integrating the joint densities of the selected clocks over the chamber $x_1>\cdots>x_k>0$ gives \eqref{eq:quenched-fdd}.  The infinite product is well defined because $S_i\sim i$ and hence
+\[
+  \sum_{i\geq1}e^{-tS_i^\gamma}<\infty
+  \qquad(t>0)
+\]
+almost surely.
+\end{proof}
+
+\begin{corollary}[Total-variation convergence of fixed windows]
+\label{cor:bottom-tv}
+Write $B_n^{[k]}=(B_{n,1},\ldots,B_{n,k})$ and
+$B^{[k]}=(B_1,\ldots,B_k)$.  Under the hypotheses of
+Theorem~\ref{thm:functional}, for almost every environment $S=(S_i)$,
+\begin{equation}
+ d_{\mathrm{TV}}\!\left(
+ \mathcal L(B_n^{[k]}\mid S),\mathcal L(B^{[k]}\mid S)\right)
+ \longrightarrow0.
+ \label{eq:bottom-tv-quenched}
+\end{equation}
+The annealed laws also converge in total variation:
+\begin{equation}
+ d_{\mathrm{TV}}\!\left(
+ \mathcal L(B_n^{[k]}),\mathcal L(B^{[k]})\right)
+ \longrightarrow0.
+ \label{eq:bottom-tv-annealed}
+\end{equation}
+Here $d_{\mathrm{TV}}(\mu,\nu)=\sup_A|\mu(A)-\nu(A)|$.
+\end{corollary}
+
+\begin{proof}
+For almost every $S$, the coupling inequality bounds the distance in
+\eqref{eq:bottom-tv-quenched} by
+$\Pp(B_n^{[k]}\neq B^{[k]}\mid S)$, which tends to zero by the eventual
+equality in Theorem~\ref{thm:bottom-window}.  Integrating this bound over
+$S$ and applying dominated convergence proves
+\eqref{eq:bottom-tv-annealed}.
+\end{proof}
+
+\section{The complete law of the last label}
+\label{sec:lastlabel}
+
+The first bottom label $B_1$ is the label drawn last.  The representation below is equivalent to \cite[Proposition~26]{PitmanTran}; we give a direct proof using the Poisson endpoint environment.  Define, for $t>0$,
+\begin{align}
+  A_\gamma(t)
+  &:=\int_1^\infty e^{-tu^\gamma}\,\dd u
+   =\frac1\gamma t^{-1/\gamma}
+     \Gamma\!\left(\frac1\gamma,t\right),
+  \label{eq:A-gamma}\\
+  H_\gamma(t)
+  &:=\int_0^1\left(1-e^{-tu^\gamma}\right)\,\dd u.
+  \label{eq:H-gamma}
+\end{align}
+
+\begin{equation}
+  C_\gamma:=\Gamma\!\left(1+\frac1\gamma\right).
+  \label{eq:C-gamma}
+\end{equation}
+
+\begin{theorem}[Last-label distribution]
+\label{thm:last-label}
+For every $m\geq1$,
+\begin{equation}
+  \Pp(B_1=m)
+  =\int_0^\infty
+  e^{-t}\frac{H_\gamma(t)^{m-1}}
+  {(1+A_\gamma(t))^m}\,\dd t.
+  \label{eq:last-label-pmf}
+\end{equation}
+Equivalently, for $0\leq z\leq1$,
+\begin{equation}
+  \Ee\left[z^{B_1-1}\right]
+  =\int_0^\infty
+  \frac{e^{-t}}
+  {1+A_\gamma(t)-zH_\gamma(t)}\,\dd t.
+  \label{eq:last-label-pgf}
+\end{equation}
+In particular,
+\begin{equation}
+  p_\gamma^{\mathrm{perm}}
+  :=\Pp(B_1=1)
+  =\int_0^\infty
+  \frac{e^{-t}}{1+A_\gamma(t)}\,\dd t.
+  \label{eq:p-perm-general}
+\end{equation}
+The function $\gamma\mapsto p_\gamma^{\mathrm{perm}}$ is strictly increasing, with
+\begin{equation}
+  \lim_{\gamma\downarrow0}p_\gamma^{\mathrm{perm}}=0,
+  \qquad
+  \lim_{\gamma\to\infty}p_\gamma^{\mathrm{perm}}=1.
+  \label{eq:p-perm-endpoints}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Fix $m$ and condition on $S_m=s$.  Given $S_m=s$, the previous arrival times $S_1,\ldots,S_{m-1}$ are the order statistics of $m-1$ independent uniforms on $(0,s)$, while the shifted future points $S_{m+1}-s,S_{m+2}-s,\ldots$ form an independent rate-one Poisson process on $(0,\infty)$.
+
+The conditional probability that label $m$ is last is
+\[
+  \int_0^\infty
+  s^\gamma e^{-s^\gamma x}
+  \prod_{i\neq m}\left(1-e^{-S_i^\gamma x}\right)\dd x.
+\]
+Set $t=s^\gamma x$.  Averaging over the previous points gives the factor
+\[
+  \left(\int_0^1(1-e^{-tu^\gamma})\dd u\right)^{m-1}
+  =H_\gamma(t)^{m-1}.
+\]
+For the future Poisson process, the probability generating functional gives
+\begin{align*}
+ &\Ee\left[
+   \prod_{i>m}\left(1-e^{-t(S_i/s)^\gamma}\right)
+   \ \middle|\ S_m=s\right]\\
+ &\qquad=
+ \exp\left(-\int_0^\infty
+ e^{-t(1+y/s)^\gamma}\dd y\right)
+ =e^{-sA_\gamma(t)}.
+\end{align*}
+Finally, $S_m$ has the $\operatorname{Gamma}(m,1)$ density, and therefore
+\[
+  \Ee[e^{-A_\gamma(t)S_m}]=(1+A_\gamma(t))^{-m}.
+\]
+This proves \eqref{eq:last-label-pmf}.  Summing the geometric series in $m$ yields \eqref{eq:last-label-pgf}.
+
+For completeness, the masses in \eqref{eq:last-label-pmf} sum to one.  Indeed,
+\begin{align*}
+  1+A_\gamma(t)-H_\gamma(t)
+  &=\int_0^\infty e^{-tu^\gamma}\dd u\\
+  &=\Gamma\!\left(1+\frac1\gamma\right)t^{-1/\gamma},
+\end{align*}
+so
+\begin{align*}
+  \sum_{m\geq1}\Pp(B_1=m)
+  &=\frac1{\Gamma(1+1/\gamma)}
+    \int_0^\infty e^{-t}t^{1/\gamma}\dd t
+  =1.
+\end{align*}
+
+For every $t>0$, $A_\gamma(t)$ strictly decreases with $\gamma$, because $u^\gamma$ strictly increases for $u>1$.  Formula \eqref{eq:p-perm-general} therefore proves strict monotonicity.  As $\gamma\to\infty$, $A_\gamma(t)\downarrow0$ for every fixed $t$, so dominated convergence gives the second limit in \eqref{eq:p-perm-endpoints}.  As $\gamma\downarrow0$, $A_\gamma(t)\to\infty$ for every fixed $t>0$, which gives the first limit.
+\end{proof}
+
+To make the equivalence with \cite[Proposition~26]{PitmanTran} explicit, put $a=1/\gamma$.  That geometric-mixture representation has mixing variable $R\sim\operatorname{Gamma}(a+1,1)$ and success probability
+\[
+  q(t)=\frac{\Gamma(a+1)}{t^a+a\Gamma(a,t)}
+      =\frac{C_\gamma t^{-1/\gamma}}{1+A_\gamma(t)}.
+\]
+Since $1-q(t)=H_\gamma(t)/(1+A_\gamma(t))$, integrating
+$q(t)(1-q(t))^{m-1}$ against the density
+$t^a e^{-t}/\Gamma(a+1)$ gives \eqref{eq:last-label-pmf}.
+
+\begin{proposition}[Stretched-exponential last-label tail]
+\label{prop:last-label-tail}
+As $m\to\infty$,
+\begin{equation}
+  \log\Pp(B_1\geq m)
+  \sim\log\Pp(B_1=m)
+  \sim
+  -D_\gamma m^{\gamma/(\gamma+1)},
+  \qquad
+  D_\gamma:=(\gamma+1)
+  \left(\frac{C_\gamma}{\gamma}\right)^{\gamma/(\gamma+1)}.
+  \label{eq:last-label-tail}
+\end{equation}
+In particular, $B_1$ has finite moments of every positive order.
+\end{proposition}
+
+\begin{proof}
+The identity used in the proof of Theorem~\ref{thm:last-label} gives
+\[
+  1+A_\gamma(t)-H_\gamma(t)
+  =C_\gamma t^{-1/\gamma}.
+\]
+Writing
+\[
+  q_\gamma(t):=
+  \frac{C_\gamma t^{-1/\gamma}}{1+A_\gamma(t)},
+\]
+formula \eqref{eq:last-label-pmf} becomes
+\begin{equation}
+  \Pp(B_1=m)
+  =\int_0^\infty
+  \frac{e^{-t}}{1+A_\gamma(t)}
+  \bigl(1-q_\gamma(t)\bigr)^{m-1}\,\dd t.
+  \label{eq:last-label-tail-integral}
+\end{equation}
+Since $1-q_\gamma(t)=H_\gamma(t)/(1+A_\gamma(t))\in(0,1)$,
+Tonelli's theorem and the geometric series also give the exact survival
+formula
+\begin{equation}
+  \Pp(B_1\geq m)
+  =\frac1{C_\gamma}\int_0^\infty
+  e^{-t}t^{1/\gamma}
+  \bigl(1-q_\gamma(t)\bigr)^{m-1}\,\dd t.
+  \label{eq:last-label-survival}
+\end{equation}
+We estimate these two integrals directly.  Put $a=\gamma/(\gamma+1)$ and
+\[
+  \Phi_\gamma(s):=s+C_\gamma s^{-1/\gamma}.
+\]
+This function has a unique minimum at
+\[
+  s_\gamma=
+  \left(\frac{C_\gamma}{\gamma}\right)^{\gamma/(\gamma+1)},
+  \qquad \Phi_\gamma(s_\gamma)=D_\gamma.
+\]
+As $t\to\infty$, $A_\gamma(t)\to0$ exponentially and
+$q_\gamma(t)\sim C_\gamma t^{-1/\gamma}$.  Fix $\eta\in(0,1)$ and choose
+$T$ so that $q_\gamma(t)\geq(1-\eta)C_\gamma t^{-1/\gamma}$ for $t\geq T$.
+For $m\geq2$ and $t\geq T$,
+\begin{align*}
+ e^{-t}\bigl(1-q_\gamma(t)\bigr)^{m-1}
+ &\leq e^{-\eta t}
+ \exp\left(-(1-\eta)
+     \left[t+C_\gamma(m-1)t^{-1/\gamma}\right]\right)\\
+ &\leq e^{-\eta t}
+ \exp\left(-(1-\eta)D_\gamma(m-1)^a\right).
+\end{align*}
+The remaining factors in \eqref{eq:last-label-tail-integral} and
+\eqref{eq:last-label-survival} are bounded by $1$ and
+$t^{1/\gamma}/C_\gamma$, respectively, and are integrable against
+$e^{-\eta t}\dd t$.  On $(0,T]$, continuity and
+$1-q_\gamma(t)\to0$ as $t\downarrow0$ give
+$1-q_\gamma(t)\leq\rho_T<1$.  Thus, if $I_m$ denotes either probability,
+\[
+  I_m\leq O(\rho_T^{m-1})
+  +O_\eta\left(e^{-(1-\eta)D_\gamma(m-1)^a}\right),
+\]
+and hence $\limsup m^{-a}\log I_m\leq-(1-\eta)D_\gamma$.
+
+For the lower bound, rescale $t=m^a s$.  Uniformly for $s$ in any compact
+interval in $(0,\infty)$, the logarithm of either rescaled integrand,
+divided by $m^a$, converges to $-\Phi_\gamma(s)$.  Indeed,
+$\log(1-q)=-q+O(q^2)$ and
+$m q_\gamma(m^a s)^2=o(m^a)$, while the other factors and the Jacobian
+have logarithms $o(m^a)$.  Restriction to a fixed interval $J$ around
+$s_\gamma$ therefore gives
+\[
+  \liminf_{m\to\infty}m^{-a}\log I_m
+  \geq-\sup_{s\in J}\Phi_\gamma(s).
+\]
+Shrink $J$ to $s_\gamma$ and then let $\eta\downarrow0$ in the upper
+bound.  This proves both logarithmic asymptotics in
+\eqref{eq:last-label-tail}.  The survival bound implies the moment
+assertion.
+\end{proof}
+
+\section{The clock-value point process and Poisson--Dirichlet limits}
+\label{sec:ppp}
+
+The random labels retain the arrival-order information of the Poisson environment.  If the labels are forgotten, however, the limiting clock values have a particularly simple law.
+
+\begin{theorem}[Poisson point-process limit]
+\label{thm:ppp}
+Let
+\[
+  \mathcal N_n:=\sum_{i=1}^n\delta_{Y_{n,i}},
+  \qquad
+  \mathcal N:=\sum_{i\geq1}\delta_{Y_i}.
+\]
+Under the coupling of Theorem~\ref{thm:functional},
+\begin{equation}
+  \mathcal N_n\longrightarrow\mathcal N
+  \qquad\text{almost surely, vaguely on }(0,\infty).
+  \label{eq:vague-convergence}
+\end{equation}
+Moreover,
+\begin{equation}
+  \mathcal N\sim\PPP(\nu_\gamma),
+  \qquad
+  \nu_\gamma(\dd z)
+  =\frac{C_\gamma}{\gamma}z^{-1-1/\gamma}\dd z.
+  \label{eq:ppp-intensity}
+\end{equation}
+If $M_1>M_2>\cdots$ are the ordered atoms of $\mathcal N$ and
+$G_r=E'_1+\cdots+E'_r$ are the arrival times of an independent rate-one
+Poisson process, then
+\begin{equation}
+  (M_r)_{r\geq1}
+  \stackrel{d}{=}
+  \left(\left(\frac{C_\gamma}{G_r}\right)^\gamma\right)_{r\geq1}.
+  \label{eq:ordered-clock-values}
+\end{equation}
+In particular,
+\begin{equation}
+  \Pp(M_1\leq x)=\exp\left(-C_\gamma x^{-1/\gamma}\right),
+  \qquad x>0.
+  \label{eq:frechet-maximum}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The almost-sure $c_0$ convergence implies vague convergence: a compact subset of $(0,\infty)$ is bounded away from zero, so only finitely many coordinates can contribute, and those coordinates converge individually.
+
+The marked process
+\[
+  \sum_{i\geq1}\delta_{(S_i,\xi_i)}
+\]
+is a Poisson point process on $(0,\infty)^2$ with intensity
+\[
+  \dd s\,e^{-x}\dd x.
+\]
+Apply the mapping theorem for Poisson processes \cite[Chapter~15]{Kallenberg} to
+\[
+  (s,x)\longmapsto \frac{x}{s^\gamma}.
+\]
+For $z>0$, the image tail intensity is
+\begin{align*}
+  \nu_\gamma((z,\infty))
+  &=\int_0^\infty\Pp(\xi>zs^\gamma)\dd s\\
+  &=\int_0^\infty e^{-zs^\gamma}\dd s
+  =C_\gamma z^{-1/\gamma}.
+\end{align*}
+Differentiating gives \eqref{eq:ppp-intensity}.  Transforming the ordered atoms by
+$z\mapsto C_\gamma z^{-1/\gamma}$ gives a homogeneous rate-one Poisson process, which proves \eqref{eq:ordered-clock-values} and \eqref{eq:frechet-maximum}.
+\end{proof}
+
+The summability threshold in Theorem~\ref{thm:functional} now has a stable-subordinator interpretation.
+
+\begin{corollary}[Poisson--Dirichlet regime]
+\label{cor:pd}
+Assume $\gamma>1$.  Let
+\[
+  Y_n^\downarrow=(Y_{n,(1)},Y_{n,(2)},\ldots),
+  \qquad
+  Y^\downarrow=(M_1,M_2,\ldots)
+\]
+denote decreasing rearrangements, padded by zeros when necessary.  Then
+\begin{equation}
+  \left\|
+  \frac{Y_n^\downarrow}{\sum_iY_{n,i}}
+  -
+  \frac{Y^\downarrow}{\sum_iY_i}
+  \right\|_1
+  \longrightarrow0
+  \qquad\text{almost surely}.
+  \label{eq:pd-l1-convergence}
+\end{equation}
+The limiting normalized sequence has law
+\begin{equation}
+  \frac{Y^\downarrow}{\sum_iY_i}
+  \sim\PD(1/\gamma,0).
+  \label{eq:pd-law}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+When $\gamma>1$, Theorem~\ref{thm:functional} gives $\ell^1$ convergence.  Decreasing rearrangement is continuous in $\ell^1$ for nonnegative sequences, and normalization is continuous away from the zero sequence, which proves \eqref{eq:pd-l1-convergence}.  The intensity \eqref{eq:ppp-intensity} is, up to a multiplicative constant, the L\'evy measure of a stable subordinator of index $1/\gamma\in(0,1)$.  The normalized ranked jumps therefore have law $\PD(1/\gamma,0)$; see \cite{PitmanYor}.
+\end{proof}
+
+\begin{remark}[Annealed law identifications]
+The Poisson law in \eqref{eq:ppp-intensity} and the Poisson--Dirichlet law
+in \eqref{eq:pd-law} average over both the Poisson environment and the
+exponential marks.  The latter describes the normalized ranked clock
+heights.  Conditional on $S$, the clocks instead have the independent
+exponential laws with rates $S_i^\gamma$ used in
+Corollary~\ref{cor:fdd}.  The almost-sure convergence statements
+\eqref{eq:vague-convergence} and \eqref{eq:pd-l1-convergence} also hold
+with conditional probability one for almost every $S$.
+\end{remark}
+
+\section{Exact profile weights versus permuton sampling}
+\label{sec:exact}
+
+Consider now the exact deterministic Luce model with profile weights
+\begin{equation}
+  w_{n,i}=f(i/n),
+  \qquad 1\leq i\leq n.
+  \label{eq:exact-profile-weights}
+\end{equation}
+For this deterministic model, null-set modifications matter, so we strengthen \eqref{eq:isolated} to the pointwise condition
+\begin{equation}
+  \inf_{x\in[\delta,1]}f(x)>0
+  \qquad\text{for every }\delta\in(0,1).
+  \label{eq:isolated-pointwise}
+\end{equation}
+
+Define exact normalized clocks
+\begin{equation}
+  Y^{\mathrm{ex}}_{n,i}:=
+  \begin{cases}
+  \displaystyle
+  \frac{f(1/n)\xi_i}{f(i/n)},&1\leq i\leq n,\\[1.2ex]
+  0,&i>n,
+  \end{cases}
+  \qquad
+  Y^{\mathrm{ex}}_i:=\frac{\xi_i}{i^\gamma}.
+  \label{eq:exact-normalized-clocks}
+\end{equation}
+
+\begin{theorem}[Exact endpoint limit]
+\label{thm:exact}
+Assume \eqref{eq:rv} and \eqref{eq:isolated-pointwise}.  Then
+\begin{equation}
+  \|Y_n^{\mathrm{ex}}-Y^{\mathrm{ex}}\|_\infty\longrightarrow0
+  \qquad\text{almost surely}.
+  \label{eq:exact-c0}
+\end{equation}
+If $p\gamma>1$, the convergence also holds in $\ell^p$, and this range is sharp for membership of $Y^{\mathrm{ex}}$ in $\ell^p$.  Consequently, the exact bottom permutation converges to the reverse exponential race with deterministic rates
+\begin{equation}
+  1^\gamma,2^\gamma,3^\gamma,\ldots.
+  \label{eq:deterministic-rate-environment}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For each fixed $i$, regular variation gives
+\[
+  \frac{f(i/n)}{f(1/n)}\longrightarrow i^\gamma.
+\]
+Potter's bound gives the uniform lower estimate $f(i/n)/f(1/n)\geq ci^\beta$ for $i\leq\delta n$, while \eqref{eq:isolated-pointwise} controls $i>\delta n$.  The proof of Theorem~\ref{thm:functional} then applies verbatim, with $S_i$ replaced by $i$.
+\end{proof}
+
+Thus the exact and permuton-sampled endpoint environments are universally
+\begin{equation}
+  \boxed{
+  \text{exact: }i^\gamma,
+  \qquad
+  \text{permuton sampled: }S_i^\gamma.
+  }
+  \label{eq:universal-discrepancy}
+\end{equation}
+Only the regular-variation index survives.
+
+\begin{remark}[When the deterministic grids generate the same permuton]
+\label{rem:exact-grid-permuton}
+Theorem~\ref{thm:exact} is an endpoint result under its stated
+hypotheses.  To interpret \eqref{eq:universal-discrepancy} as a comparison
+between an exact model and a sample from its own limiting permuton
+$\mu_f$, a separate sufficient condition is
+\begin{equation}
+ f\!\left(\frac{\lceil nx\rceil}{n}\right)\longrightarrow f(x)
+ \quad\text{for almost every }x\in(0,1).
+ \label{eq:grid-profile-convergence}
+\end{equation}
+For example, continuity of $f$ almost everywhere suffices.
+Under \eqref{eq:grid-profile-convergence}, coupling a uniform $U$ and
+an independent standard exponential $\xi$ gives
+\[
+ \left(\frac{\lceil nU\rceil}{n},
+       \frac{\xi}{f(\lceil nU\rceil/n)}\right)
+ \longrightarrow
+ \left(U,\frac{\xi}{f(U)}\right)
+ \quad\text{almost surely}.
+\]
+The empirical distribution of the independent grid clocks converges
+in probability to this joint law.  Its clock marginal is continuous,
+so replacing clocks by their ranks yields the permuton $\mu_f$.
+
+The extra condition cannot be inferred from regular variation and
+\eqref{eq:isolated-pointwise} alone.  For example, let $f(x)=x^\gamma$
+on $(0,1/3)$, and on $[1/3,1]$ let $f(x)=2$ at rational points and
+$f(x)=1$ at irrational points.  Uniform sampling sees bulk rate $1$,
+whereas every deterministic grid sees bulk rate $2$.  The endpoint
+limits above still hold, but the two bulk profiles give different
+permutons.
+\end{remark}
+
+For the probability that label $1$ is last, the exact model gives
+\begin{equation}
+  p_\gamma^{\mathrm{ex}}
+  :=\int_0^\infty e^{-t}
+  \prod_{j=2}^\infty\left(1-e^{-j^\gamma t}\right)\dd t.
+  \label{eq:p-exact-general}
+\end{equation}
+Both $p_\gamma^{\mathrm{ex}}$ and $p_\gamma^{\mathrm{perm}}$ are strictly increasing from zero to one.  For the exact model this follows directly from \eqref{eq:p-exact-general}: every factor in the product is strictly increasing in $\gamma$, the product is positive for $\gamma>0$, and dominated convergence gives the endpoint limits.  Their approach to one is nevertheless very different.
+
+\begin{proposition}[Large-exponent discrepancy]
+\label{prop:large-gamma}
+As $\gamma\to\infty$,
+\begin{equation}
+  1-p_\gamma^{\mathrm{perm}}
+  \sim\frac{\log2}{\gamma},
+  \qquad
+  1-p_\gamma^{\mathrm{ex}}
+  \sim2^{-\gamma}.
+  \label{eq:large-gamma-asymptotics}
+\end{equation}
+In particular, $p_\gamma^{\mathrm{ex}}>p_\gamma^{\mathrm{perm}}$ for all sufficiently large $\gamma$.
+\end{proposition}
+
+\begin{proof}
+Write $A=A_\gamma(t)$.  Formula \eqref{eq:p-perm-general} gives
+\begin{equation}
+  \gamma\bigl(1-p_\gamma^{\mathrm{perm}}\bigr)
+  =\int_0^\infty e^{-t}
+    \frac{\gamma A_\gamma(t)}{1+A_\gamma(t)}\,\dd t.
+  \label{eq:gamma-scaled-perm-error}
+\end{equation}
+The change of variables $u=e^{v/\gamma}$ yields
+\begin{equation}
+  \gamma A_\gamma(t)
+  =\int_0^\infty e^{v/\gamma}e^{-te^v}\,\dd v.
+  \label{eq:A-log-coordinate}
+\end{equation}
+For each fixed $t>0$, dominated convergence in \eqref{eq:A-log-coordinate}
+gives
+\[
+  \gamma A_\gamma(t)\longrightarrow
+  E_1(t):=\int_0^\infty e^{-te^v}\,\dd v
+  =\int_1^\infty\frac{e^{-tu}}{u}\,\dd u,
+\]
+and $A_\gamma(t)\to0$.  The integrand in
+\eqref{eq:gamma-scaled-perm-error} is dominated by an integrable function,
+uniformly for $\gamma\geq1$.  Indeed, for $0<t<1$, put
+$L=\log(1/t)$.  If $L\geq\gamma$, then
+$\gamma A_\gamma/(1+A_\gamma)\leq\gamma\leq L$.  If $L<\gamma$, the
+part of \eqref{eq:A-log-coordinate} with $0\leq v\leq L$ is at most $eL$.
+On the remaining part, put $v=L+w$ and use
+$e^{(L+w)/\gamma}\leq e e^w$ to obtain
+\[
+  \int_L^\infty e^{v/\gamma}e^{-te^v}\dd v
+  \leq e\int_0^\infty e^w e^{-e^w}\dd w=1.
+\]
+Thus $\gamma A_\gamma(t)/(1+A_\gamma(t))\leq eL+1$ in this case.
+For $t\geq1$, \eqref{eq:A-log-coordinate} and
+$e^{v/\gamma}\leq e^v$ give
+$\gamma A_\gamma(t)\leq e^{-t}/t$.  Dominated convergence and Fubini
+therefore imply
+\begin{align*}
+  \lim_{\gamma\to\infty}
+  \gamma\bigl(1-p_\gamma^{\mathrm{perm}}\bigr)
+  &=\int_0^\infty e^{-t}E_1(t)\,\dd t\\
+  &=\int_1^\infty\frac{\dd u}{u(1+u)}
+  =\log2.
+\end{align*}
+
+For the exact model, let $X_j\sim\Exp(j^\gamma)$ independently.  The event
+that label $1$ is not last is
+$\{X_j>X_1\text{ for some }j\geq2\}$.  Hence
+\[
+  \frac1{1+2^\gamma}
+  \leq1-p_\gamma^{\mathrm{ex}}
+  \leq\sum_{j=2}^\infty\frac1{1+j^\gamma}.
+\]
+The first term is asymptotic to $2^{-\gamma}$, while
+\[
+  \sum_{j=3}^\infty j^{-\gamma}=o(2^{-\gamma}).
+\]
+Thus the upper and lower bounds are both asymptotic to $2^{-\gamma}$.
+\end{proof}
+
+\section{The linear profile and the BCD comparison}
+\label{sec:linear}
+
+Take $f(x)=x$, so $\gamma=1$.  The R\'enyi representation gives
+\[
+  f(U_{i:n})=\frac{S_i}{S_{n+1}}.
+\]
+The common factor $S_{n+1}^{-1}$ has no effect on the Luce ordering.  Therefore, for every $n$, the bottom order is obtained by arranging
+\begin{equation}
+  \frac{\xi_1}{S_1},\ldots,\frac{\xi_n}{S_n}
+  \label{eq:linear-exact-coupling}
+\end{equation}
+in decreasing order.  In particular, the finite models are nested under one coupling.
+
+The permuton-sampled integral below appears in \cite[Proposition~27 and the following paragraph]{PitmanTran}; the deterministic-profile integral appears in \cite[Section~4.2]{CDK}.
+
+\begin{proposition}[Linear last-label probabilities]
+\label{prop:bcd-constant}
+For the permuton-sampled linear profile,
+\begin{equation}
+  \Pp(B_1=1)
+  =\int_0^\infty\frac{t}{te^t+1}\dd t
+  =0.5552284587061435773542671610\ldots.
+  \label{eq:bcd-constant}
+\end{equation}
+For the exact deterministic weights $1,2,3,\ldots$,
+\begin{equation}
+  \Pp(B_1^{\mathrm{ex}}=1)
+  =\int_0^1\prod_{j=2}^\infty(1-y^j)\dd y
+  =0.5160943231508\ldots.
+  \label{eq:exact-linear-constant}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Formula \eqref{eq:p-perm-general} and
+\[
+  A_1(t)=\int_1^\infty e^{-tu}\dd u=\frac{e^{-t}}{t}
+\]
+give
+\[
+  \Pp(B_1=1)
+  =\int_0^\infty\frac{e^{-t}}{1+e^{-t}/t}\dd t
+  =\int_0^\infty\frac{t}{te^t+1}\dd t.
+\]
+Alternatively, condition on $S_1=s$ and use the probability generating functional of the shifted Poisson process $S_i-s$, $i\geq2$:
+\[
+  \Ee\left[
+  \prod_{i=2}^\infty\left(1-e^{-(S_i/s)t}\right)
+  \ \middle|\ S_1=s\right]
+  =\exp\left(-\frac{s e^{-t}}{t}\right).
+\]
+Integrating over $S_1\sim\Exp(1)$ yields the same formula.  Equation \eqref{eq:exact-linear-constant} is \eqref{eq:p-exact-general} with $\gamma=1$, followed by the substitution $y=e^{-t}$; it also appears in \cite[Section~4.2]{CDK}.
+\end{proof}
+
+\subsection{A convention correction for Section~2.4 of BCD}
+\label{subsec:orientation}
+
+Under the convention of \cite{BCD}, $\sigma(i)$ is the draw position of label $i$, and increasing exponential clocks give the draw order.  The displayed integral in \cite[equation~(15) and Proposition~2.4]{BCD} is
+\begin{equation}
+  \int_{x_1>\cdots>x_k>0}
+  \prod_{j=1}^k\left(w_{a_j}e^{-w_{a_j}x_j}\right)
+  \prod_{i\notin\{a_1,\ldots,a_k\}}
+  \left(1-e^{-w_i x_k}\right)
+  \dd x_1\cdots\dd x_k.
+  \label{eq:bcd-printed-integral}
+\end{equation}
+The product over unselected labels requires every other clock to be smaller than $x_k$.  Therefore \eqref{eq:bcd-printed-integral} is the probability of
+\begin{equation}
+  \sigma(a_j)=n-j+1,
+  \qquad 1\leq j\leq k,
+  \label{eq:correct-bcd-event}
+\end{equation}
+not of the event $\sigma(a_j)=j$ printed beside it.  Equivalently, it is a bottom-window formula, in agreement with the reverse-order convention of \cite[Theorem~4.2]{CDK}.
+
+There is also a useful finite-$n$ consistency check.  In the linear permuton case, let
+\[
+  p_n:=\Pp\left(\frac{\xi_1}{S_1}>
+  \max_{2\leq i\leq n}\frac{\xi_i}{S_i}\right).
+\]
+The events decrease with $n$, so
+\begin{equation}
+  p_n\downarrow0.555228458706143577\ldots.
+  \label{eq:pn-monotone}
+\end{equation}
+Consequently the finite values below this limit displayed in the first column of the numerical table in \cite[Section~2.4]{BCD} cannot be values of the displayed integral \eqref{eq:bcd-printed-integral}.  The entry $0.5551$ at $n=10000$ is close to the correct limiting value $0.555228\ldots$.
+
+\section{The sharp index-zero loss of tightness}
+\label{sec:critical}
+
+The positivity of the regular-variation index is not a technical artifact.  At index zero, no fixed collection of endpoint labels captures a positive amount of the bottom window.
+
+\begin{theorem}[Slow variation implies escape]
+\label{thm:gamma-zero}
+Suppose $f$ is measurable, positive, finite, and slowly varying at zero:
+\begin{equation}
+  \frac{f(tx)}{f(x)}\longrightarrow1
+  \qquad(x\downarrow0)
+  \quad\text{for every }t>0.
+  \label{eq:slow-variation}
+\end{equation}
+Let $B_{n,1},B_{n,2},\ldots$ be the bottom labels of $\Perm(\mu_f,n)$.  Then, for every fixed $r,M\geq1$,
+\begin{equation}
+  \Pp\bigl(\{B_{n,1},\ldots,B_{n,r}\}
+  \cap\{1,\ldots,M\}\neq\varnothing\bigr)
+  \longrightarrow0.
+  \label{eq:window-escape}
+\end{equation}
+In particular, $B_{n,r}\to\infty$ in probability for every fixed $r$.
+\end{theorem}
+
+\begin{proof}
+Use the R\'enyi coupling and normalize rates by $f(1/n)$.  For every fixed $K$,
+\[
+  \left(
+  \frac{f(S_1/S_{n+1})}{f(1/n)},\ldots,
+  \frac{f(S_K/S_{n+1})}{f(1/n)}
+  \right)
+  \longrightarrow(1,\ldots,1)
+\]
+almost surely.  Hence the first $K$ normalized clocks converge jointly to $K$ independent standard exponentials.
+
+If one of the first $M$ labels belongs to the global top $r$ clocks, then it also belongs to the top $r$ clocks after restriction to labels $1,\ldots,K$.  Therefore
+\begin{align*}
+ &\limsup_{n\to\infty}
+ \Pp\bigl(\{B_{n,1},\ldots,B_{n,r}\}
+ \cap\{1,\ldots,M\}\neq\varnothing\bigr)\\
+ &\qquad\leq
+ 1-\frac{\binom{K-M}{r}}{\binom{K}{r}}
+ \leq\frac{rM}{K}.
+\end{align*}
+Letting $K\to\infty$ proves \eqref{eq:window-escape}.
+\end{proof}
+
+Thus $\gamma=0$ and $\gamma>0$ form genuinely different bottom-window phases.  In the positive-index phase the endpoint labels are tight and converge to the Poisson-tangent race; in the slowly varying phase every fixed label escapes from every fixed bottom window.
+
+The first nontrivial label scale can be identified explicitly for the
+canonical logarithmic family.  Let
+\begin{equation}
+  f_\alpha(x):=\bigl(\log(e/x)\bigr)^{-\alpha},
+  \qquad \alpha>0,
+  \label{eq:log-profile}
+\end{equation}
+and let $T_{n,(1)}\geq T_{n,(2)}\geq\cdots$ be the clocks in decreasing
+order for $\Perm(\mu_{f_\alpha},n)$.  Define
+\begin{align}
+  z_\alpha&:=\alpha^{1/(\alpha+1)},&
+  d_\alpha&:=(\alpha+1)\alpha^{-\alpha/(\alpha+1)},\label{eq:log-constants}\\
+  K_\alpha&:=e\sqrt{\frac{2\pi z_\alpha}{\alpha+1}},&
+  b_n&:=\frac1{d_\alpha}
+  \left(\log n+\frac12\log\log n+\log K_\alpha
+  -\frac12\log d_\alpha\right).
+  \label{eq:log-centering}
+\end{align}
+
+Before sorting the uniform coordinates, a clock has the distribution
+$W=\xi(1+E)^\alpha$, where $\xi,E$ are independent standard exponentials.
+Its scalar tail asymptotic is a special case of the Weibull-product
+formula in \cite[Lemma~2.1]{ArendarczykDebicki}.  We include a direct
+Laplace calculation and use the same saddle point to locate the
+corresponding bottom labels.
+
+\begin{theorem}[The logarithmic critical scale]
+\label{thm:log-critical}
+For the profile \eqref{eq:log-profile},
+\begin{equation}
+  \sum_{r=1}^n
+  \delta_{\,d_\alpha\left(T_{n,(r)}^{1/(\alpha+1)}-b_n\right)}
+  \xrightarrow{d}\PPP(e^{-x}\dd x)
+  \qquad\text{vaguely on }\R.
+  \label{eq:log-extreme-ppp}
+\end{equation}
+Consequently, for every fixed $r$,
+\begin{equation}
+  d_\alpha\left(T_{n,(r)}^{1/(\alpha+1)}-b_n\right)
+  \xrightarrow{d}-\log G_r,
+  \label{eq:log-order-statistics}
+\end{equation}
+where $G_r$ is the $r$-th arrival time of a rate-one Poisson process.
+Moreover, the corresponding bottom labels satisfy
+\begin{equation}
+  \frac{\log B_{n,r}}{\log n}
+  \xrightarrow{\Pp}\frac1{\alpha+1}.
+  \label{eq:log-label-scale}
+\end{equation}
+In particular,
+\begin{equation}
+  \frac{T_{n,(r)}}{(\log n)^{\alpha+1}}
+  \xrightarrow{\Pp}
+  \frac{\alpha^\alpha}{(\alpha+1)^{\alpha+1}}.
+  \label{eq:log-clock-scale}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Before the uniform coordinates are sorted, the clock-coordinate pairs may
+be written as independent copies of
+\[
+  (U,W),\qquad
+  U\sim\operatorname{Unif}(0,1),\qquad
+  W=\xi\bigl(\log(e/U)\bigr)^\alpha,
+\]
+with $\xi\sim\Exp(1)$ independent of $U$.  Hence the unordered clocks are
+i.i.d.  Their tail is
+\begin{align}
+  \Pp(W>t)
+  &=\int_0^1
+    \exp\left(-\frac{t}{(\log(e/u))^\alpha}\right)\dd u\notag\\
+  &=e\int_1^\infty\exp\left(-y-\frac{t}{y^\alpha}\right)\dd y.
+  \label{eq:log-clock-tail}
+\end{align}
+Put $r=t^{1/(\alpha+1)}$ and
+$h(z)=z+z^{-\alpha}$.  The unique minimizer of $h$ is
+$z_\alpha$, with
+\[
+  h(z_\alpha)=d_\alpha,
+  \qquad
+  h''(z_\alpha)=\frac{\alpha+1}{z_\alpha}.
+\]
+Laplace's method applied to \eqref{eq:log-clock-tail} gives
+\begin{equation}
+  \Pp(W>t)
+  \sim K_\alpha r^{1/2}e^{-d_\alpha r}.
+  \label{eq:log-tail-asymptotic}
+\end{equation}
+The definition of $b_n$ is exactly the normalization for which, for every
+fixed $x\in\R$,
+\begin{equation}
+  n\,\Pp\left(
+  d_\alpha\bigl(W^{1/(\alpha+1)}-b_n\bigr)>x
+  \right)\longrightarrow e^{-x}.
+  \label{eq:log-tail-poisson}
+\end{equation}
+The standard binomial point-process criterion now proves
+\eqref{eq:log-extreme-ppp}; see, for example,
+\cite[Chapter~5]{Resnick}.  More explicitly, let $N_n(x)$ count clocks
+whose normalized level in \eqref{eq:log-tail-poisson} exceeds $x$.
+Then $N_n(x)\xrightarrow{d}\operatorname{Poisson}(e^{-x})$, so
+\[
+ \Pp\left(d_\alpha\bigl(T_{n,(r)}^{1/(\alpha+1)}-b_n\bigr)\leq x\right)
+ =\Pp(N_n(x)<r)
+ \longrightarrow\Pp(G_r\geq e^{-x}).
+\]
+This proves \eqref{eq:log-order-statistics}.  The same tail estimate and
+a union bound give
+\[
+ \limsup_{n\to\infty}
+ \Pp\left(d_\alpha\bigl(T_{n,(1)}^{1/(\alpha+1)}-b_n\bigr)>A\right)
+ \leq e^{-A},
+\]
+which tends to zero as $A\to\infty$ and excludes upper-tail escape.
+
+It remains to locate the horizontal coordinates of the extremal clocks.
+Fix $\varepsilon>0$ and $L>0$, and put $q=b_n-L/d_\alpha$.
+The expected number of sample points for which
+$W^{1/(\alpha+1)}>q$ and
+\[
+  \left|\frac{\log(e/U)}{q}-z_\alpha\right|\geq\varepsilon
+\]
+is exactly
+\[
+  n\,e\,q\!\!\int_{\substack{z\geq1/q\\|z-z_\alpha|\geq\varepsilon}}
+  e^{-q h(z)}\,\dd z.
+\]
+On the larger domain $D_\varepsilon:=
+\{z>0:|z-z_\alpha|\geq\varepsilon\}$, the unique minimum of $h$ and its
+coercivity give $h(z)\geq d_\alpha+c_\varepsilon$ for some
+$c_\varepsilon>0$.  For $q\geq1$,
+\[
+ \int_{D_\varepsilon}e^{-q h(z)}\dd z
+ \leq e^{-(q-1)(d_\alpha+c_\varepsilon)}
+       \int_0^\infty e^{-h(z)}\dd z.
+\]
+The last integral is finite.  Since $q\sim(\log n)/d_\alpha$, the
+expected count therefore tends to zero for every fixed $L$.
+With probability tending to one, every point above level $-L$ consequently
+has $\log(e/U)/q$ within $\varepsilon$ of $z_\alpha$.
+Meanwhile,
+\[
+ \Pp(N_n(-L)<r)
+ \longrightarrow\Pp\bigl(\operatorname{Poisson}(e^L)<r\bigr),
+\]
+which tends to zero as $L\to\infty$.  First letting $n\to\infty$ for
+fixed $L$, then $L\to\infty$, and using $q/b_n\to1$, proves that the
+horizontal coordinate attached to each of the first fixed number of
+clocks satisfies
+\begin{equation}
+  \frac{\log(e/U)}{b_n}\xrightarrow{\Pp}z_\alpha.
+  \label{eq:log-saddle-location}
+\end{equation}
+Since
+\[
+  \frac{z_\alpha}{d_\alpha}=\frac{\alpha}{\alpha+1},
+\]
+each of the first fixed number of extreme clocks therefore has
+\[
+  -\frac{\log U}{\log n}\xrightarrow{\Pp}
+  \frac{\alpha}{\alpha+1}.
+\]
+For any sufficiently small $\varepsilon>0$, binomial concentration shows simultaneously
+that the numbers of sampled uniforms below
+$n^{-\alpha/(\alpha+1)-\varepsilon}$ and
+$n^{-\alpha/(\alpha+1)+\varepsilon}$ are respectively
+$n^{1/(\alpha+1)-\varepsilon+o_{\Pp}(1)}$ and
+$n^{1/(\alpha+1)+\varepsilon+o_{\Pp}(1)}$.
+The rank of every fixed extremal point is trapped between these two
+counts, which proves \eqref{eq:log-label-scale}.  Finally,
+$b_n\sim(\log n)/d_\alpha$, and
+$d_\alpha^{-(\alpha+1)}
+=\alpha^\alpha/(\alpha+1)^{\alpha+1}$, giving
+\eqref{eq:log-clock-scale}.
+\end{proof}
+
+\section{Conjectures and further directions}
+\label{sec:conjectures}
+
+The preceding results suggest several natural continuations.
+
+\subsection{Several vanishing points}
+
+Condition \eqref{eq:isolated} excludes competing zeros.  A local point-process argument suggests a general tangent-superposition principle.
+
+\begin{conjecture}[Tangent superposition with convergent relative scales]
+\label{conj:superposition}
+Index the finitely many vanishing sides of the profile by $j\in J$.
+For each side, write
+$f_j(u)=f(z_j+\epsilon_j u)$ on a sufficiently small one-sided
+neighborhood, where $\epsilon_j\in\{-1,1\}$ and $f_j$ is regularly
+varying at zero with index $\gamma_j>0$.  An interior zero may
+contribute both sides.  Assume these neighborhoods are disjoint and
+$f$ is essentially bounded away from zero on their complement.
+Suppose there is a common scale $a_n\to0$ such that
+\[
+ \frac{f_j(1/n)}{a_n}\longrightarrow c_j\in(0,\infty]
+ \qquad(j\in J),
+\]
+with at least one finite $c_j$.
+
+Mark a sample point in neighborhood $j$ by $(j,i)$, where $i$ is its
+rank in increasing distance from $z_j$ on that side.  For each fixed
+bottom-window size, the marked labels converge to the reverse
+exponential race with rates
+\[
+ \left(c_j S_{j,i}^{\gamma_j}:
+       j\in J,\ c_j<\infty,\ i\geq1\right),
+\]
+where the rate-one Poisson arrival sequences $(S_{j,i})_{i\geq1}$
+are independent across $j$.  Sides with $c_j=\infty$, and points
+outside the specified neighborhoods, have vanishing probability of
+appearing in a fixed bottom window.
+\end{conjecture}
+
+The marks specify the zero, the side, and the local rank; they retain a
+fixed label space even at an interior or right-endpoint zero.
+The relative-scale hypothesis is essential.  Equal regular-variation
+indices alone do not force a limiting ratio.  For example, take
+\[
+ f(u)=u^\gamma,\qquad
+ f(1-u)=u^\gamma\bigl[2+\sin(\log\log(1/u))\bigr]
+\]
+near the two endpoints, with $f$ bounded away from zero between them.
+At scale $a_n=n^{-\gamma}$, the right-to-left rate ratio
+$c_n=2+\sin(\log\log n)$ oscillates.  Along a subsequence with
+$c_n\to c$, the two endpoint clock processes have tail intensities
+$C_\gamma z^{-1/\gamma}$ and
+$C_\gamma c^{-1/\gamma}z^{-1/\gamma}$, respectively.  Thus the
+probability that the last label comes from the left endpoint tends to
+$1/(1+c^{-1/\gamma})$, which depends on the subsequence.
+For unequal indices, the faster-vanishing sides dominate; a genuine
+superposition requires finite relative scales among the surviving
+sides.
+
+\subsection{The exact-versus-permuton crossover}
+
+At $\gamma=1$, Proposition~\ref{prop:bcd-constant} gives
+\[
+  p_1^{\mathrm{perm}}>p_1^{\mathrm{ex}},
+\]
+whereas Proposition~\ref{prop:large-gamma} gives the reverse inequality for large $\gamma$.  Numerical quadrature suggests a single transition.
+
+\begin{conjecture}[Unique crossover]
+\label{conj:crossover}
+There exists a unique $\gamma_*>0$ such that
+\[
+  p_\gamma^{\mathrm{perm}}
+  \begin{cases}
+  >p_\gamma^{\mathrm{ex}},&0<\gamma<\gamma_*,\\
+  =p_\gamma^{\mathrm{ex}},&\gamma=\gamma_*,\\
+  <p_\gamma^{\mathrm{ex}},&\gamma>\gamma_*.
+  \end{cases}
+\]
+\end{conjecture}
+
+Numerical quadrature locates a crossing at approximately
+$\gamma=1.49826071665$, with common probability approximately
+$0.66385913992$.  These computations do not establish uniqueness.
+
+A proof appears to require a comparison between a deterministic power lattice and its Poissonized tangent lattice that is finer than ordinary stochastic ordering.
+
+\subsection{Second-order regular variation and rates}
+
+Corollary~\ref{cor:bottom-tv} already gives qualitative total-variation
+convergence.  An effective rate requires estimates uniform enough to
+choose a truncation level depending on $n$.  A useful starting
+assumption is second-order regular variation,
+\[
+  \frac{f(tx)}{f(x)}
+  =t^\gamma\bigl(1+A(x)K(t)+o(A(x))\bigr)
+\]
+locally uniformly in $t$, with a standard second-order
+regular-variation remainder $A(x)\to0$.  This expansion on fixed
+compact sets alone does not supply such a rate.
+
+The quantitative problem is to control, with explicit dependence on
+the truncation level $M$, the errors in the first $M$ rates, the random
+normalization $S_{n+1}/n$, and the probability of a small gap between
+competing clock heights.  One also needs finite-$n$ bounds for the
+probability that a label above $M$ enters either bottom window.
+These bounds must hold on a stated growing range of $M$ before one
+can optimize $M=M(n)$.  Establishing them under suitable uniform
+second-order and interior hypotheses would give effective numerical
+approximations and quantify the discrepancy observed in
+\cite[Section~2.4]{BCD}.  No sharp rate is asserted here.
+
+\subsection{General critical slowly varying scales}
+
+Theorem~\ref{thm:log-critical} identifies both the clock and label scales
+for the canonical logarithmic family, but a general classification at
+index zero remains open.
+
+For a slowly varying profile $f$ tending to zero, an unsorted clock
+$W=\xi/f(U)$ has survival function
+\[
+  \overline F_W(t)=\int_0^1 e^{-t f(u)}\,\dd u.
+\]
+A useful classification would state conditions on $f$ that yield
+explicit increasing thresholds $t_n(x)$ with
+\[
+ n\,\overline F_W(t_n(x))\longrightarrow e^{-x}
+ \qquad(x\in\R),
+\]
+together with off-saddle bounds locating the horizontal coordinates of
+all clocks above each fixed extreme-value level.  These estimates would
+give both an extreme-clock point-process limit and a bottom-label scale
+by the argument of Section~\ref{sec:critical}.
+The required hypotheses must control the shape of the saddle and the
+remainder at the extreme-value scale.  Leading asymptotic equivalence
+of slowly varying profiles alone need not determine the centering to
+that precision.
+
+A particularly interesting next case is
+\[
+  f(x)=\bigl(\log(e/x)\bigr)^{-\alpha}
+       \bigl(\log\log(e^e/x)\bigr)^{-\beta},
+\]
+where a saddle-point calculation suggests that the leading logarithmic
+label exponent in \eqref{eq:log-label-scale} should persist.  The clock
+normalization and its subsequent centering corrections must also
+account for the additional slowly varying factor.  Establishing the
+necessary uniform estimates for this family is left open.
+
+\clearpage
+\begin{thebibliography}{99}
+
+\bibitem{ArendarczykDebicki}
+M.~Arendarczyk and K.~D\k{e}bicki,
+\newblock Asymptotics of supremum distribution of a Gaussian process over a Weibullian time,
+\newblock \emph{Bernoulli} \textbf{17} (2011), no.~1, 194--210.
+\newblock \href{https://doi.org/10.3150/10-BEJ266}
+  {doi:10.3150/10-BEJ266}.
+
+\bibitem{BCD}
+J.~Borga, S.~Chatterjee, and P.~Diaconis,
+\newblock Permuton and local limits for the Luce model,
+\newblock \href{https://arxiv.org/abs/2509.07729}{arXiv:2509.07729v3} (2026).
+
+\bibitem{BGT}
+N.~H. Bingham, C.~M. Goldie, and J.~L. Teugels,
+\newblock \emph{Regular Variation},
+\newblock Encyclopedia of Mathematics and its Applications, vol.~27,
+  Cambridge University Press, Cambridge, 1987.
+
+\bibitem{CDK}
+S.~Chatterjee, P.~Diaconis, and G.~B. Kim,
+\newblock Enumerative theory for the Tsetlin library,
+\newblock \emph{J. Algebra} \textbf{655} (2024), 139--162.
+\newblock \href{https://doi.org/10.1016/j.jalgebra.2023.08.009}
+  {doi:10.1016/j.jalgebra.2023.08.009}.
+
+\bibitem{HKMRS}
+C.~Hoppen, Y.~Kohayakawa, C.~G. Moreira, B.~R\'ath, and R.~M. Sampaio,
+\newblock Limits of permutation sequences,
+\newblock \emph{J. Combin. Theory Ser. B} \textbf{103} (2013), 93--113.
+
+\bibitem{Kallenberg}
+O.~Kallenberg,
+\newblock \emph{Foundations of Modern Probability}, third edition,
+\newblock Probability Theory and Stochastic Modelling, vol.~99,
+  Springer, Cham, 2021.
+
+\bibitem{Luce}
+R.~D. Luce,
+\newblock \emph{Individual Choice Behavior: A Theoretical Analysis},
+\newblock Wiley, New York, 1959.
+
+\bibitem{PitmanTran}
+J.~Pitman and N.~M. Tran,
+\newblock Size-biased permutation of a finite sequence with independent and identically distributed terms,
+\newblock \emph{Bernoulli} \textbf{21} (2015), no.~4, 2484--2512.
+\newblock \href{https://doi.org/10.3150/14-BEJ652}
+  {doi:10.3150/14-BEJ652}.
+
+\bibitem{PitmanYor}
+J.~Pitman and M.~Yor,
+\newblock The two-parameter Poisson--Dirichlet distribution derived from a stable subordinator,
+\newblock \emph{Ann. Probab.} \textbf{25} (1997), 855--900.
+\newblock \href{https://doi.org/10.1214/aop/1024404422}
+  {doi:10.1214/aop/1024404422}.
+
+
+\bibitem{Resnick}
+S.~I. Resnick,
+\newblock \emph{Extreme Values, Regular Variation, and Point Processes},
+\newblock Applied Probability, vol.~4, Springer, New York, 1987.
+
+\bibitem{Renyi}
+A.~R\'enyi,
+\newblock On the theory of order statistics,
+\newblock \emph{Acta Math. Acad. Sci. Hungar.} \textbf{4} (1953), 191--231.
+\newblock \href{https://doi.org/10.1007/BF02127580}
+  {doi:10.1007/BF02127580}.
+
+\end{thebibliography}
+
+\end{document}

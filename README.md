@@ -16,6 +16,7 @@ Manuscript author: **Christopher D. Long**.
 | Longest and macroscopic cycles (CDK) | [Poisson–Dirichlet Universality](output/pdf/poisson-dirichlet-luce.pdf) | Ranked normalized cycle lengths converge to PD(1), and size-biased lengths to GEM(1), for uniformly comparable rates. |
 | Total number of cycles (CDK; BCD §5.2) | [Analytic Mod-Poisson Convergence](output/pdf/luce-mod-poisson.pdf); [Total-Cycle Poisson and Edgeworth Approximations](output/pdf/total-cycle-edgeworth.pdf) | Analytic mod-Poisson limit near z = 1 for regular positive profiles; quantitative exact-mean Poisson and lattice normal approximations for comparable rates. |
 | Permutation order (CDK) | [Erdős–Turán Law](output/pdf/luce-erdos-turan.pdf); [Sharp Order Edgeworth Expansion](output/pdf/luce-edgeworth.pdf) | Erdős–Turán central limit law and quantitative refinements for comparable rates. |
+| Bottom cards of a permuton sample versus the exact profile model (BCD §2.4) | [Bottom-Window Universality](output/pdf/bottom_window_luce.pdf) | At an isolated regularly varying vanishing endpoint, fixed bottom windows converge to a race with Poisson-arrival rates, while exact profile grids have deterministic power rates. A separate grid-profile condition ensures a common limiting permuton. |
 
 These are asymptotic results for specified classes of Luce arrays. CDK also asks about longest increasing subsequences; the cataloged manuscripts above do not claim a general solution to that question.
 
@@ -31,6 +32,7 @@ These are asymptotic results for specified classes of Luce arrays. CDK also asks
 | An Exact Uniform Component and Analytic Mod-Poisson Convergence for Luce Permutations | [PDF](output/pdf/luce-mod-poisson.pdf) | [Source](papers/mod-poisson/luce_mod_poisson.tex) | current-research; internally audited |
 | Microscopic–Macroscopic Independence and Poisson Peeling for Luce Permutations | [PDF](output/pdf/luce-independence-peeling.pdf) | [Source](papers/independence-peeling/luce_independence_peeling.tex) | current-research; internally audited |
 | Boundary Laws for Luce Rankings | [PDF](output/pdf/boundary-laws.pdf) | [Source](papers/boundary-laws/boundary-laws.tex) | mechanical extraction; audit passed; repairs pending |
+| Bottom-Window Universality for Permuton-Sampled Luce Permutations | [PDF](output/pdf/bottom_window_luce.pdf) | [Source](papers/bottom-window-universality/bottom_window_luce.tex) | current-research; internally audited |
 | Sukhatme Fixed Points and the Terminal Poisson Process | [PDF](output/pdf/sukhatme-fixed-points.pdf) | [Source](papers/sukhatme-fixed-points/sukhatme-fixed-points.tex) | mechanical extraction; audit passed; repairs pending |
 | Endpoint-Regular Fixed-Point Universality | [PDF](output/pdf/endpoint-regular-universality.pdf) | [Source](papers/endpoint-regular-universality/endpoint-regular-universality.tex) | mechanical extraction; audit passed; repairs pending |
 | Global Endpoint Poisson Approximation | [PDF](output/pdf/global-endpoint-poisson.pdf) | [Source](papers/global-endpoint-poisson/global-endpoint-poisson.tex) | mechanical extraction; audit passed; repairs pending |
@@ -187,6 +189,16 @@ For arbitrary comparable-rate arrays, a quantitative two-annulus Poisson compari
 This paper isolates the finite top-window identities and infinite bottom-window leakage theory from the archived monolith. It proves that the exact top-window total-variation distance equals the collision probability of the corresponding product sample, gives the exact one-sided relative defect, and identifies the total mass lost by a limiting bottom-window law. A vanishing-block construction records why permuton convergence alone cannot control microscopic statistics.
 
 **Status:** working mechanical extraction, with internal review completed and clarifications pending. See the [proof audit](audits/boundary-laws-proof-audit.md).
+
+### Bottom-window universality for permuton-sampled Luce permutations
+
+[PDF](output/pdf/bottom_window_luce.pdf) · [LaTeX](papers/bottom-window-universality/bottom_window_luce.tex)
+
+For a measurable profile regularly varying with positive index at an isolated vanishing endpoint, normalized permuton-sample clocks converge almost surely in $c_0$ to independent exponential marks divided by the corresponding powers of Poisson arrival times. For p at least one, convergence holds in $\ell^p$ exactly when p times the endpoint index exceeds one. Every fixed bottom window eventually agrees under the coupling, yielding both quenched and annealed total-variation convergence. The exact profile-grid limit instead uses powers of the deterministic label lattice; the stated grid-profile approximation is a separate sufficient condition for identifying its permuton with the sampled one.
+
+The paper gives the last-label distribution and its stretched-exponential tail, the large-exponent exact-versus-sampled comparison, and the critical logarithmic profile's extreme-clock and label exponents. The Poisson--Dirichlet corollary concerns normalized clock values. The power-law last-pick construction and linear last-label constant recover earlier results of Pitman--Tran, and the logarithmic scalar-tail calculation uses the Weibull-product asymptotic of Arendarczyk--Dębicki. These relationships are recorded explicitly in the manuscript and its audit.
+
+**Status:** internally audited current-research manuscript. All proof inputs are external standard results or arguments supplied in the paper; it has no active-paper dependencies. See the [proof and scope audit](audits/bottom-window-universality-proof-audit.md).
 
 ### Sukhatme fixed points and the terminal Poisson process
 

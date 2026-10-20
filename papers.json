@@ -87,6 +87,14 @@
       "dependencies": []
     },
     {
+      "id": "bottom-window-universality",
+      "title": "Bottom-Window Universality for Permuton-Sampled Luce Permutations",
+      "source": "papers/bottom-window-universality/bottom_window_luce.tex",
+      "pdf": "output/pdf/bottom_window_luce.pdf",
+      "status": "current-research",
+      "dependencies": []
+    },
+    {
       "id": "sukhatme-fixed-points",
       "title": "Sukhatme Fixed Points and the Terminal Poisson Process",
       "source": "papers/sukhatme-fixed-points/sukhatme-fixed-points.tex",
