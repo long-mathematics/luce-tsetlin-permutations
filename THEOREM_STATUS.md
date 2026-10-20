@@ -1,6 +1,6 @@
 # Theorem status
 
-Status date: 12 October 2026.
+Status date: 20 October 2026.
 
 This is the canonical theorem/review map for the active Luce/Tsetlin manuscript series. It separates **catalog status** (the machine-readable state in `papers.json`) from **mathematical review state**. Neither an internal audit nor CI is independent external refereeing or formal verification.
 
@@ -32,6 +32,7 @@ The rows below are in the same order as `papers.json`. Every active manuscript a
 | `sharp-order-edgeworth` | A Sharp Berry--Esseen Theorem and First Edgeworth Expansion for Logarithmic Luce Order | `imported` | Imported; nonlinear arithmetic not re-audited | Retains the sharp order Berry--Esseen and first Edgeworth assertions under comparable rates. Later work reuses named switching, intensity, and factorial-domination modules only; it does not certify the full nonlinear prime-power/arithmetic remainder argument. |
 | `functional-erdos-turan` | Functional Erdős--Turán and Total-Cycle Laws for Luce Permutations | `current-research` | Current research / integrated review | Gives the bivariate functional count/order limit, total-cycle CLT, bounded logarithmic-scale Gaussian field, and joint endpoint law. The count-only branch and arithmetic order branch have distinct dependency boundaries. |
 | `total-cycle-edgeworth` | Poisson Approximation and Lattice Edgeworth Expansions for Total Luce Cycles | `current-research` | Current research / integrated review | Gives exact-mean Poisson approximation, sharp normal approximation, first and second lattice Edgeworth expansions, variance control, and the fixed-order signed Poisson--Charlier hierarchy. Expansion order is fixed; no analytic mod-Poisson residue or limiting profile mean constant is inferred. |
+| `mod-poisson` | An Exact Uniform Component and Analytic Mod-Poisson Convergence for Luce Permutations | `current-research` | Internally audited draft, with exact companion inputs and remaining external-review boundary recorded | Uniform local complex bound for arbitrary comparable rates; analytic mod-Poisson convergence for positive continuous profiles; exact-mean universal residue and universal fixed higher factorial cumulants. |
 | `boundary-laws` | Boundary Laws for Luce Rankings | `working` | **Working mechanical extraction; audit passed, repairs pending** | The vanishing-block obstruction, exact top-window total variation and relative defect, birthday transfer, finite bottom-window convergence, terminal leakage, and log-log phase diagram all passed adversarial audit within the archived scope. Six localized clarifications remain deferred. |
 | `sukhatme-fixed-points` | Sukhatme Fixed Points and the Terminal Poisson Process | `working` | **Working mechanical extraction; audit passed, repairs pending** | The death-process envelope, one- and multipoint terminal saddles, anisotropic local-limit/localization package, local terminal Poisson process, mean asymptotic, and fixed factorial moments passed adversarial audit. Six localized clarifications remain deferred. |
 | `endpoint-regular-universality` | Endpoint-Regular Fixed-Point Universality | `working` | **Working mechanical extraction; audit passed, repairs pending** | Endpoint fixed-point Poisson universality, factorial moments, displacement law, tangent measure, multiplicative endpoint kernel, diagonal traces, and microscopic endpoint-permutation limit passed adversarial audit. Six localized clarifications remain deferred. |
@@ -41,6 +42,10 @@ The rows below are in the same order as `papers.json`. Every active manuscript a
 | `macroscopic-pd` | Poisson--Dirichlet Universality for Luce Permutations | `current-research` | **Audited current manuscript** | Under a fixed largest-to-smallest rate ratio, normalized ranked cycles converge to PD(1) in ell-one, the independent residual-root deletion sequence converges to GEM(1) in ell-one, and a uniform-root cycle has a Uniform(0,1) limit. Six audit-approved clarifications were applied and regression-checked. |
 
 ## Precision and non-claims
+
+The new `mod-poisson` manuscript proves a uniform local analytic bound for arbitrary comparable arrays but identifies its limiting analytic residue only under the sampled positive continuous-profile hypothesis. Its two imported asymptotic theorems are the local-entry/envelope result of `regular-profile-cycles` and the macroscopic uniform-root result of `macroscopic-pd`; the switching identity from `mesoscopic-switching` is a cited finite identity. A manuscript-level internal proof audit and a second focused review found no fatal gap, but neither amounts to independent external refereeing.
+
+
 
 For the quantitative total-cycle results, exact-mean centering is essential at the stated precision. The available general estimate is `E K_n = log n + O(log log n)`; this does not justify replacing the exact mean inside the sharp lattice formulas. The second-order expansion retains the exact variance-minus-mean coefficient, controlled by `O((log log n)^2)`; no limiting coefficient is asserted. Signed approximants are not asserted positive, and the right-continuous lattice phase equals +1/2 at integers.
 

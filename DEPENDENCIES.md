@@ -21,6 +21,7 @@ The rows are in exactly the `papers.json` order.
 | `sharp-order-edgeworth` | `mesoscopic-switching`, `erdos-turan-order` |
 | `functional-erdos-turan` | `mesoscopic-switching`, `erdos-turan-order` |
 | `total-cycle-edgeworth` | `mesoscopic-switching`, `erdos-turan-order`, `sharp-order-edgeworth` |
+| `mod-poisson` | `mesoscopic-switching`, `regular-profile-cycles`, `macroscopic-pd` |
 | `boundary-laws` | None |
 | `sukhatme-fixed-points` | None |
 | `endpoint-regular-universality` | None |
@@ -74,6 +75,15 @@ The precise active inputs are:
 | Discrete smoothing | internal to `total-cycle-edgeworth` | Taylor, Charlier, and smoothing lemmas are proved in the total-cycle paper and are not a Luce-model dependency. |
 
 The total-cycle proof does not use the active macroscopic PD/GEM paper, regular-profile paper, or any endpoint-singular extraction.
+
+### `mod-poisson` → `mesoscopic-switching`, `regular-profile-cycles`, `macroscopic-pd`
+
+The exact marked clock-swap identity is cited from `mesoscopic-switching` (`prop:master-switch`); the new manuscript independently proves its real-fugacity estimates, conditional uniform-component decomposition, and complex generating-function bound. The only imported asymptotic theorems are:
+
+- `regular-profile-cycles`: `prop:bulk-local-final` (separated bulk estimates for **targets**, uniform in source labels), `lem:endpoint-dom`, `lem:collision-dom`, and `cor:endpoint-tightness`. Their envelopes control the marked microscopic factorial-moment sums.
+- `macroscopic-pd`: `thm:macroscopic-pd`, used only for the original-measure uniform-root cycle-length limit. No tilted or finite-deletion version is assumed.
+
+The new proof derives the profile mean shift, marked residual Poisson cloud, rank-one Fredholm determinant correction, and locally uniform analytic mod-Poisson limit. Its higher-factorial-cumulant corollary does not import the separate unpublished profile mean-shift/cumulant manuscript. Internal proof checks and finite numerical tests are not independent external refereeing.
 
 ### `boundary-laws`
 

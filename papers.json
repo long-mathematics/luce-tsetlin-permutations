@@ -54,6 +54,18 @@
       ]
     },
     {
+      "id": "mod-poisson",
+      "title": "An Exact Uniform Component and Analytic Mod-Poisson Convergence for Luce Permutations",
+      "source": "papers/mod-poisson/luce_mod_poisson.tex",
+      "pdf": "output/pdf/luce-mod-poisson.pdf",
+      "status": "current-research",
+      "dependencies": [
+        "mesoscopic-switching",
+        "regular-profile-cycles",
+        "macroscopic-pd"
+      ]
+    },
+    {
       "id": "boundary-laws",
       "title": "Boundary Laws for Luce Rankings",
       "source": "papers/boundary-laws/boundary-laws.tex",

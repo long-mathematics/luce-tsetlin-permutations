@@ -42,6 +42,14 @@
       "pages": 13
     },
     {
+      "id": "mod-poisson",
+      "source": "papers/mod-poisson/luce_mod_poisson.tex",
+      "source_sha256": "3f370d52fe900748f96174a4557b14136bb84526bf01e06655e359303caa69e1",
+      "pdf": "output/pdf/luce-mod-poisson.pdf",
+      "pdf_sha256": "9baaf9cb4ee4a1de2bd362730d1589528302147ebe53c864b49ba0618dba8b57",
+      "pages": 21
+    },
+    {
       "id": "boundary-laws",
       "source": "papers/boundary-laws/boundary-laws.tex",
       "source_sha256": "e02f3632fc0eb3a6951b448fc5c7545bf3729730825e59a2ba4ff617cde6a971",
