@@ -11,7 +11,7 @@ Manuscript author: **Christopher D. Long**.
 | Question or conjecture | Manuscript(s) addressing it | Scope of the answer |
 | --- | --- | --- |
 | Poisson limit for fixed points (CDK; BCD §5.2) | [Microscopic Cycles and Sparse Entries](output/pdf/regular-profile-cycles.pdf) | Poisson limit with explicit diagonal-kernel mean for positive continuous profiles. |
-| Joint distribution of fixed-length cycles (BCD §5.2) | [Microscopic Cycles and Sparse Entries](output/pdf/regular-profile-cycles.pdf) | Independent Poisson limits for each fixed finite vector of cycle counts under regular profiles. |
+| Joint cycle structure (BCD §5.2) | [Microscopic Cycles and Sparse Entries](output/pdf/regular-profile-cycles.pdf); [Independence and Poisson Peeling](output/pdf/luce-independence-peeling.pdf) | For regular positive profiles, independent Poisson limits for fixed short-cycle vectors, jointly independent of the entire ranked PD(1) partition. No simultaneous growing-window joint limit is claimed. |
 | Divergent fixed-point counts for Sukhatme weights (BCD §5.2) | [Sukhatme Fixed Points](output/pdf/sukhatme-fixed-points.pdf); [Global Endpoint Poisson Approximation](output/pdf/global-endpoint-poisson.pdf) | Logarithmically growing mean, terminal Poisson process, and exact-mean Poisson approximation; not a fixed-parameter Poisson limit after rescaling. |
 | Longest and macroscopic cycles (CDK) | [Poisson–Dirichlet Universality](output/pdf/poisson-dirichlet-luce.pdf) | Ranked normalized cycle lengths converge to PD(1), and size-biased lengths to GEM(1), for uniformly comparable rates. |
 | Total number of cycles (CDK; BCD §5.2) | [Analytic Mod-Poisson Convergence](output/pdf/luce-mod-poisson.pdf); [Total-Cycle Poisson and Edgeworth Approximations](output/pdf/total-cycle-edgeworth.pdf) | Analytic mod-Poisson limit near z = 1 for regular positive profiles; quantitative exact-mean Poisson and lattice normal approximations for comparable rates. |
@@ -29,6 +29,7 @@ These are asymptotic results for specified classes of Luce arrays. CDK also asks
 | Functional Erdos--Turan and Total-Cycle Laws for Luce Permutations | [PDF](output/pdf/functional-luce-erdos-turan.pdf) | [Source](papers/functional-erdos-turan/functional-luce-erdos-turan.tex) | current-research |
 | Poisson Approximation and Lattice Edgeworth Expansions for Total Luce Cycles | [PDF](output/pdf/total-cycle-edgeworth.pdf) | [Source](papers/total-cycle-edgeworth/total-cycle-edgeworth.tex) | current-research |
 | An Exact Uniform Component and Analytic Mod-Poisson Convergence for Luce Permutations | [PDF](output/pdf/luce-mod-poisson.pdf) | [Source](papers/mod-poisson/luce_mod_poisson.tex) | current-research; internally audited |
+| Microscopic–Macroscopic Independence and Poisson Peeling for Luce Permutations | [PDF](output/pdf/luce-independence-peeling.pdf) | [Source](papers/independence-peeling/luce_independence_peeling.tex) | current-research; internally audited |
 | Boundary Laws for Luce Rankings | [PDF](output/pdf/boundary-laws.pdf) | [Source](papers/boundary-laws/boundary-laws.tex) | mechanical extraction; audit passed; repairs pending |
 | Sukhatme Fixed Points and the Terminal Poisson Process | [PDF](output/pdf/sukhatme-fixed-points.pdf) | [Source](papers/sukhatme-fixed-points/sukhatme-fixed-points.tex) | mechanical extraction; audit passed; repairs pending |
 | Endpoint-Regular Fixed-Point Universality | [PDF](output/pdf/endpoint-regular-universality.pdf) | [Source](papers/endpoint-regular-universality/endpoint-regular-universality.tex) | mechanical extraction; audit passed; repairs pending |
@@ -168,6 +169,16 @@ $$
 The profile correction is the Fredholm determinant constant; after centering by the exact mean, the analytic residue is universal on that neighborhood. Neither convergence on the full imaginary axis nor an identified residue for arbitrary comparable arrays without a limiting profile is asserted. The proof uses an exact uniform-clock component, a summable real-fugacity switching estimate, and the residual marked-cycle Poisson limit. Its model-specific asymptotic inputs are the regular-profile local-entry/envelope theorem and the macroscopic uniform-root law; the marked switching identity is cited from the mesoscopic manuscript. It does not assume the earlier higher-factorial-cumulant result.
 
 **Status:** internally audited current-research manuscript, not independently refereed. See the [proof and dependency audit](audits/mod-poisson-proof-audit.md).
+
+### Microscopic–macroscopic independence and Poisson peeling
+
+[PDF](output/pdf/luce-independence-peeling.pdf) · [LaTeX](papers/independence-peeling/luce_independence_peeling.tex)
+
+Under a positive continuous rate profile, every fixed vector of short-cycle counts is asymptotically independent of the entire ranked macroscopic PD(1) partition. The result includes mixed factorial-moment factorization and uniform mixed moments for macroscopic threshold counts. Its finite-deletion proof uses conditional regular-history estimates, not just the marginal PD limit.
+
+For arbitrary comparable-rate arrays, a quantitative two-annulus Poisson comparison retains the remaining count as a passive mark. The iterated conclusion is a scalar convolution approximation, not simultaneous independence of all original annular counts. An appendix gives an analytic cutoff law for the limiting PD(1) partition with an explicit threshold error; this is not a finite-size Luce convergence rate.
+
+**Status:** internally audited current-research manuscript. The scalar total-cycle mean shift and mod-Poisson theorem are cited for context, not rederived or imported as premises. See the [targeted proof audit](audits/independence-peeling-proof-audit.md) and [dependency map](DEPENDENCIES.md).
 
 ### Boundary laws for Luce rankings
 

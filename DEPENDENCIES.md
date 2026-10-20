@@ -22,6 +22,7 @@ The rows are in exactly the `papers.json` order.
 | `functional-erdos-turan` | `mesoscopic-switching`, `erdos-turan-order` |
 | `total-cycle-edgeworth` | `mesoscopic-switching`, `erdos-turan-order`, `sharp-order-edgeworth` |
 | `mod-poisson` | `mesoscopic-switching`, `regular-profile-cycles`, `macroscopic-pd` |
+| `independence-peeling` | `mesoscopic-switching`, `regular-profile-cycles`, `macroscopic-pd`, `sharp-order-edgeworth` |
 | `boundary-laws` | None |
 | `sukhatme-fixed-points` | None |
 | `endpoint-regular-universality` | None |
@@ -84,6 +85,19 @@ The exact marked clock-swap identity is cited from `mesoscopic-switching` (`prop
 - `macroscopic-pd`: `thm:macroscopic-pd`, used only for the original-measure uniform-root cycle-length limit. No tilted or finite-deletion version is assumed.
 
 The new proof derives the profile mean shift, marked residual Poisson cloud, rank-one Fredholm determinant correction, and locally uniform analytic mod-Poisson limit. Its higher-factorial-cumulant corollary does not import the separate unpublished profile mean-shift/cumulant manuscript. Internal proof checks and finite numerical tests are not independent external refereeing.
+
+### `independence-peeling` → `mesoscopic-switching`, `regular-profile-cycles`, `macroscopic-pd`, `sharp-order-edgeworth`
+
+The principal result is microscopic–macroscopic independence, not another scalar total-cycle theorem. The two proof branches use different upstream interfaces:
+
+| Result in this manuscript | Exact input | Scope |
+| --- | --- | --- |
+| Joint short-cycle/partition independence | `regular-profile-cycles`: `thm:regular-cycles`, `prop:regular-cycle-factorial` | Fixed vectors and all fixed mixed factorial moments under a positive continuous profile. |
+| Finite-deletion uniformity | `macroscopic-pd`: `lem:pd-residual-factorization`, `prop:pd-uniform-residual-fraction`, `lem:pd-deletion-stability`; equations `eq:pd-root-cdf`, `eq:pd-deletion-error`, `eq:pd-deletion-joint` | Conditional uniformity over regular histories; the initial bounded-deletion error is propagated explicitly. Unconditional PD/GEM convergence alone is not sufficient. |
+| Finite annular passive-mark comparison | `mesoscopic-switching`: `prop:master-switch`, `cor:selected-moments`, `prop:endpoint-mixing`, `cor:quantitative-truncation-interface` | One- and two-root truncated moments, with a finite numerical depth range; absolute switching-intensity error and constants uniform in the truncation level. |
+| Iterated fixed-moment/cumulant comparison | `sharp-order-edgeworth`: `cor:factorial-domination`, following `thm:multiclock` | Only fixed-order distinct-cycle domination for total prescribed length at most n/2; no arithmetic order theorem or Edgeworth conclusion is used. |
+
+The PD(1) cutoff appendix uses only the standard size-biased representation and the Dickman density cited there. `total-cycle-edgeworth` is cited for marked-Stein provenance and scalar comparisons; `mod-poisson` is cited only to delimit nonoverlap. Neither is an active dependency. The finite-deletion lemma does not assume uniform good-event probabilities after conditioning on a rare prescribed cycle, and the iterated scalar convolution comparison does not assert simultaneous independence of all actual annular counts.
 
 ### `boundary-laws`
 

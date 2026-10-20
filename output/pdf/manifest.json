@@ -50,6 +50,14 @@
       "pages": 21
     },
     {
+      "id": "independence-peeling",
+      "source": "papers/independence-peeling/luce_independence_peeling.tex",
+      "source_sha256": "8daa0abd01ace03ae564fedcb9cee389effd0117aa2e23960060750a251e5712",
+      "pdf": "output/pdf/luce-independence-peeling.pdf",
+      "pdf_sha256": "32126ccfcaffe42a1f00bbf2172c1be6e86e6e2f45e9f43cdba7e6da10966fa6",
+      "pages": 17
+    },
+    {
       "id": "boundary-laws",
       "source": "papers/boundary-laws/boundary-laws.tex",
       "source_sha256": "e02f3632fc0eb3a6951b448fc5c7545bf3729730825e59a2ba4ff617cde6a971",

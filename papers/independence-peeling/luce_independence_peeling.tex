@@ -1,0 +1,1299 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{mathrsfs}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{xurl}
+\usepackage{needspace}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={Microscopic-Macroscopic Independence and Poisson Peeling for Luce Permutations},pdfauthor={Christopher D. Long}}
+
+\numberwithin{equation}{section}
+\allowdisplaybreaks
+\setlength{\emergencystretch}{2em}
+
+\newcommand{\E}{\mathbb E}
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Pois}{\operatorname{Pois}}
+\newcommand{\PD}{\operatorname{PD}}
+\newcommand{\GEM}{\operatorname{GEM}}
+\newcommand{\TV}{d_{\mathrm{TV}}}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\cL}{\mathcal L}
+\newcommand{\cP}{\mathcal P}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\eps}{\varepsilon}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{inputtheorem}[theorem]{Input theorem}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+
+\title{Microscopic--Macroscopic Independence and\\
+Poisson Peeling for Luce Permutations}
+\author{Christopher D. Long\\\texttt{galizur@gmail.com}}
+\date{20 October 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We study the dependence between different cycle scales of Luce permutations.
+For rates converging uniformly to a positive continuous profile, every fixed
+vector of short-cycle counts is asymptotically independent of the entire
+ranked macroscopic $\mathrm{PD}(1)$ partition, with convergence of mixed
+factorial moments against bounded continuous partition observables.
+The proof verifies stability under finitely many prescribed cycles on good
+clock-slab data and then averages with factorial-moment weights.
+For arbitrary comparable-rate arrays, a marked switching argument gives a
+quantitative joint Poisson approximation for two separated cycle-length
+annuli with the remaining count as a passive mark.  Its finite-depth error
+bounds can be iterated uniformly over logarithmic scales; fixed-moment
+transfer is justified separately from total variation.
+An appendix gives an analytic cutoff law, with an explicit error,
+for the number of parts of the limiting $\mathrm{PD}(1)$ partition.
+The main results concern joint dependence and complement, rather than
+reprove, the scalar total-cycle analytic mod-Poisson theorem.
+\end{abstract}
+\setcounter{tocdepth}{1}
+\tableofcontents
+\newpage
+\raggedbottom
+
+\section{Model, scope, and main results}\label{sec:introduction}
+
+Chatterjee--Diaconis--Kim~\cite[Introduction]{ChatterjeeDiaconisKim2023}
+and Borga--Chatterjee--Diaconis~\cite[Section~5.2]{BorgaChatterjeeDiaconis2025}
+ask for the cycle structure of Luce permutations, including joint cycle
+counts.  Separate Poisson laws for short cycles and a Poisson--Dirichlet
+law for large cycles do not specify their dependence.  The principal
+result here supplies this missing joint statement for regular positive
+profiles: every fixed short-cycle vector is asymptotically independent of
+the entire ranked macroscopic partition.  This answers a part of the
+broader joint-cycle question; it does not claim universality for all
+positive-weight arrays.
+
+Let $X_{n,i}\sim\operatorname{Exp}(\theta_{n,i})$, $1\le i\le n$, be
+independent, and set
+\[
+ \sigma_n(i)=1+\#\{j:X_{n,j}<X_{n,i}\}.
+\]
+This is the label-to-rank Luce permutation.  Its inverse is the sequential
+weighted draw order and has the stationary Tsetlin-library distribution;
+inversion preserves all cycle counts.  See Luce~\cite{Luce1959},
+Chatterjee--Diaconis--Kim~\cite{ChatterjeeDiaconisKim2023}, and
+Borga--Chatterjee--Diaconis~\cite{BorgaChatterjeeDiaconis2025}.
+Write $C_{n,r}$ for the number of $r$-cycles and $L_n(i)$ for the cycle
+length at label $i$.  Put
+\[
+ K_n=\sum_{r=1}^nC_{n,r},\qquad
+ \mathbf P_n=(L_{n,1}/n,L_{n,2}/n,\ldots),
+\]
+where $L_{n,1}\ge L_{n,2}\ge\cdots$ are the ranked cycle lengths.
+The partition space
+\[
+ \mathcal S^\downarrow=
+ \{(x_j)_{j\ge1}:x_1\ge x_2\ge\cdots\ge0,\ \sum_jx_j=1\}
+\]
+is equipped with the $\ell^1$ metric.
+
+We distinguish two hypotheses.  The quantitative peeling results assume
+only a fixed bound on the largest-to-smallest rate ratio; after a common
+rescaling, write
+\begin{equation}\label{eq:comparable}
+ 1\le\theta_{n,i}\le\varkappa<\infty.
+\end{equation}
+For the short-cycle identification and joint microscopic--macroscopic
+limit, we assume
+\begin{equation}\label{eq:profile}
+ \theta_{n,i}=a_n\{f(i/n)+\varepsilon_{n,i}\},\qquad
+ \max_i|\varepsilon_{n,i}|\longrightarrow0,\qquad
+ f\in C[0,1],\quad 0<\min f\le\max f<\infty.
+\end{equation}
+The factor $a_n>0$ rescales time only.  In particular,
+\eqref{eq:profile} implies \eqref{eq:comparable} with a fixed enlarged
+constant for all sufficiently large $n$.
+
+Define
+\[
+ \mathcal A_f(t)=\int_0^1(1-e^{-f(x)t})\,dx,\qquad
+ \mathcal B_f(t)=\mathcal A_f'(t),\qquad \tau_f=\mathcal A_f^{-1},
+\]
+and the microscopic kernel and fixed-cycle means
+\begin{align}
+ \rho_f(x,y)&=\frac{f(x)e^{-f(x)\tau_f(y)}}{\mathcal B_f(\tau_f(y))},
+       \qquad 0<y<1,\label{eq:rho}\\
+ \lambda_r&=\frac1r\int_{[0,1]^r}
+     \rho_f(x_1,x_2)\cdots\rho_f(x_r,x_1)\,dx_1\cdots dx_r.
+     \label{eq:lambda}
+\end{align}
+The cyclic integral is interpreted by increasing bulk truncations.
+Its finiteness and the fixed-cycle Poisson laws are companion-paper inputs,
+not new assertions of this paper.
+For falling factorials, $(x)_j=x(x-1)\cdots(x-j+1)$ and $(x)_0=1$.
+We use $d_{\mathrm{TV}}$ for total variation (half the $\ell^1$ distance
+on countable spaces).  For a nonnegative integer variable with the required
+moments, $\kappa_q^{\mathrm F}$ denotes the factorial cumulant: the
+$q$th coefficient derivative of the formal series
+$\log\E(1+w)^Y$, or the corresponding analytic derivative when it exists.
+Only fixed orders are used in the peeling estimates.
+
+\begin{theorem}[Short cycles and the macroscopic partition]
+\label{prop:micro-macro}
+Under \eqref{eq:profile}, for every fixed $B$,
+\[
+ (C_{n,1},\ldots,C_{n,B},\mathbf P_n)
+ \Longrightarrow (Z_1,\ldots,Z_B,\mathbf P)
+\]
+in $\mathbb N_0^B\times\mathcal S^\downarrow$, where
+$Z_r\sim\Pois(\lambda_r)$ are independent, $\mathbf P\sim\PD(1)$,
+and the Poisson vector and partition are independent.
+For every fixed nonnegative integer vector $(k_1,\ldots,k_B)$ and
+bounded continuous $F:\mathcal S^\downarrow\to\mathbb R$,
+\begin{equation}\label{eq:micro-macro-factorization}
+ \E\left[F(\mathbf P_n)\prod_{r\le B}(C_{n,r})_{k_r}\right]
+ \longrightarrow \E F(\mathbf P)\prod_{r\le B}\lambda_r^{k_r}.
+\end{equation}
+\end{theorem}
+
+The proof in Section~\ref{sec:micro-macro} uses a uniform conditional
+macroscopic statement on good slab data.  Merely combining the two
+marginal convergence theorems would not prove independence.  A consequence
+is uniform mixed-moment convergence for macroscopic threshold counts on
+compact threshold intervals.
+
+Our second result, Theorem~\ref{lem:annular}, is a finite quantitative
+statement under \eqref{eq:comparable}.  For nested cutoffs
+$b'<b<U<U'$, it compares the \emph{joint} law of the lower-annulus count,
+the upper-annulus count, and the retained count with two independent
+Poisson variables independent of a copy of the retained count.  The
+retained marginal is preserved exactly.  Section~\ref{sec:peeling}
+then gives stage-uniform iterated-logarithm estimates and explains the
+separate moment assumptions needed for unbounded tests.
+
+Appendix~\ref{sec:PD-cumulants} treats a separate property of the limiting
+$\PD(1)$ partition.  It proves an analytic threshold-count limit with an
+explicit cutoff error by an elementary recurrence.  This is neither a
+finite-$n$ Luce convergence rate nor another proof of the scalar
+total-cycle theorem.
+
+\paragraph{Relation to the scalar total-cycle paper.}
+The profile-dependent mean shift, trace-class and Fredholm formula,
+universal factorial cumulants of $K_n$, and its local analytic mod-Poisson
+limit are proved in the companion manuscript~\cite{LongModPoisson2026}.
+We neither reprove these results nor treat analytic mod-Poisson convergence
+as an unresolved scalar problem.  That manuscript is cited for context
+only: no result from it is a premise below.  Conversely, its scalar
+transform alone does not imply the joint independence statement or the
+passive-mark estimates proved here.  Quantitative total-cycle Poisson and
+lattice approximations are treated separately in~\cite{LongTotalCycles2026}.
+
+\section{Companion inputs and switching estimates}\label{sec:inputs}
+
+The named companion sources in the bibliography are pinned to a fixed
+repository revision.  We state the interfaces used, including the
+conditional macroscopic information; unconditional $\PD(1)$ convergence
+alone would not be sufficient for Section~\ref{sec:micro-macro}.
+
+\subsection{Microscopic input}
+\begin{inputtheorem}[Fixed short cycles]\label{input:micro}
+Under \eqref{eq:profile}, every fixed vector $(C_{n,1},\ldots,C_{n,B})$
+converges to independent Poisson variables with means \eqref{eq:lambda},
+and every fixed mixed factorial moment converges to the corresponding
+Poisson moment.
+\end{inputtheorem}
+This is the regular-profile fixed-cycle theorem and mixed factorial-moment
+proposition of~\cite[Section~3]{LongMicroscopic2026}.  That paper's local
+entry estimate is uniform in arbitrary distinct source labels; bulk and
+separation restrictions are imposed on the target ranks only.  Its
+endpoint and collision envelopes justify the globally summed moments.
+We use the moment conclusion here, not a new marked local-entry argument.
+
+\subsection{Switching and a finite endpoint estimate}
+
+Assume \eqref{eq:comparable}.
+For $i\ne j$, put
+\[
+ R_{ij}=\exp\{-(\theta_{n,i}-\theta_{n,j})(X_{n,j}-X_{n,i})\},
+ \qquad R_{ii}=1,
+\]
+and define
+\[
+ S_{n,r}=\sum_{i:L_n(i)>r}R_{i,\sigma_n^r(i)},\qquad
+ e_{n,r}=\E|S_{n,r}/n-1|,\qquad
+ a_{n,r}=\frac{n}{r(n-r)}.
+\]
+Here $L_n(i)$ is the length of the cycle containing $i$.
+Fix $p=1+1/(4\varkappa)$ when $\varkappa>1$, and take $p=2$
+when $\varkappa=1$.  Then $p<\varkappa/(\varkappa-1)$ in the former
+case.  Set $\beta=1-1/p$; this choice makes all constants below depend
+only on the displayed parameters and on $\varkappa$.
+
+\begin{inputtheorem}[Marked switch and selected-factor control]
+\label{input:switch}
+For every bounded permutation-measurable $F$,
+\begin{equation}\label{eq:master-switch}
+ r(n-r)\E[C_{n,r}F(\sigma_n)]
+ =\E\sum_{i:L_n(i)>r}
+ R_{i,\sigma_n^r(i)}
+ F\bigl(\sigma_n\circ(i\ \sigma_n^r(i))\bigr).
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:selected-p}
+ \sup_{n,r}\frac1n\E\sum_{i:L_n(i)>r}
+ R_{i,\sigma_n^r(i)}^p<\infty.
+\end{equation}
+The analogous $p$-moment bound holds for an independent uniform pair of
+labels.  For such a pair $(I,J)$, $\E R_{IJ}=1$.
+\end{inputtheorem}
+
+These are the marked master identity and selected-moment bounds of
+\cite{LongMesoscopic2026}.  They immediately imply the following useful
+pointwise version of the short-root estimate.
+
+\begin{lemma}[Root point masses and exceptional switches]
+\label{lem:root-mass}
+For $1\le r<n$,
+\begin{equation}\label{eq:crude-cycle}
+ \E C_{n,r}\le \frac{C_\varkappa n}{r(n-r)}.
+\end{equation}
+Consequently, for an independent uniform label $I_n$ and any set
+$E\subseteq\{1,\ldots,\lfloor n/2\rfloor\}$,
+\begin{equation}\label{eq:root-set}
+ \Pp\{L_n(I_n)\in E\}\le C_\varkappa |E|/n.
+\end{equation}
+For every set $E$ of cycle lengths,
+\begin{equation}\label{eq:exception-holder}
+ \frac1n\E\sum_{\substack{i:L_n(i)>r\\L_n(i)\in E}}
+ R_{i,\sigma_n^r(i)}
+ \le C_\varkappa\bigl(\Pp\{L_n(I_n)\in E\}\bigr)^\beta.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Apply \eqref{eq:master-switch} with $F=1$ and use
+\eqref{eq:selected-p} to bound $\E S_{n,r}$ by $C_\varkappa n$.
+Since
+\[
+ \Pp\{L_n(I_n)=r\}=r\E C_{n,r}/n,
+\]
+\eqref{eq:crude-cycle} gives a bound $C_\varkappa/n$ for every $r\le n/2$.
+Summation proves \eqref{eq:root-set}.  H\"older's inequality on the product
+of clock probability and the normalized counting measure on labels proves
+\eqref{eq:exception-holder}.
+\end{proof}
+
+We record the quantitative endpoint interface, including its truncation
+parameter.  This avoids an appeal to an asymptotic admissibility condition
+at the terminal stages of the peeling argument.
+For a window $[r_-,r_+]$ with $r_+\le\delta_0 n/2$, set
+\[
+ \delta=2r_+/n,\qquad h=\delta^{1/4},\qquad
+ \omega=\delta^{1/(4\varkappa)},\qquad M=n\sqrt\delta,\qquad
+ L_\delta=1+\log(1/\delta).
+\]
+The factor two accommodates the two-root construction.  For an integer
+terminal depth $d$, define
+\begin{equation}\label{eq:endpoint-bracket}
+\begin{split}
+ \mathcal B_n(d;r_-,r_+)={}&
+ (1-\alpha)^{d-1}+dh+d\omega+\frac{d^2+d\log n}{M}
+ +\omega+\delta+\delta^{1/2}L_\delta\\
+ &+h^{-1}L_\delta e^{-cM}
+   +n^2h^{-1}e^{-chM}+n^{-2}.
+\end{split}
+\end{equation}
+Here $c>0$ and $\alpha\in(0,1)$ depend only on $\varkappa$.
+
+\begin{inputtheorem}[Finite truncation-uniform endpoint interface]
+\label{input:endpoint}
+There are positive constants $c_0,\delta_0$ depending only on $\varkappa$ such
+that the following bounds hold for all sufficiently large $n$, provided
+\[
+ 1\le d\le r_-/3,\qquad d\le c_0hM,\qquad \delta\le\delta_0.
+\]
+For every $T\ge1$, put
+\[
+ Y_{n,r}^{(T)}=\frac1n\sum_{i:L_n(i)>r}(R_{i,\sigma_n^r(i)}\wedge T),
+ \qquad D_{n,T}=\frac1{n^2}\sum_{i,j}(R_{ij}\wedge T).
+\]
+Uniformly for $r\in[r_-,r_+]$,
+\begin{align}
+ |\E Y_{n,r}^{(T)}-\E D_{n,T}|
+ &\le C_\varkappa T\mathcal B_n,
+ \label{eq:endpoint-first}\\
+ |\E(Y_{n,r}^{(T)})^2-\E D_{n,T}^2|
+ &\le C_\varkappa T^2\mathcal B_n,
+ \label{eq:endpoint-second}\\
+ \Var D_{n,T}&\le 4T^2/n.
+ \label{eq:endpoint-independent-var}
+\end{align}
+The constants are independent of $T,d,r_-,r_+$.
+\end{inputtheorem}
+
+This finite form is read from the estimates in the proof of the
+free-depth endpoint proposition (\texttt{prop:endpoint-mixing},
+equation \texttt{eq:free-depth-global-bound}) and its observable corollary
+(\texttt{cor:quantitative-truncation-interface}) in
+\cite{LongMesoscopic2026}.  These give
+\eqref{eq:endpoint-first}--\eqref{eq:endpoint-second}.
+Their finite estimates use $d\le r_-/3$ to leave the frozen prefixes intact
+and $d\le c_0hM$ to preserve residual row and cell margins.  The conditions
+$d\to\infty$, $dh\to0$, and $d\omega\to0$ in the asymptotic formulation are
+used to make the displayed bound tend to zero, not to derive that bound.
+For large $n$, $M\ge\sqrt{2n}$ and $hM\ge2^{3/4}n^{1/4}$, so the
+finite environment estimates apply uniformly.  If the bracket is bounded
+below by a fixed positive constant, the first two estimates also follow
+from the trivial bounds $0\le Y_{n,r}^{(T)},D_{n,T}\le T$.
+The last inequality follows
+by replacing one clock: at most $2n$ summands change, each by at most $T$.
+No untruncated selected second moment is required.
+
+\begin{lemma}[Finite switching-intensity bound]\label{lem:finite-intensity}
+Under the numerical conditions of Input theorem~\ref{input:endpoint},
+\begin{equation}\label{eq:finite-intensity}
+ \sup_{r_-\le r\le r_+} e_{n,r}
+ \le C_\varkappa\bigl(\mathcal B_n(d;r_-,r_+)+n^{-1}\bigr)^\eta,
+ \qquad \eta=\frac{p-1}{2p}>0.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Write $\mu_{n,T}=\E D_{n,T}\le1$.  The selected and independent-pair
+$p$-moment bounds give
+\[
+ 1-\mu_{n,T}\le C_\varkappa T^{1-p},\qquad
+ \E(S_{n,r}/n-Y_{n,r}^{(T)})\le C_\varkappa T^{1-p}.
+\]
+Using \eqref{eq:endpoint-first}--\eqref{eq:endpoint-independent-var},
+\[
+ \E|Y_{n,r}^{(T)}-\mu_{n,T}|^2
+ \le C_\varkappa T^2(\mathcal B_n+n^{-1}).
+\]
+Thus, with $u=\mathcal B_n+n^{-1}$,
+\[
+ e_{n,r}\le C_\varkappa\{T\sqrt u+T^{1-p}\}.
+\]
+For $u\le1$, choose $T=u^{-1/(2p)}$.  For $u>1$, use the uniform
+first-moment bound on $S_{n,r}/n$.  This proves the claim.
+\end{proof}
+
+\subsection{Fixed-order cycle domination}
+
+\begin{inputtheorem}[Fixed-order factorial domination]
+\label{input:factorial-dom}
+For every fixed $j\ge1$, there is $C_{\varkappa,j}<\infty$ such that
+\begin{equation}\label{eq:factorial-dom}
+ \E\cC_n(r_1,\ldots,r_j)
+ \le\frac{C_{\varkappa,j}}{r_1\cdots r_j}
+\end{equation}
+whenever $r_1+\cdots+r_j\le n/2$, where
+$\cC_n(r_1,\ldots,r_j)$ counts ordered tuples of distinct cycles of the
+specified lengths.
+\end{inputtheorem}
+
+This is Corollary \emph{Fixed-order factorial domination}
+(\texttt{cor:factorial-domination}) of~\cite{LongOrderEdgeworth2026},
+following its Exact fixed-order multi-clock identity
+(\texttt{thm:multiclock}), in the range where
+the total prescribed length is at most $n/2$.  Only this finite-order
+probabilistic module is imported; no arithmetic order theorem or
+Edgeworth expansion is used.
+
+
+\subsection{Macroscopic input and its conditional scope}
+\begin{inputtheorem}[Macroscopic partition and regular-history interfaces]
+\label{input:PD}
+Under \eqref{eq:comparable}, $\mathbf P_n\Rightarrow\PD(1)$ in $\ell^1$,
+and the size-biased residual deletion sequence converges to $\GEM(1)$.
+The following conditional interfaces of the same proof are also used.
+For a fixed finite master partition of clock time, the complete slab data
+record the label sets $H_a$, the rank sets $Q_a$, and the ordered
+\emph{unlabeled} clock values.  On good slab events of probability tending
+to one, each fixed row and cell population is bounded below by
+$c_{\mathcal J}n$.
+After conditioning only on compatible revealed edges and deleting complete
+cycles, the residual matchings are independent permanental matchings.
+The uniform rooted-closure and deletion estimates apply to regular residual
+histories with remaining mass at least a fixed positive fraction and
+relative row/cell error tending to zero.  More precisely, if $S<U$ are
+fixed clock cutoffs, the interior root-CDF error is at most
+\begin{equation}\label{eq:imported-root-error}
+ C_{\varkappa,S,\xi,\zeta}
+ (\delta+2\varkappa h+\chi_n+\varepsilon_n+e^{-U/2})
+ +C_\xi(e^{-S}+\varepsilon_n^2)+\pi_n+C_{\mathcal J,\xi,\zeta}/n,
+\end{equation}
+where $\xi$ bounds the residual fraction below, $\zeta$ is the interior
+cutoff, and $\chi_n,\varepsilon_n,\pi_n\to0$ for the fixed partition.
+The deletion lemma is a \emph{joint-event} bound: the probability that an
+interior root cycle is deleted and the resulting history is not regular
+at inner cutoff $S$ is at most $\pi_n$.  The new regularity error is
+bounded by
+\begin{equation}\label{eq:imported-deletion-error}
+ C_{\varkappa,S,\xi,\zeta}
+ (\delta+2\varkappa h+\chi_n+\varepsilon_n+e^{-U/2})
+ +C_{\mathcal J,\xi,\zeta}/n.
+\end{equation}
+These bounds are uniform over regular starting histories.  A uniform
+finite-dimensional deletion induction from a bounded prescribed deletion
+is derived below; it is not inferred from unconditional $\GEM(1)$
+convergence.
+\end{inputtheorem}
+
+These are the main macroscopic theorem, residual-factorization lemma,
+uniform residual-root law, and deletion-stability lemma of
+\cite{LongPD2026}.  The explicit bounds above are its equations
+\texttt{eq:pd-root-cdf} and \texttt{eq:pd-deletion-error}, together with
+the joint-event assertion \texttt{eq:pd-deletion-joint}.
+The regularity tested there compares, on the rows below the chosen outer
+cutoff,
+\[
+ \frac{|H_a\cap R|}{v_R|H_a|},\qquad
+ \frac{|Q_a\cap H_b\cap R|}{v_R|Q_a\cap H_b|},
+ \qquad v_R=|R|/n,
+\]
+with one, uniformly in the target category $b$.  The histories contain no
+additional information about unexposed edges.  The source labels
+\texttt{lem:pd-residual-factorization},
+\texttt{prop:pd-uniform-}\allowbreak\texttt{residual-fraction},
+\texttt{lem:pd-deletion-stability} identify the conditional modules.
+The proof of \texttt{prop:pd-residual-uniforms} supplies the cutoff
+ordering, but its unconditional statement is not used as a substitute
+for the displayed conditional estimates.
+Section~\ref{sec:micro-macro} verifies these conditions for every compatible
+collection of finitely many prescribed complete cycles before invoking
+their uniformity.  No bound on the probability of a bad slab event
+\emph{conditional on a rare prescribed cycle} is assumed.
+\section{Microscopic--macroscopic independence}\label{sec:micro-macro}
+
+We first establish the finite-deletion consequence of Input~\ref{input:PD}
+that is needed for weighted averaging.  All prescribed cycles in this
+section have bounded total size, fixed before $n\to\infty$.
+
+\subsection{Uniformity after finitely many prescribed cycles}
+
+\begin{lemma}[Finite-deletion law on good slab data]
+\label{lem:finite-deletion}
+Fix $v<\infty$ and a bounded Lipschitz function $F$ of the ranked partition
+in the $\ell^1$ metric.  Let $c_F=\E F(\mathbf P)$ for
+$\mathbf P\sim\PD(1)$.  For every $\eta>0$ there are a fixed finite clock
+partition, its complete slab-data sigma-field $\mathscr S_n$, and
+$\mathscr S_n$-measurable events $\mathcal G_n$ with
+$\Pp(\mathcal G_n^c)\to0$ such that
+\begin{equation}\label{eq:slab-uniform}
+ \limsup_{n\to\infty}
+ \mathop{\operatorname{ess\,sup}}_{\mathscr S_n\in\mathcal G_n}
+ \sup_{\substack{\Gamma\ \mathrm{compatible}\\|V(\Gamma)|\le v}}
+ \left|\E[F(\mathbf P_n)\mid\mathscr S_n,\Gamma]-c_F\right|
+ \le\eta.
+\end{equation}
+Here $\Gamma$ is a prescribed collection of disjoint complete cycles and
+conditioning on $\Gamma$ means conditioning on their specified edges.
+Only compatible collections of positive conditional probability are used.
+\end{lemma}
+\begin{proof}
+Use the complete slab data and regular-history interfaces of
+Input~\ref{input:PD}: the label sets $H_a$,
+the rank intervals $Q_a$, and the ordered \emph{unlabeled} clock values
+within each slab.  Given these data, the within-slab matchings are
+independent permanental matchings.  Conditioning on compatible specified
+edges removes their sources and targets and leaves the same permanental
+laws on the residual minors.  This is the residual-factorization lemma of
+that paper, and does not condition on the fully labeled clocks.
+
+Write $m_a=|H_a|$, $N_{ab}=|Q_a\cap H_b|$, and let $R$ be the vertex set
+remaining after deletion of $\Gamma$.  Put $r=|R|/n$,
+$m_a^R=|H_a\cap R|$, and $N_{ab}^R=|Q_a\cap H_b\cap R|$.
+For each deleted complete cycle $C$,
+\[
+ |C\cap H_a|=|C\cap Q_a|,
+\]
+because $\sigma_n$ maps the first set bijectively onto the second.
+Thus the residual rows remain square.  For the fixed partition, the good
+slab event in \cite{LongPD2026} has every row and cell population at least
+$c_{\mathcal J}n$.  Since deletion changes each population by at most $v$,
+\begin{equation}\label{eq:finite-deletion-regularity}
+ \max_a\left|\frac{m_a^R}{r m_a}-1\right|
+ +\max_{a,b}\left|\frac{N_{ab}^R}{r N_{ab}}-1\right|
+ \le C_{\mathcal J}v/n.
+\end{equation}
+This verifies the companion's regular-history hypothesis uniformly over
+$\Gamma$.
+
+Fix the number $k$ of further uniform residual-root deletions, an interior
+cutoff $\zeta\in(0,1/4)$, and a desired finite-dimensional error.
+For all large $n$, the initial residual size is at least $n/2$; on the
+first $k$ interior deletions it stays at least
+$\xi_*n$, where $\xi_*:=\zeta^k/2$.
+Choose clock cutoffs $T_0<\cdots<T_k$ from inner to outer, and then a
+single master partition with mesh $h$ containing those cutoffs.
+At stage $j+1$, use outer cutoff $T_{k-j}$ and inner cutoff $T_{k-j-1}$.
+The constants at a given inner cutoff are fixed before its outer cutoff
+is increased.  In particular, each outer tail can be chosen small enough
+after accounting for all subsequent, already fixed amplification factors.
+Only after the finite cutoff hierarchy is fixed is $h$ chosen small,
+and only then does $n$ tend to infinity.
+
+Here is the explicit perturbation from a prescribed deletion.  Put
+$d_0=C_{\mathcal J}v/n$ and, for $0\le j<k$, define
+\begin{equation}\label{eq:finite-deletion-recursion}
+ d_{j+1}=B_{k-j-1}
+ (d_j+2\varkappa h+\chi_n+\varepsilon_n+e^{-T_{k-j}/2})
+ +C_{\mathcal J,k,\xi_*,\zeta}/n,
+\end{equation}
+where $B_i$ bounds the deletion coefficient with inner cutoff $T_i$.
+All sequences are replaced by the maxima over the finitely many cutoff
+levels.  Relative to the same recursion starting from zero, the only
+additional error is
+\[
+ d_j-d_j^{(0)}
+ =\frac{C_{\mathcal J}v}{n}
+   \prod_{i=0}^{j-1}B_{k-i-1}=o_n(1),
+\]
+uniformly in the compatible prescribed cycles, since all constants are
+fixed before $n\to\infty$.  The hierarchy makes $d_j<1/4$ throughout.
+Equations~\eqref{eq:imported-root-error}--\eqref{eq:imported-deletion-error}
+then apply at every stage with these deterministic regularity bounds.
+
+To pass from these conditional bounds to a joint law, first use bounded
+Lipschitz one-variable tests supported in $[\zeta,1-\zeta]$ and vanishing
+at the endpoints.  Conditional Stieltjes integration bounds their
+expectation errors by the interior CDF error times the integral of the
+absolute derivative.  Multiply by the previously exposed tests and
+iterate.  The joint-event deletion bound charges failures of the next
+regular history directly; it never conditions on the exact new cycle
+length.  The total failure probability is at most the sum of the $k$
+uniform failure bounds.  Evaluating the CDF at $2\zeta$ and $1-2\zeta$
+bounds the omitted endpoint probabilities by $4k\zeta$ plus these errors.
+Letting the chosen finite-dimensional error and then $\zeta$ tend to zero
+proves the product-uniform comparison, uniformly over the good initial
+slab data and the prescribed cycles.  Products of Lipschitz functions
+and a finite uniform approximation on $[0,1]^k$ give the comparison for
+any fixed continuous test of the first $k$ residual fractions.
+
+In particular, for any prescribed $\eta_1>0$ the hierarchy can be chosen
+so that the residual mass $R_k^{\mathrm{res}}$, normalized by the
+initial residual size $|R|$, satisfies
+\[
+ \E[R_k^{\mathrm{res}}\mid\mathscr S_n,\Gamma]
+ \le 2^{-k}+\eta_1+o_n(1)
+\]
+uniformly: apply the finite-dimensional comparison to
+$\prod_{j=1}^k(1-u_j)$.
+A bounded Lipschitz test on the ranked partition can therefore be reduced
+to its first $k$ size-biased pieces at cost
+$C_F(2^{-k}+\eta_1+o_n(1))$; decreasing rearrangement is a contraction in
+$\ell^1$.  Formally, extend $F$ to the ambient $\ell^1$ space by a bounded
+Lipschitz extension before truncating the sequence.
+
+Finally, restoring the deleted pieces and changing normalization from
+$|R|$ to $n$ changes the ranked sequence by at most $2v/n$ in $\ell^1$.
+Choose $k$ large and then the finite-dimensional errors small enough for
+the prescribed $\eta$.  This proves \eqref{eq:slab-uniform}.
+The regular-profile hypothesis ensures convergence of the marked empirical
+rate measures, as required for this fixed-partition construction.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{prop:micro-macro}]
+Set
+\[
+ W_n=\prod_{r\le B}(C_{n,r})_{k_r},\qquad
+ v=\sum_{r\le B}rk_r.
+\]
+Expand $W_n$ as a sum of indicators over ordered collections $\Gamma$ of
+the prescribed disjoint cycles.  The total number of exposed vertices is
+$v$, independent of $n$.  By Input theorem~\ref{input:micro}, $\E W_n$ converges to
+$\prod_r\lambda_r^{k_r}$.  Also $\sup_n\E W_n^2<\infty$: the square is a fixed polynomial in
+falling factorials of the finitely many short-cycle counts, whose mixed
+factorial moments converge by Input~\ref{input:micro}.  This part of the
+proof does not require fixed-order domination for growing cycle lengths.
+
+First let $F$ be bounded Lipschitz.  Apply
+Lemma~\ref{lem:finite-deletion} with error $\eta$.
+On $\mathcal G_n$, condition first on the complete slab data and then on
+one prescribed collection.  Sum the resulting inequalities with their
+conditional occurrence probabilities.  On the bad slab event use
+Cauchy--Schwarz.  This gives
+\begin{equation}\label{eq:weighted-good-slab}
+\begin{split}
+ |\E[F(\mathbf P_n)W_n]-c_F\E W_n|
+ \le{}&(\eta+o_n(1))\E W_n\\
+ &+2\|F\|_\infty(\E W_n^2)^{1/2}
+                         \Pp(\mathcal G_n^c)^{1/2}.
+\end{split}
+\end{equation}
+Let $n\to\infty$ and then $\eta\downarrow0$.  This proves the mixed
+factorial-moment factorization for bounded Lipschitz tests.  It never
+requires a uniform bound on $\Pp(\mathcal G_n^c\mid\Gamma)$.
+
+For completeness, this factorization determines joint weak convergence.
+Both marginals are tight.  Along any joint subsequential limit, uniform
+integrability transfers the mixed factorial moments; conditioning by a
+nonnegative bounded Lipschitz test of the partition leaves the same
+factorial moments as the independent Poisson vector.  The Poisson vector
+is moment-determinate.  For example, its factorial moments give a finite
+exponential moment by the monotone expansion of
+$\prod_r(1+t_r)^{Z_r}$ for $t_r\ge0$.
+Thus every subsequential limit is the stated product law.
+Finally, joint weak convergence and the uniform integrability of $W_n$
+extend \eqref{eq:micro-macro-factorization} to bounded continuous $F$.
+\end{proof}
+
+\begin{corollary}[Uniform threshold moments]\label{cor:threshold-joint}
+Fix $B$, integers $k_1,\ldots,k_B,k\ge0$, and
+$[a,b]\subset(0,1)$.  Define
+\[
+ N_{n,t}=\sum_{r>tn}C_{n,r},\qquad
+ N_t=\#\{j:P_j>t\},\qquad\mathbf P\sim\PD(1).
+\]
+Then, uniformly for $t\in[a,b]$,
+\begin{equation}\label{eq:threshold-moments}
+ \E\left[\prod_{r\le B}(C_{n,r})_{k_r}(N_{n,t})_k\right]
+ \longrightarrow
+ \left(\prod_{r\le B}\lambda_r^{k_r}\right)\E(N_t)_k.
+\end{equation}
+Consequently the sum $\sum_{r\le B}C_{n,r}+N_{n,t}$ has the same limiting
+fixed factorial moments, uniformly on $[a,b]$, as $P_B+N_t$, where
+$P_B\sim\Pois(\sum_{r\le B}\lambda_r)$ is independent of $N_t$.
+\end{corollary}
+\begin{proof}
+For a fixed $t>0$, a $\PD(1)$ partition has no part exactly equal to $t$,
+and the threshold-count map is continuous at every such partition in
+$\ell^1$.  Moreover, $N_{n,t}\le1/a$ for $t\in[a,b]$.
+Use Theorem~\ref{prop:micro-macro} and uniform integrability of the short-cycle
+factor to obtain pointwise convergence in \eqref{eq:threshold-moments}.
+
+For fixed short-cycle factorial factor $W_n\ge0$, the functions
+$g_n(t)=\E[W_n(N_{n,t})_k]$ are nonincreasing.  Their limit is continuous
+on $[a,b]$: the PD factorial moment measure, recalled in
+Lemma~\ref{lem:PD-factorial-measure}, gives continuity by dominated convergence
+on $[a,1]^k$.  A finite-grid monotonicity sandwich therefore upgrades
+pointwise to uniform convergence.  Expand the factorial moments of the
+sum by the binomial identity for falling factorials.  The same conclusion
+holds simultaneously for any fixed finite set of $B$'s.
+\end{proof}
+
+\section{Annular passive-Poisson peeling}\label{sec:peeling}
+
+For integers $b<U$, define
+\[
+ D_n(b,U)=\sum_{r\le b}C_{n,r}+\sum_{r>U}C_{n,r},\qquad
+ H(a,b)=\sum_{a<r\le b}\frac1r.
+\]
+All moment orders in this section are fixed before the cutoffs and error
+exponents are chosen.  The quantity $e_{n,r}=\E|S_{n,r}/n-1|$ is an
+absolute switching-intensity error.  A bound only on
+$|\E(S_{n,r}/n)-1|$, sufficient for scalar real-fugacity growth, would not
+control the passive-mark test functions used here.
+
+\subsection{Marked Stein comparison and annular errors}
+
+\begin{lemma}[Passive-mark Stein transfer]\label{lem:passive-stein}
+Let $X$ be a nonnegative integer-valued variable with finite mean, let $D$
+be a countable-valued mark, and let $\lambda\ge0$.  Suppose that for every
+bounded $g$ with $\|g\|_\infty\le1$,
+\[
+ \left|\E[Xg(X-1,D)]-\lambda\E g(X,D)\right|\le\eta,
+\]
+where the term with $X=0$ is defined as zero.  Then
+\[
+ \TV\bigl(\cL(X,D),\Pois(\lambda)\otimes\cL(D)\bigr)\le\eta.
+\]
+\end{lemma}
+\begin{proof}
+Use the immigration--death generator on the active count while keeping the
+mark fixed.  For an event $B$, center its indicator by its Poisson average
+at the same mark.  The semigroup solution $h_B$ has
+$|h_B(x+1,d)-h_B(x,d)|\le1$: couple chains differing by one initial
+particle, which survives until time $t$ with probability $e^{-t}$, and
+integrate over $t\ge0$.  Testing the assumed Campbell discrepancy with
+$g(x,d)=h_B(x+1,d)-h_B(x,d)$ bounds the difference of event probabilities
+by $\eta$.  The centering integrates to
+$(\Pois(\lambda)\otimes\cL(D))(B)$, so the mark retains its original
+marginal.  This is the marked Poisson Stein argument; see
+\cite{BarbourHolstJanson1992,LongTotalCycles2026}.
+\end{proof}
+
+\Needspace{22\baselineskip}
+\begin{theorem}[Joint annular peeling]\label{lem:annular}
+Assume \eqref{eq:comparable}.  Let positive integer cutoffs satisfy
+\[
+ b'<b<U<U'<n/4,\qquad U+b<n/2.
+\]
+Put
+\[
+ J^- =\sum_{b'<r\le b}C_{n,r},\qquad
+ J^+ =\sum_{U<r\le U'}C_{n,r},\qquad
+ \Delta(I)=\sum_{r\in I}a_{n,r}e_{n,r}.
+\]
+Let
+\[
+ \lambda^- =\sum_{b'<r\le b}a_{n,r},\qquad
+ \lambda^+ =\sum_{U<r\le U'}a_{n,r}.
+\]
+There are independent $Z^-\sim\Pois(\lambda^-)$,
+$Z^+\sim\Pois(\lambda^+)$ and
+$\widetilde D_n(b',U')\overset d=D_n(b',U')$ such that
+\begin{equation}\label{eq:annular-error}
+\begin{split}
+ &\TV\bigl(\cL(J^-,J^+,D_n(b',U')),
+       \cL(Z^-,Z^+,\widetilde D_n(b',U'))\bigr)\\
+ &\quad\le C_\varkappa\left\{
+ \Delta((b',b])+\Delta((U,U'])
+ +H(b',b)(b/n)^\beta+H(U,U')(U'/n)^\beta\right\}.
+\end{split}
+\end{equation}
+\end{theorem}
+\begin{proof}
+For the lower annulus use the countable-valued vector
+$M^-=(J^+,D_n(b',U'))$ as passive mark.
+A split at distance $r\in(b',b]$ increases $J^-$ by one and leaves
+$M^-$ unchanged whenever its source-cycle length is outside
+\[
+ E_r^-=(r,r+b]\cup(U,U+r]\cup(U',U'+r].
+\]
+Indeed, outside the first interval both the source and residual cycles are
+longer than $b$; the other two exclusions keep them on the same sides
+of both $U$ and $U'$.  The $U'$ exclusion is needed because we retain
+the upper-annulus count and the final remainder separately.
+The set $E_r^-$ has at most $b+2r\le3b$ integer points and is contained in
+$\{1,\ldots,\lfloor n/2\rfloor\}$: its largest possible endpoint is
+$U'+r<U'+b<2U'<n/2$.
+For instance, $b'=2,b=5,U=12,U'=20,r=3$ and source length $22$
+show why the last interval cannot be omitted: the split creates the
+upper-annulus cycle of length $19$ and removes a long retained cycle.
+This witness is admissible for any $n>80$.
+
+Apply \eqref{eq:master-switch} with the test
+$g(J^-(\pi)-1,M^-(\pi))$ on permutations with $J^-(\pi)>0$, and zero
+otherwise.  The discrepancy from the unchanged test is at most two on
+exceptional splits.  Thus, for $\|g\|_\infty\le1$,
+\begin{align*}
+ &\left|\E[C_{n,r}g(J^--1,M^-)]-a_{n,r}\E g(J^-,M^-)\right|\\
+ &\quad\le a_{n,r}e_{n,r}
+ +\frac{2a_{n,r}}n
+    \E\sum_{\substack{i:L_n(i)>r\\L_n(i)\in E_r^-}}
+                  R_{i,\sigma_n^r(i)}\\
+ &\quad\le a_{n,r}e_{n,r}+C_\varkappa a_{n,r}(b/n)^\beta,
+\end{align*}
+where the last step is Lemma~\ref{lem:root-mass}.
+Summing over $r$ and applying Lemma~\ref{lem:passive-stein} gives a joint
+approximation of $(J^-,M^-)$ by
+$\Pois(\lambda^-)\otimes\cL(M^-)$ with the first and third errors in
+\eqref{eq:annular-error}; here $a_{n,r}\le2/r$.
+
+Next apply the same argument to $J^+$ with passive mark $D_n(b',U')$.
+For $r\in(U,U']$, the split preserves this mark and adds one to $J^+$
+whenever its source length exceeds $r+U'$.
+The sufficient exceptional set $(r,r+U']$ has at most $U'$ points and lies
+below $n/2$, since $r\le U'$ and $2U'<n/2$.  It is deliberately
+conservative: no assertion is needed about splits inside that set.  The same argument gives the second and fourth
+errors, with parameter $\lambda^+$.  Tensoring this second approximation
+with the independent $Z^-$ and applying the triangle inequality proves
+\eqref{eq:annular-error}.  Applying the summation map also gives the
+corresponding comparison of $D_n(b,U)$ with
+$Z^-+Z^++\widetilde D_n(b',U')$.
+\end{proof}
+
+\subsection{Moment bounds and factorial-cumulant transfer}
+
+\begin{lemma}[Harmonic moment bound]\label{lem:harmonic-moments}
+Fix $k\ge1$ and set $W=\lfloor n/(2k)\rfloor$.  For any set $I$ of
+cycle lengths, let $V_I=\sum_{r\in I}C_{n,r}$ and
+$h_I=\sum_{r\in I,\ r\le W}1/r$.  Then, for all sufficiently large $n$,
+\begin{equation}\label{eq:harmonic-moments}
+ \E V_I^k\le C_{\varkappa,k}(1+h_I)^k.
+\end{equation}
+In particular, $\E K_n^k\le C_{\varkappa,k}(1+\log n)^k$.
+\end{lemma}
+\begin{proof}
+Let $V=\sum_{r\in I,\ r\le W}C_{n,r}$.  For $1\le j\le k$, expansion
+into ordered distinct-cycle tuples and Input theorem~\ref{input:factorial-dom} give
+\[
+ \E(V)_j\le C_{\varkappa,j}h_I^j,
+\]
+because each tuple has total length at most $jW\le n/2$.
+The expansion of $V^k$ in falling factorials proves the corresponding
+ordinary-moment bound.  There are fewer than $2k$ cycles longer than $W$,
+since each such cycle has length greater than $n/(2k)$.  Adding this
+bounded count proves \eqref{eq:harmonic-moments}.
+\end{proof}
+
+\begin{lemma}[Factorial-cumulant transfer]\label{lem:cumulant-transfer}
+Fix $q\ge2$.  If $X,Y$ are nonnegative integer-valued variables with
+\[
+ \TV(\cL(X),\cL(Y))\le\eta,\qquad
+ \E X^{2q}+\E Y^{2q}\le C_q H^{2q},\qquad H\ge1,
+\]
+then
+\begin{equation}\label{eq:cumulant-transfer}
+ \left|\kappa_q^{\mathrm F}(X)-\kappa_q^{\mathrm F}(Y)\right|
+ \le C_q'H^q\eta^{1/2}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Under a maximal coupling, $\Pp(X\ne Y)\le\eta$.  For $1\le j\le q$,
+Cauchy--Schwarz and the $2q$-th-moment bound imply
+\[
+ |\E(X)_j-\E(Y)_j|
+ \le\E[(X^j+Y^j)\one_{\{X\ne Y\}}]
+ \le C_{q,j}H^j\eta^{1/2}.
+\]
+Writing $\cP_q$ for the set of partitions of $\{1,\ldots,q\}$,
+the factorial cumulant is the fixed polynomial
+\[
+ \kappa_q^{\mathrm F}(X)
+ =\sum_{\pi\in\cP_q}
+ (-1)^{|\pi|-1}(|\pi|-1)!
+ \prod_{B\in\pi}\E(X)_{|B|}.
+\]
+Telescoping each product and using $\sum_{B\in\pi}|B|=q$ proves the claim.
+The constants depend on the fixed order; no uniformity in $q$ is asserted.
+\end{proof}
+
+\subsection{Uniform iterated-logarithm estimates}
+
+Define successive logarithms while they are positive by
+\[
+ \ell_1=\log n,\qquad \ell_{j+1}=\log\ell_j,
+\]
+and, for a fixed exponent $A$,
+\[
+ b_j=\lceil\ell_j^3\rceil,\qquad
+ U_j=\lfloor n/\ell_j^A\rfloor,\qquad D_j=D_n(b_j,U_j).
+\]
+
+\begin{lemma}[Iterated-log peeling estimate]\label{lem:iterated-peel}
+Fix $q\ge2$ and $Q>2q+4$.  One can choose $A$ sufficiently large so that,
+for some $H_0$ and all sufficiently large $n$, the following assertions
+hold simultaneously at every stage with $x:=\ell_{j+1}\ge H_0$:
+\begin{align}
+ &\TV\bigl(\cL(D_j),
+    \cL(Z_j^-+Z_j^++\widetilde D_{j+1})\bigr)
+      \le C_{\varkappa,Q,A}x^{-Q},
+ \label{eq:iterated-tv}\\
+ &\E D_j^{2q}
+  +\E(Z_j^-+Z_j^++\widetilde D_{j+1})^{2q}
+      \le C_{\varkappa,q,A}(1+x)^{2q},
+ \label{eq:iterated-moments}
+\end{align}
+where $Z_j^-,Z_j^+,\widetilde D_{j+1}$ are independent,
+$\widetilde D_{j+1}\overset d=D_{j+1}$, and the Poisson parameters are
+\[
+ \lambda_j^- =\sum_{b_{j+1}<r\le b_j}a_{n,r},\qquad
+ \lambda_j^+ =\sum_{U_j<r\le U_{j+1}}a_{n,r}.
+\]
+Consequently,
+\begin{equation}\label{eq:cumulant-step}
+ \left|\kappa_q^{\mathrm F}(D_j)-\kappa_q^{\mathrm F}(D_{j+1})\right|
+ \le C_{\varkappa,q,Q,A}x^{q-Q/2}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Since $\ell_j=e^x$, harmonic summation gives
+\begin{align}
+ H(b_{j+1},b_j)&=3(x-\log x)+O(1),\notag\\
+ H(U_j,U_{j+1})&=A(x-\log x)+O(1).
+ \label{eq:annular-harmonic-budget}
+\end{align}
+In particular, the harmonic mass of either annulus is $O_A(x)$.
+For large $H_0$ and then large $n$, all cutoff inequalities in
+Theorem~\ref{lem:annular} hold uniformly.  Indeed,
+$b_j\le2(\log n)^3$, $U_j\ge n/(2(\log n)^A)$, and
+$U_{j+1}/n\le x^{-A}$.
+
+Choose a fixed $D>0$ and terminal depth $d=\lceil D\log x\rceil$.
+On the lower annulus, $r_-\ge b_{j+1}\ge x^3$; on the upper annulus,
+$r_-\ge U_j$.  Thus $d\le r_-/3$ once $H_0$ is large.
+Also $d=O_D(\log n)$ and $hM\ge c n^{1/4}$, so the numerical residual
+margin condition in Input theorem~\ref{input:endpoint} holds uniformly.
+
+For clarity, retain the finite-$n$ error in the calculation.  The reset
+term is at most $Cx^{-cD}$.  For the lower annulus, its largest relative
+length is $O((\log n)^3/n)$; hence all nonreset terms in
+\eqref{eq:endpoint-bracket}, after applying
+Lemma~\ref{lem:finite-intensity}, are bounded by
+$n^{-c_1}(\log n)^{C_1}$ for some $c_1>0$.
+For the upper annulus, its largest relative length is $O(x^{-A})$.
+The terms $dh,d\rho,\rho,\delta,\delta^{1/2}L_\delta$ are bounded by
+\[
+ C_{\varkappa,A,D}(1+\log x)^C x^{-a_0 A}
+\]
+for some $a_0>0$ after the same fixed positive power is applied.
+The terms $(d^2+d\log n)/M$ and the environment failures again contribute
+at most $n^{-c_1}(\log n)^{C_1}$, after changing constants.
+The selected-factor exceptional terms are bounded using
+$(b_j/n)^\beta$ and $x^{-A\beta}$.
+
+Thus Theorem~\ref{lem:annular} and \eqref{eq:annular-harmonic-budget} give
+\begin{equation}\label{eq:explicit-peel-budget}
+\begin{split}
+ \text{error in \eqref{eq:iterated-tv}}
+ \le C_{\varkappa,A,D}x\bigl[&x^{-c_2D}+(1+\log x)^{C_2}x^{-a_0A}
+       +x^{-A\beta}\bigr]\\
+ &+C_{\varkappa,A,D}x\,n^{-c_1}(\log n)^{C_1}.
+\end{split}
+\end{equation}
+Choose $D$ with $c_2D>Q+3$, and then $A$ with
+$\min(a_0,\beta)A>Q+3$.  Since every stage has
+$x\le\log\log n$, the last term is $o(x^{-Q})$ uniformly.
+The spare powers absorb the logarithmic factors.  This proves
+\eqref{eq:iterated-tv}; constants are independent of the number of stages.
+
+For the moments use Lemma~\ref{lem:harmonic-moments} with $k=2q$ and
+$W=\lfloor n/(4q)\rfloor$.  For the lengths contributing to $D_j$,
+\[
+ \sum_{r\le b_j}\frac1r+
+ \sum_{U_j<r\le W}\frac1r
+ \le(A+3)x+O_q(1).
+\]
+The same bound holds for $D_{j+1}$, since its corresponding scale is
+$\log x\le x$.  Finally, by $a_{n,r}\le2/r$ and
+\eqref{eq:annular-harmonic-budget},
+$\lambda_j^-+\lambda_j^+=O_A(x)$.
+Fixed Poisson moments are polynomials in the mean, which proves
+\eqref{eq:iterated-moments}.  Apply Lemma~\ref{lem:cumulant-transfer} and
+additivity under independence.  Both Poisson factorial cumulants vanish
+for $q\ge2$, giving \eqref{eq:cumulant-step}.
+\end{proof}
+
+
+\begin{corollary}[Accumulated peeling error]\label{cor:accumulated}
+Fix the parameters of Lemma~\ref{lem:iterated-peel} and $H\ge H_0$.
+For all sufficiently large $n$, let $J=J(n,H)$ be the last index with
+$\ell_J\ge H$.  There are independent Poisson variables with means
+$\lambda_j^-,\lambda_j^+$, $1\le j<J$, independent of a variable
+$\widetilde D_J\overset d=D_J$, such that
+\begin{equation}\label{eq:accumulated-tv}
+ \TV\left(\cL(D_1),
+ \cL\left(\sum_{j<J}(Z_j^-+Z_j^+)+\widetilde D_J\right)\right)
+ \le C_{\varkappa,Q,A}H^{-Q}.
+\end{equation}
+For the fixed factorial-cumulant order $q$ of that lemma,
+\begin{equation}\label{eq:accumulated-cumulant}
+ |\kappa_q^{\mathrm F}(D_1)-\kappa_q^{\mathrm F}(D_J)|
+ \le C_{\varkappa,q,Q,A}H^{q-Q/2}.
+\end{equation}
+\end{corollary}
+\begin{proof}
+Iterate the scalar consequence of Theorem~\ref{lem:annular}; convolution
+with a fixed probability law contracts total variation.  At every step
+use independent copies in the comparison law.  The total error is bounded
+by $C\sum_{j<J}\ell_{j+1}^{-Q}$.  Read this finite sequence backward.
+Successive values are related by $x\mapsto e^x$ and, for $H_0$ large,
+are at least twice their predecessors.  Thus the sum is at most
+$CH^{-Q}$, with a constant independent of $J$.  The same argument applied
+to \eqref{eq:cumulant-step}, using $q-Q/2<0$, proves the second bound.
+\end{proof}
+
+\begin{remark}[Meaning of the iterated comparison]
+Equation~\eqref{eq:accumulated-tv} is a comparison of the scalar retained
+count with a convolution law.  It does not assert simultaneous independence
+of all actual annular counts at all stages.  The one-stage vector estimate
+in Theorem~\ref{lem:annular} is stronger than its scalar consequence, but
+iteration with additional retained coordinates would require preserving
+those coordinates in every switching test.  Neither the number of
+factorial-cumulant orders nor the number of arbitrary passive coordinates
+is allowed to grow under the fixed-order statements above.
+\end{remark}
+\section{Scope and further questions}\label{sec:open}
+
+The independence theorem concerns every fixed short-cycle vector and the
+whole ranked partition; the quantitative peeling estimates concern
+unweighted comparable-rate arrays.  The explicit cutoff error in
+Theorem~\ref{thm:PD-analytic} belongs to the limiting $\PD(1)$ model.
+It is not a convergence rate for $\mathbf P_n$, nor does it justify
+interchanging a moving microscopic cutoff with $n\to\infty$.
+
+A natural extension is to allow the number of observed short-cycle lengths
+or the size of the prescribed deletion to grow.  This would require
+quantitative microscopic moment bounds and a residual-history estimate
+uniform in that growing size.  Another question is a joint total-cycle
+and marked short-cycle generating-function limit under a fixed real or
+complex cycle tilt.  The scalar result of~\cite{LongModPoisson2026} and
+the untilted joint limit here do not, by themselves, supply such a theorem:
+one must also control the tilted dependence and unbounded generating tests.
+
+The positive-profile assumption in the independence theorem excludes
+endpoint-singular families.  Extending these joint statements to such
+families requires a separate boundary-process analysis; no transfer is
+asserted from comparable rates alone when the rate ratio is unbounded.
+
+\paragraph{Dependency boundary.}
+The independence theorem uses the microscopic mixed factorial moments and
+the conditional regular-history interfaces of the macroscopic paper.
+The annular and iterated comparisons additionally use the exact marked
+switch, finite two-root endpoint interface, and the fixed-order factorial
+domination stated in Section~\ref{sec:inputs}.  Their quantitative scope is
+recorded there.  The $\PD(1)$ cutoff argument uses the standard size-biased
+representation and the cited Dickman density.  The scalar mean-shift,
+Fredholm, and total-cycle cumulant arguments from the earlier manuscript
+are not dependencies and are not reproduced.  The present draft has been
+internally checked against these interfaces; no claim of independent
+external refereeing or formal verification is made.
+
+
+\appendix
+\section{An analytic cutoff law for the limiting PD partition}\label{sec:PD-cumulants}
+
+Let $\mathbf P=(P_1,P_2,\ldots)\sim\PD(1)$ and
+$N_\eps=\#\{j:P_j>\eps\}$.
+
+This appendix is independent of the Luce conditioning and switching
+arguments.  Its error is a function of the cutoff in the limiting
+partition, not of the finite permutation size.
+
+\begin{theorem}[Analytic cutoff law for $\PD(1)$]\label{thm:PD-analytic}
+Let $\mathbf P\sim\PD(1)$ and
+$N_\varepsilon=\#\{j:P_j>\varepsilon\}$.
+For every $0<\varrho<1/2$, uniformly for complex $|w|\le\varrho$,
+\begin{equation}\label{eq:PD-analytic}
+ \varepsilon^w\E(1+w)^{N_\varepsilon}
+ =\frac{e^{-\gamma w}}{\Gamma(1+w)}
+   +O_\varrho(\varepsilon^{1-2\varrho})
+ \qquad(\varepsilon\downarrow0).
+\end{equation}
+Here $\varepsilon^w=\exp(w\log\varepsilon)$ uses the real logarithm,
+and $\gamma$ is Euler's constant.
+\end{theorem}
+
+\begin{lemma}[Factorial moment measures of $\PD(1)$]
+\label{lem:PD-factorial-measure}
+For every $k\ge1$, the ordered $k$-point factorial moment measure of the
+parts is
+\begin{equation}\label{eq:PD-factorial-measure}
+ \one_{\{x_1+\cdots+x_k<1\}}
+ \frac{\dd x_1\cdots\dd x_k}{x_1\cdots x_k}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Successive size-biased sampling of the parts gives the $\GEM(1)$ sequence
+$V_j=U_j\prod_{i<j}(1-U_i)$ with independent uniform $U_i$; see
+\cite[Chapter~3]{Pitman2006}.  If $s_j=x_1+\cdots+x_j$ and $s_0=0$, the
+joint density of its first $k$ terms is
+$\prod_{j=1}^k(1-s_{j-1})^{-1}$ on $s_k<1$.
+Conditional on a mass partition, an ordered tuple of distinct parts
+$(x_1,\ldots,x_k)$ is selected with probability
+$\prod_{j=1}^k x_j/(1-s_{j-1})$.
+Dividing the former density by this sampling weight gives
+\eqref{eq:PD-factorial-measure}.  In particular,
+$\E N_\eps=\log(1/\eps)$ and there is almost surely no part at a fixed
+positive threshold.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:PD-analytic}]
+Put $t=\log(1/\eps)$ and write
+\[
+ \Phi(t,w)=\E(1+w)^{N_{e^{-t}}},\qquad
+ \Psi(t,w)=e^{-wt}\Phi(t,w).
+\]
+For each finite $t$, $\Phi(t,\cdot)$ is a polynomial, since the threshold
+count is bounded.  By Lemma~\ref{lem:PD-factorial-measure},
+\begin{equation}\label{eq:PD-pgf-series}
+ \Phi(t,w)=\sum_{k\ge0}\frac{w^k}{k!}
+ \int_{\substack{x_i>e^{-t}\\x_1+\cdots+x_k<1}}
+ \prod_{i=1}^k\frac{\dd x_i}{x_i}.
+\end{equation}
+The $k$-fold integral is at most $t^k$, so
+$|\Phi(t,w)|\le e^{|w|t}$.
+
+Differentiate the moving lower boundaries in
+\eqref{eq:PD-pgf-series}.  Each boundary puts one variable equal to
+$e^{-t}$; rescale the remaining variables by $1-e^{-t}$.
+For $t\ge\log2$, this gives
+\begin{equation}\label{eq:PD-cutoff-recurrence}
+ \partial_t\Phi(t,w)=w\Phi(\log(e^t-1),w).
+\end{equation}
+The identity holds almost everywhere, and $\Phi$ is locally absolutely
+continuous in $t$, which suffices below.  For $0\le t<\log2$, at most one
+part exceeds $e^{-t}$, whence $\Phi(t,w)=1+wt$.
+Thus for all $t\ge0$,
+\begin{equation}\label{eq:PD-derivative-bound}
+ |\partial_t\Phi(t,w)|\le |w|e^{|w|t}
+\end{equation}
+almost everywhere.
+
+For $t\ge\log2$, set $d(t)=-\log(1-e^{-t})\le2e^{-t}$.  Then
+$\log(e^t-1)=t-d(t)$.  By
+\eqref{eq:PD-cutoff-recurrence}--\eqref{eq:PD-derivative-bound},
+\begin{align}
+ \partial_t\Psi(t,w)
+ &=we^{-wt}\{\Phi(t-d(t),w)-\Phi(t,w)\},\notag\\
+ |\partial_t\Psi(t,w)|
+ &\le |w|^2d(t)e^{(|w|-\Re w)t}
+ \le2\varrho^2e^{-(1-2\varrho)t},\qquad |w|\le\varrho<1/2.
+ \label{eq:PD-integrable-derivative}
+\end{align}
+This integrable bound proves locally uniform convergence of
+$\Psi(t,\cdot)$ on $|w|<1/2$, with error $O_\varrho(e^{-(1-2\varrho)t})$.
+The limiting function is analytic.
+
+It remains to identify that function.  For real $w>0$, let
+$\mathcal N_{\eps,w}$ be a Poisson process on $[\eps,1]$ with intensity
+$w\dd x/x$, and let $S_{\eps,w}$ be the sum of its points.
+The Poisson expansion in \eqref{eq:PD-pgf-series} gives
+\begin{equation}\label{eq:PD-dickman-probability}
+ \eps^w\E(1+w)^{N_\eps}=\Pp(S_{\eps,w}<1).
+\end{equation}
+As $\eps\downarrow0$, the sums increase to the time-$w$ Dickman
+subordinator, with L\'evy measure $\one_{(0,1)}(x)\dd x/x$.
+Its density on $(0,1]$ is
+\[
+ \frac{e^{-\gamma w}}{\Gamma(w)}x^{w-1};
+\]
+see \cite[Theorem~1.1]{CaravennaSunZygouras2019}.
+There is no atom at one, and integration gives
+$e^{-\gamma w}/\Gamma(1+w)$ for the limit of
+\eqref{eq:PD-dickman-probability}.
+The identity theorem identifies the analytic limit on $|w|<1/2$.
+Integrating \eqref{eq:PD-integrable-derivative} proves the stated rate.
+\end{proof}
+
+\begin{proposition}[Small-threshold PD cumulants]\label{prop:PD-cumulants}
+For every fixed $q\ge2$,
+\begin{equation}\label{eq:PD-cumulant-limit}
+ \kappa_q^{\mathrm F}(N_\eps)
+ \longrightarrow(-1)^{q+1}(q-1)!\zeta(q).
+\end{equation}
+More precisely, for every fixed $0<\varrho<1/2$ the error is
+$O_{q,\varrho}(\eps^{1-2\varrho})$.
+For $q=2$,
+\begin{equation}\label{eq:PD-var-exact}
+ \kappa_2^{\mathrm F}(N_\eps)
+ =-\int_{\substack{\eps<x,y<1\\x+y>1}}\frac{\dd x\dd y}{xy},
+ \qquad
+ 0\le\zeta(2)+\kappa_2^{\mathrm F}(N_\eps)
+ \le2\log\frac1{1-\eps}.
+\end{equation}
+\end{proposition}
+\begin{proof}
+The limiting function in \eqref{eq:PD-analytic} is nonzero on
+$|w|\le\varrho<1/2$.  For sufficiently small $\eps$, take logarithms with
+value zero at $w=0$ and use Cauchy's formula.  This justifies
+coefficientwise differentiation, with the asserted error, of
+\[
+ \log\E(1+w)^{N_\eps}
+ =w\log(1/\eps)-\gamma w-\log\Gamma(1+w)
+  +O_\varrho(\eps^{1-2\varrho}).
+\]
+Now
+\[
+ \log\Gamma(1+w)
+ =-\gamma w+\sum_{q\ge2}\frac{(-1)^q\zeta(q)}q w^q.
+\]
+For $q=2$, the one- and two-point factorial measures give the integral in
+\eqref{eq:PD-var-exact} directly.  The integral over the full region
+$0<x,y<1$, $x+y>1$, equals $\zeta(2)$.
+The omitted part is at most
+\[
+ 2\int_0^\eps\frac{-\log(1-x)}x\dd x
+ \le2\int_0^\eps\frac{\dd x}{1-x},
+\]
+which proves the final bound.
+\end{proof}
+
+
+\begin{thebibliography}{99}
+\small\raggedright
+\setlength{\itemsep}{3pt}
+
+\bibitem{BarbourHolstJanson1992}
+A.~D.~Barbour, L.~Holst, and S.~Janson,
+\emph{Poisson Approximation},
+Oxford Studies in Probability, vol.~2, Clarendon Press, Oxford, 1992.
+\url{https://doi.org/10.1093/oso/9780198522355.001.0001}.
+
+\bibitem{BorgaChatterjeeDiaconis2025}
+J.~Borga, S.~Chatterjee, and P.~Diaconis,
+\emph{Permuton and local limits for the Luce model},
+arXiv:2509.07729, version~3, 29 September 2026.
+\url{https://arxiv.org/abs/2509.07729v3}.
+
+\bibitem{CaravennaSunZygouras2019}
+F.~Caravenna, R.~Sun, and N.~Zygouras,
+The Dickman subordinator, renewal theorems, and disordered systems,
+\emph{Electron. J. Probab.} \textbf{24} (2019), paper no.~101, 1--40.
+\url{https://doi.org/10.1214/19-EJP353}.
+
+\bibitem{ChatterjeeDiaconisKim2023}
+S.~Chatterjee, P.~Diaconis, and G.~B.~Kim,
+Enumerative theory for the Tsetlin library,
+\emph{J. Algebra} \textbf{655} (2024), 139--162.
+\url{https://doi.org/10.1016/j.jalgebra.2023.08.009}.
+
+\Needspace{5\baselineskip}
+\bibitem{LongMesoscopic2026}
+C.~D.~Long,
+\emph{Mesoscopic cycles of comparable-rate Luce permutations: a switching proof of Conjecture 13.1},
+research manuscript, 2026.
+Repository \texttt{long-mathematics/luce-tsetlin-permutations},
+revision \texttt{38f195dc5b30}.
+\path{papers/mesoscopic-switching/mesoscopic-luce-cycles.tex}.
+\href{https://github.com/long-mathematics/luce-tsetlin-permutations/blob/38f195dc5b30812ebbf084764016e857a68b9a1c/papers/mesoscopic-switching/mesoscopic-luce-cycles.tex}{Pinned source}.
+
+\bibitem{LongMicroscopic2026}
+C.~D.~Long,
+\emph{Microscopic cycles and sparse entries for regular Luce profiles},
+research manuscript, 2026.
+Repository \texttt{long-mathematics/luce-tsetlin-permutations},
+revision \texttt{38f195dc5b30}.
+\path{papers/regular-profile-cycles/regular-profile-cycles.tex}.
+\href{https://github.com/long-mathematics/luce-tsetlin-permutations/blob/38f195dc5b30812ebbf084764016e857a68b9a1c/papers/regular-profile-cycles/regular-profile-cycles.tex}{Pinned source}.
+
+\bibitem{LongOrderEdgeworth2026}
+C.~D.~Long,
+\emph{A sharp Berry--Esseen theorem and first Edgeworth expansion for the Erd\H{o}s--Tur\'an law of comparable-rate Luce permutations},
+research manuscript, 2026.
+Repository \texttt{long-mathematics/luce-tsetlin-permutations},
+revision \texttt{38f195dc5b30}.
+\path{papers/sharp-order-edgeworth/luce-edgeworth.tex}.
+\href{https://github.com/long-mathematics/luce-tsetlin-permutations/blob/38f195dc5b30812ebbf084764016e857a68b9a1c/papers/sharp-order-edgeworth/luce-edgeworth.tex}{Pinned source}.
+
+\bibitem{LongPD2026}
+C.~D.~Long,
+\emph{Poisson--Dirichlet universality for Luce permutations},
+research manuscript, 2026.
+Repository \texttt{long-mathematics/luce-tsetlin-permutations},
+revision \texttt{38f195dc5b30}.
+\path{papers/macroscopic-pd/poisson-dirichlet-luce.tex}.
+\href{https://github.com/long-mathematics/luce-tsetlin-permutations/blob/38f195dc5b30812ebbf084764016e857a68b9a1c/papers/macroscopic-pd/poisson-dirichlet-luce.tex}{Pinned source}.
+
+\bibitem{LongTotalCycles2026}
+C.~D.~Long,
+\emph{Poisson approximation and lattice Edgeworth expansions for total Luce cycles},
+research manuscript, 2026.
+Repository \texttt{long-mathematics/luce-tsetlin-permutations},
+revision \texttt{38f195dc5b30}.
+\path{papers/total-cycle-edgeworth/total-cycle-edgeworth.tex}.
+\href{https://github.com/long-mathematics/luce-tsetlin-permutations/blob/38f195dc5b30812ebbf084764016e857a68b9a1c/papers/total-cycle-edgeworth/total-cycle-edgeworth.tex}{Pinned source}.
+
+\bibitem{LongModPoisson2026}
+C.~D.~Long,
+\emph{An exact uniform component and analytic mod-Poisson convergence for Luce permutations},
+research manuscript, 2026.
+Repository \texttt{long-mathematics/luce-tsetlin-permutations},
+revision \texttt{38f195dc5b30}.
+\path{papers/mod-poisson/luce_mod_poisson.tex}.
+\href{https://github.com/long-mathematics/luce-tsetlin-permutations/blob/38f195dc5b30812ebbf084764016e857a68b9a1c/papers/mod-poisson/luce_mod_poisson.tex}{Pinned source}.
+
+\bibitem{Luce1959}
+R.~D.~Luce, \emph{Individual Choice Behavior: A Theoretical Analysis},
+Wiley, New York, 1959.
+
+\bibitem{Pitman2006}
+J.~Pitman, \emph{Combinatorial Stochastic Processes},
+Lecture Notes in Mathematics, vol.~1875, Springer, Berlin, 2006.
+\url{https://doi.org/10.1007/b11601500}.
+
+\end{thebibliography}
+\end{document}
