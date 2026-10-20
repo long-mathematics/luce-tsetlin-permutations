@@ -242,6 +242,33 @@
       "sha256": "283cf5cb627a05e3c3f5e37293ea764580d9c5ca65d0cd36a88bf858015016ee",
       "origin": "user-provided conversation proof/audit bundle, 11 October 2026",
       "original_filename": "edgeworth/source-manifest.json"
+    },
+    {
+      "path": "archive/macroscopic-pd-comparable/poisson-dirichlet-luce.tex",
+      "sha256": "0fdde5028985c4b639c7679e4f59256fb23e4983119a22bf60ea9d55bfbccdaa",
+      "origin": "Superseded comparable-rate macroscopic PD manuscript and extraction map",
+      "source_repository": "long-mathematics/luce-tsetlin-permutations",
+      "source_commit": "40afaebb02e176b5262650edb0ad23ac7e986699",
+      "source_path": "papers/macroscopic-pd/poisson-dirichlet-luce.tex",
+      "source_url": "https://github.com/long-mathematics/luce-tsetlin-permutations/blob/40afaebb02e176b5262650edb0ad23ac7e986699/papers/macroscopic-pd/poisson-dirichlet-luce.tex"
+    },
+    {
+      "path": "archive/macroscopic-pd-comparable/poisson-dirichlet-luce.pdf",
+      "sha256": "1e1da609aeb2abcb07a264c585165a5c0bd248d4bffb49ae0fab4a44eaa8c03e",
+      "origin": "Superseded comparable-rate macroscopic PD manuscript and extraction map",
+      "source_repository": "long-mathematics/luce-tsetlin-permutations",
+      "source_commit": "40afaebb02e176b5262650edb0ad23ac7e986699",
+      "source_path": "output/pdf/poisson-dirichlet-luce.pdf",
+      "source_url": "https://github.com/long-mathematics/luce-tsetlin-permutations/blob/40afaebb02e176b5262650edb0ad23ac7e986699/output/pdf/poisson-dirichlet-luce.pdf"
+    },
+    {
+      "path": "archive/macroscopic-pd-comparable/EXTRACTION_MAP.md",
+      "sha256": "15593a1473bb28f1b4f69b806924fbbf4c616ac07795d7a2b50346df6a551533",
+      "origin": "Superseded comparable-rate macroscopic PD manuscript and extraction map",
+      "source_repository": "long-mathematics/luce-tsetlin-permutations",
+      "source_commit": "40afaebb02e176b5262650edb0ad23ac7e986699",
+      "source_path": "papers/macroscopic-pd/EXTRACTION_MAP.md",
+      "source_url": "https://github.com/long-mathematics/luce-tsetlin-permutations/blob/40afaebb02e176b5262650edb0ad23ac7e986699/papers/macroscopic-pd/EXTRACTION_MAP.md"
     }
   ]
 }

@@ -136,9 +136,9 @@
     },
     {
       "id": "macroscopic-pd",
-      "title": "Poisson–Dirichlet Universality for Luce Permutations",
-      "source": "papers/macroscopic-pd/poisson-dirichlet-luce.tex",
-      "pdf": "output/pdf/poisson-dirichlet-luce.pdf",
+      "title": "Spectral Poisson–Dirichlet Universality for Luce Permutations under Arbitrary Rate Arrangements",
+      "source": "papers/macroscopic-pd/spectral-poisson-dirichlet-luce.tex",
+      "pdf": "output/pdf/spectral-poisson-dirichlet-luce.pdf",
       "status": "current-research",
       "dependencies": []
     },
