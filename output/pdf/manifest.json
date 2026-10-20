@@ -120,6 +120,14 @@
       "pdf": "output/pdf/poisson-dirichlet-luce.pdf",
       "pdf_sha256": "1e1da609aeb2abcb07a264c585165a5c0bd248d4bffb49ae0fab4a44eaa8c03e",
       "pages": 21
+    },
+    {
+      "id": "stratified-hammersley-lis",
+      "source": "papers/stratified-hammersley-lis/stratified-hammersley-laws-luce.tex",
+      "source_sha256": "7b8d39d8deb5f10bfa9e491854718f9eaae647e55dc739c1802418f890f5ccdd",
+      "pdf": "output/pdf/stratified-hammersley-laws-luce.pdf",
+      "pdf_sha256": "f9b9e8664de6a2ab46e2378dea3f835561c9f2d2727399f6028f5a049e6ca149",
+      "pages": 31
     }
   ]
 }

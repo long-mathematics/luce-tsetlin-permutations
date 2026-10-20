@@ -32,6 +32,8 @@ The rows are in exactly the `papers.json` order.
 | `regular-profile-cycles` | None |
 | `macroscopic-pd` | None |
 
+| `stratified-hammersley-lis` | None |
+
 The graph is acyclic. Repository tests reject unknown document IDs and dependency cycles.
 
 ## Module-level dependency register
@@ -70,7 +72,7 @@ The precise active inputs are:
 | Internal short-root bound | `mesoscopic-switching`: `cor:root-crude` | No macroscopic PD/GEM input. |
 | Free-depth endpoint estimate | `mesoscopic-switching`: `prop:endpoint-mixing` | Fixed one/two roots; mean conditional TV relative to the coarse environment. |
 | Uniform truncations | `mesoscopic-switching`: `cor:quantitative-truncation-interface` | One factor costs A times the endpoint error and two factors A-squared; shared-clock fresh second moments are treated as second moments. |
-| Pair domination | `erdos-turan-order`: pair corollary | Total prescribed length at most n/2; enough for the first Poisson/Berry--Esseen transfer. |
+| Pair domination | `erdos-turan-order`: pair corollary | Total prescribed length at most n/2; enough for the first Poisson/Berry–Esseen transfer. |
 | Polynomial intensity | `sharp-order-edgeworth`: polynomial block proposition | Linear logarithmic terminal depth; arbitrary fixed logarithmic accuracy. |
 | Passive-mark Campbell--Stein | `sharp-order-edgeworth`: passive Stein / polynomial product-Poisson modules | Entire growing core plus an unchanged permutation-measurable mark; no quenched conditioning on that mark. The omitted-count specialization is re-derived in the total-cycle paper. |
 | Fixed-order domination | `sharp-order-edgeworth`: multi-clock theorem and factorial-domination corollary | Fixed order q only, total prescribed length at most n/2; used for higher moments and fixed-order expansions. |
@@ -110,7 +112,7 @@ Its adversarial audit found no fatal gap and records six localized clarification
 
 No active-paper dependency. The paper supplies the Poisson-spacings coupling, regularly varying endpoint and interior tail bounds, almost-sure c-zero and ell-p convergence, continuity of fixed-window ranking, quenched and annealed total-variation passage, last-label integral and tail analysis, exact-grid comparison, and the logarithmic critical-scale argument.
 
-Its external inputs are the Borga--Chatterjee--Diaconis permuton-sampling representation, Rényi's uniform order-statistic representation, regular-variation uniform convergence and Potter bounds, standard Poisson marking/mapping and iid extreme-value results, and the stable-jump Poisson--Dirichlet identification. Pitman--Tran's last-pick/rank-permutation results are cited for their substantive overlap, including the linear last-label constant; the Arendarczyk--Dębicki Weibull-product lemma supplies the scalar-tail precedent in the critical example. The standalone proofs do not import the boundary extraction or any cycle-limit manuscript. Its Poisson--Dirichlet corollary describes clock shares rather than cycle lengths.
+Its external inputs are the Borga--Chatterjee--Diaconis permuton-sampling representation, Rényi's uniform order-statistic representation, regular-variation uniform convergence and Potter bounds, standard Poisson marking/mapping and iid extreme-value results, and the stable-jump Poisson–Dirichlet identification. Pitman--Tran's last-pick/rank-permutation results are cited for their substantive overlap, including the linear last-label constant; the Arendarczyk--Dębicki Weibull-product lemma supplies the scalar-tail precedent in the critical example. The standalone proofs do not import the boundary extraction or any cycle-limit manuscript. Its Poisson–Dirichlet corollary describes clock shares rather than cycle lengths.
 
 ### `sukhatme-fixed-points`
 
@@ -147,6 +149,14 @@ External standard inputs include the identified Luce permuton density, Bernoulli
 No active-paper dependency. Its internal proof chain is: subsequential marked-profile kernel and common L2 contraction; slab law and conditional permanental factorization; hereditary flatness and predictable adaptive exposure; relative-prefix control; two-scale orbit balance; root-avoiding change of measure; conditional residual-fraction uniformity; deletion stability; finite-dimensional independent residual fractions; and ell-one tail restoration/rearrangement to GEM(1)/PD(1).
 
 External standard inputs are weak compactness/disintegration, maximal inequalities, weak convergence and continuous mapping, the bounded-Lipschitz criterion, and the standard GEM/PD relation. Its adversarial audit found no fatal gap and all six localized repairs have been applied and regression-checked.
+
+### `stratified-hammersley-lis`
+
+No active-paper dependency. The independent-clock representation reduces Luce LIS to a deterministic-fibre point cloud. The manuscript proves the row-stratified shape theorem through a common-core/residual decomposition, uniform-permutation LIS bounds, mesh-based random-exit control, and exact block variational equality. Conditional path localization and independent-score rank transfer are proved internally. The regular-profile Luce shape and robust sparse-error results use that theorem, while the endpoint-degenerate LIS/LDS argument instead adds a dyadic terminal-block exponential-moment estimate and prefix truncation. The self-similar Sukhatme estimate and certified decreasing-rate LIS lower bound are internal additions.
+
+External standard inputs include Logan–Shepp/Vershik–Kerov and uniform-permutation fixed-deviation bounds (Deuschel–Zeitouni, or Talagrand plus first-order LIS); standard compactness, concentration, regular variation, and deterministic Hamilton–Jacobi comparison. Mallows-permutation LIS literature is background only. No theorem from `macroscopic-pd`, `regular-profile-cycles`, or `independence-peeling` is imported.
+
+**Review boundary:** the October 13 expanded manuscript received a targeted adversarial audit, its score-to-rank path-localization transfer was repaired using arbitrary monotone interpolants, and the endpoint orientation, ceiling convention, bounded-density independence, and regular-Hamilton–Jacobi specification were clarified. See [the audit record](audits/stratified-hammersley-proof-audit.md). Numerical simulations are not proof; no KPZ/Tracy–Widom assertion is promoted.
 
 ## External literature and provenance
 

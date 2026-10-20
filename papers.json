@@ -11,7 +11,7 @@
     },
     {
       "id": "erdos-turan-order",
-      "title": "An Erdos--Turan Law for Comparable-Rate Luce Permutations",
+      "title": "An Erdős–Turán Law for Comparable-Rate Luce Permutations",
       "source": "papers/erdos-turan-order/luce-erdos-turan.tex",
       "pdf": "output/pdf/luce-erdos-turan.pdf",
       "status": "imported",
@@ -21,7 +21,7 @@
     },
     {
       "id": "sharp-order-edgeworth",
-      "title": "A Sharp Berry--Esseen Theorem and First Edgeworth Expansion for Logarithmic Luce Order",
+      "title": "A Sharp Berry–Esseen Theorem and First Edgeworth Expansion for Logarithmic Luce Order",
       "source": "papers/sharp-order-edgeworth/luce-edgeworth.tex",
       "pdf": "output/pdf/luce-edgeworth.pdf",
       "status": "imported",
@@ -32,7 +32,7 @@
     },
     {
       "id": "functional-erdos-turan",
-      "title": "Functional Erdos--Turan and Total-Cycle Laws for Luce Permutations",
+      "title": "Functional Erdős–Turán and Total-Cycle Laws for Luce Permutations",
       "source": "papers/functional-erdos-turan/functional-luce-erdos-turan.tex",
       "pdf": "output/pdf/functional-luce-erdos-turan.pdf",
       "status": "current-research",
@@ -67,7 +67,7 @@
     },
     {
       "id": "independence-peeling",
-      "title": "Microscopic--Macroscopic Independence and Poisson Peeling for Luce Permutations",
+      "title": "Microscopic–Macroscopic Independence and Poisson Peeling for Luce Permutations",
       "source": "papers/independence-peeling/luce_independence_peeling.tex",
       "pdf": "output/pdf/luce-independence-peeling.pdf",
       "status": "current-research",
@@ -136,9 +136,17 @@
     },
     {
       "id": "macroscopic-pd",
-      "title": "Poisson--Dirichlet Universality for Luce Permutations",
+      "title": "Poisson–Dirichlet Universality for Luce Permutations",
       "source": "papers/macroscopic-pd/poisson-dirichlet-luce.tex",
       "pdf": "output/pdf/poisson-dirichlet-luce.pdf",
+      "status": "current-research",
+      "dependencies": []
+    },
+    {
+      "id": "stratified-hammersley-lis",
+      "title": "Stratified Hammersley Laws for Luce Permutations",
+      "source": "papers/stratified-hammersley-lis/stratified-hammersley-laws-luce.tex",
+      "pdf": "output/pdf/stratified-hammersley-laws-luce.pdf",
       "status": "current-research",
       "dependencies": []
     }
