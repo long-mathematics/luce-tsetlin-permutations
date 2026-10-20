@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the six audited PD/GEM clarifications and theorem-scope preservation."""
+"""Check the six audited clarifications in the preserved comparable-rate predecessor."""
 from __future__ import annotations
 import argparse
 import hashlib
@@ -9,11 +9,11 @@ import re
 
 ROOT = Path(__file__).resolve().parents[2]
 ARCHIVE = ROOT / "archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex"
-ACTIVE = ROOT / "papers/macroscopic-pd/poisson-dirichlet-luce.tex"
+PRESERVED = ROOT / "archive/macroscopic-pd-comparable/poisson-dirichlet-luce.tex"
 RECORD = ROOT / "audits/macroscopic-pd-repair-record.md"
 START = r"\section{Macroscopic cycles under uniformly comparable weights}"
 ARCHIVE_END = r"\section{Sukhatme fixed points}"
-ACTIVE_END = r"\begin{thebibliography}{99}"
+PRESERVED_END = r"\begin{thebibliography}{99}"
 
 
 def sha(path: Path) -> str:
@@ -48,19 +48,19 @@ def main() -> None:
     args = parser.parse_args()
 
     old_text = ARCHIVE.read_text()
-    active_text = ACTIVE.read_text()
+    preserved_text = PRESERVED.read_text()
     old = between(old_text, START, ARCHIVE_END)
-    active = between(active_text, START, ACTIVE_END)
+    preserved = between(preserved_text, START, PRESERVED_END)
 
     checks: dict[str, object] = {}
     checks["archive_sha256"] = sha(ARCHIVE)
-    checks["active_sha256"] = sha(ACTIVE)
-    checks["labels_preserved"] = labels(old) == labels(active)
-    checks["references_preserved"] = refs(old) == refs(active)
-    checks["reference_closure"] = refs(active) <= labels(active)
-    checks["theorem_environment_count"] = len(re.findall(r"\\begin\{(?:theorem|proposition|lemma|corollary)\}", active))
+    checks["preserved_sha256"] = sha(PRESERVED)
+    checks["labels_preserved"] = labels(old) == labels(preserved)
+    checks["references_preserved"] = refs(old) == refs(preserved)
+    checks["reference_closure"] = refs(preserved) <= labels(preserved)
+    checks["theorem_environment_count"] = len(re.findall(r"\\begin\{(?:theorem|proposition|lemma|corollary)\}", preserved))
 
-    theorem = theorem_with_label(active_text, "thm:macroscopic-pd")
+    theorem = theorem_with_label(preserved_text, "thm:macroscopic-pd")
     theorem_fragments = [
         r"\sup_n\frac{\max_i\theta_{n,i}}{\min_i\theta_{n,i}}<\infty",
         r"\Rightarrow\operatorname{PD}(1)",
@@ -84,7 +84,7 @@ def main() -> None:
         "standard_references": "Kallenberg2002",
     }
     for name, phrase in repairs.items():
-        checks[name] = phrase in active_text
+        checks[name] = phrase in preserved_text
     checks["all_six_repair_records"] = RECORD.read_text().count("**Resolved.**") == 6
 
     failed = [k for k, v in checks.items() if isinstance(v, bool) and not v]
@@ -93,14 +93,14 @@ def main() -> None:
     if checks["archive_sha256"] != "c6d6a4607a2db9c8a5f69e2ec256c33619083fcc81ab467e9b939673fb3a5028":
         failed.append("archive_sha256")
     if failed:
-        raise SystemExit("PD/GEM audit-repair check failed: " + ", ".join(failed))
+        raise SystemExit("Preserved PD/GEM audit-repair check failed: " + ", ".join(failed))
 
     result = {
         "schema_version": 1,
         "check": "macroscopic-pd-audit-repairs",
         "checks": checks,
         "status": "pass",
-        "scope": "finite structural consistency check; not formal proof verification",
+        "scope": "historical predecessor structural consistency check; not formal proof verification",
     }
     if args.output:
         out = ROOT / args.output

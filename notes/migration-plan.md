@@ -1,6 +1,6 @@
 # Staged migration
 
-Status date: 12 October 2026.
+Status date: 20 October 2026.
 
 ## Initial reviewed stages
 
@@ -23,7 +23,7 @@ The original `nonuniform-random-permutations` repository points here as the cano
 | Global Endpoint Poisson Approximation | Yes | Yes; endpoint framework, Palm/Stein coupling, swap law, quantitative saddle, and two-cycle package preserved | Passed; no fatal gap | Yes; six localized clarifications recorded and deferred | Working mechanical extraction; audit passed, repairs pending | None | None |
 | Endpoint Short Cycles | Yes | Yes; point-constraint saddle, global envelope, trace, and factorial-moment package preserved | Passed; no fatal gap | Yes; six localized clarifications recorded and deferred | Working mechanical extraction; audit passed, repairs pending | None | None |
 | Microscopic Cycles and Sparse Entries for Regular Luce Profiles | Yes | Yes | Passed; no fatal gap | Six localized clarifications were applied and regression-checked | Audited current manuscript | None | None |
-| Poisson–Dirichlet Universality for Luce Permutations | Yes | Yes | Passed; no fatal gap | Six localized clarifications were applied and regression-checked | Audited current manuscript | None | None |
+| Poisson–Dirichlet Universality for Luce Permutations | Yes | Yes | Passed; no fatal gap | Six localized clarifications were applied and regression-checked | Audited predecessor; now preserved and superseded by the spectral manuscript | None | None |
 
 The five papers processed in the final decomposition stage deliberately remain below audited-current status because this orchestration prompt prohibited applying repairs. Their audit reports are the specifications for later focused repair PRs.
 
@@ -49,3 +49,13 @@ The foundation, preservation import, total-cycle integration, PD/GEM extraction,
 ## Independent LIS/Hammersley addition (20 October 2026)
 
 `stratified-hammersley-lis` is a standalone, independently developed paper (not an extraction from the archived 139-page source). The stronger 13 October draft was retained, audited, and updated: bounded-density stratified shape and localization; regular-profile and robust Luce/independent-score LIS and LDS laws; dyadic endpoint LIS/LDS for both Sukhatme orientations; self-similar truncation inequality; and the certified `>3.0602` decreasing-rate LIS lower bound. The October 12 regular-profile-only draft is historical research context and not a second active canonical manuscript. The active source, deterministic PDF, and hash manifest appear in the catalog and `output/pdf/manifest.json`. See [the LIS audit](../audits/stratified-hammersley-proof-audit.md) and [dependency map](../DEPENDENCIES.md).
+
+## Spectral PD/GEM replacement (20 October 2026)
+
+The stable catalog ID `macroscopic-pd` now identifies [Spectral Poisson–Dirichlet Universality for Luce Permutations under Arbitrary Rate Arrangements](../papers/macroscopic-pd/spectral-poisson-dirichlet-luce.tex). This is a substantive extension of the comparable-rate paper, with its own proof audit and five mathematical repairs; it is not a scope-preserving mechanical extraction. The full channel criterion, its subsequential form, and both proved boundary results are retained. The dyadic-doubling and slowly varying results are Theorems 9.1 and 9.2; gap necessity remains open.
+
+The earlier source, PDF, and extraction map are preserved byte-for-byte under [`archive/macroscopic-pd-comparable/`](../archive/macroscopic-pd-comparable/README.md), with their hashes appended to the preservation manifest. No previously archived file or preservation record is changed. Historical extraction and six-repair regression checks now read this preserved predecessor. The active source and deterministic PDF use the spectral filename, leaving one canonical active macroscopic manuscript.
+
+`mod-poisson` now imports the spectral theorem's comparable-rate uniform-root consequence. `independence-peeling` imports the precise conditional root/deletion interfaces with maximum-normalized clocks, good slab data, empirical tail bounds, and the full finite-deletion cutoff budget. Both papers retain their existing main theorem statements and rate hypotheses. The migration does not extend microscopic–macroscopic independence to endpoint-singular arrays.
+
+See the [spectral proof and integration record](../audits/spectral-pd-proof-audit.md), [theorem migration map](../papers/macroscopic-pd/THEOREM_MIGRATION.md), and [current dependency map](../DEPENDENCIES.md). The latest LIS integration and standardized Unicode display titles are retained.

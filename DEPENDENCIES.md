@@ -85,7 +85,7 @@ The total-cycle proof does not use the active macroscopic PD/GEM paper, regular-
 The exact marked clock-swap identity is cited from `mesoscopic-switching` (`prop:master-switch`); the new manuscript independently proves its real-fugacity estimates, conditional uniform-component decomposition, and complex generating-function bound. The only imported asymptotic theorems are:
 
 - `regular-profile-cycles`: `prop:bulk-local-final` (separated bulk estimates for **targets**, uniform in source labels), `lem:endpoint-dom`, `lem:collision-dom`, and `cor:endpoint-tightness`. Their envelopes control the marked microscopic factorial-moment sums.
-- `macroscopic-pd`: `thm:macroscopic-pd`, used only for the original-measure uniform-root cycle-length limit. No tilted or finite-deletion version is assumed.
+- `macroscopic-pd`: `thm:main-spectral`, `eq:uniform-root-main`, and `cor:comparable`, used only for the original-measure uniform-root cycle-length limit. The comparable-rate corollary covers arrays without an empirical-law limit. No tilted or finite-deletion version is assumed.
 
 The new proof derives the profile mean shift, marked residual Poisson cloud, rank-one Fredholm determinant correction, and locally uniform analytic mod-Poisson limit. Its higher-factorial-cumulant corollary does not import the separate unpublished profile mean-shift/cumulant manuscript. Internal proof checks and finite numerical tests are not independent external refereeing.
 
@@ -96,9 +96,11 @@ The principal result is microscopic–macroscopic independence, not another scal
 | Result in this manuscript | Exact input | Scope |
 | --- | --- | --- |
 | Joint short-cycle/partition independence | `regular-profile-cycles`: `thm:regular-cycles`, `prop:regular-cycle-factorial` | Fixed vectors and all fixed mixed factorial moments under a positive continuous profile. |
-| Finite-deletion uniformity | `macroscopic-pd`: `lem:pd-residual-factorization`, `prop:pd-uniform-residual-fraction`, `lem:pd-deletion-stability`; equations `eq:pd-root-cdf`, `eq:pd-deletion-error`, `eq:pd-deletion-joint` | Conditional uniformity over regular histories; the initial bounded-deletion error is propagated explicitly. Unconditional PD/GEM convergence alone is not sufficient. |
+| Finite-deletion uniformity | `macroscopic-pd`: `lem:residual-factorization`, `prop:uniform-root-fraction`, `lem:deletion-stability`; equations `eq:root-cdf`, `eq:deletion-error`, `eq:deletion-joint` | Under the existing positive-profile hypothesis, conditional uniformity over regular histories on good slab data; the initial bounded-deletion error is propagated explicitly. Unconditional PD/GEM convergence alone is not sufficient. |
 | Finite annular passive-mark comparison | `mesoscopic-switching`: `prop:master-switch`, `cor:selected-moments`, `prop:endpoint-mixing`, `cor:quantitative-truncation-interface` | One- and two-root truncated moments, with a finite numerical depth range; absolute switching-intensity error and constants uniform in the truncation level. |
 | Iterated fixed-moment/cumulant comparison | `sharp-order-edgeworth`: `cor:factorial-domination`, following `thm:multiclock` | Only fixed-order distinct-cycle domination for total prescribed length at most n/2; no arithmetic order theorem or Edgeworth conclusion is used. |
+
+The unconditional comparable-array input uses `thm:main-spectral` and `cor:comparable`. The conditional proof now uses maximum-normalized clocks and the exact spectral error `delta + 2h + chi_n + sqrt(p_n(D(U)))`. Its empirical clock-tail envelope is `exp(-U/kappa) + epsilon_n^2`. The full product of previously fixed root and deletion coefficients controls propagation through a fixed number of deletions; cutoffs control tails, the mesh controls `2h`, and n is chosen last. These inputs are pinned to spectral-source commit `81462993a7400f972a3d75583d447fbeccf1e7b3`. No endpoint-singular independence or uniformity over varying profiles is added.
 
 The PD(1) cutoff appendix uses only the standard size-biased representation and the Dickman density cited there. `total-cycle-edgeworth` is cited for marked-Stein provenance and scalar comparisons; `mod-poisson` is cited only to delimit nonoverlap. Neither is an active dependency. The finite-deletion lemma does not assume uniform good-event probabilities after conditioning on a rare prescribed cycle, and the iterated scalar convolution comparison does not assert simultaneous independence of all actual annular counts.
 
@@ -146,9 +148,13 @@ External standard inputs include the identified Luce permuton density, Bernoulli
 
 ### `macroscopic-pd`
 
-No active-paper dependency. Its internal proof chain is: subsequential marked-profile kernel and common L2 contraction; slab law and conditional permanental factorization; hereditary flatness and predictable adaptive exposure; relative-prefix control; two-scale orbit balance; root-avoiding change of measure; conditional residual-fraction uniformity; deletion stability; finite-dimensional independent residual fractions; and ell-one tail restoration/rearrangement to GEM(1)/PD(1).
+The sole active source is [Spectral Poisson–Dirichlet Universality under Arbitrary Rate Arrangements](papers/macroscopic-pd/spectral-poisson-dirichlet-luce.tex). There is no active-paper dependency. The manuscript cites the comparable-rate predecessor for provenance and reproduces the slab, flatness, and regeneration framework it needs.
 
-External standard inputs are weak compactness/disintegration, maximal inequalities, weak convergence and continuous mapping, the bounded-Lipschitz criterion, and the standard GEM/PD relation. Its adversarial audit found no fatal gap and all six localized repairs have been applied and regression-checked.
+Its internal proof chain is: the exponential observation channel; factorization through arbitrary rate-to-label couplings; spectral compression to finite slab matrices; conditional permanental factorization and hereditary flatness; predictable exposure and relative-prefix control; a late-row contraction controlled by total row mass; two-scale orbit balance; stopped root avoidance and the harmonic product; conditional root fractions and deletion stability on good slab data; and a full-budget cutoff induction with residual-mass restoration to GEM(1)/PD(1) in ell-one. No Hilbert–Schmidt assumption is used.
+
+The regularly varying gap proof combines its explicit rate-chain kernel, Abelian asymptotics, dyadic lower bounds, and a geometric Poincaré argument. The dyadic-doubling theorem and slowly varying no-gap theorem are proved within the manuscript. The subsequential criterion recovers arbitrary comparable arrays through the common-component bound.
+
+External standard inputs are weak compactness/disintegration, maximal inequalities, weak convergence and continuous mapping, the bounded-Lipschitz criterion, the GEM/PD relation, and regular-variation background. The five repaired proof points, two theorem promotions, and editorial corrections are recorded in [the spectral audit](audits/spectral-pd-proof-audit.md). The [theorem migration map](papers/macroscopic-pd/THEOREM_MIGRATION.md) identifies every reused conditional interface. The preserved predecessor and original monolith remain provenance, not active dependencies.
 
 ### `stratified-hammersley-lis`
 

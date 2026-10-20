@@ -174,7 +174,7 @@ def source_check() -> dict:
     assert r"\cup(U',U'+r]" in source
     assert source.index(r"\appendix") < source.index(r"\begin{theorem}[Analytic cutoff")
     assert r"\label{eq:finite-deletion-recursion}" in source
-    assert r"\texttt{eq:pd-deletion-joint}" in source
+    assert r"\texttt{eq:deletion-joint}" in source
     assert not any(ord(c)<32 and c not in "\n\r\t" for c in source)
     return {"labels":len(labels),"bibliography_entries":len(bibliography),
             "missing_or_duplicate_labels":0,"unresolved_citations":0,

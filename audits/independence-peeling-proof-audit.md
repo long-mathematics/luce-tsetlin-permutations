@@ -1,7 +1,7 @@
 # Targeted proof audit: microscopic–macroscopic independence and Poisson peeling
 
 Audited manuscript: `papers/independence-peeling/luce_independence_peeling.tex`.
-Companion sources checked at revision `38f195dc5b30812ebbf084764016e857a68b9a1c`.
+Companion sources checked at the original audit revision `38f195dc5b30812ebbf084764016e857a68b9a1c`; the later spectral migration is recorded below.
 Review date: 20 October 2026.
 
 ## Assessment and verification boundary
@@ -46,4 +46,14 @@ The error is for a threshold tending to zero in the limiting PD partition. It is
 
 Run `python3 scripts/independence-peeling/check_consistency.py --output .build/verification/independence_peeling.json` or the registered `make verify` target. The suite checks 5,912 exact complete-cycle deletion cases through n=6, 637,137 length-splitting cases over 1,641 cutoff configurations, and the additional upper-boundary witness. It also checks the PD recurrence at real and complex parameters, the second factorial cumulant by independent quadrature, source labels, citation closure, and the appendix placement. These are finite/floating-point consistency checks, not asymptotic or certified numerical proofs.
 
-Repository regression tests separately preserve the exact dependency set, distinguish contextual citations from premises, require the explicit conditional recursion, and check the principal theorem and appendix placement. Existing manuscript mathematics, archived sources, and audit reports are unchanged by this integration.
+Repository regression tests separately preserve the exact dependency set, distinguish contextual citations from premises, require the explicit conditional recursion, and check the principal theorem and appendix placement. At the original independence-peeling integration, existing manuscript mathematics, archived sources, and audit reports were unchanged.
+
+## Spectral PD conditional-interface migration — 20 October 2026
+
+The macroscopic input now cites the approved spectral source at revision `81462993a7400f972a3d75583d447fbeccf1e7b3`. The historical `pd-` labels above map to `lem:residual-factorization`, `prop:uniform-root-fraction`, `lem:deletion-stability`, and equations `eq:root-cdf`, `eq:deletion-error`, and `eq:deletion-joint`; see the [complete migration map](../papers/macroscopic-pd/THEOREM_MIGRATION.md).
+
+A separate focused internal review checked the scale normalization and the full finite-deletion argument against these interfaces. Maximum-normalized rates lie in `[kappa^{-1},1]`, so the finite-slab flatness term is `2h`. The exact imported error is `delta + 2h + chi_n + sqrt(p_n(D(U)))`. On the good slab event, the empirical tail is bounded by `exp(-U/kappa) + epsilon_n^2`, which gives the displayed square-root tail in the regularity recursion. The good event includes the finitely many tail-concentration events. The full product `A_i = product_{ell=0}^i (1 + R_ell + B_ell)` controls both deletion and root-law propagation; cutoffs are fixed before the mesh, and n is chosen last.
+
+The conditional finite-deletion argument is explicitly under the existing positive continuous-profile hypothesis. The unconditional PD/GEM input still covers all comparable arrays by Corollary 8.1. No uniformity over varying profile functions or endpoint-singular microscopic–macroscopic independence is introduced. Initial prescribed-cycle errors remain of order `v/n` with a fixed-partition constant, and the joint-event and weighted bad-data arguments are retained.
+
+Of the manuscript's 19 labelled theorem, corollary, lemma, proposition, and input-theorem statements, only `input:PD` changes. Every principal theorem, the labelled comparable-rate and positive-profile hypotheses, and all other labelled statements are byte-identical to the pre-migration version. This is a dependency compatibility review, not a new external referee report. Repository build and visual evidence is recorded with the [spectral integration audit](spectral-pd-proof-audit.md).

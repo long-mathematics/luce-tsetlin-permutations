@@ -1,0 +1,2109 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.08in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+  hypertexnames=false,
+  pdftitle={Spectral Poisson--Dirichlet Universality for Luce Permutations under Arbitrary Rate Arrangements},
+  pdfauthor={Christopher D. Long}
+}
+
+\allowdisplaybreaks
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\Ee}{\mathbb E}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Corr}{\operatorname{Corr}}
+\newcommand{\Exp}{\operatorname{Exp}}
+\newcommand{\Unif}{\operatorname{Unif}}
+\newcommand{\PD}{\operatorname{PD}}
+\newcommand{\GEM}{\operatorname{GEM}}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\dd}{\,d}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\cS}{\mathcal S}
+\newcommand{\cH}{\mathcal H}
+\newcommand{\cG}{\mathcal G}
+\newcommand{\cJ}{\mathcal J}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\cR}{\mathcal R}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+
+\title{Spectral Poisson--Dirichlet Universality for Luce Permutations\\
+       under Arbitrary Rate Arrangements}
+\author{Christopher D. Long\thanks{Email: \texttt{galizur@gmail.com}}}
+\date{20 October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A Luce permutation is obtained by ranking independent exponential clocks with
+prescribed positive rates.  We prove an arrangement-free criterion for its
+macroscopic cycles: if the empirical normalized rate law converges to a law
+whose exponential observation channel has a strict mean-zero $L^2$ spectral
+gap, then the size-biased cycle lengths converge in $\ell^1$ to $\GEM(1)$ and
+the ranked cycle lengths converge in $\ell^1$ to $\PD(1)$.  Only the
+asymptotic rate spectrum matters; the rates may be assigned to the labels in
+an arbitrary deterministic order.
+
+The proof identifies two mechanisms.  A factorization through the marginal
+rate channel shows that label--rate coupling cannot worsen its spectral gap,
+and an exact finite-state Markov contraction controls all late clock rows by
+their total mass, without a Hilbert--Schmidt assumption.  A dyadic
+Poincar\'e inequality combined with Karamata theory establishes the channel
+gap for every rate law with a regularly varying lower tail of positive index.
+Consequently the theorem covers all uniformly comparable arrays, every
+rearrangement of the Sukhatme rates $1,2,\ldots,n$, every rearrangement of
+$1^\gamma,2^\gamma,\ldots,n^\gamma$ for $\gamma>0$, and general positive
+regularly varying spectra.  In particular, it resolves the macroscopic- and
+longest-cycle problem for the Sukhatme model.  We also give a subsequential
+criterion and a quenched extension to random rate environments.  Two further
+spectral results identify a broader sufficient condition and a boundary of the
+criterion: successive dyadic shell-mass ratios bounded away from zero and one
+imply a strict channel gap, whereas a slowly varying lower tail has channel
+norm one.
+\end{abstract}
+
+\medskip
+\noindent\textbf{Keywords.}
+Luce permutations; Poisson--Dirichlet distributions; exponential races;
+spectral gaps; regular variation.
+
+\section{Introduction}
+\label{sec:introduction}
+
+Let $X_{n,1},\ldots,X_{n,n}$ be independent exponential random variables with
+positive rates $\theta_{n,1},\ldots,\theta_{n,n}$.  Their increasing order
+defines the label-to-position permutation
+\begin{equation}
+  \sigma_n(i)=1+\#\{j:X_{n,j}<X_{n,i}\}.
+  \label{eq:luce-permutation}
+\end{equation}
+This is the exponential-race representation of the Plackett--Luce ranking
+model; see Luce~\cite{Luce1959}, Plackett~\cite{Plackett1975}, and
+Chatterjee--Diaconis--Kim~\cite{CDK2024}.  Multiplying all rates by one
+positive constant leaves the permutation unchanged.
+
+The cycle structure of a uniform random permutation is governed by the Ewens
+parameter-one law~\cite{Ewens1972}.  Its normalized ranked cycles converge to
+Kingman's $\PD(1)$ distribution, while their size-biased order converges to the
+$\GEM(1)$ residual-allocation law; see Kingman~\cite{Kingman1975} and
+Pitman~\cite[Chapter~3]{Pitman2006}.  For Luce permutations the entry law,
+permuton, local patterns, and short-cycle behavior may be highly nonuniform.
+The question addressed here is whether the macroscopic cycle partition
+nevertheless retains the uniform-permutation limit.
+
+\subsection*{Recent Luce models and the cycle questions}
+
+Chatterjee, Diaconis, and Kim~\cite{CDK2024} developed the enumerative theory
+of the Tsetlin library and explicitly asked for the number of cycles, the
+longest cycle, the order, and the longest increasing subsequence of a
+Luce-distributed permutation.  They also singled out the decreasing weights
+$n,n-1,\ldots,1$, arising from exponential spacings, and called them the
+Sukhatme weights.  Borga, Chatterjee, and Diaconis~\cite{BCD2026} subsequently
+proved permuton and local-limit theorems, limiting pattern laws, a quenched
+Benjamini--Schramm limit, and an inversion central limit theorem.  Their
+Sukhatme permuton is singular at an endpoint and its pattern statistics are
+far from uniform, making the macroscopic-cycle question especially natural.
+
+A related but different source of Poisson--Dirichlet limits is the model of
+random standardized permutations studied by Guerder~\cite{Guerder2026}.  In
+that model one standardizes an i.i.d. word, and a uniform upper bound on the
+largest letter probability yields a $\PD(1)$ limit for large cycles.  The
+present model instead starts from independent continuous clocks with a
+deterministic triangular array of rates.  Our criterion is spectral, permits
+rates arbitrarily close to zero, and is invariant under every deterministic
+assignment of a prescribed asymptotic rate spectrum to the labels.
+
+This arrangement invariance is a central point.  Permuton and local-statistic
+limits naturally retain the coupling between labels and rates
+\cite{BCD2026}; the macroscopic cycle partition proved below depends only on
+the limiting marginal distribution of the normalized rates.
+
+This paper extends the author's earlier comparable-rate theorem
+\cite{LongPD2026}, whose full scope, including arrays without a limiting
+empirical rate law, is recovered in Corollary~\ref{cor:comparable}.  We retain
+its clock-slab and residual permanental framework, adaptive relative-prefix
+estimates, rooted exploration, and deletion-regeneration argument, reproducing
+the necessary proofs here.  The new ingredients are domination by the
+rate-observation channel, a late-row contraction estimate that avoids
+Hilbert--Schmidt assumptions, and spectral-gap criteria for endpoint-singular
+rate laws.  These extend the macroscopic cycle limits to Sukhatme and
+positive-index regularly varying spectra under arbitrary deterministic
+arrangements.
+
+\subsection*{The exponential channel}
+
+Normalize
+\[
+  r_{n,i}=\frac{\theta_{n,i}}{\max_j\theta_{n,j}}\in(0,1]
+\]
+and let
+\begin{equation}
+  \nu_n=\frac1n\sum_{i=1}^n\delta_{r_{n,i}}
+  \label{eq:empirical-rate-law}
+\end{equation}
+be the empirical normalized rate law.  Suppose first that
+$\nu_n\Rightarrow\nu$ on $[0,1]$.  The limiting exponential channel is obtained
+by sampling $R\sim\nu$ and then sampling $T\mid R=r\sim\Exp(r)$.  Its time
+marginal has density
+\begin{equation}
+  B_\nu(t)=\int_{(0,1]} r e^{-rt}\,\nu(\dd r),
+  \qquad
+  \mu_\nu(\dd t)=B_\nu(t)\dd t.
+  \label{eq:Bnu}
+\end{equation}
+When $\nu(\{0\})=0$, $\mu_\nu$ is a probability measure.  Define
+\begin{equation}
+  (C_\nu f)(r)=\int_0^\infty f(t)r e^{-rt}\dd t,
+  \qquad
+  C_\nu:L^2(\mu_\nu)\longrightarrow L^2(\nu).
+  \label{eq:channel}
+\end{equation}
+This is conditional expectation of $f(T)$ given $R=r$.  It preserves constants
+and is an $L^2$ contraction.  Its mean-zero norm
+\begin{equation}
+  q(\nu)=
+  \norm{C_\nu}_{L^2_0(\mu_\nu)\to L^2_0(\nu)}
+  \label{eq:qnu}
+\end{equation}
+is the maximal $L^2$ correlation between the latent rate and its observed
+clock time.  It is the only global mixing parameter needed below.
+
+Let $U_1,U_2,\ldots$ be independent $\Unif(0,1)$ variables.  We write
+$\GEM(1)$ for
+\[
+ U_1,\quad (1-U_1)U_2,\quad
+ (1-U_1)(1-U_2)U_3,\ldots,
+\]
+and $\PD(1)$ for its decreasing rearrangement.  Put
+\[
+ \cS^\downarrow
+ =\left\{x_1\ge x_2\ge\cdots\ge0:
+          \sum_{j\ge1}x_j=1\right\},
+\]
+with the $\ell^1$ metric.  If
+$L_{n,1}\ge L_{n,2}\ge\cdots$ are the cycle lengths of $\sigma_n$, let
+$\widetilde L_{n,1},\widetilde L_{n,2},\ldots$ be their size-biased deletion
+order: at each stage choose a vertex uniformly from the residual set, record
+its cycle length, delete that cycle, and repeat.
+
+\begin{theorem}[Spectral Poisson--Dirichlet criterion]
+\label{thm:main-spectral}
+Assume that
+\[
+  \nu_n\Rightarrow\nu,
+  \qquad \nu(\{0\})=0,
+  \qquad q(\nu)<1.
+\]
+Then
+\begin{equation}
+ \left(\frac{\widetilde L_{n,1}}n,
+       \frac{\widetilde L_{n,2}}n,\ldots\right)
+ \Rightarrow \GEM(1)
+ \quad\text{in }\ell^1,
+ \label{eq:gem-main}
+\end{equation}
+and
+\begin{equation}
+ \left(\frac{L_{n,1}}n,
+       \frac{L_{n,2}}n,\ldots\right)
+ \Rightarrow \PD(1)
+ \quad\text{in }\cS^\downarrow.
+ \label{eq:pd-main}
+\end{equation}
+If $I_n$ is a uniformly chosen label and $\mathscr L_n(I_n)$ is the length of
+its cycle, then
+\begin{equation}
+  \frac{\mathscr L_n(I_n)}n\Rightarrow\Unif(0,1).
+  \label{eq:uniform-root-main}
+\end{equation}
+The conclusion depends only on the limiting rate marginal $\nu$; no
+regularity assumption is imposed on the assignment of rates to labels.
+\end{theorem}
+
+The convergence of the empirical spectrum can be weakened to a condition on
+all of its limit points.
+
+\begin{corollary}[Subsequential spectral criterion]
+\label{cor:subsequential-spectral}
+Suppose that every weak subsequential limit $\nu$ of $(\nu_n)$ satisfies
+$\nu(\{0\})=0$ and $q(\nu)<1$.  Then
+\eqref{eq:gem-main}--\eqref{eq:uniform-root-main} hold.
+\end{corollary}
+
+\begin{proof}
+Every subsequence has a further subsequence along which $\nu_n$ converges.
+Theorem~\ref{thm:main-spectral} identifies the same universal limit on every
+such refinement.  The subsequence principle gives the result.
+\end{proof}
+
+The criterion also has a quenched random-environment form.
+
+\begin{corollary}[Random rate environments]
+\label{cor:random-environment}
+Let the positive rate vectors
+$\boldsymbol\theta_n=(\theta_{n,1},\ldots,\theta_{n,n})$ be random and
+independent of the exponential variables used to generate the ranking.
+Suppose their empirical normalized laws $\nu_n$ converge in probability, in
+the weak topology, to a deterministic law $\nu$ satisfying
+$\nu(\{0\})=0$ and $q(\nu)<1$.  Conditional on
+$\boldsymbol\theta_n$, the laws in \eqref{eq:gem-main} and
+\eqref{eq:pd-main} converge in probability, in bounded-Lipschitz distance, to
+$\GEM(1)$ and $\PD(1)$, respectively.  In particular, the corresponding
+annealed convergences hold.
+\end{corollary}
+
+\begin{proof}
+From every subsequence one may extract a further subsequence along which
+$\nu_n\Rightarrow\nu$ almost surely.  For almost every realization of the rate
+environment, Theorem~\ref{thm:main-spectral} applies to the resulting
+deterministic triangular array, so the conditional bounded-Lipschitz distance
+tends to zero almost surely.  The subsequence criterion for convergence in
+probability proves the quenched assertion, and bounded convergence gives the
+annealed one.
+\end{proof}
+
+The theorem gives the longest-cycle law explicitly.
+
+\begin{corollary}[Longest cycle and moment convergence]
+\label{cor:longest-cycle}
+Under the hypotheses of Theorem~\ref{thm:main-spectral}, let $P_1$ denote the
+largest part of a $\PD(1)$ partition.  Then
+\begin{equation}
+  \frac{L_{n,1}}n\Rightarrow P_1,
+  \qquad
+  \Ee\left(\frac{L_{n,1}}n\right)^s\longrightarrow\Ee P_1^s
+  \quad(s>0).
+  \label{eq:longest-cycle}
+\end{equation}
+In particular,
+\[
+  \frac{\Ee L_{n,1}}n\longrightarrow\lambda_{\rm GD},
+\]
+where $\lambda_{\rm GD}=\Ee P_1$ is the Golomb--Dickman constant.  These
+conclusions answer the longest-cycle question of
+Chatterjee--Diaconis--Kim~\cite{CDK2024} for the Sukhatme weights, which they
+singled out as a natural example, and for every deterministic rearrangement
+of $1,\ldots,n$.
+\end{corollary}
+
+\begin{proof}
+The largest-coordinate map is continuous on $\cS^\downarrow$ in the
+$\ell^1$ metric.  Equation~\eqref{eq:pd-main} therefore gives the distributional
+limit.  Since $0\le L_{n,1}/n\le1$, every positive moment converges.  The
+identification of $\Ee P_1$ with the Golomb--Dickman constant is classical;
+see Shepp and Lloyd~\cite{SheppLloyd1966}.
+\end{proof}
+
+The theorem includes the uniformly comparable regime: support in $[c,1]$
+gives a common exponential component and hence
+$q(\nu)\le\sqrt{1-c}<1$.  The new phenomenon is that support may reach zero.
+Our principal sufficient condition is regular variation.
+
+\begin{theorem}[Regularly varying channel gap]
+\label{thm:rv-gap}
+Let $\nu$ be a probability law on $(0,1]$, and put
+\[
+ F_\nu(x)=\nu((0,x]).
+\]
+If $F_\nu$ is regularly varying at zero with index $\alpha>0$, then
+$q(\nu)<1$.  In particular, for every $\alpha>0$,
+\begin{equation}
+  \nu_\alpha(\dd r)=\alpha r^{\alpha-1}\one_{(0,1)}(r)\dd r
+  \label{eq:power-law-law}
+\end{equation}
+has a strict channel gap.
+\end{theorem}
+
+\begin{corollary}[Power-law rate spectra]
+\label{cor:power-law-spectra}
+Fix $\gamma>0$.  Suppose that, for each $n$, the multiset of rates is
+\[
+  \{1^\gamma,2^\gamma,\ldots,n^\gamma\},
+\]
+assigned to the labels in an arbitrary deterministic order.  Then
+\eqref{eq:gem-main}--\eqref{eq:uniform-root-main} and
+\eqref{eq:longest-cycle} hold.  The case $\gamma=1$ includes every
+rearrangement of the Sukhatme rates.
+\end{corollary}
+
+\begin{corollary}[Regularly varying spectra]
+\label{cor:regularly-varying}
+Let $(a_m)_{m\ge1}$ be a positive regularly varying sequence of index
+$\gamma>0$, and for each $n$ assign the multiset
+$\{a_1,\ldots,a_n\}$ to the labels in an arbitrary deterministic order.
+Then \eqref{eq:gem-main}--\eqref{eq:uniform-root-main} and
+\eqref{eq:longest-cycle} hold.
+\end{corollary}
+
+Regular variation is used to identify the limiting empirical spectrum and to
+prove its spectral gap.  We use the uniform convergence theorem, Potter bounds,
+and Karamata's Abelian theorem from
+Bingham--Goldie--Teugels~\cite{BGT1987}.  Standard compactness, maximal
+inequalities, and weak-convergence facts are taken from
+Kallenberg~\cite{Kallenberg2002}, Durrett~\cite{Durrett2019},
+Billingsley~\cite{Billingsley1999}, and Dudley~\cite{Dudley2002}.
+
+Two structural points drive the proof.  First, a marked subsequential limit
+remembers the arrangement of rates along the labels, but its channel factors
+through $C_\nu$ and therefore cannot have a worse mean-zero norm.  Second, late
+clock rows are controlled by the exact finite-state inequality
+\[
+  \sum_b\frac{(\sum_{a\in D}p_aP_{ab})^2}{p_b}\le p(D)
+\]
+for every stochastic matrix $P$ with positive stationary law $p$.  This replaces the
+global Hilbert--Schmidt estimate that would fail for the Sukhatme kernel.
+Sections~\ref{sec:channel}--\ref{sec:regeneration} develop the spectral and
+regeneration argument, Section~\ref{sec:rv-gap} proves the regularly varying
+gap, Section~\ref{sec:applications} gives the principal applications, and
+Section~\ref{sec:boundary} proves the dyadic-doubling criterion and the slowly
+varying boundary theorem before recording the remaining spectral and multiscale
+questions.
+
+\section{The limiting exponential channel}
+\label{sec:channel}
+
+\subsection{Marked subsequential limits}
+
+Fix an arbitrary subsequence.  Since $[0,1]^2$ is compact, after passage to a
+further subsequence the marked empirical measures
+\begin{equation}
+  \eta_n=\frac1n\sum_{i=1}^n\delta_{(i/n,r_{n,i})}
+  \label{eq:marked-empirical}
+\end{equation}
+converge weakly to a probability measure $\eta$ on $[0,1]^2$.  Its first
+marginal is Lebesgue measure and its second marginal is $\nu$.  Choose a
+disintegration
+\begin{equation}
+  \eta(\dd x,\dd r)=\dd x\,\eta_x(\dd r).
+  \label{eq:disintegration}
+\end{equation}
+Since $\nu(\{0\})=0$, we have $\eta_x(\{0\})=0$ for almost every $x$.
+
+Put
+\begin{equation}
+  A(t)=\int_{(0,1]}(1-e^{-rt})\nu(\dd r),
+  \qquad B(t)=A'(t)=B_\nu(t).
+  \label{eq:A-and-B}
+\end{equation}
+Then $A$ is continuous and strictly increasing from $0$ to $1$.  Let
+$\tau=A^{-1}:(0,1)\to(0,\infty)$ and define
+\begin{equation}
+  g_x(t)=\int_{(0,1]}r e^{-rt}\eta_x(\dd r),
+  \qquad
+  \rho(x,y)=\frac{g_x(\tau(y))}{B(\tau(y))}.
+  \label{eq:marked-kernel}
+\end{equation}
+
+\begin{lemma}[Bistochastic marked kernel]
+\label{lem:bistochastic}
+The kernel $\rho$ is bistochastic up to null sets:
+\[
+  \int_0^1\rho(x,y)\dd y=1
+  \quad\text{for a.e. }x,
+  \qquad
+  \int_0^1\rho(x,y)\dd x=1
+  \quad\text{for a.e. }y.
+\]
+\end{lemma}
+
+\begin{proof}
+Under the change of variables $y=A(t)$, $\dd y=B(t)\dd t$, and therefore
+\[
+ \int_0^1\rho(x,y)\dd y
+ =\int_0^\infty g_x(t)\dd t
+ =\int_{(0,1]}\eta_x(\dd r)=1.
+\]
+Also $\int_0^1g_x(t)\dd x=B(t)$, which proves the column identity.
+\end{proof}
+
+Let $K_\eta$ be the integral operator with kernel $\rho$ on $L^2[0,1]$.
+The next factorization explains why the arrangement of rates cannot worsen the
+spectral contraction of their marginal law.
+
+\begin{lemma}[Channel domination]
+\label{lem:channel-domination}
+On mean-zero subspaces,
+\begin{equation}
+  \norm{K_\eta}_{L^2_0\to L^2_0}\le q(\nu).
+  \label{eq:marked-gap}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $U:L^2(0,1;\dd y)\to L^2(\mu_\nu)$ be the unitary map
+$(Uf)(t)=f(A(t))$.  Define
+\[
+ (C_\eta h)(x)=\int_0^\infty h(t)g_x(t)\dd t
+\]
+after which $K_\eta=C_\eta U$.
+For $k\in L^2(\nu)$ put
+\[
+  (Jk)(x)=\int k(r)\eta_x(\dd r).
+\]
+Jensen's inequality gives
+\[
+ \norm{Jk}_{L^2(\dd x)}^2
+ \le\int_0^1\int |k(r)|^2\eta_x(\dd r)\dd x
+ =\norm{k}_{L^2(\nu)}^2.
+\]
+Fubini's theorem shows that $C_\eta=JC_\nu$.  Both factors preserve constants
+and means.  Hence the mean-zero norm of $C_\eta$ is at most $q(\nu)$, and the
+unitary map $U$ does not change the norm.
+\end{proof}
+
+\begin{remark}
+The quantity $q(\nu)$ is the maximal $L^2$ correlation between the latent rate
+$R$ and its exponential observation $T$.  We use only the operator definition
+\eqref{eq:qnu}; no compactness of the channel is assumed.
+\end{remark}
+
+\section{Clock slabs and residual permanental matchings}
+\label{sec:slabs}
+
+Work along the marked subsequence fixed in Section~\ref{sec:channel}.  Replace
+the original clocks by
+\[
+  T_{n,i}=(\max_j\theta_{n,j})X_{n,i}\sim\Exp(r_{n,i});
+\]
+their order, and hence $\sigma_n$, is unchanged.
+
+Fix $T>0$ and a finite partition
+\begin{equation}
+  0=t_0<t_1<\cdots<t_d=T,
+  \qquad \max_a(t_a-t_{a-1})\le h,
+  \label{eq:time-partition}
+\end{equation}
+and append $I_\star=(T,\infty)$.  Put
+\[
+ I_a=(t_{a-1},t_a],\qquad
+ H_{n,a}=\{i:T_{n,i}\in I_a\},\qquad
+ m_{n,a}=|H_{n,a}|.
+\]
+The tail state is defined analogously.  If
+$M_{n,a}=\sum_{c\le a}m_{n,c}$, the ranks occupied by $H_{n,a}$ form the
+interval
+\[
+ Q_{n,a}=\{M_{n,a-1}+1,\ldots,M_{n,a}\}.
+\]
+Define
+\begin{equation}
+ N_{n,ab}=|Q_{n,a}\cap H_{n,b}|,
+ \qquad p_{n,a}=\frac{m_{n,a}}n,
+ \qquad P_{n,ab}=\frac{N_{n,ab}}{m_{n,a}}.
+ \label{eq:finite-slab-matrix}
+\end{equation}
+On the high-probability events used below all rows are nonempty.  The matrix
+$P_n$ is stochastic and $p_nP_n=p_n$.
+
+Let
+\[
+ J_a=(A(t_{a-1}),A(t_a)],\qquad J_\star=(A(T),1],
+ \qquad p_a=|J_a|,
+\]
+and
+\begin{equation}
+ q_{ab}=\int_{J_a\times J_b}\rho(x,y)\dd x\dd y,
+ \qquad P_{ab}=q_{ab}/p_a.
+ \label{eq:limit-slab-matrix}
+\end{equation}
+Every $p_a$ and $q_{ab}$ is positive.
+
+\subsection{The slab law}
+
+For a partition endpoint $U$, let $D(U)$ denote the union of slab states whose
+clock intervals lie in $(U,\infty)$.  Define the limiting late-clock mass
+\begin{equation}
+  \overline\nu(U)=\int_{(0,1]}e^{-rU}\nu(\dd r).
+  \label{eq:tail-mass}
+\end{equation}
+By dominated convergence, $\overline\nu(U)\downarrow0$.
+
+\begin{lemma}[Slab law and finite-state spectral gap]
+\label{lem:slab-law}
+For every fixed partition,
+\[
+ p_{n,a}\xrightarrow{\Pp}p_a,
+ \qquad
+ \frac{N_{n,ab}}n\xrightarrow{\Pp}q_{ab}
+\]
+simultaneously in $a,b$.  There are deterministic $\eps_n\downarrow0$ and
+events $\cG_n$ with $\Pp(\cG_n)\to1$ such that, on $\cG_n$:
+\begin{enumerate}[label=(\roman*)]
+\item all these convergences have error at most $\eps_n$, and every
+      $m_{n,a}$ and $N_{n,ab}$ is bounded below by a positive constant times
+      $n$;
+\item for every fixed $q_0\in(q(\nu),1)$ and all sufficiently large $n$,
+\begin{equation}
+ \norm{P_n}_{L^2_0(p_n)\to L^2_0(p_n)}\le q_0;
+ \label{eq:finite-gap}
+\end{equation}
+\item if $S$ is a partition endpoint and $J_b\subset[0,A(S)]$, then
+\begin{equation}
+  P_{n,ab}\le 2M_Sp_{n,b}
+  \quad\text{for every }a,
+  \qquad M_S=\frac1{B(S)};
+  \label{eq:inner-column}
+\end{equation}
+\item for every partition endpoint $U$,
+\begin{equation}
+  p_n(D(U))\le \overline\nu(U)+\eps_n.
+  \label{eq:finite-tail-mass}
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For a fixed time cell $I_b=(u,v]$, the indicators
+$\one_{\{T_{n,i}\in I_b\}}$ are independent and have means
+$e^{-r_{n,i}u}-e^{-r_{n,i}v}$.  Kolmogorov's maximal inequality gives
+\[
+ \max_{k\le n}\left|\sum_{i\le k}
+ \left(\one_{\{T_{n,i}\in I_b\}}
+       -\Ee\one_{\{T_{n,i}\in I_b\}}\right)\right|=o_{\Pp}(n).
+\]
+Weak convergence of the marked empirical measures gives, uniformly in
+$x\in[0,1]$,
+\[
+ \frac1n\sum_{i\le nx}\Ee\one_{\{T_{n,i}\in I_b\}}
+ \longrightarrow
+ \int_0^x\int
+  (e^{-ru}-e^{-rv})\eta_z(\dd r)\dd z.
+\]
+This proves the slab-size limit and convergence of the endpoints of
+$Q_{n,a}/n$ to those of $J_a$.  Evaluating the same uniform partial-sum limit
+at those random endpoints yields
+\[
+ \frac{N_{n,ab}}n\longrightarrow
+ \int_{J_a}\int(e^{-rt_{b-1}}-e^{-rt_b})\eta_x(\dd r)\dd x=q_{ab}.
+\]
+The last equality follows by integrating \eqref{eq:marked-kernel} over $J_b$
+and using $y=A(t)$.
+
+The matrix $P$ is the compression of $K_\eta$ to functions constant on the
+partition cells $J_a$.  Conditional expectation is a contraction, so
+Lemma~\ref{lem:channel-domination} gives
+$\norm{P}_{L^2_0(p)\to L^2_0(p)}\le q(\nu)$.  Entrywise convergence of the
+conjugated finite matrices
+$D_{p_n}^{1/2}P_nD_{p_n}^{-1/2}$ proves \eqref{eq:finite-gap}.
+
+If $y\le A(S)$, then $\tau(y)\le S$ and
+\[
+ \rho(x,y)=\frac{g_x(\tau(y))}{B(\tau(y))}
+ \le\frac1{B(S)}=M_S,
+\]
+because $0<r\le1$ and $B$ is decreasing.  Hence
+$P_{ab}\le M_Sp_b$, and entrywise convergence gives
+\eqref{eq:inner-column}.  Finally,
+\[
+ p_n(D(U))=\frac1n\sum_{i=1}^n\one_{\{T_{n,i}>U\}}
+ \xrightarrow{\Pp}\int e^{-rU}\nu(\dd r)=\overline\nu(U).
+\]
+Since the partition is finite, all statements can be placed on one sequence of
+events $\cG_n$ with deterministic errors $\eps_n\downarrow0$.
+\end{proof}
+
+\subsection{Conditional permanental matchings}
+
+Condition on the complete slab data: the sets $H_{n,a}$, the rank intervals
+$Q_{n,a}$, and the ordered but unlabeled clock values
+\[
+ s_{a,1}<\cdots<s_{a,m_{n,a}}
+\]
+in every slab, including the tail slab.  The tail row will never be assigned a
+flatness estimate; conditioning on its ordered values is used only for exact
+residual factorization.  Write
+$Q_{n,a}=\{q_{a,1}<\cdots<q_{a,m_{n,a}}\}$ and define
+$\phi_a:H_{n,a}\to[m_{n,a}]$ by
+$\sigma_n(i)=q_{a,\phi_a(i)}$.  For a bijection $\phi$,
+independence of the exponential densities gives
+\begin{equation}
+ \Pp(\phi_a=\phi\mid\text{slab data})
+ =\frac{\prod_{i\in H_{n,a}}e^{-r_{n,i}s_{a,\phi(i)}}}
+ {\operatorname{per}(e^{-r_{n,i}s_{a,j}})_{i,j}}.
+ \label{eq:permanental-row}
+\end{equation}
+The row matchings are conditionally independent.
+
+\begin{lemma}[Residual permanental factorization]
+\label{lem:residual-factorization}
+After conditioning on any compatible partial collection of exposed matching
+edges, delete the exposed source and target vertices in each row.  The remaining
+row matchings are conditionally independent, and each has the permanental law
+\eqref{eq:permanental-row} on its residual submatrix.
+\end{lemma}
+
+\begin{proof}
+The conditional density is a product over rows and, within a row, a product
+over matching edges.  Conditioning on fixed edges removes their constant
+factors and restricts the normalization to bijections of the remaining rows and
+columns, whose sum is the corresponding permanent.
+\end{proof}
+
+\begin{lemma}[Hereditary flatness]
+\label{lem:flatness}
+Let $A=(a_{ij})$ be a positive $m\times m$ matrix satisfying
+\[
+ e^{-\epsilon}\le a_{ij}/a_{ik}\le e^\epsilon
+\]
+for every row $i$ and columns $j,k$.  Under the permanental matching law
+proportional to $\prod_i a_{i,\phi(i)}$, after conditioning on an arbitrary
+partial matching, every remaining edge probability lies in
+\[
+  [e^{-2\epsilon}/s,e^{2\epsilon}/s],
+\]
+where $s$ rows and columns remain.  For a clock slab of width at most $h$ this
+holds with
+\begin{equation}
+  \beta=2h.
+  \label{eq:beta}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Work in the current residual submatrix.  For two remaining columns $j,k$,
+\[
+ \frac{\Pp(\phi(i)=j)}{\Pp(\phi(i)=k)}
+ =\frac{a_{ij}\operatorname{per}A_{-i,-j}}
+       {a_{ik}\operatorname{per}A_{-i,-k}}.
+\]
+Map each term of the first minor to a term of the second by locating the row
+sent to $k$ and sending that row to $j$.  Corresponding products differ by a
+factor in $[e^{-\epsilon},e^\epsilon]$; the displayed prefactor contributes the
+same range.  Thus pairwise edge-probability ratios lie in
+$[e^{-2\epsilon},e^{2\epsilon}]$, and the individual bounds follow because the
+$s$ probabilities sum to one.  In a slab,
+$e^{-h}\le e^{-r_{n,i}(s_j-s_k)}\le e^h$.
+\end{proof}
+
+\begin{lemma}[Predictable exposure]
+\label{lem:predictable-exposure}
+Suppose that before each new edge is exposed, its source is measurable with
+respect to the slab data and all previously exposed edges.  Conditional on the
+current filtration, its target has the one-edge marginal of the residual
+permanental matching.  If $s$ targets remain in a finite slab, each target has
+conditional probability in
+\[
+  [e^{-\beta}/s,e^\beta/s].
+\]
+If one distinguished target is forbidden, each of the other $s-1$ targets has
+conditional probability in
+$[e^{-\beta}/(s-1),e^\beta/(s-1)]$.
+\end{lemma}
+
+\begin{proof}
+Apply Lemma~\ref{lem:residual-factorization} before the new edge is revealed and
+then Lemma~\ref{lem:flatness}.  Conditioning away from a distinguished target
+renormalizes the other probabilities without changing their pairwise ratios.
+\end{proof}
+
+\subsection{A universal contraction for late rows}
+
+The following elementary inequality replaces every global Hilbert--Schmidt
+estimate.
+
+\begin{lemma}[Markov contraction of a row block]
+\label{lem:row-block-contraction}
+Let $P$ be a finite stochastic matrix with positive stationary probability
+vector $p$.
+For any set $D$ of row states, put
+\[
+  s_b=\sum_{a\in D}p_aP_{ab}.
+\]
+Then
+\begin{equation}
+  \sum_b\frac{s_b^2}{p_b}\le p(D).
+  \label{eq:row-block-contraction}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Stationarity gives $0\le s_b\le p_b$, and stochasticity gives
+$\sum_b s_b=p(D)$.  Therefore
+\[
+ \sum_b\frac{s_b^2}{p_b}\le\sum_b s_b=p(D).
+\]
+\end{proof}
+
+\begin{remark}
+The estimate is exact at finite $n$, requires no reversibility, and remains
+valid when the limiting kernel is not Hilbert--Schmidt.  For the ordered
+Sukhatme coupling $r(x)=x$, with $\nu(\dd r)=\dd r$ on $(0,1)$, the squared
+Hilbert--Schmidt integral truncated at clock time $T$ satisfies
+\begin{align*}
+ \int_0^1\int_0^{A(T)}\rho(x,y)^2\dd y\dd x
+ &=\int_0^T
+   \frac{\int_0^1r^2e^{-2rt}\dd r}{B_\nu(t)}\dd t\\
+ &=\frac14\log T+O(1),\qquad T\to\infty.
+\end{align*}
+Indeed, $B_\nu(t)=(1-(1+t)e^{-t})/t^2$, and the integrand in the time
+integral is $1/(4t)+O(e^{-t})$ as $t\to\infty$.  The decreasing ordered
+coupling gives the same integral by reflection.  Thus the limiting kernel is
+not Hilbert--Schmidt, while Lemma~\ref{lem:row-block-contraction} still controls
+late rows by the square root of their total mass.
+\end{remark}
+
+\subsection{A relative-prefix estimate}
+
+We use the following adaptive sampling lemma.  It is included to make the
+regeneration argument self-contained.
+
+\begin{lemma}[Relative prefix law]
+\label{lem:relative-prefix}
+Fix $d\ge1$ and $c_*>0$.  There are absolute constants
+$\beta_0>0$, $C<\infty$, and deterministic sequences
+$\chi_m\downarrow0$, $\pi_m\downarrow0$, depending only on $d,c_*$, with the
+following property.  Partition $m$ targets into $d$ categories of sizes
+$m_1,\ldots,m_d$, where $m_b\ge c_*m$.  Select targets sequentially without
+replacement in an arbitrary predictable adaptive source order.  Suppose that,
+whenever $s$ targets remain, every individual remaining target has conditional
+selection probability in
+\[
+  [e^{-\beta}/s,e^\beta/s],
+  \qquad 0\le\beta\le\beta_0.
+\]
+If $X_b(r)$ is the number of category-$b$ targets among the first $r$
+selections, then
+\begin{equation}
+ \Pp\left(
+ \max_{b\le d}\max_{0\le r\le m}
+ \frac{|X_b(r)-rm_b/m|}{m_b}>C\beta+\chi_m
+ \right)\le\pi_m.
+ \label{eq:relative-prefix}
+\end{equation}
+The conclusion is unchanged, after harmless modification of the constants, if
+a fixed number of distinguished targets is deleted or forbidden.
+\end{lemma}
+
+\begin{proof}
+Fix one category and write
+\[
+ N_r=m_b-X_b(r),\qquad s_r=m-r.
+\]
+If $Y_{r+1}$ indicates that the next target lies in this category, then
+\begin{equation}
+ \Ee(Y_{r+1}\mid\mathscr F_r)
+ \in\left[e^{-\beta}\frac{N_r}{s_r},
+          e^\beta\frac{N_r}{s_r}\right].
+ \label{eq:prefix-drift-prob}
+\end{equation}
+Set $a_m=m_b^{2/3}$ and stop when $N_r<a_m$ or $s_r<a_m$.  Before that time
+put $Z_r=\log(N_r/s_r)$.  Taylor expansion gives
+\[
+ \left|\Ee(Z_{r+1}-Z_r\mid\mathscr F_r)\right|
+ \le C\frac\beta{s_r}
+    +C\left(\frac1{s_r^2}+\frac1{s_rN_r}\right),
+\]
+and the conditional variance of the centered increment is at most
+$C/(s_rN_r)$.  Since $m_b\ge c_*m$,
+\[
+ \sum_{r<\tau}\frac1{s_rN_r}
+ \le C_{c_*}\frac{1+\log m}{m^{2/3}}=:v_m.
+\]
+Doob's $L^2$ maximal inequality shows that, outside an event of probability
+$O(v_m^{1/2})$, the stopped martingale part is uniformly
+$O(v_m^{1/4})$.  Summing the drift and writing $u=s_r/m$ yields
+\[
+ e^{-\eta_m}u^{1+C\beta}
+ \le\frac{N_r}{m_b}
+ \le e^{\eta_m}u^{1-C\beta},
+ \qquad
+ \eta_m=O(v_m^{1/4}+v_m).
+\]
+Choose $\beta_0$ so that $C\beta_0\le1/2$.  The elementary bound
+\[
+ \sup_{0\le u\le1}|u^{1+a}-u|\le C|a|,
+ \qquad |a|\le1/2,
+\]
+then gives
+\[
+ \left|\frac{N_r}{m_b}-\frac{s_r}{m}\right|
+ \le C\beta+o(1)
+\]
+uniformly before the stopping time.
+
+If $s_\tau<a_m$, the upper power bound forces $N_\tau/m_b=o(1)$.  If instead
+$N_\tau<a_m$, the lower power bound forces $s_\tau/m=o(1)$.  Both normalized
+remaining counts are nonincreasing after $\tau$, so the same estimate holds for
+all later prefixes.  A union bound over the fixed number of categories proves
+\eqref{eq:relative-prefix}.  Deleting or forbidding finitely many targets
+changes all relevant counts by $O(1)$ only.
+\end{proof}
+
+In all later applications the fixed mesh is chosen so that
+$\beta=2h\le\beta_0$.
+
+\section{Scale-sensitive orbit balance}
+\label{sec:orbit-balance}
+
+A residual history $\cH$ consists of the slab data, all roots selected so far,
+and the matching edges in a collection of fully exposed and deleted cycles; it
+contains no additional information about unexposed row matchings.  Let
+$R\subset[n]$ be the remaining vertex set, $N=|R|$, and $r=N/n$.  Put
+\[
+ m_a^R=|H_{n,a}\cap R|,
+ \qquad
+ N_{ab}^R=|Q_{n,a}\cap H_{n,b}\cap R|.
+\]
+For every deleted cycle $C$ and every slab $a$,
+\begin{equation}
+ |C\cap H_{n,a}|=|C\cap Q_{n,a}|,
+ \label{eq:cycle-row-balance}
+\end{equation}
+because $\sigma_n$ maps the first set bijectively onto the second.  Hence
+$m_a^R=|Q_{n,a}\cap R|$.
+
+Fix a partition endpoint $U$.  A history is $(U,\delta,\xi)$-regular if
+$N\ge\xi n$, $0\le\delta<1/4$, and, for every row contained in $[0,U]$ and
+every target state $b$,
+\begin{equation}
+ \left|\frac{m_a^R}{r m_{n,a}}-1\right|\le\delta,
+ \qquad
+ \left|\frac{N_{ab}^R}{rN_{n,ab}}-1\right|\le\delta.
+ \label{eq:regular-history}
+\end{equation}
+The initial history is $(U,0,1)$-regular.
+
+An admissible exploration reveals one outgoing edge at a time, with the next
+source measurable before the edge is exposed.  We allow a fixed number of
+distinguished targets to be forbidden.  Lemma~\ref{lem:predictable-exposure}
+applies to every actual cycle exploration and every root-avoiding exploration
+below.
+
+Consider an injective path segment $v_0,\ldots,v_\ell$, allowing
+$v_\ell=v_0$ only at a terminal closing step.  Put
+\[
+ R_a(\ell)=\#\{0\le j<\ell:v_j\in H_{n,a}\},
+\]
+and
+\[
+ R_{ab}(\ell)=\#\{0\le j<\ell:
+ v_j\in H_{n,a},\ v_{j+1}\in H_{n,b}\}.
+\]
+The deterministic flow identity is
+\begin{equation}
+ R_b(\ell)-\sum_aR_{ab}(\ell)
+ =\one_{\{v_0\in H_{n,b}\}}-
+  \one_{\{v_\ell\in H_{n,b}\}}.
+ \label{eq:flow-identity}
+\end{equation}
+
+\begin{lemma}[Scale-sensitive orbit balance]
+\label{lem:orbit-balance}
+Fix partition endpoints $0<S<U\le T$, $\xi>0$, and
+$0\le\delta<1/4$.  There are deterministic $\chi_n,\pi_n\downarrow0$ such
+that, on $\cG_n$, uniformly over every $(U,\delta,\xi)$-regular history and
+every admissible exploration, with conditional probability at least
+$1-\pi_n$ the following statements hold simultaneously at every defined
+prefix length $\ell\ge1$.
+
+For every row $a$ contained in $[0,U]$ and every target state $b$,
+\begin{equation}
+ \left|R_{ab}(\ell)-\frac{R_a(\ell)}{m_a^R}N_{ab}^R\right|
+ \le(C\beta+\chi_n)N_{ab}^R.
+ \label{eq:row-prefix}
+\end{equation}
+Define
+\begin{equation}
+ \Delta_n(U,\delta,h)
+ =\delta+\beta+\chi_n+\sqrt{p_n(D(U))}.
+ \label{eq:Delta}
+\end{equation}
+Then, for every inner state $b$ with $J_b\subset[0,A(S)]$,
+\begin{equation}
+ \left|\frac{R_b(\ell)}{\ell p_{n,b}}-1\right|
+ \le C_{S,\xi}\frac n\ell\Delta_n(U,\delta,h)
+      +\frac{C_{\cJ}}\ell.
+ \label{eq:scale-sensitive-balance}
+\end{equation}
+In particular, for every fixed $\lambda>0$, the right-hand side is
+$C_{S,\xi,\lambda}\Delta_n+o(1)$ uniformly for $\ell\ge\lambda n$.
+\end{lemma}
+
+\begin{proof}
+On $\cG_n$, every cell in the fixed finite partition has size bounded below by
+a positive constant times $n$.  Regularity gives the same bound for the
+residual cells.  Apply Lemmas~\ref{lem:predictable-exposure} and
+\ref{lem:relative-prefix} row by row, extending the queried source sequence
+predictably after the orbit ends if necessary.  A finite union bound gives
+\eqref{eq:row-prefix} with sequences $\chi_n,\pi_n$ uniform over all stated
+histories and explorations.
+
+Suppress $\ell$ and put
+\[
+ P=P_n,
+ \qquad q_a=R_a/\ell,
+ \qquad E_{ab}=R_{ab}-R_aP_{ab}.
+\]
+For $a\notin D(U)$, regularity and \eqref{eq:row-prefix} give
+\begin{equation}
+ |E_{ab}|\le C(\delta+\beta+\chi_n)N_{n,ab}.
+ \label{eq:good-row-error}
+\end{equation}
+For $a\in D(U)$, injectivity gives
+$0\le R_{ab}\le N_{n,ab}$ and
+$0\le R_aP_{ab}\le N_{n,ab}$, hence
+\begin{equation}
+ |E_{ab}|\le N_{n,ab}.
+ \label{eq:bad-row-error}
+\end{equation}
+Let
+\[
+ G_b=\sum_{a\notin D(U)}E_{ab},
+ \qquad H_b=\sum_{a\in D(U)}E_{ab}.
+\]
+Since $\sum_aN_{n,ab}=np_{n,b}$,
+\begin{equation}
+ \norm{G/(\ell p_n)}_{L^2(p_n)}
+ \le C\frac n\ell(\delta+\beta+\chi_n).
+ \label{eq:good-L2}
+\end{equation}
+For the bad rows, \eqref{eq:bad-row-error} and
+Lemma~\ref{lem:row-block-contraction} give
+\begin{align}
+ \sum_b\frac{H_b^2}{m_{n,b}}
+ &\le n\sum_b
+ \frac{(\sum_{a\in D(U)}p_{n,a}P_{n,ab})^2}{p_{n,b}}
+ \le n p_n(D(U)).
+ \label{eq:bad-L2-raw}
+\end{align}
+Consequently
+\begin{equation}
+ \norm{H/(\ell p_n)}_{L^2(p_n)}
+ \le\frac n\ell\sqrt{p_n(D(U))}.
+ \label{eq:bad-L2}
+\end{equation}
+
+Let $d_b$ be the right-hand side of \eqref{eq:flow-identity}; it has at most
+two nonzero coordinates of absolute value at most one.  Dividing the flow
+identity by $\ell$ gives
+\[
+ q-qP=e,
+ \qquad e_b=(d_b+G_b+H_b)/\ell.
+\]
+Put $u_a=q_a/p_{n,a}-1$.  Since $p_nP=p_n$ and
+$\sum_ap_{n,a}u_a=0$,
+\begin{equation}
+ u-P^*u=e/p_n.
+ \label{eq:resolvent}
+\end{equation}
+By \eqref{eq:finite-gap},
+\begin{equation}
+ \norm{u}_{L^2(p_n)}
+ \le(1-q_0)^{-1}\norm{e/p_n}_{L^2(p_n)}
+ \le C\frac n\ell\Delta_n+\frac{C_{\cJ}}\ell.
+ \label{eq:u-L2}
+\end{equation}
+
+For an inner state $b$, \eqref{eq:inner-column} and stationarity imply
+\[
+ \sum_ap_{n,a}\left(\frac{P_{n,ab}}{p_{n,b}}\right)^2
+ \le 2M_S.
+\]
+Thus $|(P^*u)_b|\le\sqrt{2M_S}\norm{u}_{L^2(p_n)}$.  Directly from
+\eqref{eq:good-row-error}, \eqref{eq:bad-row-error}, and
+\eqref{eq:inner-column},
+\[
+ \left|\frac{e_b}{p_{n,b}}\right|
+ \le C_S\frac n\ell
+ \bigl(\delta+\beta+\chi_n+p_n(D(U))\bigr)
+ +\frac{C_{\cJ}}\ell.
+\]
+Now use $u_b=(e/p_n)_b+(P^*u)_b$ and
+$p_n(D(U))\le\sqrt{p_n(D(U))}$ to obtain
+\eqref{eq:scale-sensitive-balance}.
+\end{proof}
+
+\section{Rooted cycles and regeneration}
+\label{sec:rooted}
+
+For a vertex $v$, let $c(v)$ be the row index for which $v\in Q_{n,c(v)}$.
+An orbit can hit $v$ only when its current source lies in $H_{n,c(v)}$.
+
+\subsection{Root avoidance}
+
+\begin{lemma}[Root-avoiding change of measure]
+\label{lem:root-avoiding}
+Fix a residual history $\cH$ and a distinguished remaining target $v$.
+Explore the path from $v$.  At each step, use the original residual one-edge
+kernel conditional on the complete exposed history.  At its $j$th opportunity
+to hit $v$, indexed from zero, let $\lambda_j$ be that kernel's probability of
+selecting $v$.  Define the auxiliary law $\Pp^\circ$ by conditioning each such
+transition away from $v$, and stopping if no allowed target remains.
+
+Let $\tau^\circ$ be the number of nonclosing edges completed before this
+stopping time.  On $\{\tau^\circ\ge k\}$, let $S(k)$ be the number of closure
+opportunities among the first $k$ completed edges, and define
+\begin{equation}
+ W_k=
+ \begin{cases}
+  \displaystyle\prod_{j=0}^{S(k)-1}(1-\lambda_j),
+       &\tau^\circ\ge k,\\[1ex]
+  0,   &\tau^\circ<k.
+ \end{cases}
+ \label{eq:root-survival-weight}
+\end{equation}
+Then
+\begin{equation}
+ \Pp(|\cC(v)|>k\mid\cH,v)
+ =\Ee^\circ W_k.
+ \label{eq:root-rn}
+\end{equation}
+If the closure row $c(v)$ is a finite clock slab of width at most $h$ and
+initially has $m$ available targets, including $v$, then, while defined,
+\begin{equation}
+ \frac{e^{-\beta}}{m-j}\le\lambda_j\le
+ \frac{e^\beta}{m-j}.
+ \label{eq:root-hazard}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+At a closure opportunity with $\lambda_j<1$, the original transition law is a
+mixture of an atom of mass $\lambda_j$ at $v$ and the avoid-$v$ law of mass
+$1-\lambda_j$.  Multiplying these sequential Radon--Nikodym factors along
+each auxiliary prefix of length $k$ and summing over prefixes proves
+\eqref{eq:root-rn}.  Histories stopped before completing $k$ edges contribute
+zero.  A previously visited non-root vertex cannot be the first repeat because
+its target column was consumed when the path first entered it.  Before the
+$j$th opportunity, exactly $j$ non-root targets have been removed from the
+closure row.  When that row has width at most $h$,
+Lemma~\ref{lem:predictable-exposure} gives \eqref{eq:root-hazard}.
+\end{proof}
+
+\begin{lemma}[Harmonic product]
+\label{lem:harmonic-product}
+Fix $\zeta\in(0,1)$.  Uniformly for $c\in[1/2,2]$, integers $m\ge1$, and
+$0\le s\le(1-\zeta)m$,
+\begin{equation}
+ \prod_{j=0}^{s-1}\left(1-\frac c{m-j}\right)
+ =(1-s/m)^c\{1+O_\zeta(m^{-1})\},
+ \label{eq:harmonic-product}
+\end{equation}
+whenever all factors are nonnegative.  Also, uniformly for
+$x\in[\zeta,1-\zeta]$ and $|a|\le1/2$,
+\[
+ |(1-x)^{1+a}-(1-x)|\le C_\zeta|a|.
+\]
+\end{lemma}
+
+\begin{proof}
+Expand the logarithm.  Since $m-j\ge\zeta m$,
+\[
+ \sum_{j<s}\log\left(1-\frac c{m-j}\right)
+ =-c\sum_{j<s}\frac1{m-j}+O_\zeta(m^{-1}),
+\]
+and the harmonic sum equals
+$\log(m/(m-s))+O_\zeta(m^{-1})$.  The second assertion follows from the
+mean-value theorem in the exponent.
+\end{proof}
+
+\subsection{A uniform residual fraction}
+
+\begin{proposition}[Uniform conditional residual fraction]
+\label{prop:uniform-root-fraction}
+Fix partition endpoints $0<S<U\le T$, $\xi>0$,
+$\zeta\in(0,1/2)$, and $0\le\delta<1/4$.  On $\cG_n$, let $\cH$ be a
+$(U,\delta,\xi)$-regular history.  Choose a root uniformly from its $N$
+remaining vertices, independently of the unexposed matchings, and let $L$ be
+the root-cycle length.  Uniformly over all such histories,
+\begin{align}
+ &\sup_{x\in[\zeta,1-\zeta]}
+ \left|\Pp\left(\left.\frac LN\le x\right|\cH\right)-x\right|
+ \notag\\
+ &\qquad\le
+ C_{S,\xi,\zeta}\Delta_n(U,\delta,h)
+ +C_\xi p_n(D(S))+\pi_n+\frac{C_{\cJ,\xi,\zeta}}n.
+ \label{eq:root-cdf}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+Let $v$ be the uniform root and $C=c(v)$.  By
+\eqref{eq:cycle-row-balance},
+\[
+ \Pp(C=a\mid\cH)=\frac{|Q_{n,a}\cap R|}{N}=\frac{m_a^R}{N}.
+\]
+Therefore
+\begin{equation}
+ \Pp(C\in D(S)\mid\cH)
+ \le\frac{np_n(D(S))}{N}\le\xi^{-1}p_n(D(S)).
+ \label{eq:closure-tail}
+\end{equation}
+Work henceforth on $C\notin D(S)$.  Put $m=m_C^R$ and $p_C=p_{n,C}$.
+Regularity gives
+\begin{equation}
+ \frac{m}{Np_C}=1+O(\delta).
+ \label{eq:closure-size}
+\end{equation}
+For the fixed partition, $p_C$ is bounded below over inner rows, so
+$m\ge c_{\cJ,S}\xi n$.
+
+First exclude premature termination of the avoid-$v$ exploration.  If it stops
+after $r$ edges because only $v$ remains in the closure row, then
+$R_C(r)=m-1$.  On the simultaneous event of
+Lemma~\ref{lem:orbit-balance},
+\[
+ \left|\frac{m-1}{rp_C}-1\right|
+ \le C_S\frac nr\Delta_n+\frac{C_{\cJ}}r.
+\]
+Multiplying by $r/N$ and using \eqref{eq:closure-size} gives
+\begin{equation}
+ |1-r/N|\le C_{S,\xi}\Delta_n+O_{\cJ,\xi}(n^{-1}).
+ \label{eq:no-premature}
+\end{equation}
+Unless the desired bound is already trivial, this excludes termination before
+$(1-\zeta)N$ edges.
+
+Fix $x\in[\zeta,1-\zeta]$ and $k=\lfloor xN\rfloor$.  On the simultaneous
+event above, $S(k)=R_C(k)$.  Lemma~\ref{lem:orbit-balance} and
+\eqref{eq:closure-size} give
+\begin{equation}
+ \sup_{x\in[\zeta,1-\zeta]}
+ \left|\frac{S(\lfloor xN\rfloor)}m-x\right|
+ \le C_{S,\xi,\zeta}\Delta_n+O_{\cJ,\xi,\zeta}(n^{-1})
+ \label{eq:closure-opportunities}
+\end{equation}
+except on conditional probability at most $\pi_n$.
+
+On this event, the weight $W_k$ in Lemma~\ref{lem:root-avoiding} is squeezed between the
+two harmonic products with $c=e^\beta$ and $c=e^{-\beta}$.  Since the mesh is
+chosen with $\beta$ small, Lemma~\ref{lem:harmonic-product} and
+\eqref{eq:closure-opportunities} show that both differ from $1-x$ by the
+principal error in \eqref{eq:root-cdf}.  Average under $\Pp^\circ$, use the
+trivial bound on the exceptional event, and add \eqref{eq:closure-tail}.
+\end{proof}
+
+\subsection{Deletion stability}
+
+\begin{lemma}[Deletion of an interior macroscopic cycle]
+\label{lem:deletion-stability}
+Fix partition endpoints $0<V<U\le T$, $\xi>0$,
+$\zeta\in(0,1/2)$, and $0\le\delta<1/4$.  On $\cG_n$, start from a
+$(U,\delta,\xi)$-regular history and expose the cycle of a uniform residual
+root.  Let $N$ and $L$ be the residual size and cycle length.  There is a
+constant $C=C(V,\xi,\zeta)$ such that
+\begin{align}
+ &\Pp\Bigl(
+ \zeta N\le L\le(1-\zeta)N,\ 
+ \text{the post-deletion history is not }
+ (V,\delta',\zeta\xi)\text{-regular}
+ \mid\cH\Bigr)
+ \le\pi_n,
+ \label{eq:deletion-joint}
+\end{align}
+where
+\begin{equation}
+ \delta'=C\Delta_n(U,\delta,h)+\frac{C_{\cJ,\xi,\zeta}}n.
+ \label{eq:deletion-error}
+\end{equation}
+The assertion is used only when $\delta'<1/4$.
+\end{lemma}
+
+\begin{proof}
+Let $d_a$ be the number of vertices of the exposed cycle in $H_{n,a}$ and
+$d_{ab}$ the number of its edges from $H_{n,a}$ to $H_{n,b}$.  The event in
+Lemma~\ref{lem:orbit-balance} is simultaneous over all prefix lengths and may
+therefore be evaluated at the random closing time without conditioning on
+$L$.  On $\zeta N\le L\le(1-\zeta)N$, apply
+\eqref{eq:scale-sensitive-balance} with inner cutoff $V$ and $\ell=L$ to get
+\[
+ \frac{d_a}{Lp_{n,a}}
+ =1+O_{V,\xi,\zeta}(\Delta_n)+O_{\cJ,\xi,\zeta}(n^{-1})
+\]
+for every row below $V$.  Since
+$m_a^R=Np_{n,a}(1+O(\delta))$,
+\begin{equation}
+ \frac{d_a}{m_a^R}
+ =\frac LN+O_{V,\xi,\zeta}(\Delta_n)+O_{\cJ,\xi,\zeta}(n^{-1}).
+ \label{eq:deleted-row-fraction}
+\end{equation}
+The row-prefix estimate at the same closing time gives
+\[
+ d_{ab}=\frac{d_a}{m_a^R}N_{ab}^R
+        +O((\beta+\chi_n)N_{ab}^R),
+\]
+so
+\begin{equation}
+ d_{ab}=\frac LN N_{ab}^R
+ +\bigl\{O_{V,\xi,\zeta}(\Delta_n)
+          +O_{\cJ,\xi,\zeta}(n^{-1})\bigr\}N_{ab}^R.
+ \label{eq:deleted-cell-fraction}
+\end{equation}
+The quantity $d_{ab}$ is exactly the number of targets removed from
+$Q_{n,a}\cap H_{n,b}$.  Equations
+\eqref{eq:deleted-row-fraction}--\eqref{eq:deleted-cell-fraction}, together
+with $1-L/N\ge\zeta$, prove regularity of the residual history with error
+\eqref{eq:deletion-error}.  Residual factorization remains valid by
+Lemma~\ref{lem:residual-factorization}.
+\end{proof}
+
+\section{The regeneration induction}
+\label{sec:regeneration}
+
+Define residual fractions
+\begin{equation}
+ V_{n,j}=\frac{\widetilde L_{n,j}}
+ {n-\widetilde L_{n,1}-\cdots-\widetilde L_{n,j-1}},
+ \label{eq:residual-fractions}
+\end{equation}
+with $V_{n,j}=0$ after exhaustion.
+
+\begin{lemma}[Conditional CDF test]
+\label{lem:cdf-test}
+Let $W\in[0,1]$, let $\mathscr F$ be a sigma-field, and suppose
+\[
+ \sup_{x\in[a,b]}|\Pp(W\le x\mid\mathscr F)-x|\le\eta
+ \quad\text{a.s.},
+ \qquad 0<a<b<1.
+\]
+Then
+\[
+ \Pp(W\notin[a,b]\mid\mathscr F)\le a+(1-b)+2\eta.
+\]
+If $f$ is absolutely continuous, supported in $[a,b]$, and vanishes at the
+endpoints, then
+\[
+ \left|\Ee(f(W)\mid\mathscr F)-\int_0^1f(u)\dd u\right|
+ \le\eta\int_a^b|f'(u)|\dd u.
+\]
+\end{lemma}
+
+\begin{proof}
+The endpoint estimate follows by evaluating the CDF bound at $a,b$.  The second
+claim is conditional Stieltjes integration by parts.
+\end{proof}
+
+\begin{proposition}[Independent residual uniforms]
+\label{prop:residual-uniforms}
+For every fixed $k$,
+\begin{equation}
+  (V_{n,1},\ldots,V_{n,k})
+  \Rightarrow(U_1,\ldots,U_k),
+  \qquad U_j\stackrel{\mathrm{iid}}\sim\Unif(0,1).
+  \label{eq:finite-uniforms}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Fix $k$, an interior parameter $\zeta\in(0,1/4)$, and a target error
+$\eta\in(0,1/16)$.  Put $\xi_*=\zeta^{k-1}$.  We describe the order of
+choices, which is essential.
+
+Choose an inner cutoff $T_0$ so large that
+$\xi_*^{-1}\overline\nu(T_0)\le\eta/4$.  Once $T_j$ is fixed, choose
+constants $R_j,D_j\ge1$ bounding the principal-error coefficients in,
+respectively, Proposition~\ref{prop:uniform-root-fraction} and
+Lemma~\ref{lem:deletion-stability}, with inner cutoff $T_j$, residual fraction
+at least $\xi_*$, and truncation parameter $\zeta$.  These constants are
+independent of the outer cutoff and of the subsequent partition.  Set
+\[
+ A_j=\prod_{i=0}^{j}(1+R_i+D_i),
+\]
+and choose $T_{j+1}>T_j$ so large that
+\[
+ A_j\sqrt{\overline\nu(T_{j+1})}\le2^{-j-3}\eta.
+\]
+Continue through $T_k$.  This is possible because
+$\overline\nu(U)\downarrow0$.
+
+Write $\epsilon_{j+1}=\sqrt{\overline\nu(T_{j+1})}$.  An error introduced at
+level $j$ contributes to a later regularity error at level $i\le j$ with
+coefficient $\prod_{\ell=i}^jD_\ell$, and to the root-law error at level $i$
+with coefficient $R_i\prod_{\ell=i+1}^jD_\ell$, with empty products equal to
+one.  Both coefficients are at most $A_j$.  Thus the total tail contribution
+to any regularity or root-law error is at most
+\[
+ \sum_{j=0}^{k-1}A_j\epsilon_{j+1}\le\eta/4.
+\]
+
+After all cutoffs and constants are fixed, choose $h>0$ such that
+\[
+ 2h\le\beta_0,
+ \qquad
+ 2h\sum_{j=0}^{k-1}A_j\le\eta/4.
+\]
+Choose one finite partition of $[0,T_k]$ containing $T_0,\ldots,T_k$ and
+having mesh at most $h$, and append its tail cell.  The same propagation
+calculation bounds every mesh contribution by $\eta/4$.  Finally take $n$
+large enough that the fixed-partition errors, the empirical tail-mass errors,
+and the exceptional-event probabilities, after these finitely many
+amplifications, contribute at most another prescribed fraction of $\eta$.
+Every required regularity error is then below $1/4$, and every stagewise
+conditional CDF error is $O_k(\eta)$ without a cutoff-dependent factor
+multiplying $\eta$.  For reference, at deletion stage $1\le r\le k$ we use
+\[
+\begin{array}{c|c|c|c}
+\text{stage}&\text{current outer cutoff}&\text{root-law inner cutoff}
+&\text{post-deletion cutoff}\\ \hline
+r&T_{k-r+1}&T_{k-r}&T_{k-r}.
+\end{array}
+\]
+Thus every inner cutoff is fixed before its corresponding outer cutoff.
+
+On the event
+\begin{equation}
+ \zeta\le V_{n,j}\le1-\zeta,
+ \qquad 1\le j<r,
+ \label{eq:interior-history}
+\end{equation}
+the residual size before stage $r$ is at least
+$\zeta^{r-1}n\ge\xi_*n$.  Inductively, Lemma~\ref{lem:deletion-stability}
+keeps the current history regular at the required outer cutoff, apart from a
+conditional probability $O_k(\eta)$.  Proposition
+\ref{prop:uniform-root-fraction} then gives
+\begin{equation}
+ \sup_{x\in[\zeta,1-\zeta]}
+ \left|\Pp(V_{n,r}\le x\mid\mathscr F_{r-1})-x\right|
+ \le C_k\eta
+ \label{eq:stage-cdf}
+\end{equation}
+uniformly over every surviving regular history.
+
+Let $f_1,\ldots,f_k$ be bounded Lipschitz functions on $[0,1]$.  Choose a
+piecewise linear cutoff $\varphi_\zeta$ supported in
+$[\zeta,1-\zeta]$ and equal to one on
+$[2\zeta,1-2\zeta]$, and put $g_j=f_j\varphi_\zeta$.  Apply
+Lemma~\ref{lem:cdf-test} to \eqref{eq:stage-cdf}, multiply successively by the
+preceding factors, and use the joint-event form of
+Lemma~\ref{lem:deletion-stability}.  Induction gives
+\[
+ \Ee\prod_{j=1}^kg_j(V_{n,j})
+ =\prod_{j=1}^k\int_0^1g_j(u)\dd u+O_{f,k,\zeta}(\eta)+o_n(1).
+\]
+The endpoint part of Lemma~\ref{lem:cdf-test} gives
+\[
+ \limsup_{n\to\infty}\Pp\left(
+ V_{n,j}\notin[2\zeta,1-2\zeta]
+ \text{ for some }j\le k\right)
+ \le4k\zeta+C_k\eta.
+\]
+Replace $g_j$ by $f_j$, then let $n\to\infty$, $\eta\downarrow0$, and
+$\zeta\downarrow0$.  Products of bounded Lipschitz functions determine weak
+convergence on $[0,1]^k$, proving \eqref{eq:finite-uniforms}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main-spectral}]
+Put
+\begin{equation}
+ X_{n,j}=\frac{\widetilde L_{n,j}}n
+ =V_{n,j}\prod_{i<j}(1-V_{n,i}),
+ \qquad
+ R_{n,k}=1-\sum_{j=1}^kX_{n,j}
+ =\prod_{i=1}^k(1-V_{n,i}).
+ \label{eq:stick-breaking-finite}
+\end{equation}
+Proposition~\ref{prop:residual-uniforms} and the continuous mapping theorem give
+for every fixed $k$ the corresponding finite-dimensional $\GEM(1)$ limit,
+including
+\[
+ R_{n,k}\Rightarrow\prod_{i=1}^k(1-U_i).
+\]
+Since $0\le R_{n,k}\le1$,
+\begin{equation}
+ \Ee R_{n,k}\longrightarrow2^{-k}.
+ \label{eq:residual-expectation}
+\end{equation}
+Let $X_n=(X_{n,1},X_{n,2},\ldots)$ and let $X$ have the $\GEM(1)$ law.  If
+$F:\ell^1\to\mathbb R$ is bounded and Lipschitz, truncation after $k$
+coordinates gives
+\[
+ |\Ee F(X_n)-\Ee F(X)|
+ \le\operatorname{Lip}(F)(\Ee R_{n,k}+2^{-k})
+ +|\Ee F(X_n^{(k)})-\Ee F(X^{(k)})|.
+\]
+First let $n\to\infty$ and then $k\to\infty$.  The bounded-Lipschitz criterion
+on the separable space $\ell^1$ proves \eqref{eq:gem-main}.
+
+For nonnegative $\ell^1$ sequences, decreasing rearrangement is a contraction:
+\[
+ \norm{x^\downarrow-y^\downarrow}_1\le\norm{x-y}_1.
+\]
+This follows first for finite sequences by the two-point uncrossing inequality
+and then by truncation.  The continuous mapping theorem proves
+\eqref{eq:pd-main}.  The first residual fraction is the cycle length of a
+uniform root divided by $n$, proving \eqref{eq:uniform-root-main}.
+
+The argument was carried out along an arbitrary subsequence after extracting a
+marked limit.  Lemma~\ref{lem:channel-domination} gives the same strict bound
+$q(\nu)$ for every such marked limit, and the resulting law is always universal.
+The subsequence principle therefore yields convergence along the full sequence.
+\end{proof}
+
+\begin{corollary}[Power sums]
+\label{cor:power-sums}
+Under the hypotheses of Theorem~\ref{thm:main-spectral}, for every $s>1$,
+\[
+ \sum_{j\ge1}\left(\frac{L_{n,j}}n\right)^s
+ \Rightarrow\sum_{j\ge1}P_j^s,
+ \qquad (P_j)\sim\PD(1),
+\]
+and
+\[
+ \Ee\sum_{j\ge1}\left(\frac{L_{n,j}}n\right)^s\longrightarrow\frac1s.
+\]
+\end{corollary}
+
+\begin{proof}
+The power-sum functional is bounded and continuous on $\cS^\downarrow$.  A
+size-biased pick $\widetilde P$ from a $\PD(1)$ partition is uniform on
+$(0,1)$, and
+\[
+ \Ee(\widetilde P^{s-1}\mid(P_j))=\sum_jP_j^s.
+\]
+Hence the limiting expectation is
+$\int_0^1u^{s-1}\dd u=1/s$.
+\end{proof}
+
+\section{Regularly varying spectral gaps}
+\label{sec:rv-gap}
+
+We prove Theorem~\ref{thm:rv-gap}.  Let
+\[
+  F(x)=\nu((0,x])
+\]
+be regularly varying at zero with index $\alpha>0$.  Define the truncated first
+moment
+\begin{equation}
+  H(x)=\int_{(0,x]}r\nu(\dd r).
+  \label{eq:H-first-moment}
+\end{equation}
+Integration by parts and Karamata's theorem give
+\begin{equation}
+  H(x)=xF(x)-\int_0^xF(u)\dd u
+  \sim\frac{\alpha}{\alpha+1}xF(x)
+  \qquad(x\downarrow0).
+  \label{eq:H-asymptotic}
+\end{equation}
+Thus $H$ is regularly varying at zero with index $\alpha+1$.  Since
+$B_\nu(t)=\int e^{-tr}\dd H(r)$, the Abelian theorem for Laplace--Stieltjes
+transforms yields
+\begin{equation}
+  B_\nu(t)
+  \sim \Gamma(\alpha+2)H(1/t)
+  \sim \alpha\Gamma(\alpha+1)t^{-1}F(1/t)
+  \qquad(t\to\infty).
+  \label{eq:B-rv-asymptotic}
+\end{equation}
+These standard forms of Karamata's theorem are recorded in
+\cite[Chapters~1 and~4]{BGT1987}.
+
+Let $C=C_\nu$ and $Q=CC^*$ on $L^2(\nu)$.  A direct calculation gives the
+symmetric Markov kernel
+\begin{equation}
+  R_\nu(r,s)=rs\int_0^\infty
+  \frac{e^{-(r+s)t}}{B_\nu(t)}\dd t
+  \label{eq:Rnu}
+\end{equation}
+relative to $\nu(\dd s)$.
+
+\begin{lemma}[Dyadic kernel lower bound]
+\label{lem:rv-kernel-lower}
+Let
+\[
+ I_k=(2^{-k-1},2^{-k}],
+ \qquad w_k=\nu(I_k).
+\]
+There are $K<\infty$ and $c>0$ such that, for every $k\ge K$, if $r,s$ lie in
+the same shell $I_k$ or in the adjacent shells $I_k,I_{k-1}$, then
+\begin{equation}
+  R_\nu(r,s)\ge\frac{c}{w_k}.
+  \label{eq:rv-shell-lower}
+\end{equation}
+Moreover,
+\begin{equation}
+  \frac{w_{k+1}}{w_k}\longrightarrow2^{-\alpha}.
+  \label{eq:shell-ratio}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Put $x=2^{-k}$.  Regular variation gives
+\[
+  w_k=F(x)-F(x/2)\sim(1-2^{-\alpha})F(x),
+\]
+which proves \eqref{eq:shell-ratio}.  By
+\eqref{eq:B-rv-asymptotic} and the uniform convergence theorem, uniformly for
+$t\in[x^{-1},2x^{-1}]$ and all sufficiently small $x$,
+\begin{equation}
+  B_\nu(t)\le CxF(x).
+  \label{eq:B-shell-upper}
+\end{equation}
+If $r,s$ are in the stated shells, then $rs\ge c_1x^2$ and
+$r+s\le c_2x$.  Restricting \eqref{eq:Rnu} to
+$t\in[x^{-1},2x^{-1}]$ therefore gives
+\[
+ R_\nu(r,s)
+ \ge c x^2\int_{x^{-1}}^{2x^{-1}}
+       \frac{\dd t}{xF(x)}
+ \ge\frac{c'}{F(x)}
+ \ge\frac{c''}{w_k}.
+\]
+\end{proof}
+
+We also need a weighted Poincar\'e inequality for an eventually geometric
+sequence of shell masses.
+
+\begin{lemma}[Geometric weighted Poincar\'e inequality]
+\label{lem:geometric-poincare}
+Let $(w_k)_{k\ge K}$ be positive and suppose that
+$w_{k+1}/w_k\le\rho<1$ for all $k\ge K$.  For a sequence $(m_k)$,
+\begin{equation}
+ \sum_{k\ge K}w_k(m_k-m_K)^2
+ \le C_\rho\sum_{k>K}w_k(m_k-m_{k-1})^2.
+ \label{eq:geometric-poincare}
+\end{equation}
+Consequently the same right-hand side controls the weighted variance of
+$(m_k)_{k\ge K}$.
+\end{lemma}
+
+\begin{proof}
+Put $d_j=m_j-m_{j-1}$ and $a_j=\sqrt{w_j}d_j$.  For $j\le k$,
+$w_k/w_j\le\rho^{k-j}$, and hence
+\[
+ \sqrt{w_k}(m_k-m_K)
+ =\sum_{j=K+1}^k\sqrt{\frac{w_k}{w_j}}a_j.
+\]
+Young's convolution inequality on $\ell^2$, with the summable kernel
+$(\rho^{r/2})_{r\ge0}$, proves \eqref{eq:geometric-poincare}.  Weighted
+variance is no larger than squared distance from the fixed value $m_K$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:rv-gap}]
+Choose $K$ so that Lemma~\ref{lem:rv-kernel-lower} holds and
+$w_{k+1}/w_k\le\rho<1$ for $k\ge K$.  Put
+$I_\circ=(2^{-K},1]$ and $w_\circ=\nu(I_\circ)$.  For $K$ large,
+$w_\circ>0$ and $w_K>0$.  Restricting \eqref{eq:Rnu} to $t\in[0,1]$, and
+using $B_\nu(t)\le1$, gives a positive lower bound for $R_\nu$ on
+$[2^{-K-1},1]^2$.  In particular, the Dirichlet form controls both the variance
+inside the core and the squared difference between the core mean and the mean
+on $I_K$.
+
+Because $Q$ is a symmetric Markov operator with kernel $R_\nu$ relative to
+$\nu$, its Dirichlet form is
+\begin{equation}
+ \langle f,(I-Q)f\rangle
+ =\frac12\iint (f(r)-f(s))^2R_\nu(r,s)\,\nu(\dd r)\nu(\dd s).
+ \label{eq:rv-dirichlet-form}
+\end{equation}
+Let $m_\circ$ be the $\nu$-average of $f$ on $I_\circ$ and let $m_k$ be its
+average on $I_k$.  The same-shell part of
+\eqref{eq:rv-shell-lower} yields
+\begin{equation}
+ \langle f,(I-Q)f\rangle
+ \ge c\left\{\int_{I_\circ}|f-m_\circ|^2\dd\nu
+       +\sum_{k\ge K}\int_{I_k}|f-m_k|^2\dd\nu\right\},
+ \label{eq:rv-within-shell}
+\end{equation}
+while the core--first-shell and adjacent-shell parts, followed by Jensen's
+inequality, give
+\begin{equation}
+ \langle f,(I-Q)f\rangle
+ \ge c\left\{w_K(m_K-m_\circ)^2
+       +\sum_{k>K}w_k(m_k-m_{k-1})^2\right\}.
+ \label{eq:rv-between-shell}
+\end{equation}
+Since $\sum_{k\ge K}w_k\le w_K/(1-\rho)$,
+Lemma~\ref{lem:geometric-poincare} gives
+\begin{align}
+ \sum_{k\ge K}w_k(m_k-m_\circ)^2
+ &\le 2C_\rho\sum_{k>K}w_k(m_k-m_{k-1})^2
+       +\frac{2w_K}{1-\rho}(m_K-m_\circ)^2.
+ \label{eq:core-shell-poincare}
+\end{align}
+Combining this with \eqref{eq:rv-within-shell}--\eqref{eq:rv-between-shell}
+and $\Var_\nu(f)\le\int|f-m_\circ|^2\dd\nu$ yields
+\begin{equation}
+  \Var_\nu(f)
+  \le C_\nu\langle f,(I-Q)f\rangle.
+  \label{eq:rv-poincare}
+\end{equation}
+Since $Q=CC^*$ is positive semidefinite, \eqref{eq:rv-poincare} implies
+$\norm{Q}_{L^2_0(\nu)}\le1-c_\nu$ for some $c_\nu>0$.  Therefore
+\[
+  q(\nu)=\norm{C}_{L^2_0(\mu_\nu)\to L^2_0(\nu)}
+  \le\sqrt{1-c_\nu}<1.
+\]
+The power-law law \eqref{eq:power-law-law} has $F(x)=x^\alpha$, so it is a
+special case.
+\end{proof}
+
+\begin{remark}
+The proof gives no sharp value of $q(\nu)$.  Even for the exact power-law law,
+determining the optimal gap appears to be a nontrivial Mellin-analytic problem.
+\end{remark}
+
+\section{Applications}
+\label{sec:applications}
+
+\subsection{Comparable arrays}
+
+\begin{corollary}[Comparable rates]
+\label{cor:comparable}
+Suppose that after common rescaling all rates lie in $[c,1]$ for some fixed
+$c>0$.  Then the conclusions of Theorem~\ref{thm:main-spectral} hold.
+\end{corollary}
+
+\begin{proof}
+For every $r\in[c,1]$,
+\[
+ r e^{-rt}\dd t\ge c e^{-t}\dd t.
+\]
+Thus all conditional time laws contain the common probability component
+$e^{-t}\dd t$ with mass $c$.  The common-component decomposition and
+Jensen's inequality give $q(\nu)\le\sqrt{1-c}<1$ for every subsequential
+empirical rate law $\nu$.  Although the full sequence of empirical laws need
+not converge, every subsequence has a further convergent subsequence, and
+Theorem~\ref{thm:main-spectral} gives the same universal limit on each such
+refinement.  The subsequence principle proves the full conclusion.
+\end{proof}
+
+\subsection{Power-law and Sukhatme spectra}
+
+\begin{proof}[Proof of Corollary~\ref{cor:power-law-spectra}]
+Normalize by $n^\gamma$.  The empirical measure of
+$(j/n)^\gamma$, $1\le j\le n$, converges to the pushforward of Lebesgue measure
+under $x\mapsto x^\gamma$.  Its density is
+\[
+ \frac1\gamma r^{1/\gamma-1}\dd r=\nu_{1/\gamma}(\dd r).
+\]
+The assignment of this multiset to labels does not change the empirical rate
+law.  Apply Theorems~\ref{thm:main-spectral} and
+\ref{thm:rv-gap}.  The Sukhatme case is $\gamma=1$.
+\end{proof}
+
+The ordered Sukhatme profile $n,n-1,\ldots,1$ also has a distinct microscopic
+terminal theory: its fixed points have logarithmic intensity and a terminal
+Poisson process; see \cite{LongSukhatme2026} and the historical exponential
+spacing representations of Sukhatme~\cite{Sukhatme1937} and
+R\'enyi~\cite{Renyi1953}.  The present macroscopic result is insensitive to
+ordering and therefore belongs to a different universality mechanism.
+
+\subsection{Regularly varying spectra}
+
+\begin{lemma}[Empirical law of a regularly varying spectrum]
+\label{lem:rv-empirical}
+Let $a_m=m^\gamma L(m)$ be positive and regularly varying with index
+$\gamma>0$, and put $M_n=\max_{1\le j\le n}a_j$.  Then
+\[
+ \frac{M_n}{a_n}\longrightarrow1
+\]
+and
+\begin{equation}
+ \frac1n\sum_{j=1}^n\delta_{a_j/M_n}
+ \Rightarrow\nu_{1/\gamma}.
+ \label{eq:rv-empirical}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For every fixed $\delta\in(0,1)$, the uniform convergence theorem for regular
+variation gives
+\[
+ \sup_{x\in[\delta,1]}
+ \left|\frac{a_{\lfloor nx\rfloor}}{a_n}-x^\gamma\right|\to0.
+\]
+Potter bounds imply that for any $\epsilon\in(0,\gamma)$ there is $C_\epsilon$
+such that, apart from finitely many indices,
+\[
+ \frac{a_j}{a_n}\le C_\epsilon(j/n)^{\gamma-\epsilon},
+ \qquad j\le n.
+\]
+Since $M_n\ge a_n$, it remains to prove the matching upper bound.  On
+$[\delta n,n]$ this follows from uniform convergence, while Potter bounds make
+$\sup_{j\le\delta n}a_j/a_n$ arbitrarily small after first choosing $\delta$
+and then $n$ large; the finitely many exceptional initial indices are
+$o(a_n)$.  Hence $M_n/a_n\to1$.  For every bounded continuous $\varphi$, split
+the Riemann sum at $\delta n$.  The small-index part has mass at most $\delta$, while on
+$[\delta,1]$ uniform convergence gives
+\[
+ \frac1n\sum_{j=1}^n\varphi(a_j/M_n)
+ \longrightarrow\int_0^1\varphi(x^\gamma)\dd x.
+\]
+The latter is integration against $\nu_{1/\gamma}$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:regularly-varying}]
+The empirical normalized rate law is independent of the assignment to labels.
+Lemma~\ref{lem:rv-empirical} identifies its limit as
+$\nu_{1/\gamma}$, and Theorems~\ref{thm:main-spectral} and
+\ref{thm:rv-gap} apply.
+\end{proof}
+
+For the exact power-law spectrum, the late-clock mass has the explicit decay
+\begin{equation}
+ \overline\nu(U)
+ =\alpha\int_0^1r^{\alpha-1}e^{-rU}\dd r
+ \asymp U^{-\alpha}.
+ \label{eq:power-tail}
+\end{equation}
+Thus the uncontrolled-row term in orbit balance is
+$O(U^{-\alpha/2})=O(U^{-1/(2\gamma)})$.  This is qualitative here because the
+mesh and cutoffs are fixed before $n\to\infty$, but it identifies the correct
+endpoint leakage scale.
+
+\section{Spectral boundary and further questions}
+\label{sec:boundary}
+
+The spectral formulation separates three inputs: vanishing late-clock mass,
+local flatness within finite clock slabs, and a global mean-zero contraction.
+We first establish a broader sufficient condition for the channel gap and
+identify its slowly varying boundary.  The necessity of a gap for
+Poisson--Dirichlet universality and the behavior of multiple rate scales remain
+separate questions.
+
+\begin{theorem}[Dyadic-doubling criterion]
+\label{thm:dyadic-doubling}
+Let $\nu$ be a probability law on $(0,1]$, and put
+\[
+ w_k=\nu((2^{-k-1},2^{-k}]).
+\]
+Suppose that, for some constants $0<a\le b<1$ and every sufficiently large
+$k$, one has $w_k>0$ and
+\[
+ a\le\frac{w_{k+1}}{w_k}\le b.
+\]
+Then $q(\nu)<1$.
+\end{theorem}
+
+\begin{proof}
+Choose $K$ so that the ratio bounds hold for $k\ge K$, and let
+$I_k=(2^{-k-1},2^{-k}]$.  Put $x=2^{-k}$ and
+$t\in[x^{-1},2x^{-1}]$.  The contribution of the inner shells to
+$B_\nu(t)$ is at most
+\[
+ \sum_{m\ge0}2^{-k-m}w_{k+m}
+ \le xw_k\sum_{m\ge0}(b/2)^m.
+\]
+For an outer shell $I_{k-m}$ with $1\le m\le k-K$, one has
+$r\le2^mx$, $rt\ge2^{m-1}$, and $w_{k-m}\le a^{-m}w_k$.  Its
+contribution is at most
+\[
+ xw_k(2/a)^m e^{-2^{m-1}}.
+\]
+The sum over $m\ge1$ converges.  The remaining core $(2^{-K},1]$ contributes
+at most $e^{-2^{-K}/x}=o(xw_k)$, since $w_k\ge w_Ka^{k-K}$.  Thus, uniformly
+on the stated time interval and for all sufficiently large $k$,
+\begin{equation}
+ B_\nu(t)\le Cxw_k.
+ \label{eq:dyadic-density-upper}
+\end{equation}
+
+If $r,s$ lie in $I_k$, or in the adjacent shells $I_k,I_{k-1}$, then
+$rs\ge c_1x^2$ and $r+s\le c_2x$.  Restricting \eqref{eq:Rnu} to
+$[x^{-1},2x^{-1}]$ and using \eqref{eq:dyadic-density-upper} gives
+\[
+ R_\nu(r,s)\ge c/w_k.
+\]
+After enlarging $K$ if necessary, the core has positive mass.  Restricting
+\eqref{eq:Rnu} to $t\in[0,1]$ gives a positive kernel lower bound joining
+the core to $I_K$ and within the core.  The within-shell and adjacent-shell
+estimates in \eqref{eq:rv-within-shell}--\eqref{eq:rv-between-shell} therefore
+hold in this setting.  Lemma~\ref{lem:geometric-poincare} and
+\eqref{eq:core-shell-poincare}, with $\rho=b$, give
+\[
+ \Var_\nu(f)\le C_\nu\langle f,(I-C_\nu C_\nu^*)f\rangle.
+\]
+Positivity of $C_\nu C_\nu^*$ now yields $q(\nu)<1$.
+\end{proof}
+
+The criterion permits oscillating shell ratios and atomic or singular rate
+laws.  It also implies Theorem~\ref{thm:rv-gap}, because a regularly varying
+lower tail of index $\alpha>0$ has $w_{k+1}/w_k\to2^{-\alpha}\in(0,1)$.
+
+\begin{theorem}[Slowly varying boundary]
+\label{thm:slow-boundary}
+Let $\nu$ be a probability law on $(0,1]$.  Suppose
+$F_\nu(x)=\nu((0,x])$ is positive for all sufficiently small $x$, tends to
+zero, and is slowly varying at zero.
+Then $q(\nu)=1$.
+\end{theorem}
+
+\begin{proof}
+In the joint exponential channel, define
+\[
+ A_\delta=\{R\le\delta\},\qquad
+ B_\delta=\{T>1/\delta\},\qquad
+ a_\delta=F_\nu(\delta).
+\]
+The Laplace--Stieltjes Abelian theorem at index zero
+\cite[Chapter~1]{BGT1987} gives
+\[
+ \Pp(B_\delta)=\int e^{-r/\delta}\nu(\dd r)\sim a_\delta.
+\]
+Also, $1-e^{-z}\le z$ and Stieltjes integration by parts yield
+\begin{align*}
+ \Pp(A_\delta\setminus B_\delta)
+ &\le\delta^{-1}\int_{(0,\delta]}r\nu(\dd r)\\
+ &=F_\nu(\delta)-\delta^{-1}\int_0^\delta F_\nu(u)\dd u
+ =o(a_\delta).
+\end{align*}
+For the last equality, substitute $u=\delta v$ and apply dominated
+convergence to $F_\nu(\delta v)/F_\nu(\delta)$ on $0<v<1$: slow variation
+gives pointwise convergence to one, and monotonicity bounds the ratio by one.
+Consequently $\Pp(A_\delta\cap B_\delta)\sim a_\delta$, while both marginal
+probabilities are asymptotic to $a_\delta\to0$.  Hence
+\[
+ \Corr(\one_{A_\delta},\one_{B_\delta})\longrightarrow1.
+\]
+The channel norm $q(\nu)$ dominates each of these correlations and is at most
+one, proving the claim.
+\end{proof}
+
+Theorem~\ref{thm:slow-boundary} identifies a boundary of the strict spectral-gap
+hypothesis.  It does not assert failure of the $\PD(1)$ conclusion in that
+regime; necessity of the gap remains the following question.
+
+\begin{question}[Necessity of the spectral gap]
+\label{q:sharpness}
+Is $q(\nu)<1$ necessary for $\PD(1)$ universality uniformly over all
+deterministic arrangements with empirical rate law $\nu$?  If $q(\nu)=1$,
+can one construct an arrangement whose macroscopic cycle partition is not
+$\PD(1)$?
+\end{question}
+
+The present proof genuinely loses regeneration when the mean-zero resolvent is
+unbounded.  It is unknown whether that reflects a transition of the model or
+only a limitation of the method.
+
+A useful continuum-of-scales test family is explicit.  For $\beta>0$, let
+\begin{equation}
+ \nu_\beta(\dd r)=\frac{1}{\beta r}
+ \one_{[e^{-\beta},1]}(r)\dd r.
+ \label{eq:log-uniform-law}
+\end{equation}
+This is the limiting normalized rate law of
+$\theta_{n,i}=\exp(\beta i/n)$.
+
+\begin{proposition}[Degeneration of the log-uniform channel]
+\label{prop:log-uniform-lower}
+For every $\beta>0$,
+\begin{equation}
+ q(\nu_\beta)\ge
+ \frac{\beta}{\sqrt{\beta^2+2\pi^2}}
+ =1-\frac{\pi^2}{\beta^2}+O(\beta^{-4}).
+ \label{eq:log-uniform-gap-lower}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Write $R=e^{-X}$ with $X\sim\Unif(0,\beta)$.  If $E\sim\Exp(1)$ is
+independent, then $T=E/R=Ee^X$, so
+$\log T=X+\log E$.  Maximal correlation dominates the ordinary correlation of
+the centered functions $X=X(R)$ and $\log T$.  Since
+$\Var X=\beta^2/12$ and $\Var(\log E)=\pi^2/6$,
+\[
+ q(\nu_\beta)\ge\Corr(X,\log T)
+ =\sqrt{\frac{\Var X}{\Var X+\Var(\log E)}}
+ =\frac{\beta}{\sqrt{\beta^2+2\pi^2}}.
+\]
+\end{proof}
+
+Since $\nu_\beta$ is supported on $[e^{-\beta},1]$, the comparable-support
+bound gives $q(\nu_\beta)<1$.  Thus, for every $\beta>0$, the norm gap satisfies
+\[
+ 0<1-q(\nu_\beta)
+ \le1-\frac{\beta}{\sqrt{\beta^2+2\pi^2}}
+ \le\frac{\pi^2}{\beta^2}.
+\]
+The last inequality follows from $(1+x)^{-1/2}\ge1-x/2$ for $x\ge0$.
+
+\begin{question}[Growing log-linear spectra]
+\label{q:log-linear-growth}
+For
+\[
+ \theta_{n,i}=\exp(\beta_n i/n),
+ \qquad \beta_n\longrightarrow\infty,
+\]
+determine the largest-cycle scale and the maximal growth regime of $\beta_n$
+for which the $\PD(1)$ limit persists.  Is there a sharp transition between
+macroscopic and submacroscopic cycles?
+\end{question}
+
+After normalization the empirical spectrum collapses to an atom at zero, so
+this problem is outside Theorem~\ref{thm:main-spectral}.  Unlike a finite
+hierarchy of separated scales, it has a continuum of logarithmic rate scales.
+It is therefore a natural test of whether one-scale spectral universality can
+survive a slowly degenerating gap.
+
+\begin{conjecture}[Multiscale endpoint phase]
+\label{conj:multiscale}
+Suppose that, after normalization by the largest rate scale, the empirical rate
+law has a positive atom at zero, and that the vanishing-rate sector admits one
+or more nontrivial limits after successive rescalings.  Then the cycle
+partition has a hierarchical multiscale limit assembled from the
+Poisson--Dirichlet partitions of the successive rate scales, with a
+continuum-scale analogue when the logarithmic spectrum does not separate into
+finitely many levels.
+\end{conjecture}
+
+An atom at zero is excluded from Theorem~\ref{thm:main-spectral} because a
+positive fraction of clocks escapes every fixed time cutoff.  The conjecture
+asks for the correct replacement rather than a direct extension of the
+one-scale theorem.
+
+\begin{question}[Quantitative convergence]
+\label{q:quantitative}
+Under a uniform spectral gap and a polynomial bound
+$\overline\nu(U)\le CU^{-\alpha}$, can one obtain an explicit rate of
+convergence to $\GEM(1)$ or $\PD(1)$ in Wasserstein or bounded-Lipschitz
+metric?
+\end{question}
+
+Such a theorem would require growing partitions and quantitative approximation
+of the finite-state spectral gap.  The present proof deliberately fixes all
+cutoffs and the mesh before sending $n\to\infty$.
+
+\begin{question}[Exact power-law gap]
+\label{q:exact-gap}
+Determine the exact value, or sharp asymptotics as $\alpha\downarrow0$ and
+$\alpha\to\infty$, of $q(\nu_\alpha)$.  Is there a Mellin transform that
+diagonalizes an appropriate scale-invariant comparison channel?
+\end{question}
+
+\begin{thebibliography}{99}
+
+\bibitem{BCD2026}
+J. Borga, S. Chatterjee, and P. Diaconis.
+\newblock Permuton and local limits for the Luce model.
+\newblock \emph{Annals of Applied Probability}, to appear.
+\newblock \href{https://arxiv.org/abs/2509.07729v3}{arXiv:2509.07729v3}.
+
+\bibitem{BGT1987}
+N. H. Bingham, C. M. Goldie, and J. L. Teugels.
+\newblock \emph{Regular Variation}.
+\newblock Encyclopedia of Mathematics and its Applications, vol. 27.
+\newblock Cambridge University Press, Cambridge, 1987.
+
+\bibitem{Billingsley1999}
+P. Billingsley.
+\newblock \emph{Convergence of Probability Measures}, second edition.
+\newblock Wiley, New York, 1999.
+
+\bibitem{CDK2024}
+S. Chatterjee, P. Diaconis, and G. B. Kim.
+\newblock Enumerative theory for the Tsetlin library.
+\newblock \emph{Journal of Algebra} 655 (2024), 139--162.
+\newblock \href{https://doi.org/10.1016/j.jalgebra.2023.08.009}
+{doi:10.1016/j.jalgebra.2023.08.009}.
+
+\bibitem{Dudley2002}
+R. M. Dudley.
+\newblock \emph{Real Analysis and Probability}, second edition.
+\newblock Cambridge University Press, Cambridge, 2002.
+
+\bibitem{Durrett2019}
+R. Durrett.
+\newblock \emph{Probability: Theory and Examples}, fifth edition.
+\newblock Cambridge University Press, Cambridge, 2019.
+
+\bibitem{Ewens1972}
+W. J. Ewens.
+\newblock The sampling theory of selectively neutral alleles.
+\newblock \emph{Theoretical Population Biology} 3 (1972), no.~1, 87--112.
+\newblock \href{https://doi.org/10.1016/0040-5809(72)90035-4}
+{doi:10.1016/0040-5809(72)90035-4}.
+
+\bibitem{Guerder2026}
+A. Guerder.
+\newblock Cycle structure of random standardized permutations.
+\newblock Preprint, 2026.
+\newblock \href{https://arxiv.org/abs/2603.24127}{arXiv:2603.24127}.
+
+\bibitem{Kallenberg2002}
+O. Kallenberg.
+\newblock \emph{Foundations of Modern Probability}, second edition.
+\newblock Springer-Verlag, New York, 2002.
+
+\bibitem{Kingman1975}
+J. F. C. Kingman.
+\newblock Random discrete distributions.
+\newblock \emph{Journal of the Royal Statistical Society, Series B}
+37 (1975), 1--22.
+\newblock \href{https://doi.org/10.1111/j.2517-6161.1975.tb01024.x}
+{doi:10.1111/j.2517-6161.1975.tb01024.x}.
+
+\bibitem{LongPD2026}
+C. D. Long.
+\newblock Poisson--Dirichlet universality for Luce permutations.
+\newblock Preprint, 2026.
+\newblock Repository manuscript:
+\href{https://github.com/long-mathematics/luce-tsetlin-permutations/blob/25b7e4490c32418b818b2356106228283986dd6c/papers/macroscopic-pd/poisson-dirichlet-luce.tex}{\texttt{macroscopic-pd}}.
+
+\bibitem{LongSukhatme2026}
+C. D. Long.
+\newblock Sukhatme fixed points and the terminal Poisson process.
+\newblock Preprint, 2026.
+\newblock Repository manuscript:
+\href{https://github.com/long-mathematics/luce-tsetlin-permutations/tree/main/papers/sukhatme-fixed-points}{\texttt{sukhatme-fixed-points}}.
+
+\bibitem{Luce1959}
+R. D. Luce.
+\newblock \emph{Individual Choice Behavior: A Theoretical Analysis}.
+\newblock Wiley, New York, 1959.
+
+\bibitem{Pitman2006}
+J. Pitman.
+\newblock \emph{Combinatorial Stochastic Processes}.
+\newblock Lecture Notes in Mathematics, vol. 1875.
+\newblock Springer-Verlag, Berlin, 2006.
+
+\bibitem{Plackett1975}
+R. L. Plackett.
+\newblock The analysis of permutations.
+\newblock \emph{Journal of the Royal Statistical Society, Series C
+(Applied Statistics)} 24 (1975), 193--202.
+\newblock \href{https://doi.org/10.2307/2346567}
+{doi:10.2307/2346567}.
+
+\bibitem{Renyi1953}
+A. R\'enyi.
+\newblock On the theory of order statistics.
+\newblock \emph{Acta Mathematica Academiae Scientiarum Hungaricae}
+4 (1953), 191--231.
+\newblock \href{https://doi.org/10.1007/BF02127580}
+{doi:10.1007/BF02127580}.
+
+\bibitem{SheppLloyd1966}
+L. A. Shepp and S. P. Lloyd.
+\newblock Ordered cycle lengths in a random permutation.
+\newblock \emph{Transactions of the American Mathematical Society}
+121 (1966), 340--357.
+
+\bibitem{Sukhatme1937}
+P. V. Sukhatme.
+\newblock Tests of significance for samples of the $\chi^2$-population with
+two degrees of freedom.
+\newblock \emph{Annals of Eugenics} 8 (1937), no.~1, 52--56.
+\newblock \href{https://doi.org/10.1111/j.1469-1809.1937.tb02159.x}
+{doi:10.1111/j.1469-1809.1937.tb02159.x}.
+
+\end{thebibliography}
+
+\end{document}

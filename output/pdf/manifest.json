@@ -44,18 +44,18 @@
     {
       "id": "mod-poisson",
       "source": "papers/mod-poisson/luce_mod_poisson.tex",
-      "source_sha256": "3f370d52fe900748f96174a4557b14136bb84526bf01e06655e359303caa69e1",
+      "source_sha256": "ad96eb52f7eb53cd7b20115dfae0134a03a59c9367af8af273c04f96aac6ebcc",
       "pdf": "output/pdf/luce-mod-poisson.pdf",
-      "pdf_sha256": "9baaf9cb4ee4a1de2bd362730d1589528302147ebe53c864b49ba0618dba8b57",
+      "pdf_sha256": "90d19bb8feb2fe18f2ca8da0c7f8ce7b67ab439d37692541c18ec3b6bbc722c1",
       "pages": 21
     },
     {
       "id": "independence-peeling",
       "source": "papers/independence-peeling/luce_independence_peeling.tex",
-      "source_sha256": "8daa0abd01ace03ae564fedcb9cee389effd0117aa2e23960060750a251e5712",
+      "source_sha256": "029f762121c09f8033f5df333c9361ccc12153716a854465e97e3613b201a0c5",
       "pdf": "output/pdf/luce-independence-peeling.pdf",
-      "pdf_sha256": "32126ccfcaffe42a1f00bbf2172c1be6e86e6e2f45e9f43cdba7e6da10966fa6",
-      "pages": 17
+      "pdf_sha256": "27bb0f5393ca3429876ec0a3d1771dbaee35b3bd235b0e10b6fb0876c2ada90a",
+      "pages": 18
     },
     {
       "id": "boundary-laws",
@@ -115,11 +115,11 @@
     },
     {
       "id": "macroscopic-pd",
-      "source": "papers/macroscopic-pd/poisson-dirichlet-luce.tex",
-      "source_sha256": "0fdde5028985c4b639c7679e4f59256fb23e4983119a22bf60ea9d55bfbccdaa",
-      "pdf": "output/pdf/poisson-dirichlet-luce.pdf",
-      "pdf_sha256": "1e1da609aeb2abcb07a264c585165a5c0bd248d4bffb49ae0fab4a44eaa8c03e",
-      "pages": 21
+      "source": "papers/macroscopic-pd/spectral-poisson-dirichlet-luce.tex",
+      "source_sha256": "06e4c2487c6b5af6ed89b55a58637ff87adf80a583e418dae2a07ab2b5170c49",
+      "pdf": "output/pdf/spectral-poisson-dirichlet-luce.pdf",
+      "pdf_sha256": "1201e63b6dbf4d628a2c1abfc40ca5be3835971e6b83146da7f3e926308e840f",
+      "pages": 26
     },
     {
       "id": "stratified-hammersley-lis",

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "stage": "spectral-pd-replacement",
+  "date": "2026-10-20",
+  "baseline_commit": "40afaebb02e176b5262650edb0ad23ac7e986699",
+  "approved_source_commit": "81462993a7400f972a3d75583d447fbeccf1e7b3",
+  "stable_document_id": "macroscopic-pd",
+  "approved_spectral_source_sha256": "06e4c2487c6b5af6ed89b55a58637ff87adf80a583e418dae2a07ab2b5170c49",
+  "spectral_source_installed_without_changes": true,
+  "promoted_results": [
+    "thm:dyadic-doubling",
+    "thm:slow-boundary"
+  ],
+  "retained_main_criterion": "thm:main-spectral and cor:subsequential-spectral at full strength; arbitrary deterministic rate assignments",
+  "gap_necessity_remains_open": "q:sharpness",
+  "predecessor_directory": "archive/macroscopic-pd-comparable",
+  "pre_existing_archive_records_preserved": 40,
+  "new_preservation_records": 3,
+  "unchanged_active_pdf_snapshots": 13,
+  "updated_snapshots": [
+    {
+      "id": "mod-poisson",
+      "source": "papers/mod-poisson/luce_mod_poisson.tex",
+      "source_sha256": "ad96eb52f7eb53cd7b20115dfae0134a03a59c9367af8af273c04f96aac6ebcc",
+      "pdf": "output/pdf/luce-mod-poisson.pdf",
+      "pdf_sha256": "90d19bb8feb2fe18f2ca8da0c7f8ce7b67ab439d37692541c18ec3b6bbc722c1",
+      "pages": 21
+    },
+    {
+      "id": "independence-peeling",
+      "source": "papers/independence-peeling/luce_independence_peeling.tex",
+      "source_sha256": "029f762121c09f8033f5df333c9361ccc12153716a854465e97e3613b201a0c5",
+      "pdf": "output/pdf/luce-independence-peeling.pdf",
+      "pdf_sha256": "27bb0f5393ca3429876ec0a3d1771dbaee35b3bd235b0e10b6fb0876c2ada90a",
+      "pages": 18
+    },
+    {
+      "id": "macroscopic-pd",
+      "source": "papers/macroscopic-pd/spectral-poisson-dirichlet-luce.tex",
+      "source_sha256": "06e4c2487c6b5af6ed89b55a58637ff87adf80a583e418dae2a07ab2b5170c49",
+      "pdf": "output/pdf/spectral-poisson-dirichlet-luce.pdf",
+      "pdf_sha256": "1201e63b6dbf4d628a2c1abfc40ca5be3835971e6b83146da7f3e926308e840f",
+      "pages": 26
+    }
+  ],
+  "downstream_statement_review": {
+    "mod-poisson": {
+      "labelled_statements": 24,
+      "changed_statements": []
+    },
+    "independence-peeling": {
+      "labelled_statements": 19,
+      "changed_statements": [
+        "input:PD"
+      ]
+    },
+    "principal_theorems_unchanged": true,
+    "endpoint_singular_independence_not_claimed": true
+  },
+  "local_validation": {
+    "make_test": {
+      "passed": true,
+      "tests": 57
+    },
+    "make_pdf": {
+      "passed": true,
+      "active_documents": 16
+    },
+    "make_check": {
+      "passed": true,
+      "byte_identical_rebuilds": 16
+    },
+    "make_verify": {
+      "passed": true,
+      "registered_programs": 5
+    },
+    "visual_review": {
+      "spectral_pages": 26,
+      "mod_poisson_pages": 21,
+      "independence_pages": 18,
+      "passed": true
+    }
+  },
+  "build_reproducibility": "Stable default PDF identifier seed preserves historical CI bytes across checkout paths; explicit source declarations and strict byte comparisons retained.",
+  "review_boundary": "Internal AI-assisted proof and dependency review; finite and build checks are not independent external refereeing or formal verification."
+}
