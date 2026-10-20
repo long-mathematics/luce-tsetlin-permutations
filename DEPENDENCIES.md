@@ -137,6 +137,6 @@ No growing-number-of-roots theorem, arbitrary-deletion quenched theorem, profile
 
 ## Open dependency-sensitive targets
 
-The sampled-profile mean constant, uniformly bounded arbitrary-array mean shift, higher factorial-cumulant limits, and locally uniform complex mod-Poisson residue remain open. None is an input to a current theorem.
+The active `mod-poisson` manuscript establishes the sampled positive continuous-profile mean constant, universal fixed higher factorial-cumulant limits, and locally uniform analytic mod-Poisson convergence near z = 1. For arbitrary comparable-rate arrays, it gives a uniform mean-shift bound and local analytic bound without identifying a limiting residue. Open extensions include more general rate-array limits, endpoint-singular profiles, and larger complex domains or full-axis convergence. The new theorem is not an imported premise of its own proof; its actual upstream inputs are recorded above.
 
 The next controlled edits to the five audit-passed working extractions are their focused audit-repair PRs. Those repairs must not create new active-paper dependency edges unless such an edge is explicitly justified, documented here, and added to `papers.json`.
