@@ -14,7 +14,7 @@ Manuscript author: **Christopher D. Long**.
 | Joint distribution of fixed-length cycles (BCD §5.2) | [Microscopic Cycles and Sparse Entries](output/pdf/regular-profile-cycles.pdf) | Independent Poisson limits for each fixed finite vector of cycle counts under regular profiles. |
 | Divergent fixed-point counts for Sukhatme weights (BCD §5.2) | [Sukhatme Fixed Points](output/pdf/sukhatme-fixed-points.pdf); [Global Endpoint Poisson Approximation](output/pdf/global-endpoint-poisson.pdf) | Logarithmically growing mean, terminal Poisson process, and exact-mean Poisson approximation; not a fixed-parameter Poisson limit after rescaling. |
 | Longest and macroscopic cycles (CDK) | [Poisson–Dirichlet Universality](output/pdf/poisson-dirichlet-luce.pdf) | Ranked normalized cycle lengths converge to PD(1), and size-biased lengths to GEM(1), for uniformly comparable rates. |
-| Total number of cycles (CDK; BCD §5.2) | [Analytic Mod-Poisson Convergence](output/pdf/luce-mod-poisson.pdf); [Total-Cycle Poisson and Edgeworth Approximations](output/pdf/total-cycle-edgeworth.pdf) | Analytic mod-Poisson limit for regular profiles; quantitative exact-mean Poisson and lattice normal approximations for comparable rates. |
+| Total number of cycles (CDK; BCD §5.2) | [Analytic Mod-Poisson Convergence](output/pdf/luce-mod-poisson.pdf); [Total-Cycle Poisson and Edgeworth Approximations](output/pdf/total-cycle-edgeworth.pdf) | Analytic mod-Poisson limit near z = 1 for regular positive profiles; quantitative exact-mean Poisson and lattice normal approximations for comparable rates. |
 | Permutation order (CDK) | [Erdős–Turán Law](output/pdf/luce-erdos-turan.pdf); [Sharp Order Edgeworth Expansion](output/pdf/luce-edgeworth.pdf) | Erdős–Turán central limit law and quantitative refinements for comparable rates. |
 
 These are asymptotic results for specified classes of Luce arrays. CDK also asks about longest increasing subsequences; the cataloged manuscripts above do not claim a general solution to that question.
@@ -37,7 +37,7 @@ These are asymptotic results for specified classes of Luce arrays. CDK also asks
 | Microscopic Cycles and Sparse Entries for Regular Luce Profiles | [PDF](output/pdf/regular-profile-cycles.pdf) | [Source](papers/regular-profile-cycles/regular-profile-cycles.tex) | audited current manuscript |
 | Poisson--Dirichlet Universality for Luce Permutations | [PDF](output/pdf/poisson-dirichlet-luce.pdf) | [Source](papers/macroscopic-pd/poisson-dirichlet-luce.tex) | audited current manuscript |
 
-The **139-page original research draft** is preserved as [PDF](archive/6178a99/output/pdf/luce-boundary-cycle-laws.pdf) and [LaTeX](archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex). It is an immutable provenance source, not an active monolithic editing target. Every principal theorem-and-proof package has now been assigned to a standalone paper. The regular-profile and PD/GEM papers completed extraction, adversarial audit, and localized repair and are audited current manuscripts. The five remaining thematic papers completed mechanical extraction and independent adversarial audit; every audit found no fatal gap, but each records six localized clarifications that remain deliberately deferred. See the [consolidated migration table](notes/migration-plan.md), theorem-specific audit files under [`audits/`](audits/), and old-label/new-label maps under the corresponding paper directories. No principal theorem remains only in the monolith.
+The **139-page original research draft** is preserved as [PDF](archive/6178a99/output/pdf/luce-boundary-cycle-laws.pdf) and [LaTeX](archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex). It is an immutable provenance source, not an active monolithic editing target. Every principal theorem-and-proof package has now been assigned to a standalone paper. The regular-profile and PD/GEM papers completed extraction, internal proof audit, and localized repair. The five remaining thematic papers have standalone extractions and internal audits, with manuscript-specific clarifications still pending. Their detailed review records remain linked below. See the [consolidated migration table](notes/migration-plan.md), theorem-specific audit files under [`audits/`](audits/), and old-label/new-label maps under the corresponding paper directories. No principal theorem remains only in the monolith.
 
 ## Paper summaries
 
@@ -152,20 +152,20 @@ which yields the sharp Berry--Esseen order $(\log n)^{-1/2}$. Its first lattice 
 
 The paper also gives the variance asymptotic, a continuity-corrected second-order lattice expansion retaining the exact coefficient $\mathrm{Var}K_n-\mu_n$, and signed Poisson--Charlier approximations at every fixed order. The proof uses a passive-mark Poisson core from the switching theory and discrete Poisson smoothing; it does not use the nonlinear arithmetic analysis required for logarithmic permutation order.
 
-**Status:** current research manuscript. Exact-mean centering and the lattice phase are essential; profile-dependent limiting mean and higher-cumulant constants remain separate open questions.
+**Status:** current research manuscript. Exact-mean centering and the lattice phase are essential for its quantitative expansions. The later [analytic mod-Poisson paper](output/pdf/luce-mod-poisson.pdf) establishes the profile-dependent mean and limiting higher factorial cumulants under regular positive profiles.
 
 ### Analytic mod-Poisson convergence for Luce permutations
 
 [PDF](output/pdf/luce-mod-poisson.pdf) · [LaTeX](papers/mod-poisson/luce_mod_poisson.tex)
 
-For arbitrary comparable-rate triangular arrays, the paper proves a uniform complex normal-family bound for the normalized total-cycle generating function. For positive continuous rate profiles, it proves locally uniform analytic mod-Poisson convergence:
+For arbitrary comparable-rate triangular arrays, the paper proves a uniform complex normal-family bound near z = 1 for the normalized total-cycle generating function. For positive continuous rate profiles, it proves locally uniform analytic mod-Poisson convergence on a fixed complex neighborhood of z = 1:
 
 $$
 n^{1-z}\mathbb{E} z^{K_n}\longrightarrow
 \frac{e^{A_f(z-1)}}{\Gamma(z)}.
 $$
 
-The profile correction is the Fredholm determinant constant; after centering by the exact mean, the analytic residue is universal. The proof uses an exact uniform-clock component, a summable real-fugacity switching estimate, and the residual marked-cycle Poisson limit. Its model-specific asymptotic inputs are the regular-profile local-entry/envelope theorem and the macroscopic uniform-root law; the marked switching identity is cited from the mesoscopic manuscript. It does not assume the earlier higher-factorial-cumulant result.
+The profile correction is the Fredholm determinant constant; after centering by the exact mean, the analytic residue is universal on that neighborhood. Neither convergence on the full imaginary axis nor an identified residue for arbitrary comparable arrays without a limiting profile is asserted. The proof uses an exact uniform-clock component, a summable real-fugacity switching estimate, and the residual marked-cycle Poisson limit. Its model-specific asymptotic inputs are the regular-profile local-entry/envelope theorem and the macroscopic uniform-root law; the marked switching identity is cited from the mesoscopic manuscript. It does not assume the earlier higher-factorial-cumulant result.
 
 **Status:** internally audited current-research manuscript, not independently refereed. See the [proof and dependency audit](audits/mod-poisson-proof-audit.md).
 
@@ -175,7 +175,7 @@ The profile correction is the Fredholm determinant constant; after centering by 
 
 This paper isolates the finite top-window identities and infinite bottom-window leakage theory from the archived monolith. It proves that the exact top-window total-variation distance equals the collision probability of the corresponding product sample, gives the exact one-sided relative defect, and identifies the total mass lost by a limiting bottom-window law. A vanishing-block construction records why permuton convergence alone cannot control microscopic statistics.
 
-**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/boundary-laws-proof-audit.md) and remain deferred.
+**Status:** working mechanical extraction, with internal review completed and clarifications pending. See the [proof audit](audits/boundary-laws-proof-audit.md).
 
 ### Sukhatme fixed points and the terminal Poisson process
 
@@ -183,7 +183,7 @@ This paper isolates the finite top-window identities and infinite bottom-window 
 
 For the singular decreasing-rate profile, this paper proves logarithmic fixed-point growth, a local terminal Poisson point process on logarithmic coordinates, and all fixed factorial-moment asymptotics. Its proof combines a death-process envelope with anisotropic saddle and local-limit analysis.
 
-**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/sukhatme-fixed-points-proof-audit.md) and remain deferred.
+**Status:** working mechanical extraction, with internal review completed and clarifications pending. See the [proof audit](audits/sukhatme-fixed-points-proof-audit.md).
 
 ### Endpoint-regular fixed-point universality
 
@@ -191,7 +191,7 @@ For the singular decreasing-rate profile, this paper proves logarithmic fixed-po
 
 For uniformly endpoint-regularly varying terminal arrays, the paper proves a logarithmic fixed-point Poisson process, displacement and tangent-measure laws, a multiplicative endpoint kernel, and a microscopic endpoint permutation limit. Its proof uses endpoint-specific anisotropic saddle and local-limit analysis.
 
-**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/endpoint-regular-universality-proof-audit.md) and remain deferred.
+**Status:** working mechanical extraction, with internal review completed and clarifications pending. See the [proof audit](audits/endpoint-regular-universality-proof-audit.md).
 
 ### Global endpoint Poisson approximation
 
@@ -199,7 +199,7 @@ For uniformly endpoint-regularly varying terminal arrays, the paper proves a log
 
 This paper strengthens the endpoint fixed-point theory to a global total-variation Poisson approximation with exact mean. Its Stein--Chen proof constructs an approximate Palm coupling by terminal-rank transposition and controls the likelihood ratio, quantitative saddle error, and two-cycle correction.
 
-**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/global-endpoint-poisson-proof-audit.md) and remain deferred.
+**Status:** working mechanical extraction, with internal review completed and clarifications pending. See the [proof audit](audits/global-endpoint-poisson-proof-audit.md).
 
 ### Endpoint short cycles
 
@@ -207,7 +207,7 @@ This paper strengthens the endpoint fixed-point theory to a global total-variati
 
 This paper proves the joint law of every fixed collection of short cycle lengths in the endpoint-singular regime. Their expectations grow logarithmically with constants given by convolution traces of the endpoint kernel, and the normalized cycle counts converge jointly to one.
 
-**Status:** working mechanical extraction; the adversarial audit found no fatal gap. Six localized clarifications are recorded in the [proof audit](audits/endpoint-short-cycles-proof-audit.md) and remain deferred.
+**Status:** working mechanical extraction, with internal review completed and clarifications pending. See the [proof audit](audits/endpoint-short-cycles-proof-audit.md).
 
 ### Microscopic cycles and sparse entries for regular Luce profiles
 
@@ -249,7 +249,7 @@ The proof is independent of the mesoscopic and total-cycle theorems. Its main in
 
 The initial import pins the original collection at commit `6178a99a8f2ee7b6416edd026e7780b9b8fa9fa0`. Original sources, PDFs, licenses, and historical audits are immutable hash-checked archival records. The invalid historical total-cycle candidate remains separate from the later functional and quantitative proofs.
 
-The regular-profile paper adds an active standalone copy without changing any archived byte. Its audit covers the separated local estimate, endpoint/collision envelopes, improper integrability, factorial moments, total variation, long traces, sparse entries, and deterministic overlaps; its six localized clarification sets are regression-checked. The PD/GEM paper adds an active standalone copy without changing any archived byte. The extraction check certifies coverage and cross-reference closure; the later adversarial audit separately checks the clock-slab conditioning, adaptive prefix law, rooted closure, deletion stability, regeneration, GEM induction, residual-mass control, and $\ell^1$ passage. The audit found no fatal gap and recommended six publication-level clarifications, all of which are recorded and regression-checked. This remains an internal review, not formal verification or independent external refereeing.
+The regular-profile paper adds an active standalone copy without changing any archived byte. Its audit covers the separated local estimate, endpoint/collision envelopes, improper integrability, factorial moments, total variation, long traces, sparse entries, and deterministic overlaps; its localized repairs are recorded and regression-checked. The PD/GEM paper adds an active standalone copy without changing any archived byte. The extraction check certifies coverage and cross-reference closure; the later adversarial audit separately checks the clock-slab conditioning, adaptive prefix law, rooted closure, deletion stability, regeneration, GEM induction, residual-mass control, and $\ell^1$ passage. The internal audit's publication-level clarifications were incorporated and regression-checked. This remains an internal review, not formal verification or independent external refereeing.
 
 [Preservation manifest](archive/manifest.json) · [Import mapping](notes/import-record.json) · [Source proof notes](archive/total-cycle-source-notes/README.md) · [Total-cycle integration audit](audits/total-cycle-integration.md) · [PD/GEM extraction record](audits/macroscopic-pd-extraction.md) · [PD/GEM proof audit](audits/macroscopic-pd-proof-audit.md) · [PD/GEM repair record](audits/macroscopic-pd-repair-record.md) · [Migration plan](notes/migration-plan.md)
 

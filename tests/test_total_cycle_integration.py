@@ -27,9 +27,16 @@ class IntegrationTests(unittest.TestCase):
         self.assertIn('scripts/macroscopic-pd/check_audit_repairs.py',scripts)
         for script in scripts:
             self.assertFalse(script.startswith('archive/'))
-    def test_profile_limits_remain_open(self):
-        text=(ROOT/'THEOREM_STATUS.md').read_text()
-        self.assertIn('## Open questions',text)
-        self.assertIn('locally uniform complex Luce mod-Poisson residue remain open',text)
+    def test_profile_mod_poisson_scope_matches_active_theorem(self):
+        status=(ROOT/'THEOREM_STATUS.md').read_text()
+        self.assertIn('## Open questions',status)
+        self.assertIn('sampled positive continuous-profile mean constant',status)
+        self.assertIn('locally uniform analytic convergence near z = 1',status)
+        self.assertIn('but not an identified analytic limiting residue',status)
+        self.assertNotIn('locally uniform complex Luce mod-Poisson residue remain open',status)
+        documents=json.loads((ROOT/'papers.json').read_text())['documents']
+        self.assertIn('mod-poisson',[doc['id'] for doc in documents])
+        previous=(ROOT/'papers/total-cycle-edgeworth/total-cycle-edgeworth.tex').read_text()
+        self.assertIn('Neither limit is proved here',previous)
 
 if __name__=='__main__': unittest.main()
