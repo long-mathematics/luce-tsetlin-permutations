@@ -23,6 +23,13 @@
         "--output",
         ".build/verification/macroscopic_pd_repairs.json"
       ]
+    },
+    {
+      "script": "scripts/independence-peeling/check_consistency.py",
+      "args": [
+        "--output",
+        ".build/verification/independence_peeling.json"
+      ]
     }
   ]
 }
