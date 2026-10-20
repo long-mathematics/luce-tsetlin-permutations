@@ -1,5 +1,7 @@
 # Macroscopic PD/GEM audit-repair record
 
+**Supersession notice — 20 October 2026.** This historical record concerns the comparable-rate predecessor. Its repaired source, PDF, and extraction map are now [preserved byte-for-byte](../archive/macroscopic-pd-comparable/README.md). The active `macroscopic-pd` manuscript is the [spectral replacement](../papers/macroscopic-pd/spectral-poisson-dirichlet-luce.tex); see its [separate audit](spectral-pd-proof-audit.md) and [theorem migration map](../papers/macroscopic-pd/THEOREM_MIGRATION.md). The dated findings, hashes, and paths below describe the historical version.
+
 Repair date: 11 October 2026  
 Audit source: `audits/macroscopic-pd-proof-audit.md`  
 Audited manuscript head: `025fbbc2ad072aad0577a2fdd5aec5edd640b748`  

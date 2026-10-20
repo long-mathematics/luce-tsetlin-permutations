@@ -22,4 +22,10 @@ The remaining independent-verification boundary is end-to-end scrutiny of the tw
 
 ## Repository reproducibility
 
-The LaTeX source and compiled PDF are registered in `papers.json`; the deterministic build and SHA-256 PDF manifest are maintained by `scripts/build.py`. Run `make pdf`, `make test`, `make check`, and `make verify` following `CONTRIBUTING.md`. The proof's citation references are pinned in its bibliography to repository revision `01f99e121c4ea497e3c9e9bcfa83d027c5833742`.
+The LaTeX source and compiled PDF are registered in `papers.json`; the deterministic build and SHA-256 PDF manifest are maintained by `scripts/build.py`. Run `make pdf`, `make test`, `make check`, and `make verify` following `CONTRIBUTING.md`. At the original integration, the companion citations were pinned to repository revision `01f99e121c4ea497e3c9e9bcfa83d027c5833742`. The later spectral migration below updates only the macroscopic input citation.
+
+## Spectral PD dependency migration — 20 October 2026
+
+The macroscopic citation now points to the approved spectral source at revision `81462993a7400f972a3d75583d447fbeccf1e7b3`. The imported conclusion remains the original-measure uniform-root law under comparable rates: Theorem 1.1, equation `eq:uniform-root-main`, specialized by Corollary 8.1. That corollary includes arrays without an empirical rate-law limit. No tilted, residual-history, or finite-deletion input is added.
+
+A focused interface review checked the replacement against the active spectral source. Every labelled theorem, corollary, lemma, proposition, and input-theorem statement in this manuscript is unchanged. The bibliography and explanatory citation paragraph are the only mathematical-source edits. See the [spectral integration record](spectral-pd-proof-audit.md) and [theorem migration map](../papers/macroscopic-pd/THEOREM_MIGRATION.md). The earlier audit remains a record of its originally pinned companions.

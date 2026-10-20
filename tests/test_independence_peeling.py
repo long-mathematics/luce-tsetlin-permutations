@@ -24,9 +24,16 @@ class IndependencePeelingTests(unittest.TestCase):
         for label in ('eq:imported-root-error', 'eq:imported-deletion-error',
                       'eq:finite-deletion-recursion', 'eq:weighted-good-slab'):
             self.assertIn(r'\label{' + label + '}', text)
-        for name in ('eq:pd-root-cdf', 'eq:pd-deletion-joint',
-                     'lem:pd-residual-factorization', 'cor:factorial-domination'):
+        for name in ('eq:root-cdf', 'eq:deletion-joint',
+                     'lem:residual-factorization', 'cor:factorial-domination'):
             self.assertIn(name, text)
+        spectral = (ROOT / 'papers/macroscopic-pd/spectral-poisson-dirichlet-luce.tex').read_text()
+        imported = ('thm:main-spectral', 'cor:comparable',
+                    'lem:residual-factorization', 'prop:uniform-root-fraction',
+                    'lem:deletion-stability', 'prop:residual-uniforms',
+                    'eq:root-cdf', 'eq:deletion-error', 'eq:deletion-joint')
+        for name in imported:
+            self.assertIn(r'\label{' + name + '}', spectral)
         self.assertIn('not inferred from unconditional', text)
         self.assertIn('no additional information about unexposed edges', ' '.join(text.split()))
 

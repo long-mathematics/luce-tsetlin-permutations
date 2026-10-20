@@ -41,7 +41,7 @@ The rows below are in the same order as `papers.json`. Every active manuscript a
 | `global-endpoint-poisson` | Global Endpoint Poisson Approximation | `working` | **Working mechanical extraction; audit passed, repairs pending** | The endpoint framework, approximate-Palm Stein bound, exact rank-transposition likelihood ratio, quantitative saddle, swap--Palm comparison, two-cycle correction, explicit total-variation rate, and exact-mean normal corollary passed adversarial audit. Audit-recorded clarifications remain deferred. |
 | `endpoint-short-cycles` | Endpoint Short Cycles | `working` | **Working mechanical extraction; audit passed, repairs pending** | The source-to-target endpoint saddle, anisotropic LLT/localization, global cycle envelope, logarithmic trace, negligible-configuration bounds, mixed factorial moments, and fixed-Lp law of large numbers passed adversarial audit. Audit-recorded clarifications remain deferred. |
 | `regular-profile-cycles` | Microscopic Cycles and Sparse Entries for Regular Luce Profiles | `current-research` | **Audited current manuscript** | Under the exact sampled positive continuous-profile hypothesis, fixed cycle vectors converge to independent Poisson laws with cyclic-trace means; the means approach 1/r exponentially. The same paper gives diagonal-band, sparse-entry, thin-graph, deterministic-overlap, and transverse-curve laws. Audit-approved clarifications were applied and regression-checked. |
-| `macroscopic-pd` | Poisson–Dirichlet Universality for Luce Permutations | `current-research` | **Audited current manuscript** | Under a fixed largest-to-smallest rate ratio, normalized ranked cycles converge to PD(1) in ell-one, the independent residual-root deletion sequence converges to GEM(1) in ell-one, and a uniform-root cycle has a Uniform(0,1) limit. Audit-approved clarifications were applied and regression-checked. |
+| `macroscopic-pd` | Spectral Poisson–Dirichlet Universality for Luce Permutations under Arbitrary Rate Arrangements | `current-research` | **Audited current manuscript** | The full mean-zero channel criterion gives GEM(1) and PD(1) convergence in ell-one and a uniform-root Uniform(0,1) limit for arbitrary deterministic rate assignments. Its subsequential form recovers all comparable arrays. Positive-index regularly varying spectra, including every Sukhatme rearrangement, satisfy the criterion. The dyadic-gap and slowly varying no-gap results are proved theorems. |
 
 | `stratified-hammersley-lis` | Stratified Hammersley Laws for Luce Permutations | `current-research` | Internally audited, localized repairs incorporated; no external refereeing | A row-stratified Hammersley full shape-field theorem (with fixed-deviation tails, all finite moments and localization) transfers to independent-score rankings and positive continuous-profile Luce arrays, with bounded-rate sparse-error robustness. A dyadic terminal-block comparison gives first-order endpoint LIS/LDS laws for both Sukhatme orientations, quantitative truncation bounds and the certified decreasing-rate lower bound >3.0602. No singular full-field or Tracy–Widom assertion. |
 
@@ -53,7 +53,7 @@ The new `mod-poisson` manuscript proves a uniform local analytic bound for arbit
 
 For the quantitative total-cycle results, exact-mean centering is essential at the stated precision. The newer `mod-poisson` theorem yields `E K_n = H_n + O(1)` and `Var K_n - E K_n = O(1)` uniformly over comparable-rate arrays. These bounds do not justify replacing the exact mean inside the sharp lattice formulas, because the lattice phase can jump under an arbitrarily small centering error. The second-order Edgeworth formula retains the exact variance-minus-mean coefficient; an arbitrary comparable-rate array need not have a convergent profile or limiting coefficient. Signed approximants are not asserted positive, and the right-continuous lattice phase equals +1/2 at integers.
 
-The two audited-current extracted papers do not acquire any unreviewed strengthening. The regular-profile paper is not extended to arbitrary comparable arrays, growing cycle lengths, endpoint-singular profiles, or a quantitative total-variation rate. The PD/GEM paper does not assert a quantitative rate, arbitrary-history quenched uniformity, or endpoint-singular macroscopic universality.
+The regular-profile extraction is not extended to arbitrary comparable arrays, growing cycle lengths, endpoint-singular profiles, or a quantitative total-variation rate. The spectral PD/GEM replacement permits endpoint-singular spectra under its stated channel criterion and recovers all comparable-rate arrays through its subsequential form. It does not supply a quantitative convergence rate or uniformity over arbitrary deletion histories. Its conditional root and deletion estimates apply to the specified regular histories and good slab data. The random-environment corollary concerns rates independent of the exponential variables whose empirical laws converge in probability to a deterministic qualifying limit; conditional convergence is in probability. Neither that corollary nor the broader marginal cycle theorem changes the hypotheses of the regular-profile, mod-Poisson, or independence-peeling manuscripts.
 
 The five audit-passed working extractions remain below audited-current status until their recorded clarifications are applied in focused repair PRs and checked against the frozen-source theorem scope.
 
@@ -63,13 +63,34 @@ The `bottom-window-universality` theorem assumes a regularly varying profile wit
 
 The standalone `stratified-hammersley-lis` paper is a first-order LIS/LDS result, not a cycle theorem, and does not import an active Luce manuscript. Its endpoint theorem provides terminal subsequence limits and concentration, not a uniform full shape field in the singular regime. The rigorous bound for the decreasing-rate Sukhatme LIS constant is strictly greater than 3.0602; the draft does not certify a two-decimal numerical limiting constant. Its internal audit and repaired localization proof are documented in [the focused record](audits/stratified-hammersley-proof-audit.md).
 
+## Spectral PD/GEM theorem register
+
+The active spectral source retains the full criterion and distinguishes its proved boundary results from its remaining questions:
+
+| Result | Label | Status and scope |
+| --- | --- | --- |
+| Spectral criterion, Theorem 1.1 | `thm:main-spectral` | **Proved.** Weak convergence of maximum-normalized empirical laws to $ν$, no atom at zero, and $q(ν)<1$ imply the three cycle limits for every deterministic rate arrangement. |
+| Subsequential criterion, Corollary 1.2 | `cor:subsequential-spectral` | **Proved.** Every weak subsequential limit must satisfy the criterion; a single limiting law and an extra uniform-gap assumption are unnecessary. |
+| Independent random environments, Corollary 1.3 | `cor:random-environment` | **Proved.** Conditional bounded-Lipschitz convergence in probability when rates are independent of the exponential variables and their empirical laws converge in probability to a deterministic qualifying law. |
+| Longest cycle, Corollary 1.4 | `cor:longest-cycle` | **Proved.** Convergence to the largest PD(1) part and convergence of every positive moment. |
+| Regularly varying gap, Theorem 1.5 | `thm:rv-gap` | **Proved.** A lower tail regularly varying at zero with positive index has a spectral gap. Power and regularly varying rate spectra are covered by Corollaries 1.6–1.7. |
+| Comparable arrays, Corollary 8.1 | `cor:comparable` | **Proved.** Recovers the predecessor's full theorem without empirical-law convergence. |
+| Dyadic-doubling criterion, Theorem 9.1 | `thm:dyadic-doubling` | **Proved; promoted from conjecture.** Eventually positive shell masses with successive ratios between fixed positive constants strictly below one give a gap, including atomic or singular laws. |
+| Slowly varying boundary, Theorem 9.2 | `thm:slow-boundary` | **Proved; promoted from conjecture.** An eventually positive, slowly varying lower tail tending to zero has $q(ν)=1$. This does not assert failure of PD(1). |
+
+See the [spectral audit](audits/spectral-pd-proof-audit.md) for the five repaired proof points and the [migration map](papers/macroscopic-pd/THEOREM_MIGRATION.md) for the exact predecessor interfaces.
+
 ## Historical material
 
 The original total-cycle / Conjecture 13.2 resolution candidate is a **Historical rejected candidate**. The later Campbell--Stein proof does not reinstate its proposed profile expectation expansion.
 
+The comparable-rate PD/GEM paper is a **superseded, proved predecessor**, preserved with its PDF and extraction map in [the comparable-rate archive](archive/macroscopic-pd-comparable/README.md). It is no longer a separate active paper or an active dependency; its full theorem is recovered by the spectral manuscript. Its historical audit findings and hashes remain valid for that preserved version.
+
 No principal theorem-and-proof package remains only in the frozen 139-page monolith. The monolith-only remainder is introductory, transitional, concluding, or conjectural exposition, as recorded in `notes/migration-plan.md`.
 
 ## Open questions
+
+For spectral PD/GEM, necessity of a channel gap for universality over all deterministic arrangements remains Question 9.3. The slowly varying no-gap theorem does not settle it. Growing log-linear spectra (Question 9.5), the multiscale endpoint phase (Conjecture 9.6), quantitative GEM/PD convergence (Question 9.7), and the exact power-law gap (Question 9.8) remain open. The former dyadic and slowly varying conjectures are now Theorems 9.1 and 9.2.
 
 The active `mod-poisson` manuscript establishes the sampled positive continuous-profile mean constant, locally uniform analytic convergence near z = 1, and the limits of every fixed higher factorial cumulant. For arbitrary comparable-rate arrays, it proves uniform bounds on the mean shift and higher factorial cumulants, but not an identified analytic limiting residue. Open extensions include broader rate-array limits, endpoint-singular or discontinuous profiles, and convergence on larger complex domains (including the full imaginary axis in stronger formulations). See the [scope and remaining-questions note](notes/working/profile-mod-poisson.md).
 
@@ -85,12 +106,14 @@ The five audit-passed working extractions have paired extraction, provenance, an
 | `global-endpoint-poisson` | [record](audits/global-endpoint-poisson-extraction.md) | [audit](audits/global-endpoint-poisson-proof-audit.md) | [map](papers/global-endpoint-poisson/EXTRACTION_MAP.md) |
 | `endpoint-short-cycles` | [record](audits/endpoint-short-cycles-extraction.md) | [audit](audits/endpoint-short-cycles-proof-audit.md) | [map](papers/endpoint-short-cycles/EXTRACTION_MAP.md) |
 
-The audited-current extracted papers have full extraction/audit/repair chains:
+The regular-profile extraction and the now-preserved comparable-rate PD/GEM predecessor have full historical extraction/audit/repair chains:
 
 | ID | Extraction | Audit | Repair |
 | --- | --- | --- | --- |
 | `regular-profile-cycles` | [record](audits/regular-profile-extraction.md) | [audit](audits/regular-profile-proof-audit.md) | [repair](audits/regular-profile-repair-record.md) |
 | `macroscopic-pd` | [record](audits/macroscopic-pd-extraction.md) | [audit](audits/macroscopic-pd-proof-audit.md) | [repair](audits/macroscopic-pd-repair-record.md) |
+
+The active spectral replacement has a separate [proof and integration audit](audits/spectral-pd-proof-audit.md) and [theorem migration map](papers/macroscopic-pd/THEOREM_MIGRATION.md). The two downstream papers now cite its exact inputs; their theorem hypotheses are unchanged.
 
 The total-cycle integration boundary is recorded in [the integration audit](audits/total-cycle-integration.md), and the preserved source proof notes remain under [`archive/total-cycle-source-notes/`](archive/total-cycle-source-notes/README.md).
 

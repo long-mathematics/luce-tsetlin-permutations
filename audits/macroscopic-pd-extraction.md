@@ -1,5 +1,7 @@
 # Macroscopic PD/GEM mechanical extraction record
 
+**Supersession notice — 20 October 2026.** This historical record concerns the comparable-rate predecessor. Its repaired source, PDF, and extraction map are now [preserved byte-for-byte](../archive/macroscopic-pd-comparable/README.md). The active `macroscopic-pd` manuscript is the [spectral replacement](../papers/macroscopic-pd/spectral-poisson-dirichlet-luce.tex); see its [separate audit](spectral-pd-proof-audit.md) and [theorem migration map](../papers/macroscopic-pd/THEOREM_MIGRATION.md). The dated findings, hashes, and paths below describe the historical version.
+
 Date: 11 October 2026.
 
 This record documents extraction coverage and build integrity. It is **not** a mathematical audit, referee report, novelty certification, or formal proof verification.

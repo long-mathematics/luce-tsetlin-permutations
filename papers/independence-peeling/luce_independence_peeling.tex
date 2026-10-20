@@ -416,9 +416,14 @@ Edgeworth expansion is used.
 \label{input:PD}
 Under \eqref{eq:comparable}, $\mathbf P_n\Rightarrow\PD(1)$ in $\ell^1$,
 and the size-biased residual deletion sequence converges to $\GEM(1)$.
-The following conditional interfaces of the same proof are also used.
-For a fixed finite master partition of clock time, the complete slab data
-record the label sets $H_a$, the rank sets $Q_a$, and the ordered
+Under \eqref{eq:profile}, we also use the following conditional interfaces
+of the same proof.  Normalize clocks and rates by
+\[
+ T_{n,i}=(\max_j\theta_{n,j})X_{n,i},\qquad
+ r_{n,i}=\theta_{n,i}/\max_j\theta_{n,j}\in[\varkappa^{-1},1].
+\]
+For a fixed finite master partition of this normalized clock time, the
+complete slab data record the label sets $H_a$, the rank sets $Q_a$, and the ordered
 \emph{unlabeled} clock values.  On good slab events of probability tending
 to one, each fixed row and cell population is bounded below by
 $c_{\mathcal J}n$.
@@ -426,22 +431,31 @@ After conditioning only on compatible revealed edges and deleting complete
 cycles, the residual matchings are independent permanental matchings.
 The uniform rooted-closure and deletion estimates apply to regular residual
 histories with remaining mass at least a fixed positive fraction and
-relative row/cell error tending to zero.  More precisely, if $S<U$ are
-fixed clock cutoffs, the interior root-CDF error is at most
+relative row/cell error tending to zero.  For a partition endpoint $U$,
+write $p_n(D(U))=n^{-1}\#\{i:T_{n,i}>U\}$ and
+\[
+ \Delta_n(U,\delta,h)
+ =\delta+2h+\chi_n+\sqrt{p_n(D(U))},
+\]
+where $h$ is the mesh of the finite clock cells.  More precisely, if
+$S<U$ are fixed clock cutoffs, the interior root-CDF error is at most
 \begin{equation}\label{eq:imported-root-error}
- C_{\varkappa,S,\xi,\zeta}
- (\delta+2\varkappa h+\chi_n+\varepsilon_n+e^{-U/2})
- +C_\xi(e^{-S}+\varepsilon_n^2)+\pi_n+C_{\mathcal J,\xi,\zeta}/n,
+ C_{\varkappa,S,\xi,\zeta}\Delta_n(U,\delta,h)
+ +C_\xi p_n(D(S))+\pi_n+C_{\mathcal J,\xi,\zeta}/n,
 \end{equation}
 where $\xi$ bounds the residual fraction below, $\zeta$ is the interior
-cutoff, and $\chi_n,\varepsilon_n,\pi_n\to0$ for the fixed partition.
+cutoff, and $\chi_n,\pi_n\to0$ for the fixed partition.  On the same good
+slab events, for a deterministic $\varepsilon_n\to0$ and every partition
+endpoint $U$,
+\begin{equation}\label{eq:imported-tail-bound}
+ p_n(D(U))\le e^{-U/\varkappa}+\varepsilon_n^2.
+\end{equation}
 The deletion lemma is a \emph{joint-event} bound: the probability that an
 interior root cycle is deleted and the resulting history is not regular
 at inner cutoff $S$ is at most $\pi_n$.  The new regularity error is
 bounded by
 \begin{equation}\label{eq:imported-deletion-error}
- C_{\varkappa,S,\xi,\zeta}
- (\delta+2\varkappa h+\chi_n+\varepsilon_n+e^{-U/2})
+ C_{\varkappa,S,\xi,\zeta}\Delta_n(U,\delta,h)
  +C_{\mathcal J,\xi,\zeta}/n.
 \end{equation}
 These bounds are uniform over regular starting histories.  A uniform
@@ -450,11 +464,24 @@ is derived below; it is not inferred from unconditional $\GEM(1)$
 convergence.
 \end{inputtheorem}
 
-These are the main macroscopic theorem, residual-factorization lemma,
-uniform residual-root law, and deletion-stability lemma of
-\cite{LongPD2026}.  The explicit bounds above are its equations
-\texttt{eq:pd-root-cdf} and \texttt{eq:pd-deletion-error}, together with
-the joint-event assertion \texttt{eq:pd-deletion-joint}.
+The unconditional conclusions are Theorem~1.1 and Corollary~8.1 of
+\cite{LongPD2026}; the latter covers comparable arrays without an empirical
+rate-law limit.  The conditional inputs are its residual-factorization
+lemma, uniform residual-root law, and deletion-stability lemma.  The
+explicit bounds above are its equations \texttt{eq:root-cdf} and
+\texttt{eq:deletion-error}, together with the joint-event assertion
+\texttt{eq:deletion-joint}.  Under \eqref{eq:profile}, the normalized
+empirical rate law converges to the law $\nu$ of $f(U)/\max f$, with $U$
+uniform on $[0,1]$.  This law is supported on $[\varkappa^{-1},1]$.  The
+common-component argument of Corollary~8.1 gives
+$q(\nu)\le\sqrt{1-\varkappa^{-1}}<1$, and the channel density satisfies
+$B_\nu(S)=\int r e^{-rS}\nu(\dd r)\ge\varkappa^{-1}e^{-S}$.
+Thus the conditional estimates apply with
+fixed finite constants.  The tail bound
+\eqref{eq:imported-tail-bound} follows from $r_{n,i}\ge\varkappa^{-1}$ and
+concentration of the empirical clock tails at the finitely many endpoints;
+the good slab event is intersected with these events.  No uniformity over
+varying profile functions is needed.
 The regularity tested there compares, on the rows below the chosen outer
 cutoff,
 \[
@@ -464,11 +491,11 @@ cutoff,
 \]
 with one, uniformly in the target category $b$.  The histories contain no
 additional information about unexposed edges.  The source labels
-\texttt{lem:pd-residual-factorization},
-\texttt{prop:pd-uniform-}\allowbreak\texttt{residual-fraction},
-\texttt{lem:pd-deletion-stability} identify the conditional modules.
-The proof of \texttt{prop:pd-residual-uniforms} supplies the cutoff
-ordering, but its unconditional statement is not used as a substitute
+\texttt{lem:residual-factorization},
+\texttt{prop:uniform-root-}\allowbreak\texttt{fraction},
+\texttt{lem:deletion-stability} identify the conditional modules.
+The cutoff ordering follows the proof of
+\texttt{prop:residual-uniforms}, but its unconditional statement is not used as a substitute
 for the displayed conditional estimates.
 Section~\ref{sec:micro-macro} verifies these conditions for every compatible
 collection of finitely many prescribed complete cycles before invoking
@@ -476,8 +503,9 @@ their uniformity.  No bound on the probability of a bad slab event
 \emph{conditional on a rare prescribed cycle} is assumed.
 \section{Microscopic--macroscopic independence}\label{sec:micro-macro}
 
-We first establish the finite-deletion consequence of Input~\ref{input:PD}
-that is needed for weighted averaging.  All prescribed cycles in this
+Throughout this section assume \eqref{eq:profile}.  We first establish the
+finite-deletion consequence of Input~\ref{input:PD} that is needed for
+weighted averaging.  All prescribed cycles in this
 section have bounded total size, fixed before $n\to\infty$.
 
 \subsection{Uniformity after finitely many prescribed cycles}
@@ -538,17 +566,27 @@ $\xi_*n$, where $\xi_*:=\zeta^k/2$.
 Choose clock cutoffs $T_0<\cdots<T_k$ from inner to outer, and then a
 single master partition with mesh $h$ containing those cutoffs.
 At stage $j+1$, use outer cutoff $T_{k-j}$ and inner cutoff $T_{k-j-1}$.
-The constants at a given inner cutoff are fixed before its outer cutoff
-is increased.  In particular, each outer tail can be chosen small enough
-after accounting for all subsequent, already fixed amplification factors.
-Only after the finite cutoff hierarchy is fixed is $h$ chosen small,
-and only then does $n$ tend to infinity.
+At each inner cutoff $T_i$, let $R_i$ and $B_i$ bound respectively the
+principal root-law and deletion coefficients, with residual fraction at
+least $\xi_*$, and set
+\[
+ A_i=\prod_{\ell=0}^i(1+R_\ell+B_\ell).
+\]
+All these constants are fixed before $T_{i+1}$ is chosen.  A tail error
+introduced at level $j$ enters a later regularity bound with coefficient
+$B_i\cdots B_j$, or a later root-law bound with coefficient
+$R_iB_{i+1}\cdots B_j$, for some $i\le j$; both are at most $A_j$.
+Choose $T_0$ to control the direct root tail, and each $T_{i+1}$ so that
+$A_i e^{-T_{i+1}/(2\varkappa)}$ is smaller than its allocated error budget.
+Only after this finite hierarchy is fixed is $h$ chosen so that
+$2h\sum_{i<k}A_i$ is small.  Finally take $n$ large enough to control the
+fixed-partition errors and their finitely many amplification factors.
 
 Here is the explicit perturbation from a prescribed deletion.  Put
 $d_0=C_{\mathcal J}v/n$ and, for $0\le j<k$, define
 \begin{equation}\label{eq:finite-deletion-recursion}
  d_{j+1}=B_{k-j-1}
- (d_j+2\varkappa h+\chi_n+\varepsilon_n+e^{-T_{k-j}/2})
+ (d_j+2h+\chi_n+\varepsilon_n+e^{-T_{k-j}/(2\varkappa)})
  +C_{\mathcal J,k,\xi_*,\zeta}/n,
 \end{equation}
 where $B_i$ bounds the deletion coefficient with inner cutoff $T_i$.
@@ -1261,12 +1299,12 @@ revision \texttt{38f195dc5b30}.
 
 \bibitem{LongPD2026}
 C.~D.~Long,
-\emph{Poisson--Dirichlet universality for Luce permutations},
-research manuscript, 2026.
+\emph{Spectral Poisson--Dirichlet universality for Luce permutations
+under arbitrary rate arrangements},
+research manuscript, 20 October 2026.
 Repository \texttt{long-mathematics/luce-tsetlin-permutations},
-revision \texttt{38f195dc5b30}.
-\path{papers/macroscopic-pd/poisson-dirichlet-luce.tex}.
-\href{https://github.com/long-mathematics/luce-tsetlin-permutations/blob/38f195dc5b30812ebbf084764016e857a68b9a1c/papers/macroscopic-pd/poisson-dirichlet-luce.tex}{Pinned source}.
+\path{papers/macroscopic-pd/spectral-poisson-dirichlet-luce.tex}.
+\href{https://github.com/long-mathematics/luce-tsetlin-permutations/blob/81462993a7400f972a3d75583d447fbeccf1e7b3/papers/macroscopic-pd/spectral-poisson-dirichlet-luce.tex}{Pinned repository source}.
 
 \bibitem{LongTotalCycles2026}
 C.~D.~Long,

@@ -2,6 +2,7 @@
 """Build active papers; verify immutable archive bytes and deterministic PDFs."""
 from __future__ import annotations
 import argparse
+from datetime import datetime, timezone
 import hashlib
 import json
 import os
@@ -15,6 +16,11 @@ ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / '.build'
 MANIFEST = ROOT / 'output/pdf/manifest.json'
 STATUSES = {'imported', 'working', 'current-research'}
+SOURCE_DATE_EPOCH = 1791504000
+# Preserve the IDs of existing CI snapshots while making builds independent of
+# their actual checkout path. This is an identifier namespace, not a required
+# physical directory. Manuscripts declaring their own trailer ID keep that choice.
+PDF_ID_NAMESPACE = '/home/runner/work/luce-tsetlin-permutations/luce-tsetlin-permutations/.build'
 
 
 def digest(path: Path) -> str:
@@ -248,8 +254,16 @@ def build_one(doc: dict) -> tuple[Path, int]:
     if work.exists():
         shutil.rmtree(work)
     work.mkdir(parents=True)
-    env = dict(os.environ, SOURCE_DATE_EPOCH='1791504000', FORCE_SOURCE_DATE='1', TZ='UTC')
-    cmd = ['latexmk', '-pdf', '-g', '-interaction=nonstopmode', '-halt-on-error', '-file-line-error', '-latexoption=-no-shell-escape', '-outdir='+str(work), source.name]
+    env = dict(os.environ, SOURCE_DATE_EPOCH=str(SOURCE_DATE_EPOCH), FORCE_SOURCE_DATE='1', TZ='UTC')
+    creation_date = datetime.fromtimestamp(SOURCE_DATE_EPOCH, timezone.utc).strftime('D:%Y%m%d%H%M%SZ')
+    trailer_seed = creation_date + PDF_ID_NAMESPACE + '/' + doc['id'] + '/' + source.stem + '.pdf'
+    # pdfTeX honors only the first trailer-ID declaration. Do not preempt an
+    # explicit manuscript choice (the bottom-window paper omits its ID).
+    source_code = re.sub(r'(?m)(?<!\\)%.*$', '', source.read_text())
+    pretex = [] if re.search(r'\\pdftrailerid\b', source_code) else [
+        '-usepretex=' + r'\pdftrailerid{' + trailer_seed + '}'
+    ]
+    cmd = ['latexmk', '-pdf', '-g', '-interaction=nonstopmode', '-halt-on-error', '-file-line-error', '-latexoption=-no-shell-escape', *pretex, '-outdir='+str(work), source.name]
     result = subprocess.run(cmd, cwd=source.parent, env=env, capture_output=True, text=True, timeout=300)
     (work/'build-console.txt').write_text(result.stdout+result.stderr)
     if result.returncode:
