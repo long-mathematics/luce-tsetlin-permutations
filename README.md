@@ -1,12 +1,12 @@
 # Luce/Tsetlin Permutations
 
-Limit laws and cycle statistics for Luce/Tsetlin permutations, including Poisson–Dirichlet universality, switching methods, and Erdős–Turán theorems.
+Limit laws for Luce/Tsetlin permutations, including cycle statistics, Poisson–Dirichlet universality, longest increasing subsequences, switching methods, and Erdős–Turán theorems.
 
 Manuscript author: **Christopher D. Long**.
 
 ## Questions raised in the Diaconis collaborations
 
-[Chatterjee–Diaconis–Kim, *Enumerative Theory for the Tsetlin Library* (2024)](https://doi.org/10.1016/j.jalgebra.2023.08.009) asks about fixed points, cycles, the longest cycle, and permutation order. [Borga–Chatterjee–Diaconis, *Permuton and Local Limits for the Luce Model* (2026), §5.2](https://arxiv.org/html/2509.07729v3#S5.SS2) explicitly conjectures a Poisson fixed-point limit and raises further cycle-count questions. The following manuscripts give asymptotic answers **under the stated rate hypotheses**, not for arbitrary positive-weight arrays.
+[Chatterjee–Diaconis–Kim, *Enumerative Theory for the Tsetlin Library* (2024)](https://doi.org/10.1016/j.jalgebra.2023.08.009) asks about fixed points, cycles, the longest cycle, permutation order, and longest increasing subsequences. [Borga–Chatterjee–Diaconis, *Permuton and Local Limits for the Luce Model* (2026), §5.2](https://arxiv.org/html/2509.07729v3#S5.SS2) explicitly conjectures a Poisson fixed-point limit and raises further cycle-count questions. The following manuscripts give asymptotic answers **under the stated rate hypotheses**, not for arbitrary positive-weight arrays.
 
 - **Poisson limit for fixed points (CDK; BCD §5.2)** — [Microscopic Cycles and Sparse Entries](output/pdf/regular-profile-cycles.pdf). Poisson limit with explicit diagonal-kernel mean for positive continuous profiles.
 - **Joint cycle structure (BCD §5.2)** — [Microscopic Cycles and Sparse Entries](output/pdf/regular-profile-cycles.pdf); [Independence and Poisson Peeling](output/pdf/luce-independence-peeling.pdf). For regular positive profiles, independent Poisson limits for fixed short-cycle vectors, jointly independent of the entire ranked PD(1) partition. No simultaneous growing-window joint limit is claimed.
@@ -14,16 +14,17 @@ Manuscript author: **Christopher D. Long**.
 - **Longest and macroscopic cycles (CDK)** — [Poisson–Dirichlet Universality](output/pdf/poisson-dirichlet-luce.pdf). Ranked normalized cycle lengths converge to PD(1), and size-biased lengths to GEM(1), for uniformly comparable rates.
 - **Total number of cycles (CDK; BCD §5.2)** — [Analytic Mod-Poisson Convergence](output/pdf/luce-mod-poisson.pdf); [Total-Cycle Poisson and Edgeworth Approximations](output/pdf/total-cycle-edgeworth.pdf). Analytic mod-Poisson limit near z = 1 for regular positive profiles; quantitative exact-mean Poisson and lattice normal approximations for comparable rates.
 - **Permutation order (CDK)** — [Erdős–Turán Law](output/pdf/luce-erdos-turan.pdf); [Sharp Order Edgeworth Expansion](output/pdf/luce-edgeworth.pdf). Erdős–Turán central limit law and quantitative refinements for comparable rates.
+- **Longest increasing subsequences (CDK; BCD §5.3)** — [Stratified Hammersley Laws](output/pdf/stratified-hammersley-laws-luce.pdf). A full first-order shape theorem holds for positive continuous Luce profiles, with robust extensions to comparable-rate sparse errors. A dyadic endpoint estimate proves the `sqrt(n)`-scale LIS and LDS laws for both Sukhatme rate orientations. These are laws of large numbers, not Tracy–Widom fluctuation theorems.
 - **Bottom cards of a permuton sample versus the exact profile model (BCD §2.4)** — [Bottom-Window Universality](output/pdf/bottom_window_luce.pdf). At an isolated regularly varying vanishing endpoint, fixed bottom windows converge to a race with Poisson-arrival rates, while exact profile grids have deterministic power rates. A separate grid-profile condition ensures a common limiting permuton.
 
-These are asymptotic results for specified classes of Luce arrays. CDK also asks about longest increasing subsequences; the cataloged manuscripts above do not claim a general solution to that question.
+These are asymptotic results for specified classes of Luce arrays. The LIS manuscript establishes first-order limits in the stated profile classes; Tracy–Widom fluctuations, finer endpoint universality, and general positive-weight arrays remain outside its scope.
 
 ## Current manuscripts
 
 - **Mesoscopic cycles of comparable-rate Luce permutations** — [PDF](output/pdf/mesoscopic-luce-cycles.pdf) · [Source](papers/mesoscopic-switching/mesoscopic-luce-cycles.tex) · *imported*
-- **An Erdos--Turan Law for Comparable-Rate Luce Permutations** — [PDF](output/pdf/luce-erdos-turan.pdf) · [Source](papers/erdos-turan-order/luce-erdos-turan.tex) · *imported*
-- **A Sharp Berry--Esseen Theorem and First Edgeworth Expansion for Logarithmic Luce Order** — [PDF](output/pdf/luce-edgeworth.pdf) · [Source](papers/sharp-order-edgeworth/luce-edgeworth.tex) · *imported*
-- **Functional Erdos--Turan and Total-Cycle Laws for Luce Permutations** — [PDF](output/pdf/functional-luce-erdos-turan.pdf) · [Source](papers/functional-erdos-turan/functional-luce-erdos-turan.tex) · *current-research*
+- **An Erdős–Turán Law for Comparable-Rate Luce Permutations** — [PDF](output/pdf/luce-erdos-turan.pdf) · [Source](papers/erdos-turan-order/luce-erdos-turan.tex) · *imported*
+- **A Sharp Berry–Esseen Theorem and First Edgeworth Expansion for Logarithmic Luce Order** — [PDF](output/pdf/luce-edgeworth.pdf) · [Source](papers/sharp-order-edgeworth/luce-edgeworth.tex) · *imported*
+- **Functional Erdős–Turán and Total-Cycle Laws for Luce Permutations** — [PDF](output/pdf/functional-luce-erdos-turan.pdf) · [Source](papers/functional-erdos-turan/functional-luce-erdos-turan.tex) · *current-research*
 - **Poisson Approximation and Lattice Edgeworth Expansions for Total Luce Cycles** — [PDF](output/pdf/total-cycle-edgeworth.pdf) · [Source](papers/total-cycle-edgeworth/total-cycle-edgeworth.tex) · *current-research*
 - **An Exact Uniform Component and Analytic Mod-Poisson Convergence for Luce Permutations** — [PDF](output/pdf/luce-mod-poisson.pdf) · [Source](papers/mod-poisson/luce_mod_poisson.tex) · *current-research; internally audited*
 - **Microscopic–Macroscopic Independence and Poisson Peeling for Luce Permutations** — [PDF](output/pdf/luce-independence-peeling.pdf) · [Source](papers/independence-peeling/luce_independence_peeling.tex) · *current-research; internally audited*
@@ -34,9 +35,11 @@ These are asymptotic results for specified classes of Luce arrays. CDK also asks
 - **Global Endpoint Poisson Approximation** — [PDF](output/pdf/global-endpoint-poisson.pdf) · [Source](papers/global-endpoint-poisson/global-endpoint-poisson.tex) · *mechanical extraction; audit passed; repairs pending*
 - **Endpoint Short Cycles** — [PDF](output/pdf/endpoint-short-cycles.pdf) · [Source](papers/endpoint-short-cycles/endpoint-short-cycles.tex) · *mechanical extraction; audit passed; repairs pending*
 - **Microscopic Cycles and Sparse Entries for Regular Luce Profiles** — [PDF](output/pdf/regular-profile-cycles.pdf) · [Source](papers/regular-profile-cycles/regular-profile-cycles.tex) · *audited current manuscript*
-- **Poisson--Dirichlet Universality for Luce Permutations** — [PDF](output/pdf/poisson-dirichlet-luce.pdf) · [Source](papers/macroscopic-pd/poisson-dirichlet-luce.tex) · *audited current manuscript*
+- **Poisson–Dirichlet Universality for Luce Permutations** — [PDF](output/pdf/poisson-dirichlet-luce.pdf) · [Source](papers/macroscopic-pd/poisson-dirichlet-luce.tex) · *audited current manuscript*
 
-The **139-page original research draft** is preserved as [PDF](archive/6178a99/output/pdf/luce-boundary-cycle-laws.pdf) and [LaTeX](archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex). It is an immutable provenance source, not an active monolithic editing target. Every principal theorem-and-proof package has now been assigned to a standalone paper. The regular-profile and PD/GEM papers completed extraction, internal proof audit, and localized repair. The five remaining thematic papers have standalone extractions and internal audits, with manuscript-specific clarifications still pending. Their detailed review records remain linked below. See the [consolidated migration table](notes/migration-plan.md), theorem-specific audit files under [`audits/`](audits/), and old-label/new-label maps under the corresponding paper directories. No principal theorem remains only in the monolith.
+- **Stratified Hammersley Laws for Luce Permutations** — [PDF](output/pdf/stratified-hammersley-laws-luce.pdf) · [Source](papers/stratified-hammersley-lis/stratified-hammersley-laws-luce.tex) · *current-research; internally audited*
+
+The **139-page original research draft** is preserved as [PDF](archive/6178a99/output/pdf/luce-boundary-cycle-laws.pdf) and [LaTeX](archive/6178a99/papers/01-luce-boundary-cycle-laws/luce-boundary-cycle-laws.tex). It is an immutable provenance source, not an active monolithic editing target. Every principal theorem-and-proof package has now been assigned to a standalone paper. The regular-profile and PD/GEM papers completed extraction, internal proof audit, and localized repair. The independently developed stratified-Hammersley/LIS paper has also been registered, audited, and locally repaired; it is not an extraction from the archived monolith. The five remaining thematic papers have standalone extractions and internal audits, with manuscript-specific clarifications still pending. Their detailed review records remain linked below. See the [consolidated migration table](notes/migration-plan.md), theorem-specific audit files under [`audits/`](audits/), and old-label/new-label maps under the corresponding paper directories. No principal theorem remains only in the monolith.
 
 ## Paper summaries
 
@@ -53,15 +56,15 @@ $$
 
 uniformly whenever the cycle length tends to infinity but remains $o(n)$. More generally, if $a_n\to\infty$ and $a_n=o(n)$, the point process of cycle lengths divided by $a_n$ converges vaguely to the scale-invariant Poisson process with intensity $dx/x$.
 
-The proof develops the switching calculus used throughout the later series: a marked involutive clock-swap identity, selected-factor moment bounds, and a finite-endpoint mixing theorem in mean conditional total variation. It proves the short-root estimate internally and therefore does not depend on the macroscopic Poisson--Dirichlet theorem.
+The proof develops the switching calculus used throughout the later series: a marked involutive clock-swap identity, selected-factor moment bounds, and a finite-endpoint mixing theorem in mean conditional total variation. It proves the short-root estimate internally and therefore does not depend on the macroscopic Poisson–Dirichlet theorem.
 
 **Status:** imported manuscript. The named endpoint modules have scoped review records; this README does not promote the paper to a separately re-audited status.
 
-### An Erdős--Turán law for comparable-rate Luce permutations
+### An Erdős–Turán law for comparable-rate Luce permutations
 
 [PDF](output/pdf/luce-erdos-turan.pdf) · [LaTeX](papers/erdos-turan-order/luce-erdos-turan.tex)
 
-This paper proves that the classical Erdős--Turán central limit theorem for permutation order survives throughout the comparable-rate Luce class, with no limiting rate profile:
+This paper proves that the classical Erdős–Turán central limit theorem for permutation order survives throughout the comparable-rate Luce class, with no limiting rate profile:
 
 $$
 \frac{\log\mathrm{ord}(\sigma_n)-\frac12(\log n)^2}
@@ -74,11 +77,11 @@ The additive cycle-product statistic is handled by the marked switching theory, 
 
 **Status:** imported manuscript. Its switching dependencies are explicit; the source is unchanged by the later total-cycle integration.
 
-### A sharp Berry--Esseen theorem and first Edgeworth expansion for logarithmic Luce order
+### A sharp Berry–Esseen theorem and first Edgeworth expansion for logarithmic Luce order
 
 [PDF](output/pdf/luce-edgeworth.pdf) · [LaTeX](papers/sharp-order-edgeworth/luce-edgeworth.tex)
 
-This quantitative supplement strengthens the scalar Erdős--Turán law. Writing $O_n=\mathrm{ord}(\sigma_n)$, $m_n=\mathbb E\log O_n$, and $L=\log n$, it states
+This quantitative supplement strengthens the scalar Erdős–Turán law. Writing $O_n=\mathrm{ord}(\sigma_n)$, $m_n=\mathbb E\log O_n$, and $L=\log n$, it states
 
 $$
 d_{\mathrm K}\left(
@@ -103,7 +106,7 @@ The proof combines polynomial endpoint control, prime-power linearization, compo
 
 **Status:** imported quantitative manuscript. The later repository integration reviewed the switching interfaces used elsewhere, but did not constitute a fresh audit of this paper's full nonlinear arithmetic argument.
 
-### Functional Erdős--Turán and total-cycle laws
+### Functional Erdős–Turán and total-cycle laws
 
 [PDF](output/pdf/functional-luce-erdos-turan.pdf) · [LaTeX](papers/functional-erdos-turan/functional-luce-erdos-turan.tex)
 
@@ -147,7 +150,7 @@ d_{\mathrm{TV}}\left(\mathcal L(K_n),\mathrm{Pois}(\mu_n)\right)
 $$
 
 
-which yields the sharp Berry--Esseen order $(\log n)^{-1/2}$. Its first lattice Edgeworth expansion determines the exact leading Kolmogorov constant $2/(3\sqrt{2\pi})$.
+which yields the sharp Berry–Esseen order $(\log n)^{-1/2}$. Its first lattice Edgeworth expansion determines the exact leading Kolmogorov constant $2/(3\sqrt{2\pi})$.
 
 The paper also gives the variance asymptotic, a continuity-corrected second-order lattice expansion retaining the exact coefficient $\mathrm{Var}K_n-\mu_n$, and signed Poisson--Charlier approximations at every fixed order. The proof uses a passive-mark Poisson core from the switching theory and discrete Poisson smoothing; it does not use the nonlinear arithmetic analysis required for logarithmic permutation order.
 
@@ -192,7 +195,7 @@ This paper isolates the finite top-window identities and infinite bottom-window 
 
 For a measurable profile regularly varying with positive index at an isolated vanishing endpoint, normalized permuton-sample clocks converge almost surely in $c_0$ to independent exponential marks divided by the corresponding powers of Poisson arrival times. For p at least one, convergence holds in $\ell^p$ exactly when p times the endpoint index exceeds one. Every fixed bottom window eventually agrees under the coupling, yielding both quenched and annealed total-variation convergence. The exact profile-grid limit instead uses powers of the deterministic label lattice; the stated grid-profile approximation is a separate sufficient condition for identifying its permuton with the sampled one.
 
-The paper gives the last-label distribution and its stretched-exponential tail, the large-exponent exact-versus-sampled comparison, and the critical logarithmic profile's extreme-clock and label exponents. The Poisson--Dirichlet corollary concerns normalized clock values. The power-law last-pick construction and linear last-label constant recover earlier results of Pitman--Tran, and the logarithmic scalar-tail calculation uses the Weibull-product asymptotic of Arendarczyk--Dębicki. These relationships are recorded explicitly in the manuscript and its audit.
+The paper gives the last-label distribution and its stretched-exponential tail, the large-exponent exact-versus-sampled comparison, and the critical logarithmic profile's extreme-clock and label exponents. The Poisson–Dirichlet corollary concerns normalized clock values. The power-law last-pick construction and linear last-label constant recover earlier results of Pitman--Tran, and the logarithmic scalar-tail calculation uses the Weibull-product asymptotic of Arendarczyk--Dębicki. These relationships are recorded explicitly in the manuscript and its audit.
 
 **Status:** internally audited current-research manuscript. All proof inputs are external standard results or arguments supplied in the paper; it has no active-paper dependencies. See the [proof and scope audit](audits/bottom-window-universality-proof-audit.md).
 
@@ -254,7 +257,7 @@ The same local-entry theory yields fixed-width diagonal-band Poisson laws, spars
 
 **Status:** audited current manuscript. The standalone extraction was checked against the frozen monolith, adversarially audited, and changed only by the localized clarifications recorded in its audit and repair files.
 
-### Poisson--Dirichlet universality for Luce permutations
+### Poisson–Dirichlet universality for Luce permutations
 
 [PDF](output/pdf/poisson-dirichlet-luce.pdf) · [LaTeX](papers/macroscopic-pd/poisson-dirichlet-luce.tex)
 
@@ -263,6 +266,16 @@ Under only a fixed bound on the ratio of the largest to the smallest positive ra
 The proof is independent of the mesoscopic and total-cycle theorems. Its main ingredients are the clock-slab permanental representation, hereditary flatness under predictable exploration, scale-sensitive rooted closure, deletion stability, and a regenerative GEM induction with residual-mass control.
 
 **Status:** audited current manuscript. The standalone extraction and all localized post-audit clarifications are recorded in the repository provenance and repair files.
+
+### Stratified Hammersley Laws for Luce Permutations
+
+[PDF](output/pdf/stratified-hammersley-laws-luce.pdf) · [LaTeX](papers/stratified-hammersley-lis/stratified-hammersley-laws-luce.tex)
+
+A row-stratified Hammersley theorem gives the full longest-chain field for independent continuous points with exactly one point per deterministic vertical fibre, under uniform convergence to a continuous row density. The field converges uniformly with fixed-deviation exponential tails, all finite moments, and localization of near-maximal chains. Ranking independent scores transfers this result to regular Luce profiles and Gaussian Thurstone–Mosteller rankings. Under positive continuous Luce profiles and uniformly comparable sparse profile errors, the normalized LIS and LDS have deterministic variational limits.
+
+For endpoint-degenerate profiles satisfying interior profile convergence and dyadic terminal-block rate comparability, the paper proves first-order LIS **and** LDS limits, moment convergence, and fixed-deviation concentration. This includes both orientations of the Sukhatme rates: `n-i+1` and `i`. The constants for the two orientations exchange under label reversal, not by equating their LIS laws. A self-similar Sukhatme truncation inequality controls the effect of the final fraction of labels, and an explicit trial path gives the rigorous lower bound `L_Suk^downarrow > 3.0602`. No unsupported two-decimal endpoint constant is asserted.
+
+**Status:** internally audited current-research manuscript, with localized repairs incorporated; not externally refereed or formally verified. The shape-field and localization results concern bounded-score regular profiles; the endpoint theorem concerns terminal LIS/LDS, not a complete singular shape field. Fluctuation distributions, KPZ scaling and a full RSK limit surface remain open. See the [focused proof and integration record](audits/stratified-hammersley-proof-audit.md) and [dependency map](DEPENDENCIES.md).
 
 ## Preservation and review
 

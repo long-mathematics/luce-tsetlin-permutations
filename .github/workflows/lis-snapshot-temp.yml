@@ -1,0 +1,49 @@
+name: Populate LIS PDF snapshot (temporary)
+on:
+  push:
+    branches: [paper/stratified-hammersley-lis-2026-10-20]
+permissions:
+  contents: write
+jobs:
+  snapshot:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: true
+      - name: Install TeX tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends latexmk texlive-latex-extra texlive-fonts-recommended texlive-science lmodern poppler-utils python3
+      - name: Compile exact PDF and update manifest
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, re, subprocess
+          from pathlib import Path
+          root=Path.cwd()
+          source=root/'papers/stratified-hammersley-lis/stratified-hammersley-laws-luce.tex'
+          output=root/'output/pdf/stratified-hammersley-laws-luce.pdf'
+          work=root/'.build/stratified-hammersley-lis'
+          work.mkdir(parents=True, exist_ok=True)
+          env=dict(os.environ, SOURCE_DATE_EPOCH='1791504000', FORCE_SOURCE_DATE='1', TZ='UTC')
+          subprocess.run(['latexmk','-pdf','-g','-interaction=nonstopmode','-halt-on-error','-file-line-error','-latexoption=-no-shell-escape','-outdir='+str(work),source.name], cwd=source.parent, env=env, check=True)
+          compiled=work/(source.stem+'.pdf')
+          output.write_bytes(compiled.read_bytes())
+          pages=int(re.search(r'^Pages:\s+(\d+)',subprocess.check_output(['pdfinfo',str(compiled)],text=True),re.M).group(1))
+          path=root/'output/pdf/manifest.json'
+          data=json.loads(path.read_text())
+          assert not any(d['id']=='stratified-hammersley-lis' for d in data['documents'])
+          sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+          data['documents'].append(dict(id='stratified-hammersley-lis',source='papers/stratified-hammersley-lis/stratified-hammersley-laws-luce.tex',source_sha256=sha(source),pdf='output/pdf/stratified-hammersley-laws-luce.pdf',pdf_sha256=sha(output),pages=pages))
+          path.write_text(json.dumps(data,indent=2)+'\n')
+          print('Built',pages,'pages, SHA256',sha(output))
+          PY
+      - name: Commit new reproducible snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output/pdf/manifest.json output/pdf/stratified-hammersley-laws-luce.pdf
+          git commit -m "Build deterministic PDF snapshot for stratified Hammersley/LIS"
+          git push origin HEAD:paper/stratified-hammersley-lis-2026-10-20
